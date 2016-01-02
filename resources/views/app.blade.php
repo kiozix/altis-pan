@@ -22,7 +22,7 @@
     <meta name="revisit-after" content="7 days">
     <meta name="copyright" content="AltisPan">
     <meta name="language" content="French">
-    <
+
     <!-- Facebook and Twitter integration -->
     <meta property="og:title" content=""/>
     <meta property="og:image" content=""/>
@@ -59,6 +59,8 @@
     <script src="{{ asset('/js/respond.min.js') }}"></script>
     <![endif]-->
 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
 </head>
 <body>
 
@@ -73,21 +75,22 @@
             </div>
             <div id="fh5co-navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li <?php if(Request::is('/home') OR Request::is('/')) { echo 'class="active"'; } ?>><a href="{{ url('/') }}"><span>Accueil<span class="border"></span></span></a></li>
-                    <li><a href="#"><span>Blog<span class="border"></span></span></a></li>
-                    <li><a href="#"><span>Forum<span class="border"></span></span></a></li>
-                    <li><a href="#"><span>Boutique<span class="border"></span></span></a></li>
+                    <li <?php if(Request::is('home') OR Request::is('/')) { echo 'class="active"'; } ?>><a href="{{ url('/') }}"><span><i class="fa fa-home"></i> Accueil<span class="border"></span></span></a></li>
+                    <li><a href="#"><span><i class="fa fa-newspaper-o"></i>&nbsp;&nbsp;Blog<span class="border"></span></span></a></li>
+                    <li><a href="#"><span><i class="fa fa-comments-o"></i>&nbsp;&nbsp;Forum<span class="border"></span></span></a></li>
+                    <li><a href="#"><span><i class="fa fa-shopping-cart"></i>&nbsp;&nbsp;Boutique<span class="border"></span></span></a></li>
+                    <li><a href="#"><span><i class="fa fa-video-camera"></i>&nbsp;&nbsp;Stream<span class="border"></span></span></a></li>
                     @if (Auth::guest())
                         <li class="{{ Request::is('auth/login') ? 'active' : '' }}"><a href="{{ url('/auth/login') }}"><span>Connexion<span class="border"></span></span></a></li>
                         <li class="{{ Request::is('auth/register') ? 'active' : '' }}"><a href="{{ url('/auth/register') }}"><span>Inscription<span class="border"></span></span></a></li>
                     @else
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                           aria-expanded="false">Mon Compte<span class="caret"></span><span class="border"></a>
+                           aria-expanded="false"><i class="fa fa-user"></i>&nbsp;&nbsp;Mon Compte<span class="caret"></span><span class="border"></a>
                         <ul class="dropdown-menu">
-                            <li><a href="{{ route('profil') }}">Mon compte<span class="border"></a></li>
+                            <li><a href="{{ route('profil') }}"><i class="fa fa-cogs"></i>&nbsp;&nbsp;Mon compte<span class="border"></a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="{{ url('/auth/logout') }}">Déconnexion</a></li>
+                            <li><a href="{{ url('/auth/logout') }}"><i class="fa fa-sign-out"></i>&nbsp;&nbsp;Déconnexion</a></li>
                         </ul>
                     </li>
                     @endif
