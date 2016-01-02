@@ -109,9 +109,7 @@
         <div class="col-md-6 col-sm-6">
             <div class="fh5co-footer-widget">
                 <h2 class="fh5co-footer-logo">AltisPan</h2>
-
-                <p>Site réalisée avec AltisPan, CMS dédiée au Mod multijoueur Altis Life. Réalisation : Lucas GRELAUD,
-                    Emile LEPTIT.</p><!-- Correspond a la meta "description" -->
+                <p>Site réalisé avec AltisPan, CMS dédiée au Mod multijoueur Altis Life. Réalisation : Lucas GRELAUD, Emile LEPETIT.</p><!-- Correspond a la meta "description" -->
                 <p> &copy; Copyright <a href="#">AltisPan</a>, site par <a href="http://emix-dev.fr/">EmixDev</a>
             </div>
         </div>

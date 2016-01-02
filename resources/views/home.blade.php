@@ -11,7 +11,7 @@
                         <div class="col-md-8 col-md-offset-2">
                             <div class="fh5co-owl-text-wrap">
                                 <div class="fh5co-owl-text text-center to-animate">
-                                    <h1 class="fh5co-lead">Bienvenu sur AltisForLife</h1>
+                                    <h1 class="fh5co-lead">Bienvenue sur AltisForLife</h1>
                                     <h2 class="fh5co-sub-lead">Pour vous connecter sur le serveur cliquer <a href="#">ici</a></h2>
                                 </div>
                             </div>
@@ -50,8 +50,8 @@
                 <div class="row text-center">
                     <div class="col-md-8 col-md-offset-2">
                         <h2 class="fh5co-section-lead">Quelques informations</h2>
-                        <h3 class="fh5co-section-sub-lead">Afin que ce serveur reste agréable, conviviale et où règne une athmosphère paisible, nous vous prions de bien vouloir suivre ces quelques règles.
-                            <br />Pour plus d'informations, merci de contacter les modérateur sur le teamspeak.</h3>
+                        <h3 class="fh5co-section-sub-lead">Afin que ce serveur reste agréable, convivial et où règne une athmosphère paisible, nous vous prions de bien vouloir suivre ces quelques règles.
+                            <br />Pour plus d'informations, merci de contacter les modérateurs sur le teamspeak.</h3>
                     </div>
                     <div class="fh5co-spacer fh5co-spacer-md"></div>
                 </div>
@@ -63,7 +63,7 @@
                             </div>
                             <div class="fh5co-feature-text">
                                 <h3>Verouillez vos véhicules</h3>
-                                <p>Quoi de pire que d'allez faire une course et ce retrouvez sans véhicule après vos achats ? </p>
+                                <p>Quoi de pire que d'allez faire une course et se retrouvez sans véhicule après vos achats ? </p>
                                 <p><br /></p>
                             </div>
                         </div>
@@ -73,7 +73,7 @@
                             </div>
                             <div class="fh5co-feature-text">
                                 <h3>Avis ?</h3>
-                                <p>Votre avis nous intéresse, dites nous vos remarque,envis sur le forum!</p>
+                                <p>Votre avis nous intéresse, dites nous vos remarques, vos envies sur le forum!</p>
                                 <p><a href="#">Forum</a></p>
                             </div>
                         </div>
