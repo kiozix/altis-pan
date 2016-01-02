@@ -11,6 +11,12 @@
                         <span class="fh5co-border"></span>
                     </h1>
                 </div>
+            </div>
+        </div>
+    </aside>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
 
                 <div class="panel panel-default">
                     <div class="panel-body">
@@ -46,5 +52,5 @@
                 </div>
             </div>
         </div>
-    </aside>
+    </div>
 @endsection

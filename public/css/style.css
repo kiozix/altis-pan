@@ -3374,7 +3374,7 @@ tbody.collapse.in {
 
 .navbar-brand {
   float: left;
-  padding: 7px 20px;
+  padding: 20px 20px;
   font-size: 18px;
   line-height: 20px;
   height: 60px; }
@@ -5967,20 +5967,3 @@ a > img.fh5co-align-center {
   margin-right: auto; }
 
 /*# sourceMappingURL=style.css.map */
-.dropdown .dropdown-menu{
-    -webkit-transition: all 0.3s;
-    -moz-transition: all 0.3s;
-    -ms-transition: all 0.3s;
-    -o-transition: all 0.3s;
-    transition: all 0.3s;
-
-    max-height: 0;
-    display: block;
-    overflow: hidden;
-    opacity: 0;
-}
-
-.dropdown.open .dropdown-menu {
-    max-height: 200px;
-    opacity: 1;
-}
