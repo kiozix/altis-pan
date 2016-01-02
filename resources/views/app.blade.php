@@ -73,22 +73,13 @@
             </div>
             <div id="fh5co-navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="active"><a href="{{ url('/') }}"><span>Accueil<span class="border"></span></span></a></li>
+                    <li <?php if(Request::is('/home') OR Request::is('/')) { echo 'class="active"'; } ?>><a href="{{ url('/') }}"><span>Accueil<span class="border"></span></span></a></li>
                     <li><a href="#"><span>Blog<span class="border"></span></span></a></li>
                     <li><a href="#"><span>Forum<span class="border"></span></span></a></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                           aria-expanded="false">Le Serveur<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Page 1<span class="border"></a></li>
-                            <li><a href="#">Page 2</a></li>
-                            <li><a href="#">Page 3</a></li>
-                        </ul>
-                    </li>
                     <li><a href="#"><span>Boutique<span class="border"></span></span></a></li>
                     @if (Auth::guest())
-                        <li><a href="{{ url('/auth/login') }}"><span>Connexion<span class="border"></span></span></a></li>
-                        <li><a href="{{ url('/auth/register') }}"><span>Inscription<span class="border"></span></span></a></li>
+                        <li class="{{ Request::is('auth/login') ? 'active' : '' }}"><a href="{{ url('/auth/login') }}"><span>Connexion<span class="border"></span></span></a></li>
+                        <li class="{{ Request::is('auth/register') ? 'active' : '' }}"><a href="{{ url('/auth/register') }}"><span>Inscription<span class="border"></span></span></a></li>
                     @else
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
