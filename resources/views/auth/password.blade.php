@@ -38,24 +38,23 @@
                                 </div>
                             </div>
                         @endif
-                        <div class="col-md-6 col-md-offset-3">
-                            <div class="row">
-                                <form role="form" method="POST" action="{{ url('/password/email') }}">
-                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label for="email" class="sr-only">Email</label>
-                                            <input placeholder="Adresse Email" id="email" name="email" type="email" class="form-control input-lg" value="{{ old('email') }}">
-                                        </div>
+                        <form role="form" method="POST" class="form-horizontal" action="{{ url('/password/email') }}">
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">Adresse Email</label>
+                                    <div class="col-md-6">
+                                        <input placeholder="Adresse Email" id="email" name="email" type="email"
+                                               class="form-control input-lg" value="{{ old('email') }}">
                                     </div>
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <input type="submit" class="btn btn-primary col-md-12" value="Envoyer">
-                                        </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-6 col-md-offset-4">
+                                        <button type="submit" class="btn btn-primary">
+                                            Se connecter
+                                        </button>
                                     </div>
-                                </form>
-                            </div>
-                        </div>
+                                </div>
+                        </form>
                     </div>
                 </div>
             </div>
