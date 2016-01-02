@@ -45,6 +45,8 @@
     <link rel="stylesheet" href="{{ asset('/css/animate.css') }}">
     <!-- Feather font -->
     <link rel="stylesheet" href="{{ asset('/css/feather.css') }}">
+    <!-- FontAwesome font -->
+    <link rel="stylesheet" href="{{ asset('/css/font-awesome.css') }}">
     <!-- Owl Carousel -->
     <link rel="stylesheet" href="{{ asset('/css/owl.carousel.min.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/owl.theme.default.min.css') }}">
@@ -58,8 +60,6 @@
     <!--[if lt IE 9]>
     <script src="{{ asset('/js/respond.min.js') }}"></script>
     <![endif]-->
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
 </head>
 <body>
@@ -81,8 +81,8 @@
                     <li><a href="#"><span><i class="fa fa-shopping-cart"></i>&nbsp;&nbsp;Boutique<span class="border"></span></span></a></li>
                     <li><a href="#"><span><i class="fa fa-video-camera"></i>&nbsp;&nbsp;Stream<span class="border"></span></span></a></li>
                     @if (Auth::guest())
-                        <li class="{{ Request::is('auth/login') ? 'active' : '' }}"><a href="{{ url('/auth/login') }}"><span>Connexion<span class="border"></span></span></a></li>
-                        <li class="{{ Request::is('auth/register') ? 'active' : '' }}"><a href="{{ url('/auth/register') }}"><span>Inscription<span class="border"></span></span></a></li>
+                        <li class="{{ Request::is('auth/login') ? 'active' : '' }}"><a href="{{ url('/auth/login') }}"><span><i class="fa fa-unlock"></i>&nbsp;&nbsp;Connexion<span class="border"></span></span></a></li>
+                        <li class="{{ Request::is('auth/register') ? 'active' : '' }}"><a href="{{ url('/auth/register') }}"><span><i class="fa fa-pencil"></i>&nbsp;&nbsp;Inscription<span class="border"></span></span></a></li>
                     @else
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
