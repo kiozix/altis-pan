@@ -24,7 +24,7 @@ class UsersController extends Controller {
 		$user = $this->auth->user();
 		$this->validate($request, [
 			'name' => "required|unique:users,name,{$user->id}|min:2",
-            'arma' => "unique:users,arma,{$user->id}|min:17|max:17|numeric",
+            'arma' => "required|unique:users,arma,{$user->id}|numeric",
 			'avatar' => "image"
 		]);
 

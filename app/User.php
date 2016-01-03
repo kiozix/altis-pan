@@ -45,10 +45,4 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 			$this->attributes['avatar'] = true;
 		}
 	}
-
-	public function arma($arma) {
-		if(empty($arma)) {
-			$this->attributes['arma'] = $this->arma;
-		}
-	}
 }

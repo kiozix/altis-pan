@@ -19,6 +19,9 @@
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
                     <div class="panel-body">
+
+                        @include('flash')
+
                         {!! Form::model($user, ['class' => 'form-horizontal', 'files' => true]) !!}
                         <div class="col-md-4">
                             <div class="col-md-12">
@@ -63,17 +66,20 @@
                                     </div>
                                 </div>
                             </div>
-                            @if($user->arma)
-                            @else
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label class="col-md-4 control-label">ID Arma 3</label>
-                                        <div class="col-md-8">
+
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">ID Arma 3</label>
+                                    <div class="col-md-8">
+                                        @if($user->arma)
+                                            {!! Form::text('arma', null, ['class' => 'form-control', 'maxlength' => '17', 'value' => "$user->arma"]) !!}
+                                        @else
                                             {!! Form::text('arma', null, ['class' => 'form-control', 'maxlength' => '17']) !!}
-                                        </div>
+                                        @endif
                                     </div>
                                 </div>
-                            @endif
+                            </div>
+
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <input type="submit" class="btn btn-primary " value="Modifier">

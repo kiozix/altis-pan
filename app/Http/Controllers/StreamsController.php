@@ -49,7 +49,8 @@ class StreamsController extends Controller {
 	 */
 	public function show($id)
 	{
-		//
+		$streams = Streams::findOrFail($id);
+		return view('streams.show', compact('streams'));
 	}
 
 	/**

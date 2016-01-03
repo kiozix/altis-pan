@@ -26,7 +26,7 @@
                 <tr>
                     <td>&nbsp; &nbsp;
                         <span class="stream__title">
-                            <a href="{{ $stream->slug }}">{{ $stream->name }}</a>
+                            <a href="{{ url("/streams/$stream->id ")}}">{{ $stream->name }}</a>
                         </span>
                         <span class="stream__action">
                             <a href="{{ action('StreamsController@edit', $stream) }}" class="btn btn-primary"><i class="fa fa-pencil"></i> Editer</a>
@@ -41,7 +41,7 @@
                                         <iframe src="http://player.twitch.tv/?channel={{ $stream->name }}" frameborder="0" scrolling="no" height="242" width="360"></iframe>
                                     </td>
                                     <td valign="top">
-                                        <p class="stream__content">{{$stream->content }}</p>
+                                        <p class="stream__content">{!!  $stream->content !!}</p>
                                     </td>
                                 </tr>
                             </tbody>
