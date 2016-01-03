@@ -5,8 +5,20 @@ use App\Http\Requests;
 use App\Http\Requests\StreamsRequest;
 use App\Streams;
 use Illuminate\Http\Request;
+use Illuminate\Contracts\Auth\Guard;
 
 class StreamsController extends Controller {
+
+	public function __construct()
+	{
+		$this->middleware('auth', ['except' => ['index', 'show']]);
+		$this->middleware('admin', ['except' => ['index', 'show']]);
+	}
+
+	/*public function getRessource($id)
+	{
+		return Streams::findOrFail($id);
+	}*/
 
 	/**
 	 * Display a listing of the resource.
@@ -18,6 +30,7 @@ class StreamsController extends Controller {
 		$streams = Streams::all();
 		return view('streams.index', compact('streams'));
 	}
+
 
 	/**
 	 * Show the form for creating a new resource.
