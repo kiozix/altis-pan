@@ -85,7 +85,9 @@ class StreamsController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		//
+		$streams = Streams::findOrFail($id);
+		$streams->delete();
+		return redirect(action('StreamsController@index'))->with('success', 'Le streamer à bien été supprimé');
 	}
 
 }

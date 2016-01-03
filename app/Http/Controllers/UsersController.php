@@ -24,9 +24,10 @@ class UsersController extends Controller {
 		$user = $this->auth->user();
 		$this->validate($request, [
 			'name' => "required|unique:users,name,{$user->id}|min:2",
-            'arma' => "required|unique:users,arma,{$user->id}|min:17|max:17",
+            'arma' => "unique:users,arma,{$user->id}|min:17|max:17",
 			'avatar' => "image"
 		]);
+
 		$user->update($request->only('name', 'firstname', 'lastname', 'avatar', 'arma'));
 		return view('users.edit', compact('user'));
 		return redirect()->back()->with('success', 'Votre profil a bien été modifié');

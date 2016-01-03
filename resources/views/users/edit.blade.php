@@ -4,6 +4,7 @@
     <div class="panel panel-default">
         <div class="panel-heading">Mon compte</div>
         <div class="panel-body">
+
             {!! Form::model($user, ['class' => 'form-horizontal', 'files' => true]) !!}
 
             <div class="form-group">
@@ -44,16 +45,16 @@
                 </div>
             </div>
 
-            <div class="form-group">
-                <label class="col-md-4 control-label">ID Arma III</label>
-                <div class="col-md-6">
-                    @if($user->arma)
-                        {!! Form::text('arma', null, ['class' => 'form-control', 'disabled']) !!}
-                    @else
-                        {!! Form::text('arma', null, ['class' => 'form-control', 'maxlength' => '17']) !!}
-                    @endif
+            @if($user->arma)
+            @else
+                <div class="form-group">
+                    <label class="col-md-4 control-label">ID Arma III</label>
+                    <div class="col-md-6">
+                            {!! Form::text('arma', null, ['class' => 'form-control', 'maxlength' => '17']) !!}
+
+                    </div>
                 </div>
-            </div>
+            @endif
 
             <div class="form-group">
                 <div class="col-md-6 col-md-offset-4">

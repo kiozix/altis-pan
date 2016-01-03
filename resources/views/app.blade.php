@@ -10,10 +10,10 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="csrf-token" content="{!! csrf_token() !!}">
     <title>AltisPan</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description"
-          content="Site réalisée avec AltisPan, CMS dédiée au Mod multijoueur Altis Life. Réalisation : Lucas GRELAUD, Emile LEPTIT."/>
+    <meta name="description" content="Site réalisée avec AltisPan, CMS dédiée au Mod multijoueur Altis Life. Réalisation : Lucas GRELAUD, Emile LEPTIT."/>
     <meta name="keywords" content="altis life, cms, altispan, arma, 3, serveur"/>
     <meta name="author" content="Lucas GRELAUD, Emile LEPETIT"/>
     <!-- Don't modify the web_author meta , only the author meta please -->
@@ -100,7 +100,7 @@
     </nav>
 </header>
 <!-- END .header -->
-
+@include('flash')
 @yield('content')
 <hr/>
 
@@ -157,6 +157,8 @@
 <script src="{{ asset('/js/jquery.magnific-popup.min.js') }}"></script>
 <!-- Main JS -->
 <script src="{{ asset('/js/main.js') }}"></script>
+
+<script src="{{ asset('/js/laravel.js') }}"></script>
 
 
 </body>

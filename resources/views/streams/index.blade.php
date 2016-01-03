@@ -37,7 +37,7 @@
                 <th>{{$stream->content }}</th>
                 <th>
                     <a href="{{ action('StreamsController@edit', $stream) }}" class="btn btn-primary">Editer</a>
-                    <a href="{{ action('StreamsController@destroy', $stream) }}" class="btn btn-primary">Suprimmer</a>
+                    <a href="{{ action('StreamsController@destroy', $stream) }}" data-method="delete" data-confirm="Voulez vous vraiment suprimer cette enregistrement ?" class="btn btn-danger">Suprimmer</a>
                 </th>
             </tr>
         @endforeach

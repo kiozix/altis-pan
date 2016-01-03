@@ -18,26 +18,6 @@
             <div class="panel panel-default">
                 <div class="panel-body">
                     <div class="col-md-12">
-                        @if (session('status'))
-                            <div class="col-md-12">
-                                <div class="alert alert-success">
-                                    {{ session('status') }}
-                                </div>
-                            </div>
-                        @endif
-
-                        @if (count($errors) > 0)
-                            <div class="col-md-12">
-                                <div class="alert alert-danger">
-                                    <strong>Whoops!</strong> Il y a un problème !<br><br>
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            </div>
-                        @endif
                         <form role="form" method="POST" class="form-horizontal" action="{{ url('/password/email') }}">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <div class="form-group">
