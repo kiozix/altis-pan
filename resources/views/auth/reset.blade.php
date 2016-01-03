@@ -18,6 +18,7 @@
 			<div class="col-md-12">
 				<div class="panel panel-default">
 					<div class="panel-body">
+						@include('flash')
 						<br/><br/><br/>
 						<form class="form-horizontal" role="form" method="POST" action="{{ url('/password/reset') }}">
 							<input type="hidden" name="_token" value="{{ csrf_token() }}">

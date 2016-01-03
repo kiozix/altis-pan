@@ -17,6 +17,7 @@
         <div class="row">
             <div class="panel panel-default">
                 <div class="panel-body">
+                    @include('flash')
                     <div class="col-md-12">
                         <form role="form" method="POST" class="form-horizontal" action="{{ url('/password/email') }}">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">

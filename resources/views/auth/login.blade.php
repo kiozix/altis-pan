@@ -19,6 +19,7 @@
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-body">
+                        @include('flash')
                         <br/><br/><br/>
                         {!! Form::open(['class' => 'form-horizontal']) !!}
 

@@ -100,7 +100,6 @@
     </nav>
 </header>
 <!-- END .header -->
-@include('flash')
 @yield('content')
 <hr/>
 
