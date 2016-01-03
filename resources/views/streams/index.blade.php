@@ -14,33 +14,42 @@
         </div>
     </aside>
 
-    <p class="text-right">
-        <a href="{{ action('StreamsController@create') }}" class="btn btn-primary">Ajouter un stream </a>
-    </p>
+    <div class="container stream">
 
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nom</th>
-                <th>Slug</th>
-                <th>Content</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        @foreach($streams as $stream)
-            <tr>
-                <th>{{ $stream->id }}</th>
-                <th>{{ $stream->name }}</th>
-                <th>{{ $stream->slug }}</th>
-                <th>{{$stream->content }}</th>
-                <th>
-                    <a href="{{ action('StreamsController@edit', $stream) }}" class="btn btn-primary">Editer</a>
-                    <a href="{{ action('StreamsController@destroy', $stream) }}" data-method="delete" data-confirm="Voulez vous vraiment suprimer cette enregistrement ?" class="btn btn-danger">Suprimmer</a>
-                </th>
-            </tr>
-        @endforeach
-        </tbody>
-    </table>
+        <p class="text-right">
+            <a href="{{ action('StreamsController@create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Ajouter un stream </a>
+        </p>
+
+        <table width="100%" color="black" class="table table-striped">
+            <tbody>
+            @foreach($streams as $stream)
+                <tr>
+                    <td>&nbsp; &nbsp;
+                        <span class="stream__title">
+                            <a href="{{ $stream->slug }}">{{ $stream->name }}</a>
+                        </span>
+                        <span class="stream__action">
+                            <a href="{{ action('StreamsController@edit', $stream) }}" class="btn btn-primary"><i class="fa fa-pencil"></i> Editer</a>
+                            <a href="{{ action('StreamsController@destroy', $stream) }}" data-method="delete" data-confirm="Voulez vous vraiment suprimer cette enregistrement ?" class="btn btn-danger"><i class="fa fa-trash"></i> Suprimmer</a>
+                        </span>
+                        <hr class="stream__hr"/>
+
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td valign="top">
+                                        <iframe src="http://player.twitch.tv/?channel={{ $stream->name }}" frameborder="0" scrolling="no" height="242" width="360"></iframe>
+                                    </td>
+                                    <td valign="top">
+                                        <p class="stream__content">{{$stream->content }}</p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
+    </div>
 @endsection

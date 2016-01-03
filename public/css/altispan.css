@@ -1,0 +1,18 @@
+.stream__title{
+    font-size:20px;
+    text-transform: capitalize;
+}
+
+.stream__hr{
+    border-color:#FBB040;
+    margin-top:5px;
+    margin-bottom:5px
+}
+
+.stream__content {
+    margin-left: 20px;
+}
+
+.stream__action{
+    margin-left: 55%;
+}
