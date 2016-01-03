@@ -1,28 +1,6 @@
 @extends('app')
 
 @section('content')
-<<<<<<< HEAD
-    <div class="panel panel-default">
-        <div class="panel-heading">Mon compte</div>
-        @include('flash')
-        <div class="panel-body">
-
-            {!! Form::model($user, ['class' => 'form-horizontal', 'files' => true]) !!}
-
-            <div class="form-group">
-                <label class="col-md-4 control-label">Avatar</label>
-                <div class="col-md-6">
-                    @if($user->avatar)
-                        <img src="{{ url($user->avatar) }}"/>
-                    @endif
-                    {!! Form::file('avatar', ['class' => 'form-control']) !!}
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="col-md-4 control-label">Pseudo</label>
-                <div class="col-md-6">
-                    {!! Form::text('name', null, ['class' => 'form-control']) !!}
     <aside class="fh5co-page-heading">
         <div class="container">
             <div class="row">
