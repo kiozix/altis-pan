@@ -26,7 +26,7 @@
                 <tr>
                     <td>&nbsp; &nbsp;
                         <span class="stream__title">
-                            <a href="{{ url("/streams/$stream->id ")}}">{{ $stream->name }}</a>
+                            <a href="{{ url("/stream/$stream->id ")}}">{{ $stream->name }}</a>
                         </span>
                         <span class="stream__action">
                             <a href="{{ action('StreamsController@edit', $stream) }}" class="btn btn-primary"><i class="fa fa-pencil"></i> Editer</a>

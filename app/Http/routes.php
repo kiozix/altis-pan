@@ -17,7 +17,7 @@ Route::get('home', 'HomeController@index');
 Route::get('profil', ['uses' => 'UsersController@edit', 'as' => 'profil']);
 Route::post('profil', ['uses' => 'UsersController@update']);
 
-Route::resource('streams', 'StreamsController');
+Route::resource('stream', 'StreamsController');
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',
