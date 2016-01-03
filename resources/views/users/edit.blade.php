@@ -3,6 +3,7 @@
 @section('content')
     <div class="panel panel-default">
         <div class="panel-heading">Mon compte</div>
+        @include('flash')
         <div class="panel-body">
 
             {!! Form::model($user, ['class' => 'form-horizontal', 'files' => true]) !!}
