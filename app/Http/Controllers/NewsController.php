@@ -5,8 +5,18 @@ use App\Http\Requests;
 use App\Http\Requests\NewsRequest;
 use App\News;
 use Illuminate\Http\Request;
+use Illuminate\Contracts\Auth\Guard;
 
 class NewsController extends Controller {
+
+	/**
+	 * NewsController constructor.
+     */
+	public function __construct()
+	{
+		$this->middleware('auth', ['except' => ['index', 'show']]);
+		$this->middleware('admin', ['except' => ['index', 'show']]);
+	}
 
 	/**
 	 * Display a listing of the resource.

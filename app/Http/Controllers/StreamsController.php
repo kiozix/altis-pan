@@ -9,16 +9,14 @@ use Illuminate\Contracts\Auth\Guard;
 
 class StreamsController extends Controller {
 
+	/**
+	 * StreamsController constructor.
+     */
 	public function __construct()
 	{
 		$this->middleware('auth', ['except' => ['index', 'show']]);
 		$this->middleware('admin', ['except' => ['index', 'show']]);
 	}
-
-	/*public function getRessource($id)
-	{
-		return Streams::findOrFail($id);
-	}*/
 
 	/**
 	 * Display a listing of the resource.

@@ -14,33 +14,33 @@
         </div>
     </aside>
 
-    <p class="text-right">
-        <a href="{{ action('NewsController@create') }}" class="btn btn-primary">Ajouter un stream </a>
-    </p>
 
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Nom</th>
-            <th>Slug</th>
-            <th>Content</th>
-            <th>Actions</th>
-        </tr>
-        </thead>
-        <tbody>
+    <div class="container">
+        <p class="text-right">
+            <a href="{{ action('NewsController@create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Ajouter une une News </a>
+        </p>
         @foreach($news as $new)
-            <tr>
-                <th>{{ $new->id }}</th>
-                <th>{{ $new->name }}</th>
-                <th>{{ $new->slug }}</th>
-                <th>{{ $new->content }}</th>
-                <th>
-                    <a href="{{ action('NewsController@edit', $new) }}" class="btn btn-primary">Editer</a>
-                    <a href="{{ action('NewsController@destroy', $new) }}" data-method="delete" data-confirm="Voulez vous vraiment suprimer cette enregistrement ?" class="btn btn-danger">Suprimmer</a>
-                </th>
-            </tr>
+            <ul class="fh5co-post">
+                <li>
+                    <a href="{{ url("/news/$new->id ")}}">
+                        <div class="fh5co-post-media"><img src="{{ asset('img/news.png') }}" alt="News"></div>
+                        <div class="fh5co-post-blurb">
+                            <h3>{!! $new->name !!}</h3>
+                            {!! $new->content !!}
+                            <span class="fh5co-post-meta">{{  $new->updated_at }}</span>
+                        </div>
+                    </a>
+                    <div class="col-md-12">
+                        <div class="col-md-3 col-md-push-6 col-sm-6">
+                            <a href="{{ action('NewsController@edit', $new) }}" class="btn btn-primary"><i class="fa fa-pencil"></i> Editer</a>
+                        </div>
+                        <div class="col-md-3 col-md-push-6 col-sm-6">
+                            <a href="{{ action('NewsController@destroy', $new) }}" data-method="delete" data-confirm="Voulez vous vraiment suprimer cette enregistrement ?" class="btn btn-danger"><i class="fa fa-trash"></i> Supprimer</a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
         @endforeach
-        </tbody>
-    </table>
+    </div>
+
 @endsection

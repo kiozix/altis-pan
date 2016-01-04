@@ -24,3 +24,7 @@
 .stream__content_indiv{
     margin-top: 25px;
 }
+
+.post__action{
+    display: inline-block;
+}
