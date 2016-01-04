@@ -77,7 +77,7 @@
             <div id="fh5co-navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li <?php if(Request::is('home') OR Request::is('/')) { echo 'class="active"'; } ?>><a href="{{ url('/') }}"><span><i class="fa fa-home"></i> Accueil<span class="border"></span></span></a></li>
-                    <li><a href="#"><span><i class="fa fa-newspaper-o"></i>&nbsp;&nbsp;Blog<span class="border"></span></span></a></li>
+                    <li class="{{ Request::is('news') ? 'active' : '' }}"><a href="{{ url('/news') }}"><span><i class="fa fa-newspaper-o"></i>&nbsp;&nbsp;News<span class="border"></span></span></a></li>
                     <li><a href="#"><span><i class="fa fa-comments-o"></i>&nbsp;&nbsp;Forum<span class="border"></span></span></a></li>
                     <li><a href="#"><span><i class="fa fa-shopping-cart"></i>&nbsp;&nbsp;Boutique<span class="border"></span></span></a></li>
                     <li class="{{ Request::is('stream') ? 'active' : '' }}"><a href="{{ url('/stream') }}"><span><i class="fa fa-video-camera"></i>&nbsp;&nbsp;Stream<span class="border"></span></span></a></li>
