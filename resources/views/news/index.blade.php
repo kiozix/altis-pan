@@ -16,9 +16,16 @@
 
 
     <div class="container">
-        <p class="text-right">
-            <a href="{{ action('NewsController@create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Ajouter une une News </a>
-        </p>
+        @if (Auth::guest())
+        @else
+            @if (Auth::user()->admin == 1)
+                <p class="text-right">
+                    <a href="{{ action('NewsController@create') }}" class="btn btn-primary"><i class="fa fa-plus"></i>
+                        Ajouter une une News </a>
+                </p>
+            @endif
+        @endif
+
         @foreach($news as $new)
             <ul class="fh5co-post">
                 <li>
@@ -30,14 +37,22 @@
                             <span class="fh5co-post-meta">{{  $new->updated_at }}</span>
                         </div>
                     </a>
-                    <div class="col-md-12">
-                        <div class="col-md-3 col-md-push-6 col-sm-6">
-                            <a href="{{ action('NewsController@edit', $new) }}" class="btn btn-primary"><i class="fa fa-pencil"></i> Editer</a>
-                        </div>
-                        <div class="col-md-3 col-md-push-6 col-sm-6">
-                            <a href="{{ action('NewsController@destroy', $new) }}" data-method="delete" data-confirm="Voulez vous vraiment suprimer cette enregistrement ?" class="btn btn-danger"><i class="fa fa-trash"></i> Supprimer</a>
-                        </div>
-                    </div>
+                    @if (Auth::guest())
+                    @else
+                        @if (Auth::user()->admin == 1)
+                            <div class="col-md-12">
+                                <div class="col-md-3 col-md-push-6 col-sm-6">
+                                    <a href="{{ action('NewsController@edit', $new) }}" class="btn btn-primary"><i
+                                                class="fa fa-pencil"></i> Editer</a>
+                                </div>
+                                <div class="col-md-3 col-md-push-6 col-sm-6">
+                                    <a href="{{ action('NewsController@destroy', $new) }}" data-method="delete"
+                                       data-confirm="Voulez vous vraiment suprimer cette enregistrement ?"
+                                       class="btn btn-danger"><i class="fa fa-trash"></i> Supprimer</a>
+                                </div>
+                            </div>
+                        @endif
+                    @endif
                 </li>
             </ul>
         @endforeach
