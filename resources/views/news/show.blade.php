@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <h1 class="fh5co-page-heading-lead">
-                        {{ $news->name }}
+                        {!! $news->name !!}
                         <span class="fh5co-border"></span>
                     </h1>
                 </div>
@@ -15,7 +15,7 @@
     </aside>
 
     <div class="container">
-        <p>{{ $news->content }}</p>
+        <p>{!! $news->content !!}</p>
     </div>
 
 @endsection
