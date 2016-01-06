@@ -15,7 +15,7 @@
     </aside>
 
     <div class="container">
-        <p>{!! $news->content !!}</p>
+        {!! $news->content !!}
     </div>
 
 @endsection

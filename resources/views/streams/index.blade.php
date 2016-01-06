@@ -19,8 +19,7 @@
         @else
             @if (Auth::user()->admin == 1)
                 <p class="text-right">
-                    <a href="{{ action('StreamsController@create') }}" class="btn btn-primary"><i
-                                class="fa fa-plus"></i> Ajouter un stream </a>
+                    <a href="{{ action('StreamsController@create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Ajouter un stream </a>
                 </p>
             @endif
         @endif
@@ -39,9 +38,7 @@
                                 <span class="stream__action">
                                     <a href="{{ action('StreamsController@edit', $stream) }}" class="btn btn-primary"><i
                                                 class="fa fa-pencil"></i> Editer</a>
-                                    <a href="{{ action('StreamsController@destroy', $stream) }}" data-method="delete"
-                                       data-confirm="Voulez vous vraiment suprimer cette enregistrement ?"
-                                       class="btn btn-danger"><i class="fa fa-trash"></i> Suprimmer</a>
+                                    <a href="{{ action('StreamsController@destroy', $stream) }}" data-method="delete" data-confirm="Voulez vous vraiment suprimer cette enregistrement ?" class="btn btn-danger"><i class="fa fa-trash"></i> Suprimmer</a>
                                 </span>
                             @endif
                         @endif
@@ -51,12 +48,10 @@
                             <tbody>
                             <tr>
                                 <td valign="top">
-                                    <iframe src="http://player.twitch.tv/?channel={{ $stream->name }}" frameborder="0"
-                                            scrolling="no" height="242" width="360"></iframe>
+                                    <iframe src="http://player.twitch.tv/?channel={{ $stream->name }}" frameborder="0"  scrolling="no" height="242" width="360"></iframe>
                                 </td>
                                 <td valign="top">
                                     <p class="stream__content">{!!  $stream->content !!}</p>
-
                                 </td>
                             </tr>
                             </tbody>

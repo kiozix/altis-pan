@@ -42,13 +42,10 @@
                         @if (Auth::user()->admin == 1)
                             <div class="col-md-12">
                                 <div class="col-md-3 col-md-push-6 col-sm-6">
-                                    <a href="{{ action('NewsController@edit', $new) }}" class="btn btn-primary"><i
-                                                class="fa fa-pencil"></i> Editer</a>
+                                    <a href="{{ action('NewsController@edit', $new) }}" class="btn btn-primary"><i class="fa fa-pencil"></i> Editer</a>
                                 </div>
                                 <div class="col-md-3 col-md-push-6 col-sm-6">
-                                    <a href="{{ action('NewsController@destroy', $new) }}" data-method="delete"
-                                       data-confirm="Voulez vous vraiment suprimer cette enregistrement ?"
-                                       class="btn btn-danger"><i class="fa fa-trash"></i> Supprimer</a>
+                                    <a href="{{ action('NewsController@destroy', $new) }}" data-method="delete" data-confirm="Voulez vous vraiment suprimer cette enregistrement ?" class="btn btn-danger"><i class="fa fa-trash"></i> Supprimer</a>
                                 </div>
                             </div>
                         @endif

@@ -20,7 +20,7 @@
     <label class="col-md-4 control-label">Description</label>
 
     <div class="col-md-6">
-        {!! Form::textarea('content', null, ['class' => 'form-control']) !!}
+        {!! Form::textarea('content', null, ['class' => 'form-control', 'class' => 'ckeditor']) !!}
     </div>
 </div>
 
@@ -34,3 +34,5 @@
 </div>
 
 {!! Form::close() !!}
+
+<script src="{{ asset('/js/ckeditor/ckeditor.js') }}"></script>
