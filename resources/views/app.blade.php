@@ -94,7 +94,7 @@
                                 <li role="separator" class="divider"></li>
                             @endif
                             <li><a href="{{ route('profil') }}"><i class="fa fa-cogs"></i>&nbsp;&nbsp;Mon compte<span class="border"></span></a></li>
-                            <li><a href=""><i class="fa fa-server"></i>&nbsp;&nbsp;AltisLife<span class="border"></span></a></li>
+                            <li><a href="{{ url('/players') }}"><i class="fa fa-server"></i>&nbsp;&nbsp;AltisLife<span class="border"></span></a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="{{ url('/auth/logout') }}"><i class="fa fa-sign-out"></i>&nbsp;&nbsp;&nbsp;Déconnexion</a></li>
                         </ul>
