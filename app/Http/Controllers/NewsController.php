@@ -52,17 +52,17 @@ class NewsController extends Controller {
 
 	}
 
+
 	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
+	 * @param $slug
+	 * @return \Illuminate\View\View
+     */
+	public function show($slug)
 	{
-		$news = News::findOrFail($id);
+		$news = News::where('slug', $slug)->firstOrFail();
 		return view('news.show', compact('news'));
 	}
+
 
 	/**
 	 * Show the form for editing the specified resource.

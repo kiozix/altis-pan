@@ -29,7 +29,7 @@
         @foreach($news as $new)
             <ul class="fh5co-post">
                 <li>
-                    <a href="{{ url("/news/$new->id ")}}">
+                    <a href="{{ url("/news/$new->slug ")}}">
                         <div class="fh5co-post-media"><img src="{{ asset('img/news.png') }}" alt="News"></div>
                         <div class="fh5co-post-blurb">
                             <h3>{!! $new->name !!}</h3>
