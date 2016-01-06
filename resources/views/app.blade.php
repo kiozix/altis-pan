@@ -89,8 +89,12 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                            aria-expanded="false"><i class="fa fa-user"></i>&nbsp;&nbsp;Mon Compte<span class="caret"></span><span class="border"></a>
                         <ul class="dropdown-menu">
+                            @if (Auth::user()->admin == 1)
+                                <li><a href="#"><i class="fa fa-wrench"></i>&nbsp;&nbsp;Admin<span class="border"></span></a></li>
+                                <li role="separator" class="divider"></li>
+                            @endif
                             <li><a href="{{ route('profil') }}"><i class="fa fa-cogs"></i>&nbsp;&nbsp;Mon compte<span class="border"></span></a></li>
-                            <li><a href=""><i class="fa fa-male"></i>&nbsp;&nbsp;&nbsp;AltisLife<span class="border"></span></a></li>
+                            <li><a href=""><i class="fa fa-server"></i>&nbsp;&nbsp;AltisLife<span class="border"></span></a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="{{ url('/auth/logout') }}"><i class="fa fa-sign-out"></i>&nbsp;&nbsp;&nbsp;Déconnexion</a></li>
                         </ul>
