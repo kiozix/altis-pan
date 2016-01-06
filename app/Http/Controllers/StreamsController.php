@@ -54,13 +54,12 @@ class StreamsController extends Controller {
 
 	/**
 	 * Display the specified resource.
-	 *
-	 * @param  int  $id
+	 * @param $slug
 	 * @return Response
 	 */
-	public function show($id)
+	public function show($slug)
 	{
-		$streams = Streams::findOrFail($id);
+		$streams = Streams::where('slug', $slug)->firstOrFail();
 		return view('streams.show', compact('streams'));
 	}
 

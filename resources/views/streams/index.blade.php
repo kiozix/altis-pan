@@ -30,7 +30,7 @@
                 <tr>
                     <td>&nbsp; &nbsp;
                         <span class="stream__title">
-                            <a href="{{ url("/stream/$stream->id ")}}">{{ $stream->name }}</a>
+                            <a href="{{ url("/stream/$stream->slug ")}}">{{ $stream->name }}</a>
                         </span>
                         @if (Auth::guest())
                         @else
