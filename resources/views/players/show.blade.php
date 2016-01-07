@@ -49,7 +49,7 @@
                                 <label class="col-md-4 control-label">Cash</label>
                                 <div class="col-md-8">
                                     <input class="form-control input-lg" type="text"
-                                           value="{{ number_format($players->cash, 2, ',', ' ') . ' $' }}" disabled>
+                                           value="Cash masqué" disabled>
                                 </div>
                             </div>
                         </div>
@@ -61,7 +61,7 @@
                                 <label class="col-md-4 control-label">Banque</label>
                                 <div class="col-md-8">
                                     <input class="form-control input-lg" type="text"
-                                           value="{{ number_format($players->bankacc, 2, ',', ' ') . ' $' }}" disabled>
+                                           value="Compte en banque masqué" disabled>
                                 </div>
                             </div>
                         </div>
@@ -89,24 +89,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <br /><br />
                         @endif
-
-
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label class="col-md-4 control-label">Rang donateur</label>
-                                <div class="col-md-8">
-                                    @if($players->donatorlvl > 0)
-                                        <span class="donatorlvl"><i class="fa fa-check"></i> Vous êtes donateur</span>
-                                    @else
-                                        <span class="donatorlvl"><i class="fa fa-close"></i> Vous n'êtes pas donateur</span>
-                                        <br>
-                                        <a href="">Le devenir ?</a>
-                                    @endif
-                                </div>
-                            </div>
-                        </div>
 
                     </div>
                 </div>
