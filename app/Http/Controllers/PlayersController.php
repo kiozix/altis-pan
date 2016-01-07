@@ -67,7 +67,22 @@ class PlayersController extends Controller {
 				break;
 		}
 
-		return view('players.index', compact('players', 'mediclevel', 'coplevel', 'vehicles'));
+		switch($players->adminlevel){
+			case 0:
+				$rank = 'Joueur';
+				break;
+			case 1:
+				$rank = 'Support';
+				break;
+			case 2:
+				$rank = 'Modérateur';
+				break;
+			case 3:
+				$rank = 'Administrateur';
+				break;
+		}
+
+		return view('players.index', compact('players', 'mediclevel', 'coplevel', 'rank', 'vehicles'));
 	}
 
 
@@ -99,7 +114,69 @@ class PlayersController extends Controller {
 	 */
 	public function show($id)
 	{
+		$players = DB::table('players')->where('playerid', $id)->first();
 
+		switch ($players->coplevel) {
+			case 1:
+				$coplevel = 'Recrue';
+				break;
+			case 2:
+				$coplevel = 'Brigadier';
+				break;
+			case 3:
+				$coplevel = 'Brigadier Chef';
+				break;
+			case 4:
+				$coplevel = 'Adjudant';
+				break;
+			case 5:
+				$coplevel = 'Adjudant Chef';
+				break;
+			case 6:
+				$coplevel = 'Lieutenant';
+				break;
+			case 7:
+				$coplevel = 'Capitaine';
+				break;
+			case 8:
+				$coplevel = 'Commandant';
+				break;
+		}
+
+		switch ($players->mediclevel) {
+			case 1:
+				$mediclevel = 'Sapeur';
+				break;
+			case 2:
+				$mediclevel = 'Caporal';
+				break;
+			case 3:
+				$mediclevel = 'Caporal Chef';
+				break;
+			case 4:
+				$mediclevel = 'Lieutenant colonel';
+				break;
+			case 5:
+				$mediclevel = 'Adjudant Chef';
+				break;
+		}
+
+		switch($players->adminlevel){
+			case 0:
+				$rank = 'Joueur';
+				break;
+			case 1:
+				$rank = 'Support';
+				break;
+			case 2:
+				$rank = 'Modérateur';
+				break;
+			case 3:
+				$rank = 'Administrateur';
+				break;
+		}
+
+		return view('players.show', compact('players', 'mediclevel', 'coplevel', 'rank', 'vehicles'));
 	}
 
 	/**

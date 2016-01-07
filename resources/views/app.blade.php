@@ -137,10 +137,10 @@
             <div class="fh5co-footer-widget top-level">
                 <h4 class="fh5co-footer-lead">Nous suivre</h4>
                 <ul class="fh5co-list-check">
-                    <li><a href="http://steamcommunity.com/">Steam</a></li>
-                    <li><a href="http://steamcommunity.com/">Youtube</a></li>
-                    <li><a href="https://www.facebook.com/">FaceBook</a></li>
-                    <li><a href="https://twitter.com/">Twitter</a></li>
+                    <li><a href="http://steamcommunity.com/groups/A3AltisForLife">Steam</a></li>
+                    <li><a href="http://www.twitch.tv/altisforlifetv">Twitch</a></li>
+                    <li><a href="https://www.facebook.com/Altisforlife-1689709277932251/?fref=ts">FaceBook</a></li>
+                    <li><a href="http://www.gametracker.com/server_info/91.236.254.56:2302/">GameTracker</a></li>
                 </ul>
             </div>
         </div>

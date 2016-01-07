@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Emile
- * Date: 03/01/2016
- * Time: 11:20
- */
 
 namespace App\Behaviour;
 
