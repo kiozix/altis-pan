@@ -21,7 +21,7 @@ class PlayersController extends Controller {
 		// $auth->user()->id
 		$players = DB::table('players')
 			->where('playerid', $auth->user()->arma)
-			->get();
+			->first();
 		return view('players.index', compact('players'));
 	}
 

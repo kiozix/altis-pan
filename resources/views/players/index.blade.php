@@ -17,7 +17,6 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                @foreach($players as $player)
                 <div class="panel panel-default">
                     <div class="panel-body">
 
@@ -31,7 +30,7 @@
                                 <div class="form-group">
                                     <label class="col-md-4 control-label">Nom</label>
                                     <div class="col-md-8">
-                                        <input class="form-control input-lg" name="name" type="text" value="{{ $player->name }}" disabled>
+                                        <input class="form-control input-lg" name="name" type="text" value="{{ $players->name }}" disabled>
                                     </div>
                                 </div>
                             </div>
@@ -39,7 +38,7 @@
                                 <div class="form-group">
                                     <label class="col-md-4 control-label">Cash</label>
                                     <div class="col-md-8">
-                                        <input class="form-control input-lg" type="text" value="{{ number_format($player->cash, 2, ',', ' ') . ' $' }}" disabled>
+                                        <input class="form-control input-lg" type="text" value="{{ number_format($players->cash, 2, ',', ' ') . ' $' }}" disabled>
                                     </div>
                                 </div>
                             </div>
@@ -47,35 +46,47 @@
                                 <div class="form-group">
                                     <label class="col-md-4 control-label">Banque</label>
                                     <div class="col-md-8">
-                                        <input class="form-control input-lg" type="text" value="{{ number_format($player->bankacc, 2, ',', ' ') . ' $' }}" disabled>
+                                        <input class="form-control input-lg" type="text" value="{{ number_format($players->bankacc, 2, ',', ' ') . ' $' }}" disabled>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-12">
+                        
+                        @if($players->mediclevel > 0)
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label class="col-md-4 control-label">Rang Pompier</label>
                                     <div class="col-md-8">
-
+                                        <input type="text" class="form-control input-lg" value="{{ $players->mediclevel }}" disabled>
                                     </div>
                                 </div>
                             </div>
+                        @endif
 
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label">Rang Policier</label>
-                                    <div class="col-md-8">
-
+                            @if($players->coplevel > 0)
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Rang Policier</label>
+                                        <div class="col-md-8">
+                                            <input type="text" class="form-control input-lg" value="{{ $players->coplevel }}" disabled>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            @endif
 
-
+                            @if($players->donatorlvl > 0)
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Rang donateur</label>
+                                        <div class="col-md-8">
+                                            <input type="text" class="form-control input-lg" value="{{ $players->donatorlvl}}" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>
-                @endforeach
             </div>
         </div>
     </div>
