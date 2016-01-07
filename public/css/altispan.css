@@ -28,3 +28,8 @@
 .post__action{
     display: inline-block;
 }
+
+.donatorlvl{
+    font-size: 18px;
+    font-family: Roboto, arial, sans-serif;
+}
