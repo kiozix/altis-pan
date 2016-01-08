@@ -1,3 +1,11 @@
+<div class="container">
+    <div class="col-md-12">
+        <div class="col-md-push-3 col-md-9">
+            @include('flash')
+        </div>
+    </div>
+</div>
+
 {!! Form::model($streams, ['class' =>'form-horizontal', 'url' => action("StreamsController@$action", $streams), 'method' => $action == 'store' ? 'Post' : 'Put']) !!}
 
 <div class="form-group">
