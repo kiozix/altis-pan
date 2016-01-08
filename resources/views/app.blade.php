@@ -13,7 +13,8 @@
     <meta name="csrf-token" content="{!! csrf_token() !!}">
     <title>AltisForLife</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Site réalisée avec AltisPan, CMS dédiée au Mod multijoueur Altis Life. Réalisation : Lucas GRELAUD, Emile LEPTIT."/>
+    <meta name="description"
+          content="Site réalisée avec AltisPan, CMS dédiée au Mod multijoueur Altis Life. Réalisation : Lucas GRELAUD, Emile LEPTIT."/>
     <meta name="keywords" content="altis life, cms, altispan, arma, 3, serveur"/>
     <meta name="author" content="Lucas GRELAUD, Emile LEPETIT"/>
     <!-- Don't modify the web_author meta , only the author meta please -->
@@ -64,88 +65,109 @@
 
 </head>
 <body>
-
-<header id="fh5co-header" role="banner">
-    <nav class="navbar navbar-default" role="navigation">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <!-- Mobile Toggle Menu Button -->
-                <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle" data-toggle="collapse"
-                   data-target="#fh5co-navbar" aria-expanded="false" aria-controls="navbar"><i></i></a>
-                <a class="navbar-brand" href="{{ url('/') }}">AltisForLife</a>
+<div class="content">
+    <header id="fh5co-header" role="banner">
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <!-- Mobile Toggle Menu Button -->
+                    <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle" data-toggle="collapse"
+                       data-target="#fh5co-navbar" aria-expanded="false" aria-controls="navbar"><i></i></a>
+                    <a class="navbar-brand" href="{{ url('/') }}">AltisForLife</a>
+                </div>
+                <div id="fh5co-navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li <?php if (Request::is('home') OR Request::is('/')) {
+                            echo 'class="active"';
+                        } ?>><a href="{{ url('/') }}"><span><i class="fa fa-home"></i> Accueil<span
+                                            class="border"></span></span></a></li>
+                        <li class="{{ Request::is('news') ? 'active' : '' }}"><a href="{{ url('/news') }}"><span><i
+                                            class="fa fa-newspaper-o"></i>&nbsp;&nbsp;News<span
+                                            class="border"></span></span></a></li>
+                        <!--<li><a href="#"><span><i class="fa fa-comments-o"></i>&nbsp;&nbsp;Forum<span class="border"></span></span></a></li>-->
+                        <li><a href="#"><span><i class="fa fa-shopping-cart"></i>&nbsp;&nbsp;Boutique<span
+                                            class="border"></span></span></a></li>
+                        <li class="{{ Request::is('stream') ? 'active' : '' }}"><a href="{{ url('/stream') }}"><span><i
+                                            class="fa fa-video-camera"></i>&nbsp;&nbsp;Stream<span
+                                            class="border"></span></span></a></li>
+                        @if (Auth::guest())
+                            <li class="{{ Request::is('auth/login') ? 'active' : '' }}"><a
+                                        href="{{ url('/auth/login') }}"><span><i class="fa fa-unlock"></i>&nbsp;&nbsp;Connexion<span
+                                                class="border"></span></span></a></li>
+                            <li class="{{ Request::is('auth/register') ? 'active' : '' }}"><a
+                                        href="{{ url('/auth/register') }}"><span><i class="fa fa-pencil"></i>&nbsp;&nbsp;Inscription<span
+                                                class="border"></span></span></a></li>
+                        @else
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                   aria-haspopup="true"
+                                   aria-expanded="false"><i class="fa fa-user"></i>&nbsp;&nbsp;Mon Compte<span
+                                            class="caret"></span><span class="border"></a>
+                                <ul class="dropdown-menu">
+                                    @if (Auth::user()->admin == 1)
+                                        <li><a href="#"><i class="fa fa-wrench"></i>&nbsp;&nbsp;Admin<span
+                                                        class="border"></span></a></li>
+                                        <li role="separator" class="divider"></li>
+                                    @endif
+                                    <li><a href="{{ route('profil') }}"><i class="fa fa-cogs"></i>&nbsp;&nbsp;Mon compte<span
+                                                    class="border"></span></a></li>
+                                    <li><a href="{{ url('/players') }}"><i class="fa fa-server"></i>&nbsp;&nbsp;AltisLife<span
+                                                    class="border"></span></a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="{{ url('/auth/logout') }}"><i class="fa fa-sign-out"></i>&nbsp;&nbsp;&nbsp;Déconnexion</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        @endif
+                    </ul>
+                </div>
             </div>
-            <div id="fh5co-navbar" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li <?php if(Request::is('home') OR Request::is('/')) { echo 'class="active"'; } ?>><a href="{{ url('/') }}"><span><i class="fa fa-home"></i> Accueil<span class="border"></span></span></a></li>
-                    <li class="{{ Request::is('news') ? 'active' : '' }}"><a href="{{ url('/news') }}"><span><i class="fa fa-newspaper-o"></i>&nbsp;&nbsp;News<span class="border"></span></span></a></li>
-                    <!--<li><a href="#"><span><i class="fa fa-comments-o"></i>&nbsp;&nbsp;Forum<span class="border"></span></span></a></li>-->
-                    <li><a href="#"><span><i class="fa fa-shopping-cart"></i>&nbsp;&nbsp;Boutique<span class="border"></span></span></a></li>
-                    <li class="{{ Request::is('stream') ? 'active' : '' }}"><a href="{{ url('/stream') }}"><span><i class="fa fa-video-camera"></i>&nbsp;&nbsp;Stream<span class="border"></span></span></a></li>
-                    @if (Auth::guest())
-                        <li class="{{ Request::is('auth/login') ? 'active' : '' }}"><a href="{{ url('/auth/login') }}"><span><i class="fa fa-unlock"></i>&nbsp;&nbsp;Connexion<span class="border"></span></span></a></li>
-                        <li class="{{ Request::is('auth/register') ? 'active' : '' }}"><a href="{{ url('/auth/register') }}"><span><i class="fa fa-pencil"></i>&nbsp;&nbsp;Inscription<span class="border"></span></span></a></li>
-                    @else
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                           aria-expanded="false"><i class="fa fa-user"></i>&nbsp;&nbsp;Mon Compte<span class="caret"></span><span class="border"></a>
-                        <ul class="dropdown-menu">
-                            @if (Auth::user()->admin == 1)
-                                <li><a href="#"><i class="fa fa-wrench"></i>&nbsp;&nbsp;Admin<span class="border"></span></a></li>
-                                <li role="separator" class="divider"></li>
-                            @endif
-                            <li><a href="{{ route('profil') }}"><i class="fa fa-cogs"></i>&nbsp;&nbsp;Mon compte<span class="border"></span></a></li>
-                            <li><a href="{{ url('/players') }}"><i class="fa fa-server"></i>&nbsp;&nbsp;AltisLife<span class="border"></span></a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="{{ url('/auth/logout') }}"><i class="fa fa-sign-out"></i>&nbsp;&nbsp;&nbsp;Déconnexion</a></li>
-                        </ul>
-                    </li>
-                    @endif
-                </ul>
+        </nav>
+    </header>
+    <!-- END .header -->
+    @yield('content')
+</div>
+
+<footer>
+    <hr/>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6">
+                <div class="fh5co-footer-widget">
+                    <h2 class="fh5co-footer-logo">AltisForLife</h2>
+                    <p>Site réalisé avec AltisPan, CMS dédiée au Mod multijoueur Altis Life. Réalisation : Lucas
+                        GRELAUD, Emile LEPETIT.</p><!-- Correspond a la meta "description" -->
+                    <p> &copy; Copyright <a href="#">AltisPan</a>, site par <a href="http://emix-dev.fr/">EmixDev</a>
+                </div>
             </div>
-        </div>
-    </nav>
-</header>
-<!-- END .header -->
-@yield('content')
-<hr/>
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-6 col-sm-6">
-            <div class="fh5co-footer-widget">
-                <h2 class="fh5co-footer-logo">AltisForLife</h2>
-                <p>Site réalisé avec AltisPan, CMS dédiée au Mod multijoueur Altis Life. Réalisation : Lucas GRELAUD, Emile LEPETIT.</p><!-- Correspond a la meta "description" -->
-                <p> &copy; Copyright <a href="#">AltisPan</a>, site par <a href="http://emix-dev.fr/">EmixDev</a>
+            <div class="col-md-3 col-sm-6">
+                <div class="fh5co-footer-widget top-level">
+                    <h4 class="fh5co-footer-lead ">Liens utiles</h4>
+                    <ul>
+                        <li><a href="#">A propos</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Forum</a></li>
+                        <li><a href="http://arma3.com">Arma 3</a></li>
+                    </ul>
+                </div>
             </div>
-        </div>
 
-        <div class="col-md-3 col-sm-6">
-            <div class="fh5co-footer-widget top-level">
-                <h4 class="fh5co-footer-lead ">Liens utiles</h4>
-                <ul>
-                    <li><a href="#">A propos</a></li>
-                    <li><a href="#">Contact</a></li>
-                    <li><a href="#">Forum</a></li>
-                    <li><a href="http://arma3.com">Arma 3</a></li>
-                </ul>
-            </div>
-        </div>
+            <div class="visible-sm-block clearfix"></div>
 
-        <div class="visible-sm-block clearfix"></div>
-
-        <div class="col-md-3 col-sm-6">
-            <div class="fh5co-footer-widget top-level">
-                <h4 class="fh5co-footer-lead">Nous suivre</h4>
-                <ul class="fh5co-list-check">
-                    <li><a href="http://steamcommunity.com/groups/A3AltisForLife">Steam</a></li>
-                    <li><a href="http://www.twitch.tv/altisforlifetv">Twitch</a></li>
-                    <li><a href="https://www.facebook.com/Altisforlife-1689709277932251/?fref=ts">FaceBook</a></li>
-                    <li><a href="http://www.gametracker.com/server_info/91.236.254.56:2302/">GameTracker</a></li>
-                </ul>
+            <div class="col-md-3 col-sm-6">
+                <div class="fh5co-footer-widget top-level">
+                    <h4 class="fh5co-footer-lead">Nous suivre</h4>
+                    <ul class="fh5co-list-check">
+                        <li><a href="http://steamcommunity.com/groups/A3AltisForLife">Steam</a></li>
+                        <li><a href="http://www.twitch.tv/altisforlifetv">Twitch</a></li>
+                        <li><a href="https://www.facebook.com/Altisforlife-1689709277932251/?fref=ts">FaceBook</a></li>
+                        <li><a href="http://www.gametracker.com/server_info/91.236.254.56:2302/">GameTracker</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
-</div>
 </footer>
 
 <!-- jQuery -->
