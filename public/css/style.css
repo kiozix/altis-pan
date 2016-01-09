@@ -5966,5 +5966,17 @@ a > img.fh5co-align-center {
   display: block;
   margin-left: auto;
   margin-right: auto; }
-
+.shop-currency{
+  display: inline-block;
+  vertical-align: top;
+  font-size: 2rem;
+  font-weight: 700;
+}
+.shop-price{
+  font-size: 7rem;
+  font-weight: 300;
+}
+.shop-duration{
+  font-size: 1.4rem;
+}
 /*# sourceMappingURL=style.css.map */
