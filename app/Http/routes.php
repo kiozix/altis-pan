@@ -19,7 +19,8 @@ Route::post('profil', ['uses' => 'UsersController@update']);
 
 Route::resource('stream', 'StreamsController');
 Route::resource('news', 'NewsController');
-Route::resource('players', 'playersController');
+Route::resource('players', 'PlayersController');
+Route::resource('shop', 'ShopsController');
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',
