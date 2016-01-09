@@ -18,6 +18,21 @@ class ShopsController extends Controller {
 	}
 
 	/**
+	 * @return \Illuminate\View\View
+     */
+	public function accepted()
+	{
+		return view('shops.accepted');
+	}
+
+	/**
+	 * @return \Illuminate\View\View
+     */
+	public function failed()
+	{
+		return view('shops.failed');
+	}
+	/**
 	 * Show the form for creating a new resource.
 	 *
 	 * @return Response
