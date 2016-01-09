@@ -14,8 +14,7 @@ class ShopsController extends Controller {
 	 */
 	public function index()
 	{
-		$test = 'Emile';
-		return view('shops.index', compact('test'));
+		return view('shops.index');
 	}
 
 	/**
