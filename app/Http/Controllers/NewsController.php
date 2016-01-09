@@ -99,7 +99,7 @@ class NewsController extends Controller {
 	{
 		$news = News::findOrFail($id);
 		$news->delete();
-		return redirect(action('NewsController@index'))->with('success', 'Le streamer à bien été supprimé');
+		return redirect(action('NewsController@index'))->with('success', 'La news à bien été supprimé');
 	}
 
 }

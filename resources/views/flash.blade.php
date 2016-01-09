@@ -11,12 +11,12 @@
 
 @if(session()->has('success'))
     <div class="alert alert-success">
-        {{ session('success') }}
+        <i class="fa fa-check"></i>&nbsp;&nbsp;{{ session('success') }}
     </div>
 @endif
 
 @if(session()->has('error'))
     <div class="alert alert-danger">
-        {{ session('error') }}
+        <i class="fa fa-close"></i>&nbsp;&nbsp;{{ session('error') }}
     </div>
 @endif

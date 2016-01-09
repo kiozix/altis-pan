@@ -21,7 +21,7 @@
             @if (Auth::user()->admin == 1)
                 <p class="text-right">
                     <a href="{{ action('NewsController@create') }}" class="btn btn-primary"><i class="fa fa-plus"></i>
-                        Ajouter une une News </a>
+                        Ajouter une News </a>
                 </p>
             @endif
         @endif

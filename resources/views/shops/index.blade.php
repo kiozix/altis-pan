@@ -14,24 +14,46 @@
         </div>
     </aside>
 
+    @if (Auth::guest())
+    @else
+        @if (Auth::user()->admin == 1)
+            <p class="text-right">
+                <a href="{{ action('ShopsController@create') }}" class="btn btn-primary"><i class="fa fa-plus"></i>
+                    Ajouter une offre </a>
+            </p>
+        @endif
+    @endif
+
     <div class="container">
+        @include('flash')
         <div class="row">
+            @foreach($shops as $shop)
             <div class="col-md-4 panel panel-danger">
                 <div class="panel-body">
-                    <h2 class="fh5co-sidebox-lead text-center">Test</h2>
+                    <h2 class="fh5co-sidebox-lead text-center">{{ $shop->name }}</h2>
                     <hr />
                     <div class="text-center">
                       <span class="shop-currency">€</span>
-                      <span class="shop-price">20</span>
-                      <span class="shop-duration">/MO</span>
+                      <span class="shop-price">{{ $shop->price }}</span>
+                      @if($shop->time != 0)
+                      <span class="shop-duration">/{{ $shop->time }}Jours</span>
+                      @endif
                     </div>
                     <br />
-                    <img class="img-responsive img-rounded" src="http://altislifefr.com/images/uploads/1426543887.jpg">
+                    <img class="img-responsive img-rounded" src="{{ $shop->image }}">
                     <br />
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus cum ea et eveniet hic impedit maxime, molestias omnis, perspiciatis, praesentium quis ratione repellendus vitae. A dicta maiores quas quia voluptatibus.</p>
+                    <p>{{ $shop->content }}</p>
                     <button class="btn btn-outline">Achetter</button>
+                    @if (Auth::guest())
+                    @else
+                        @if (Auth::user()->admin == 1)
+                            <a href="{{ action('ShopsController@edit', $shop) }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
+                            <a href="{{ action('ShopsController@destroy', $shop) }}" data-method="delete" data-confirm="Voulez vous vraiment suprimer cette enregistrement ?" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                        @endif
+                    @endif
                 </div>
             </div>
+            @endforeach
         </div>
     </div>
 @endsection

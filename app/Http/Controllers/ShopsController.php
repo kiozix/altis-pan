@@ -2,7 +2,9 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ShopsRequest;
 
+use App\Shops;
 use Illuminate\Http\Request;
 
 class ShopsController extends Controller {
@@ -14,7 +16,8 @@ class ShopsController extends Controller {
 	 */
 	public function index()
 	{
-		return view('shops.index');
+		$shops = Shops::all();
+		return view('shops.index', compact('shops'));
 	}
 
 	/**
@@ -39,7 +42,8 @@ class ShopsController extends Controller {
 	 */
 	public function create()
 	{
-		//
+		$shops = new Shops();
+		return view('shops.create', compact('shops'));
 	}
 
 	/**
@@ -47,9 +51,10 @@ class ShopsController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store(ShopsRequest $request)
 	{
-		//
+		Shops::create($request->only('name', 'time', 'content', 'price', 'image'));
+		return redirect(action('ShopsController@index'))->with('success', 'L\'offre à bien été ajouter');
 	}
 
 	/**
@@ -71,7 +76,8 @@ class ShopsController extends Controller {
 	 */
 	public function edit($id)
 	{
-		//
+		$shops = Shops::findOrFail($id);
+		return view('shops.edit', compact('shops'));
 	}
 
 	/**
@@ -80,9 +86,11 @@ class ShopsController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update($id, ShopsRequest $request)
 	{
-		//
+		$shops = Shops::findOrFail($id);
+		$shops->update($request->only('name', 'time', 'content', 'price', 'image'));
+		return redirect(action('ShopsController@index'))->with('success', 'L\'offre à bien été modifiée');
 	}
 
 	/**
@@ -93,7 +101,9 @@ class ShopsController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		//
+		$shops = Shops::findOrFail($id);
+		$shops->delete();
+		return redirect(action('ShopsController@index'))->with('success', 'L\'offre à bien été supprimé');
 	}
 
 }
