@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <h1 class="fh5co-page-heading-lead">
-                        {{ $players->name }}
+                        {!! $players->name !!}
                         <span class="fh5co-border"></span>
                     </h1>
                 </div>
@@ -25,7 +25,7 @@
                                 <label class="col-md-4 control-label">Nom</label>
                                 <div class="col-md-8">
                                     <input class="form-control input-lg" name="name" type="text"
-                                           value="{{ $players->name }}" disabled>
+                                           value="{!! $players->name !!}" disabled>
                                 </div>
                             </div>
                         </div>
@@ -37,7 +37,7 @@
                                 <label class="col-md-4 control-label">Rang</label>
                                 <div class="col-md-8">
                                     <input class="form-control input-lg" name="name" type="text"
-                                           value="{{ $rank }}" disabled>
+                                           value="{!! $rank !!}" disabled>
                                 </div>
                             </div>
                         </div>
@@ -69,10 +69,10 @@
                         @if($players->mediclevel > 0)
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label">Rang Pompier</label>
+                                    <label class="col-md-4 control-label">Rang Pompier <button type="button" data-toggle="modal" data-target="#pompier">(?)</button></label>
                                     <div class="col-md-8">
                                         <input type="text" class="form-control input-lg"
-                                               value="{{ $mediclevel }}" disabled>
+                                               value="{!! $mediclevel !!}" disabled>
                                     </div>
                                 </div>
                             </div>
@@ -82,10 +82,10 @@
                         @if($players->coplevel > 0)
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label">Rang Policier</label>
+                                    <label class="col-md-4 control-label">Rang Policier <button type="button" data-toggle="modal" data-target="#police">(?)</button></label>
                                     <div class="col-md-8">
                                         <input type="text" class="form-control input-lg"
-                                               value="{{ $coplevel }}" disabled>
+                                               value="{!! $coplevel !!}" disabled>
                                     </div>
                                 </div>
                             </div>
@@ -112,7 +112,63 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Véhicules :</h3>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table table-striped table-responsive">
+                            <tr>
+                                <th>Nom</th>
+                                <th>Coté</th>
+                                <th>Type</th>
+                                <th>Active</th>
+                            </tr>
+                            @foreach($vehicles as $vehicle)
+                            <tr>
+                                <td>{!! $vehicle->classname !!}</td>
+                                <td>{!! $vehicle->side !!}</td>
+                                <td>{!! $vehicle->type !!}</td>
+                                <td>
+                                    @if($vehicle->active == 1)
+                                        <i class="fa fa-check" style="color: #2cc36b;"></i>
+                                    @elseif($vehicle->active == 0)
+                                        <i class="fa fa-close" style="color: #c0392b;"></i>
+                                    @endif
+                                </td>
+                            </tr>
+                            @endforeach
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Votre Gang : {!! $gang->name !!}</h3>
+                    </div>
+                    <div class="panel-body">
+                        <h3>Information :</h3>
+                        <ul>
+                            <li>Nombres de membres maximum : {!! $gang->maxmembers !!}</li>
+                            <li>Compte en banque : {{ number_format($gang->bank, 2, ',', ' ') . ' $' }}</li>
+                        </ul>
+
+                        <h4>Membres</h4>
+
+                        <pre>{!! $gang->members !!}</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
     </div>
+
+    @include('players.modal')
 
 @endsection

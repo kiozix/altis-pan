@@ -19,70 +19,72 @@ class PlayersController extends Controller {
 	public function index(Guard $auth)
 	{
 		$players = DB::table('players')->where('playerid', $auth->user()->arma)->first();
+		$vehicles = DB::table('vehicles')->where('pid', $auth->user()->arma)->get();
+		$gang = DB::table('gangs')->where('owner', $auth->user()->arma)->first();
 
-		// $vehicles = DB::table('vehicles')->where('pid', $auth->user()->arma)->get();
+		// dd($gang);
 
 		switch ($players->coplevel) {
 			case 1:
-				$coplevel = 'Recrue';
+				$coplevel = env('POLICE_GRADE_1');
 				break;
 			case 2:
-				$coplevel = 'Brigadier';
+				$coplevel = env('POLICE_GRADE_2');
 				break;
 			case 3:
-				$coplevel = 'Brigadier Chef';
+				$coplevel = env('POLICE_GRADE_3');
 				break;
 			case 4:
-				$coplevel = 'Adjudant';
+				$coplevel = env('POLICE_GRADE_4');
 				break;
 			case 5:
-				$coplevel = 'Adjudant Chef';
+				$coplevel = env('POLICE_GRADE_5');
 				break;
 			case 6:
-				$coplevel = 'Lieutenant';
+				$coplevel = env('POLICE_GRADE_6');
 				break;
 			case 7:
-				$coplevel = 'Capitaine';
+				$coplevel = env('POLICE_GRADE_7');
 				break;
 			case 8:
-				$coplevel = 'Commandant';
+				$coplevel = env('POLICE_GRADE_8');
 				break;
 		}
 
 		switch ($players->mediclevel) {
 			case 1:
-				$mediclevel = 'Sapeur';
+				$mediclevel = env('POMPIER_GRADE_1');
 				break;
 			case 2:
-				$mediclevel = 'Caporal';
+				$mediclevel = env('POMPIER_GRADE_2');
 				break;
 			case 3:
-				$mediclevel = 'Caporal Chef';
+				$mediclevel = env('POMPIER_GRADE_3');
 				break;
 			case 4:
-				$mediclevel = 'Lieutenant colonel';
+				$mediclevel = env('POMPIER_GRADE_4');
 				break;
 			case 5:
-				$mediclevel = 'Adjudant Chef';
+				$mediclevel = env('POMPIER_GRADE_5');
 				break;
 		}
 
 		switch($players->adminlevel){
 			case 0:
-				$rank = 'Joueur';
+				$rank = env('ADMIN_GRADE_0');
 				break;
 			case 1:
-				$rank = 'Support';
+				$rank = env('ADMIN_GRADE_1');
 				break;
 			case 2:
-				$rank = 'Modérateur';
+				$rank = env('ADMIN_GRADE_2');
 				break;
 			case 3:
-				$rank = 'Administrateur';
+				$rank = env('ADMIN_GRADE_3');
 				break;
 		}
 
-		return view('players.index', compact('players', 'mediclevel', 'coplevel', 'rank', 'vehicles'));
+		return view('players.index', compact('players', 'mediclevel', 'coplevel', 'rank', 'vehicles', 'gang'));
 	}
 
 
@@ -118,61 +120,61 @@ class PlayersController extends Controller {
 
 		switch ($players->coplevel) {
 			case 1:
-				$coplevel = 'Recrue';
+				$coplevel = env('POLICE_GRADE_1');
 				break;
 			case 2:
-				$coplevel = 'Brigadier';
+				$coplevel = env('POLICE_GRADE_2');
 				break;
 			case 3:
-				$coplevel = 'Brigadier Chef';
+				$coplevel = env('POLICE_GRADE_3');
 				break;
 			case 4:
-				$coplevel = 'Adjudant';
+				$coplevel = env('POLICE_GRADE_4');
 				break;
 			case 5:
-				$coplevel = 'Adjudant Chef';
+				$coplevel = env('POLICE_GRADE_5');
 				break;
 			case 6:
-				$coplevel = 'Lieutenant';
+				$coplevel = env('POLICE_GRADE_6');
 				break;
 			case 7:
-				$coplevel = 'Capitaine';
+				$coplevel = env('POLICE_GRADE_7');
 				break;
 			case 8:
-				$coplevel = 'Commandant';
+				$coplevel = env('POLICE_GRADE_8');
 				break;
 		}
 
 		switch ($players->mediclevel) {
 			case 1:
-				$mediclevel = 'Sapeur';
+				$mediclevel = env('POMPIER_GRADE_1');
 				break;
 			case 2:
-				$mediclevel = 'Caporal';
+				$mediclevel = env('POMPIER_GRADE_2');
 				break;
 			case 3:
-				$mediclevel = 'Caporal Chef';
+				$mediclevel = env('POMPIER_GRADE_3');
 				break;
 			case 4:
-				$mediclevel = 'Lieutenant colonel';
+				$mediclevel = env('POMPIER_GRADE_4');
 				break;
 			case 5:
-				$mediclevel = 'Adjudant Chef';
+				$mediclevel = env('POMPIER_GRADE_5');
 				break;
 		}
 
 		switch($players->adminlevel){
 			case 0:
-				$rank = 'Joueur';
+				$rank = env('ADMIN_GRADE_0');
 				break;
 			case 1:
-				$rank = 'Support';
+				$rank = env('ADMIN_GRADE_1');
 				break;
 			case 2:
-				$rank = 'Modérateur';
+				$rank = env('ADMIN_GRADE_2');
 				break;
 			case 3:
-				$rank = 'Administrateur';
+				$rank = env('ADMIN_GRADE_3');
 				break;
 		}
 

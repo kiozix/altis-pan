@@ -11,7 +11,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="csrf-token" content="{!! csrf_token() !!}">
-    <title>AltisForLife</title>
+    <title>{{ env('SITE_NAME', 'AltisPan') }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description"
           content="Site réalisée avec AltisPan, CMS dédiée au Mod multijoueur Altis Life. Réalisation : Lucas GRELAUD, Emile LEPTIT."/>
@@ -72,7 +72,7 @@
                     <!-- Mobile Toggle Menu Button -->
                     <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle" data-toggle="collapse"
                        data-target="#fh5co-navbar" aria-expanded="false" aria-controls="navbar"><i></i></a>
-                    <a class="navbar-brand" href="{{ url('/') }}">AltisForLife</a>
+                    <a class="navbar-brand" href="{{ url('/') }}">{{ env('SITE_NAME', 'AltisPan') }}</a>
                 </div>
                 <div id="fh5co-navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
@@ -133,7 +133,7 @@
         <div class="row">
             <div class="col-md-6 col-sm-6">
                 <div class="fh5co-footer-widget">
-                    <h2 class="fh5co-footer-logo">AltisForLife</h2>
+                    <h2 class="fh5co-footer-logo">{{ env('SITE_NAME', 'AltisPan') }}</h2>
                     <p>Site réalisé avec AltisPan, CMS dédiée au Mod multijoueur Altis Life. Réalisation : Lucas
                         GRELAUD, Emile LEPETIT.</p><!-- Correspond a la meta "description" -->
                     <p> &copy; Copyright <a href="#">AltisPan</a>, site par <a href="http://emix-dev.fr/">EmixDev</a>
