@@ -16,27 +16,31 @@
 
 
     <div class="container">
-        @if (Auth::guest())
-        @else
-            @if (Auth::user()->admin == 1)
-                <p class="text-right">
-                    <a href="{{ action('NewsController@create') }}" class="btn btn-primary"><i class="fa fa-plus"></i>
-                        Ajouter une News </a>
-                </p>
-            @endif
-        @endif
-
-        @foreach($news as $new)
-            <ul class="fh5co-post">
-                <li>
+        <div class="row">
+            <div class="col-md-12">
+                @if (Auth::guest())
+                @else
+                    @if (Auth::user()->admin == 1)
+                        <p class="text-right">
+                            <a href="{{ action('NewsController@create') }}" class="btn btn-primary"><i class="fa fa-plus"></i>
+                                Ajouter une News </a>
+                        </p>
+                    @endif
+                @endif
+            </div>
+            <div class="col-md-12">
+                @foreach($news as $new)
+                <div class="col-md-12 fh5co-post">
                     <a href="{{ url("/news/$new->slug ")}}">
                         <div class="fh5co-post-media"><img src="{{ asset('img/news.png') }}" alt="News"></div>
                         <div class="fh5co-post-blurb">
-                            <h3>{!! $new->name !!}</h3>
+                            <h3 class="text-uppercase">{!! $new->name !!}</h3>
                             {!! $new->content !!}
                             <span class="fh5co-post-meta">{{  $new->updated_at }}</span>
                         </div>
                     </a>
+                </div>
+                <div class="col-md-12">
                     @if (Auth::guest())
                     @else
                         @if (Auth::user()->admin == 1)
@@ -50,9 +54,11 @@
                             </div>
                         @endif
                     @endif
-                </li>
-            </ul>
-        @endforeach
+                </div>
+                @endforeach
+            </div>
+        </div>
+
     </div>
 
 @endsection

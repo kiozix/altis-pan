@@ -5409,7 +5409,7 @@ h1, h2, h3, h4, h5, h6 {
   display: block; }
 .fh5co-post a:hover, .fh5co-post a:active, .fh5co-post a:focus {
   text-decoration: none; }
-.fh5co-post a:hover .fh5co-post-blurb, .fh5co-post a:active .fh5co-post-blurb, .fh5co-post a:focus .fh5co-post-blurb {
+.fh5co-post a:hover .fh5co-post-blurb h3, .fh5co-post a:active .fh5co-post-blurb h3, .fh5co-post a:focus .fh5co-post-blurb h3 {
   color: #FBB040; }
 .fh5co-post a:hover .fh5co-post-media, .fh5co-post a:hover .fh5co-post-blurb, .fh5co-post a:hover .fh5co-post-meta, .fh5co-post a:active .fh5co-post-media, .fh5co-post a:active .fh5co-post-blurb, .fh5co-post a:active .fh5co-post-meta, .fh5co-post a:focus .fh5co-post-media, .fh5co-post a:focus .fh5co-post-blurb, .fh5co-post a:focus .fh5co-post-meta {
   text-decoration: none; }
