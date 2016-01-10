@@ -23,43 +23,36 @@
                 </p>
             @endif
         @endif
-
-        <table width="100%" color="black" class="table table-striped">
-            <tbody>
-            @foreach($streams as $stream)
-                <tr>
-                    <td>&nbsp; &nbsp;
-                        <span class="stream__title">
-                            <a href="{{ url("/stream/$stream->slug ")}}">{{ $stream->name }}</a>
-                        </span>
-                        @if (Auth::guest())
-                        @else
-                            @if (Auth::user()->admin == 1)
-                                <span class="stream__action">
-                                    <a href="{{ action('StreamsController@edit', $stream) }}" class="btn btn-primary"><i
-                                                class="fa fa-pencil"></i> Editer</a>
+            <div class="container">
+                <div class="row">
+                    @foreach($streams as $stream)
+                        <div class="col-md-12">
+                            <div class="col-md-8">
+                                <h4 class="text-uppercase"><a href="{{ url("/stream/$stream->slug ")}}">{{ $stream->name }}</a></h4>
+                            </div>
+                            <div class="col-md-4 text-right">
+                                @if (Auth::guest())
+                                @else
+                                    @if (Auth::user()->admin == 1)
+                                    <a href="{{ action('StreamsController@edit', $stream) }}" class="btn btn-primary"><i class="fa fa-pencil"></i> Editer</a>
                                     <a href="{{ action('StreamsController@destroy', $stream) }}" data-method="delete" data-confirm="Voulez vous vraiment suprimer cette enregistrement ?" class="btn btn-danger"><i class="fa fa-trash"></i> Suprimmer</a>
-                                </span>
-                            @endif
-                        @endif
-                        <hr class="stream__hr"/>
+                                    @endif
+                                @endif
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-md-6">
+                                <div class="embed-responsive embed-responsive-4by3">
+                                    <iframe src="http://player.twitch.tv/?channel={{ $stream->name }}" frameborder="0"  scrolling="no" class="embed-responsive-item" height="150px"></iframe>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="stream__content">{!!  $stream->content !!}</p>
+                            </div>
+                        </div>
 
-                        <table>
-                            <tbody>
-                            <tr>
-                                <td valign="top">
-                                    <iframe src="http://player.twitch.tv/?channel={{ $stream->name }}" frameborder="0"  scrolling="no" height="242" width="360"></iframe>
-                                </td>
-                                <td valign="top">
-                                    <p class="stream__content">{!!  $stream->content !!}</p>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </td>
-                </tr>
-            @endforeach
-            </tbody>
-        </table>
+                    @endforeach
+                </div>
+            </div>
     </div>
 @endsection

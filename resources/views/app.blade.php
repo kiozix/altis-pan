@@ -55,7 +55,6 @@
     <link rel="stylesheet" href="{{ asset('/css/magnific-popup.css') }}">
     <!-- Theme Style -->
     <link rel="stylesheet" href="{{ asset('/css/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('/css/altispan.css') }}">
     <!-- Modernizr JS -->
     <script src="{{ asset('/js/modernizr-2.6.2.min.js') }}"></script>
     <!-- FOR IE9 below -->
