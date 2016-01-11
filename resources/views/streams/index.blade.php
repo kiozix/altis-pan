@@ -34,6 +34,15 @@
                                 </div>
                             </div>
                             <div class="col-md-12">
+                                @if (Auth::guest())
+                                @else
+                                    @if (Auth::user()->admin == 1)
+                                        <a href="{{ action('StreamsController@edit', $stream) }}" class="btn btn-primary"><i class="fa fa-pencil"></i> Editer</a>
+                                        <a href="{{ action('StreamsController@destroy', $stream) }}" data-method="delete" data-confirm="Voulez vous vraiment suprimer cette enregistrement ?" class="btn btn-danger"><i class="fa fa-trash"></i> Suprimmer</a>
+                                    @endif
+                                @endif
+                            </div>
+                            <div class="col-md-12">
                                 <p class="stream-text">{!!  $stream->content !!}</p>
                             </div>
                         </div>
