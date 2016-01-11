@@ -26,7 +26,7 @@
 
         </div>
         <div class="col-md-8">
-            <p>{!! $streams->content !!}</p>
+            <p class="stream-text">{!! $streams->content !!}</p>
         </div>
     </div>
 </div>

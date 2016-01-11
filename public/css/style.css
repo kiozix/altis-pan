@@ -5995,3 +5995,8 @@ a > img.fh5co-align-center {
 ::-webkit-scrollbar:horizontal {
   height: 13px
 }
+
+.stream-text{
+    padding: 15px;
+    font-size: 1.8rem;
+}
