@@ -17,156 +17,164 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
-                    <div class="panel-body">
-
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label class="col-md-4 control-label">Nom</label>
-                                <div class="col-md-8">
-                                    <input class="form-control input-lg" name="name" type="text"
-                                           value="{!! $players->name !!}" disabled>
+                <div class="tabbable ">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#a" data-toggle="tab">Informations</a></li>
+                        <li><a href="#b" data-toggle="tab">Véhicules</a></li>
+                        <li><a href="#c" data-toggle="tab">Gangs</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="a">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Votre personnage :</h3>
                                 </div>
-                            </div>
-                        </div>
+                                <div class="panel-body">
 
-                        <br/><br/>
-
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label class="col-md-4 control-label">Rang</label>
-                                <div class="col-md-8">
-                                    <input class="form-control input-lg" name="name" type="text"
-                                           value="{!! $rank !!}" disabled>
-                                </div>
-                            </div>
-                        </div>
-
-                        <br/><br/>
-
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label class="col-md-4 control-label">Cash</label>
-                                <div class="col-md-8">
-                                    <input class="form-control input-lg" type="text"
-                                           value="{{ number_format($players->cash, 2, ',', ' ') . ' $' }}" disabled>
-                                </div>
-                            </div>
-                        </div>
-
-                        <br/><br/>
-
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label class="col-md-4 control-label">Banque</label>
-                                <div class="col-md-8">
-                                    <input class="form-control input-lg" type="text"
-                                           value="{{ number_format($players->bankacc, 2, ',', ' ') . ' $' }}" disabled>
-                                </div>
-                            </div>
-                        </div>
-                        <br /><br />
-                        @if($players->mediclevel > 0)
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label">Rang Pompier <button type="button" data-toggle="modal" data-target="#pompier">(?)</button></label>
-                                    <div class="col-md-8">
-                                        <input type="text" class="form-control input-lg"
-                                               value="{!! $mediclevel !!}" disabled>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">Nom</label>
+                                            <div class="col-md-8">
+                                                <input class="form-control input-lg" name="name" type="text"
+                                                       value="{!! $players->name !!}" disabled>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <br /><br />
-                        @endif
 
-                        @if($players->coplevel > 0)
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label">Rang Policier <button type="button" data-toggle="modal" data-target="#police">(?)</button></label>
-                                    <div class="col-md-8">
-                                        <input type="text" class="form-control input-lg"
-                                               value="{!! $coplevel !!}" disabled>
+                                    <br/><br/>
+
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">Rang</label>
+                                            <div class="col-md-8">
+                                                <input class="form-control input-lg" name="name" type="text"
+                                                       value="{!! $rank !!}" disabled>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <br /><br />
-                        @endif
 
+                                    <br/><br/>
 
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label class="col-md-4 control-label">Rang donateur</label>
-                                <div class="col-md-8">
-                                    @if($players->donatorlvl > 0)
-                                        <span class="donatorlvl"><i class="fa fa-check"></i> Vous êtes donateur</span>
-                                    @else
-                                        <span class="donatorlvl"><i class="fa fa-close"></i> Vous n'êtes pas donateur</span>
-                                        <br>
-                                        <a href="">Le devenir ?</a>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">Cash</label>
+                                            <div class="col-md-8">
+                                                <input class="form-control input-lg" type="text"
+                                                       value="{{ number_format($players->cash, 2, ',', ' ') . ' $' }}" disabled>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <br/><br/>
+
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">Banque</label>
+                                            <div class="col-md-8">
+                                                <input class="form-control input-lg" type="text"
+                                                       value="{{ number_format($players->bankacc, 2, ',', ' ') . ' $' }}" disabled>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br /><br />
+                                    @if($players->mediclevel > 0)
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">Rang Pompier <a type="button" data-toggle="modal" data-target="#pompier">(?)</a></label>
+                                                <div class="col-md-8">
+                                                    <input type="text" class="form-control input-lg"
+                                                           value="{!! $mediclevel !!}" disabled>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br /><br />
                                     @endif
+
+                                    @if($players->coplevel > 0)
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">Rang Policier <a type="button" data-toggle="modal" data-target="#police">(?)</a></label>
+                                                <div class="col-md-8">
+                                                    <input type="text" class="form-control input-lg"
+                                                           value="{!! $coplevel !!}" disabled>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br /><br />
+                                    @endif
+
+
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">Rang donateur</label>
+                                            <div class="col-md-8">
+                                                @if($players->donatorlvl > 0)
+                                                    <span class="donatorlvl"><i class="fa fa-check"></i> Vous êtes donateur</span>
+                                                @else
+                                                    <span class="donatorlvl"><i class="fa fa-close"></i> Vous n'êtes pas donateur</span>
+                                                    <br>
+                                                    <a href="">Le devenir ?</a>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
+                        <div class="tab-pane" id="b">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Véhicules :</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <table class="table table-striped table-responsive">
+                                        <tr>
+                                            <th>Nom</th>
+                                            <th>Coté</th>
+                                            <th>Type</th>
+                                            <th>Active</th>
+                                        </tr>
+                                        @foreach($vehicles as $vehicle)
+                                            <tr>
+                                                <td>{!! $vehicle->classname !!}</td>
+                                                <td>{!! $vehicle->side !!}</td>
+                                                <td>{!! $vehicle->type !!}</td>
+                                                <td>
+                                                    @if($vehicle->active == 1)
+                                                        <i class="fa fa-check" style="color: #2cc36b;"></i>
+                                                    @elseif($vehicle->active == 0)
+                                                        <i class="fa fa-close" style="color: #c0392b;"></i>
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="c">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Votre Gang : {!! $gang->name !!}</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <h3>Information :</h3>
+                                    <ul>
+                                        <li>Nombres de membres maximum : {!! $gang->maxmembers !!}</li>
+                                        <li>Compte en banque : {{ number_format($gang->bank, 2, ',', ' ') . ' $' }}</li>
+                                    </ul>
 
+                                    <h4>Membres</h4>
+
+                                    <pre>{!! $gang->members !!}</pre>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Véhicules :</h3>
-                    </div>
-                    <div class="panel-body">
-                        <table class="table table-striped table-responsive">
-                            <tr>
-                                <th>Nom</th>
-                                <th>Coté</th>
-                                <th>Type</th>
-                                <th>Active</th>
-                            </tr>
-                            @foreach($vehicles as $vehicle)
-                            <tr>
-                                <td>{!! $vehicle->classname !!}</td>
-                                <td>{!! $vehicle->side !!}</td>
-                                <td>{!! $vehicle->type !!}</td>
-                                <td>
-                                    @if($vehicle->active == 1)
-                                        <i class="fa fa-check" style="color: #2cc36b;"></i>
-                                    @elseif($vehicle->active == 0)
-                                        <i class="fa fa-close" style="color: #c0392b;"></i>
-                                    @endif
-                                </td>
-                            </tr>
-                            @endforeach
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Votre Gang : {!! $gang->name !!}</h3>
-                    </div>
-                    <div class="panel-body">
-                        <h3>Information :</h3>
-                        <ul>
-                            <li>Nombres de membres maximum : {!! $gang->maxmembers !!}</li>
-                            <li>Compte en banque : {{ number_format($gang->bank, 2, ',', ' ') . ' $' }}</li>
-                        </ul>
-
-                        <h4>Membres</h4>
-
-                        <pre>{!! $gang->members !!}</pre>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
     </div>
 
     @include('players.modal')
