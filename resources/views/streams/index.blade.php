@@ -33,15 +33,16 @@
                                     <iframe src="http://player.twitch.tv/?channel={{ $stream->name }}" frameborder="0"  scrolling="no" class="embed-responsive-item" height="150px"></iframe>
                                 </div>
                             </div>
-                            <div class="col-md-12">
                                 @if (Auth::guest())
                                 @else
                                     @if (Auth::user()->admin == 1)
-                                        <a href="{{ action('StreamsController@edit', $stream) }}" class="btn btn-primary"><i class="fa fa-pencil"></i> Editer</a>
-                                        <a href="{{ action('StreamsController@destroy', $stream) }}" data-method="delete" data-confirm="Voulez vous vraiment suprimer cette enregistrement ?" class="btn btn-danger"><i class="fa fa-trash"></i> Suprimmer</a>
+                                        <div class="col-md-12 text-center" style="margin-top: 10px;">
+                                            <a href="{{ action('StreamsController@edit', $stream) }}" class="btn btn-primary"><i class="fa fa-pencil"></i> Editer</a>
+                                            <a href="{{ action('StreamsController@destroy', $stream) }}" data-method="delete" data-confirm="Voulez vous vraiment suprimer cette enregistrement ?" class="btn btn-danger"><i class="fa fa-trash"></i> Suprimmer</a>
+                                        </div>
                                     @endif
                                 @endif
-                            </div>
+
                             <div class="col-md-12">
                                 <p class="stream-text">{!!  $stream->content !!}</p>
                             </div>
