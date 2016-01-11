@@ -12,7 +12,7 @@ class PlayersController extends Controller {
 
 	public function __construct()
 	{
-		$this->middleware('auth');
+		$this->middleware('auth', ['except' => ['index', 'show']]);
 		$this->middleware('admin', ['except' => ['index', 'show']]);
 	}
 
@@ -25,8 +25,11 @@ class PlayersController extends Controller {
 	public function index(Guard $auth)
 	{
 		$players = DB::table('players')->where('playerid', $auth->user()->arma)->first();
-		$vehicles = DB::table('vehicles')->where('pid', $auth->user()->arma)->get();
 		$gang = DB::table('gangs')->where('owner', $auth->user()->arma)->first();
+
+		$vehicles_car = DB::table('vehicles')->where('pid', $auth->user()->arma)->where('type', 'Car')->get();
+		$vehicles_air = DB::table('vehicles')->where('pid', $auth->user()->arma)->where('type', 'Air')->get();
+		$vehicles_ship = DB::table('vehicles')->where('pid', $auth->user()->arma)->where('type', 'Ship')->get();
 
 		// dd($gang);
 
@@ -90,7 +93,7 @@ class PlayersController extends Controller {
 				break;
 		}
 
-		return view('players.index', compact('players', 'mediclevel', 'coplevel', 'rank', 'vehicles', 'gang'));
+		return view('players.index', compact('players', 'mediclevel', 'coplevel', 'rank', 'gang', 'vehicles_car', 'vehicles_air', 'vehicles_ship'));
 	}
 
 

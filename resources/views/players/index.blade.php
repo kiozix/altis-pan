@@ -129,28 +129,7 @@
                                     <h3 class="panel-title">Véhicules :</h3>
                                 </div>
                                 <div class="panel-body">
-                                    <table class="table table-striped table-responsive">
-                                        <tr>
-                                            <th>Nom</th>
-                                            <th>Coté</th>
-                                            <th>Type</th>
-                                            <th>Active</th>
-                                        </tr>
-                                        @foreach($vehicles as $vehicle)
-                                            <tr>
-                                                <td>{!! $vehicle->classname !!}</td>
-                                                <td>{!! $vehicle->side !!}</td>
-                                                <td>{!! $vehicle->type !!}</td>
-                                                <td>
-                                                    @if($vehicle->active == 1)
-                                                        <i class="fa fa-check" style="color: #2cc36b;"></i>
-                                                    @elseif($vehicle->active == 0)
-                                                        <i class="fa fa-close" style="color: #c0392b;"></i>
-                                                    @endif
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    </table>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -189,7 +168,28 @@
                                             </div>
                                             <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
                                                 <div class="panel-body">
-                                                    faire liste
+                                                    <table class="table table-striped table-responsive">
+                                                        <tr>
+                                                            <th>Nom</th>
+                                                            <th>Coté</th>
+                                                            <th>Type</th>
+                                                            <th>Active</th>
+                                                        </tr>
+                                                        @foreach($vehicles_car as $vehicle_car)
+                                                            <tr>
+                                                                <td>{!! $vehicle_car->classname !!}</td>
+                                                                <td>{!! $vehicle_car->side !!}</td>
+                                                                <td>{!! $vehicle_car->type !!}</td>
+                                                                <td>
+                                                                    @if($vehicle_car->active == 1)
+                                                                        <i class="fa fa-check" style="color: #2cc36b;"></i>
+                                                                    @elseif($vehicle_car->active == 0)
+                                                                        <i class="fa fa-close" style="color: #c0392b;"></i>
+                                                                    @endif
+                                                                </td>
+                                                            </tr>
+                                                        @endforeach
+                                                    </table>
                                                 </div>
                                             </div>
                                         </div>
@@ -203,7 +203,28 @@
                                             </div>
                                             <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
                                                 <div class="panel-body">
-                                                   faire liste
+                                                    <table class="table table-striped table-responsive">
+                                                        <tr>
+                                                            <th>Nom</th>
+                                                            <th>Coté</th>
+                                                            <th>Type</th>
+                                                            <th>Active</th>
+                                                        </tr>
+                                                        @foreach($vehicles_air as $vehicle_air)
+                                                            <tr>
+                                                                <td>{!! $vehicle_air->classname !!}</td>
+                                                                <td>{!! $vehicle_air->side !!}</td>
+                                                                <td>{!! $vehicle_air->type !!}</td>
+                                                                <td>
+                                                                    @if($vehicle_air->active == 1)
+                                                                        <i class="fa fa-check" style="color: #2cc36b;"></i>
+                                                                    @elseif($vehicle_air->active == 0)
+                                                                        <i class="fa fa-close" style="color: #c0392b;"></i>
+                                                                    @endif
+                                                                </td>
+                                                            </tr>
+                                                        @endforeach
+                                                    </table>
                                                 </div>
                                             </div>
                                         </div>
@@ -217,7 +238,28 @@
                                             </div>
                                             <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
                                                 <div class="panel-body">
-                                                    faire liste
+                                                    <table class="table table-striped table-responsive">
+                                                        <tr>
+                                                            <th>Nom</th>
+                                                            <th>Coté</th>
+                                                            <th>Type</th>
+                                                            <th>Active</th>
+                                                        </tr>
+                                                        @foreach($vehicles_ship as $vehicle_ship)
+                                                            <tr>
+                                                                <td>{!! $vehicle_ship->classname !!}</td>
+                                                                <td>{!! $vehicle_ship->side !!}</td>
+                                                                <td>{!! $vehicle_ship->type !!}</td>
+                                                                <td>
+                                                                    @if($vehicle_ship->active == 1)
+                                                                        <i class="fa fa-check" style="color: #2cc36b;"></i>
+                                                                    @elseif($vehicle_ship->active == 0)
+                                                                        <i class="fa fa-close" style="color: #c0392b;"></i>
+                                                                    @endif
+                                                                </td>
+                                                            </tr>
+                                                        @endforeach
+                                                    </table>
                                                 </div>
                                             </div>
                                         </div>
