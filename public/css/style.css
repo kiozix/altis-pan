@@ -5978,3 +5978,20 @@ a > img.fh5co-align-center {
   font-size: 1.4rem;
 }
 /*# sourceMappingURL=style.css.map */
+
+::-webkit-scrollbar {
+  width: 13px
+}
+
+::-webkit-scrollbar-thumb {
+  background: #FBB040;
+  border-radius: 0
+}
+
+::-webkit-scrollbar-track {
+  background: #ddd
+}
+
+::-webkit-scrollbar:horizontal {
+  height: 13px
+}

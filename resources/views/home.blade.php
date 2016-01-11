@@ -4,7 +4,7 @@
     <div class="fh5co-slider">
         <div class="owl-carousel owl-carousel-fullwidth">
             <!-- Slide type 1 -->
-            <div class="item" style="background-image:url(http://altisforlife.fr/wp-content/themes/zerif-lite/images/bg3.jpg)">
+            <div class="item" style="background-image:url({{ asset('img/carousel/bg1.jpg') }})">
                 <div class="fh5co-overlay"></div>
                 <div class="container">
                     <div class="row">
