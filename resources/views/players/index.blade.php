@@ -21,7 +21,8 @@
                     <ul class="nav nav-tabs">
                         <li class="active"><a href="#a" data-toggle="tab">Informations</a></li>
                         <li><a href="#b" data-toggle="tab">Véhicules</a></li>
-                        @if($gang)<li><a href="#c" data-toggle="tab">Gangs</a></li>@endif
+                        <li><a href="#d" data-toggle="tab">Licences</a></li>
+                    @if($gang)<li><a href="#c" data-toggle="tab">Gangs</a></li>@endif
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane active" id="a">
@@ -228,6 +229,53 @@
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane" id="d">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Vos Licences</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <?php
+                                    $suppr = array("\"", "`", "[", "]");
+                                    $lineLicenses = str_replace($suppr, "", $players->civ_licenses);
+                                    $arrayLicenses = preg_split("/,/", $lineLicenses);
+                                    $totarrayLicenses = count($arrayLicenses);
+                                    $y = 0;
+                                    $n = 0;
+                                    for($i = 1; $y < $totarrayLicenses; $i++){
+                                    ?>
+
+                                    <div style="margin-top:5px;width:100%;">
+                                        <div class="input-group">
+                                            <input type="text" disabled class="form-control"
+                                                   placeholder="<?php echo $arrayLicenses[$y];?>">
+                                            <div class="input-group-btn">
+                                                <span class="input-group-btn">
+                                                <?php
+                                                    if ($arrayLicenses[$i] == 1) {
+                                                        echo '<button onclick="SAVElicenses(' . $arrayLicenses[$i] . ',' . $n . ')" style="width:90px;" class="btn btn-danger" type="button">Retirer</button>';
+                                                    } else {
+                                                        echo '<button onclick="SAVElicenses(' . $arrayLicenses[$i] . ',' . $n . ')" style="width:90px;" class="btn btn-default" type="button">Ajouter</button>';
+                                                    }
+                                                    ?>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <?php
+                                    // Pair
+                                    $y = $y + 2;
+                                    // Impair
+                                    $i = $i + 1;
+                                    // normal
+                                    $n = $n + 1;
+                                    }
+                                    ?>
                                 </div>
                             </div>
                         </div>
