@@ -21,7 +21,7 @@
                     <ul class="nav nav-tabs">
                         <li class="active"><a href="#a" data-toggle="tab">Informations</a></li>
                         <li><a href="#b" data-toggle="tab">Véhicules</a></li>
-                        <li><a href="#c" data-toggle="tab">Gangs</a></li>
+                        @if($gang)<li><a href="#c" data-toggle="tab">Gangs</a></li>@endif
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane active" id="a">
@@ -122,24 +122,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane" id="c">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title">Votre Gang : {!! $gang->name !!}</h3>
-                                </div>
-                                <div class="panel-body">
-                                    <h3>Information :</h3>
-                                    <ul>
-                                        <li>Nombres de membres maximum : {!! $gang->maxmembers !!}</li>
-                                        <li>Compte en banque : {{ number_format($gang->bank, 2, ',', ' ') . ' $' }}</li>
-                                    </ul>
 
-                                    <h4>Membres</h4>
-
-                                    <pre>{!! $gang->members !!}</pre>
-                                </div>
-                            </div>
-                        </div>
                         <div class="tab-pane" id="b">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
@@ -248,6 +231,27 @@
                                 </div>
                             </div>
                         </div>
+
+                        @if($gang)
+                        <div class="tab-pane" id="c">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Votre Gang : {!! $gang->name !!}</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <h3>Information :</h3>
+                                    <ul>
+                                        <li>Nombres de membres maximum : {!! $gang->maxmembers !!}</li>
+                                        <li>Compte en banque : {{ number_format($gang->bank, 2, ',', ' ') . ' $' }}</li>
+                                    </ul>
+
+                                    <h4>Membres</h4>
+
+                                    <pre>{!! $gang->members !!}</pre>
+                                </div>
+                            </div>
+                        </div>
+                        @endif
                     </div>
                 </div>
             </div>
