@@ -239,43 +239,46 @@
                                     <h3 class="panel-title">Vos Licences</h3>
                                 </div>
                                 <div class="panel-body">
-                                    <?php
-                                    $suppr = array("\"", "`", "[", "]");
-                                    $lineLicenses = str_replace($suppr, "", $players->civ_licenses);
-                                    $arrayLicenses = preg_split("/,/", $lineLicenses);
-                                    $totarrayLicenses = count($arrayLicenses);
-                                    $y = 0;
-                                    $n = 0;
-                                    for($i = 1; $y < $totarrayLicenses; $i++){
-                                    ?>
 
-                                    <div style="margin-top:5px;width:100%;">
-                                        <div class="input-group">
-                                            <input type="text" disabled class="form-control"
-                                                   placeholder="<?php echo $arrayLicenses[$y];?>">
-                                            <div class="input-group-btn">
-                                                <span class="input-group-btn">
-                                                <?php
-                                                    if ($arrayLicenses[$i] == 1) {
-                                                        echo '<button onclick="SAVElicenses(' . $arrayLicenses[$i] . ',' . $n . ')" style="width:90px;" class="btn btn-danger" type="button">Retirer</button>';
-                                                    } else {
-                                                        echo '<button onclick="SAVElicenses(' . $arrayLicenses[$i] . ',' . $n . ')" style="width:90px;" class="btn btn-default" type="button">Ajouter</button>';
-                                                    }
-                                                    ?>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <table class="table table-striped table-responsive">
+                                        <tr>
+                                            <th>Nom</th>
+                                            <th>Status</th>
+                                        </tr>
+                                        <?php
+                                        $suppr = array("\"", "`", "[", "]");
+                                        $lineLicenses = str_replace($suppr, "", $players->civ_licenses);
+                                        $arrayLicenses = preg_split("/,/", $lineLicenses);
+                                        $totarrayLicenses = count($arrayLicenses);
+                                        $y = 0;
+                                        $n = 0;
+                                         for($i = 1; $y < $totarrayLicenses; $i++){
+                                        ?>
+                                        <tr>
+                                            <td>{{ $arrayLicenses[$y] }}</td>
+                                            <td>
+                                                @if($arrayLicenses[$i] == 1)
+                                                    <i class="fa fa-check" style="color: #2cc36b;"></i>
+                                                @else
+                                                    <i class="fa fa-close" style="color: #c0392b;"></i>
+                                                @endif
+                                            </td>
+                                        </tr>
 
-                                    <?php
-                                    // Pair
-                                    $y = $y + 2;
-                                    // Impair
-                                    $i = $i + 1;
-                                    // normal
-                                    $n = $n + 1;
-                                    }
-                                    ?>
+                                        <?php
+                                            // Pair
+                                            $y = $y + 2;
+                                            // Impair
+                                            $i = $i + 1;
+                                            // normal
+                                            $n = $n + 1;
+
+                                            }
+                                        ?>
+
+                                    </table>
+
+
                                 </div>
                             </div>
                         </div>
