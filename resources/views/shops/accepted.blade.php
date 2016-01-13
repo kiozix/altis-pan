@@ -20,6 +20,10 @@
               <i class="fa fa-circle fa-stack-2x"></i>
               <i class="fa fa-thumbs-up fa-stack-1x fa-inverse"></i>
             </span><br />
+            <pre>
+                Token : {{ $token }}
+                PlayerID : {{ $PayerID }}
+            </pre>
             <div class="alert alert-success col-md-8 col-md-offset-2" role="alert">Votre paiement a été acceptée, vous pouvez maintenant profiter de votre achat sur notre serveur!  Merci a vous !</div>
             <div class="col-md-12 text-center">
                 <a href="{{ url('/') }}" class="btn btn-outline"><i class="fa fa-home"></i> Retouner à l'accueil</a>

@@ -31,19 +31,22 @@
             <div class="col-md-4 panel panel-danger">
                 <div class="panel-body">
                     <h2 class="fh5co-sidebox-lead text-center">{{ $shop->name }}</h2>
+                    <h3 class="fh5co-sidebox-lead text-center" style="font-size: 15px;">Level : {{ $shop->level }}</h3>
                     <hr />
                     <div class="text-center">
                       <span class="shop-currency">€</span>
                       <span class="shop-price">{{ $shop->price }}</span>
                       @if($shop->time != 0)
                       <span class="shop-duration">/{{ $shop->time }}Jours</span>
+                      @else
+                          <span class="shop-duration">/A vie</span>
                       @endif
                     </div>
                     <br />
-                    <img class="img-responsive img-rounded" src="{{ $shop->image }}">
+                    {{--<img class="img-responsive img-rounded" src="{{ $shop->image }}">--}}
                     <br />
                     <p>{{ $shop->content }}</p>
-                    <button class="btn btn-outline">Achetter</button>
+                    <a class="btn btn-outline" href="{{ action('ShopsController@show', $shop) }}">Achetter</a>
                     @if (Auth::guest())
                     @else
                         @if (Auth::user()->admin == 1)

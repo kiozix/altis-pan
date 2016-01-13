@@ -3,9 +3,12 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ShopsRequest;
+use App\Behaviour\Paypal;
 
 use App\Shops;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Session;
 
 class ShopsController extends Controller {
 
@@ -25,7 +28,54 @@ class ShopsController extends Controller {
      */
 	public function accepted()
 	{
-		return view('shops.accepted');
+		if(empty(Input::get('token')) && empty(Input::get('PayerID'))){
+			return Response::view('errors.403', array(), 403);
+		}
+
+		$id = Session::get('shop.id');
+		$shops = Shops::where('id', $id)->firstOrFail();
+
+		$token = Input::get('token');
+		$PayerID = Input::get('PayerID');
+
+		$paypal = new Paypal();
+
+		$response = $paypal->request('GetExpressCheckoutDetails', array('TOKEN' => $token));
+
+		if($response){
+			if($response['CHECKOUTSTATUS'] == 'PaymentActionCompleted'){
+				return redirect('/shop/payment/failed');
+			}
+		}else{
+			return redirect('/shop/payment/failed');
+			// var_dump($paypal->errors);
+			// die();
+		}
+
+		$params = array(
+			'TOKEN' => $token,
+			'PAYERID'=> $PayerID,
+			'PAYMENTACTION' => 'Sale',
+
+			'PAYMENTREQUEST_0_AMT' => $shops->price,
+			'PAYMENTREQUEST_0_CURRENCYCODE' => 'EUR',
+
+			'L_PAYMENTREQUEST_0_NAME0' => $shops->name,
+			'L_PAYMENTREQUEST_0_AMT0' => $shops->price,
+			'L_PAYMENTREQUEST_0_QTY0' => 1,
+		);
+
+		$response = $paypal->request('DoExpressCheckoutPayment',$params);
+		if($response){
+			dd($response);
+			$response['PAYMENTINFO_0_TRANSACTIONID'];
+			return view('shops.accepted', compact('token', 'PayerID'));
+
+		}else{
+			return redirect('/shop/payment/failed');
+			// dd($paypal->errors);
+		}
+
 	}
 
 	/**
@@ -65,7 +115,34 @@ class ShopsController extends Controller {
 	 */
 	public function show($id)
 	{
-		//
+		$shops = Shops::where('id', $id)->firstOrFail();
+
+		Session::put('shop.id', $shops->id);
+
+		$paypal = new Paypal();
+
+		$params = array(
+			'RETURNURL' => url('/shop/payment/accepted'),
+			'CANCELURL' => url('/shop/payment/failed'),
+
+			'PAYMENTREQUEST_0_AMT' => $shops->price,
+			'PAYMENTREQUEST_0_CURRENCYCODE' => 'EUR',
+
+			'L_PAYMENTREQUEST_0_NAME0' => $shops->name,
+			'L_PAYMENTREQUEST_0_AMT0' => $shops->price,
+			'L_PAYMENTREQUEST_0_QTY0' => 1,
+		);
+
+		$response = $paypal->request('SetExpressCheckout', $params);
+
+		if($response){
+			$paypal = 'https://www.sandbox.paypal.com/webscr?cmd=_express-checkout&useraction=commit&token=' . $response['TOKEN'];
+		}else{
+			dd($paypal->errors);
+			die('Erreur ');
+		}
+
+		return view('shops.show', compact('shops', 'paypal'));
 	}
 
 	/**
