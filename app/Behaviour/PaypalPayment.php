@@ -2,7 +2,7 @@
 
 namespace App\Behaviour;
 
-class Paypal
+class PaypalPayment
 {
 
     private $user      = "emile.lepetit-facilitator_api1.gmail.com";

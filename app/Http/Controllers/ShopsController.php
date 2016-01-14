@@ -1,16 +1,19 @@
 <?php namespace App\Http\Controllers;
 
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
-use App\Http\Requests\ShopsRequest;
-use App\Behaviour\Paypal;
-
-use App\Shops;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
 
+use App\Http\Requests\ShopsRequest;
+use App\Shops;
+use App\Paypal;
+use App\Behaviour\PaypalPayment;
+
 class ShopsController extends Controller {
+
 
 	/**
 	 * Display a listing of the resource.
@@ -26,7 +29,7 @@ class ShopsController extends Controller {
 	/**
 	 * @return \Illuminate\View\View
      */
-	public function accepted()
+	public function accepted(Request $request)
 	{
 		if(empty(Input::get('token')) && empty(Input::get('PayerID'))){
 			return Response::view('errors.403', array(), 403);
@@ -38,9 +41,7 @@ class ShopsController extends Controller {
 		$token = Input::get('token');
 		$PayerID = Input::get('PayerID');
 
-
-
-		$paypal = new Paypal();
+		$paypal = new PaypalPayment();
 
 		$response = $paypal->request('GetExpressCheckoutDetails', array('TOKEN' => $token));
 
@@ -68,10 +69,20 @@ class ShopsController extends Controller {
 		);
 
 		$response = $paypal->request('DoExpressCheckoutPayment',$params);
+
 		if($response){
 			// dd($response);
 			$transaction_id = $response['PAYMENTINFO_0_TRANSACTIONID'];
-			return view('shops.accepted', compact('token', 'PayerID', 'id', 'shops', 'transaction_id'));
+
+			$paypal_store = New Paypal();
+			$paypal_store->id_shop = $shops->id;
+			$paypal_store->id_user = $request->user()->id;
+			$paypal_store->id_transaction = $transaction_id;
+			$paypal_store->price = $shops->price;
+			$paypal_store->save();
+
+
+			return view('shops.accepted');
 
 		}else{
 			return redirect('/shop/payment/failed');
@@ -121,7 +132,7 @@ class ShopsController extends Controller {
 
 		Session::put('shop.id', $shops->id);
 
-		$paypal = new Paypal();
+		$paypal = new PaypalPayment();
 
 		$params = array(
 			'RETURNURL' => url('/shop/payment/accepted'),
