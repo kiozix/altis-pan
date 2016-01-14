@@ -14,6 +14,11 @@ use App\Behaviour\PaypalPayment;
 
 class ShopsController extends Controller {
 
+	public function __construct()
+	{
+		$this->middleware('auth', ['except' => ['index']]);
+		$this->middleware('arma', ['except' => ['index']]);
+	}
 
 	/**
 	 * Display a listing of the resource.

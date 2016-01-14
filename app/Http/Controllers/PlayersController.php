@@ -12,7 +12,9 @@ class PlayersController extends Controller {
 
 	public function __construct()
 	{
-		$this->middleware('auth', ['except' => ['index', 'show']]);
+		$this->middleware('auth');
+		$this->middleware('arma');
+
 		$this->middleware('admin', ['except' => ['index', 'show']]);
 	}
 
