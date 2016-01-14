@@ -13,9 +13,7 @@
             </div>
         </div>
     </aside>
-
-    <pre>{{ var_dump(Session::all()) }}</pre>
-
+    
     <div class="container">
         <div class="col-md-12">
             <div class="col-md-6">

@@ -23,6 +23,12 @@
             <pre>
                 Token : {{ $token }}
                 PlayerID : {{ $PayerID }}
+
+                ID : {{ $id }}
+                Shops : {{ $shops }}
+
+                transaction_id : {{ $transaction_id }}
+
             </pre>
             <div class="alert alert-success col-md-8 col-md-offset-2" role="alert">Votre paiement a été acceptée, vous pouvez maintenant profiter de votre achat sur notre serveur!  Merci a vous !</div>
             <div class="col-md-12 text-center">

@@ -38,6 +38,8 @@ class ShopsController extends Controller {
 		$token = Input::get('token');
 		$PayerID = Input::get('PayerID');
 
+
+
 		$paypal = new Paypal();
 
 		$response = $paypal->request('GetExpressCheckoutDetails', array('TOKEN' => $token));
@@ -67,9 +69,9 @@ class ShopsController extends Controller {
 
 		$response = $paypal->request('DoExpressCheckoutPayment',$params);
 		if($response){
-			dd($response);
-			$response['PAYMENTINFO_0_TRANSACTIONID'];
-			return view('shops.accepted', compact('token', 'PayerID'));
+			// dd($response);
+			$transaction_id = $response['PAYMENTINFO_0_TRANSACTIONID'];
+			return view('shops.accepted', compact('token', 'PayerID', 'id', 'shops', 'transaction_id'));
 
 		}else{
 			return redirect('/shop/payment/failed');
