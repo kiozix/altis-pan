@@ -1,5 +1,72 @@
 @extends('admin.app')
 
+@section('widget')
+    <div class="col-lg-3 col-sm-6">
+        <!-- START widget-->
+        <div class="panel widget bg-primary">
+            <div class="row row-table">
+                <div class="col-xs-4 text-center bg-primary-dark pv-lg">
+                    <em class="icon-cloud-upload fa-3x"></em>
+                </div>
+                <div class="col-xs-8 pv-lg">
+                    <div class="h2 mt0">1700</div>
+                    <div class="text-uppercase">Uploads</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-sm-6">
+        <!-- START widget-->
+        <div class="panel widget bg-purple">
+            <div class="row row-table">
+                <div class="col-xs-4 text-center bg-purple-dark pv-lg">
+                    <em class="icon-globe fa-3x"></em>
+                </div>
+                <div class="col-xs-8 pv-lg">
+                    <div class="h2 mt0">700
+                        <small>GB</small>
+                    </div>
+                    <div class="text-uppercase">Quota</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6 col-sm-12">
+        <!-- START widget-->
+        <div class="panel widget bg-green">
+            <div class="row row-table">
+                <div class="col-xs-4 text-center bg-green-dark pv-lg">
+                    <em class="icon-bubbles fa-3x"></em>
+                </div>
+                <div class="col-xs-8 pv-lg">
+                    <div class="h2 mt0">500</div>
+                    <div class="text-uppercase">Reviews</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6 col-sm-12">
+        <!-- START date widget-->
+        <div class="panel widget">
+            <div class="row row-table">
+                <div class="col-xs-4 text-center bg-green pv-lg">
+                    <!-- See formats: https://docs.angularjs.org/api/ng/filter/date-->
+                    <div data-now="" data-format="MMMM" class="text-sm"></div>
+                    <br>
+                    <div data-now="" data-format="D" class="h2 mt0"></div>
+                </div>
+                <div class="col-xs-8 pv-lg">
+                    <div data-now="" data-format="dddd" class="text-uppercase"></div>
+                    <br>
+                    <div data-now="" data-format="h:mm" class="h2 mt0"></div>
+                    <div data-now="" data-format="a" class="text-muted text-sm"></div>
+                </div>
+            </div>
+        </div>
+        <!-- END date widget    -->
+    </div>
+@endsection
+
 @section('content')
 <!-- START dashboard main content-->
     <div class="col-lg-9">
@@ -113,117 +180,7 @@
                 </div>
                 <!-- END widget-->
             </div>
-            <div class="col-lg-8">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <div class="pull-right label label-danger">5</div>
-                        <div class="pull-right label label-success">12</div>
-                        <div class="panel-title">Team messages</div>
-                    </div>
-                    <!-- START list group-->
-                    <div data-height="180" data-scrollable="" class="list-group">
-                        <!-- START list group item-->
-                        <a href="#" class="list-group-item">
-                            <div class="media-box">
-                                <div class="pull-left">
-                                    <img src="img/user/02.jpg" alt="Image" class="media-box-object img-circle thumb32">
-                                </div>
-                                <div class="media-box-body clearfix">
-                                    <small class="pull-right">2h</small>
-                                    <strong class="media-box-heading text-primary">
-                                        <span class="circle circle-success circle-lg text-left"></span>Catherine
-                                        Ellis</strong>
-                                    <p class="mb-sm">
-                                        <small>Cras sit amet nibh libero, in gravida nulla. Nulla...</small>
-                                    </p>
-                                </div>
-                            </div>
-                        </a>
-                        <!-- END list group item-->
-                        <!-- START list group item-->
-                        <a href="#" class="list-group-item">
-                            <div class="media-box">
-                                <div class="pull-left">
-                                    <img src="img/user/03.jpg" alt="Image" class="media-box-object img-circle thumb32">
-                                </div>
-                                <div class="media-box-body clearfix">
-                                    <small class="pull-right">3h</small>
-                                    <strong class="media-box-heading text-primary">
-                                        <span class="circle circle-success circle-lg text-left"></span>Jessica
-                                        Silva</strong>
-                                    <p class="mb-sm">
-                                        <small>Cras sit amet nibh libero, in gravida nulla. Nulla facilisi.</small>
-                                    </p>
-                                </div>
-                            </div>
-                        </a>
-                        <!-- END list group item-->
-                        <!-- START list group item-->
-                        <a href="#" class="list-group-item">
-                            <div class="media-box">
-                                <div class="pull-left">
-                                    <img src="img/user/09.jpg" alt="Image" class="media-box-object img-circle thumb32">
-                                </div>
-                                <div class="media-box-body clearfix">
-                                    <small class="pull-right">4h</small>
-                                    <strong class="media-box-heading text-primary">
-                                        <span class="circle circle-danger circle-lg text-left"></span>Jessie Wells</strong>
-                                    <p class="mb-sm">
-                                        <small>Cras sit amet nibh libero, in gravida nulla. Nulla...</small>
-                                    </p>
-                                </div>
-                            </div>
-                        </a>
-                        <!-- END list group item-->
-                        <!-- START list group item-->
-                        <a href="#" class="list-group-item">
-                            <div class="media-box">
-                                <div class="pull-left">
-                                    <img src="img/user/12.jpg" alt="Image" class="media-box-object img-circle thumb32">
-                                </div>
-                                <div class="media-box-body clearfix">
-                                    <small class="pull-right">1d</small>
-                                    <strong class="media-box-heading text-primary">
-                                        <span class="circle circle-danger circle-lg text-left"></span>Rosa Burke</strong>
-                                    <p class="mb-sm">
-                                        <small>Cras sit amet nibh libero, in gravida nulla. Nulla...</small>
-                                    </p>
-                                </div>
-                            </div>
-                        </a>
-                        <!-- END list group item-->
-                        <!-- START list group item-->
-                        <a href="#" class="list-group-item">
-                            <div class="media-box">
-                                <div class="pull-left">
-                                    <img src="img/user/10.jpg" alt="Image" class="media-box-object img-circle thumb32">
-                                </div>
-                                <div class="media-box-body clearfix">
-                                    <small class="pull-right">2d</small>
-                                    <strong class="media-box-heading text-primary">
-                                        <span class="circle circle-danger circle-lg text-left"></span>Michelle Lane</strong>
-                                    <p class="mb-sm">
-                                        <small>Mauris eleifend, libero nec cursus lacinia...</small>
-                                    </p>
-                                </div>
-                            </div>
-                        </a>
-                        <!-- END list group item-->
-                    </div>
-                    <!-- END list group-->
-                    <!-- START panel footer-->
-                    <div class="panel-footer clearfix">
-                        <div class="input-group">
-                            <input type="text" placeholder="Search message .." class="form-control input-sm">
-                                     <span class="input-group-btn">
-                                        <button type="submit" class="btn btn-default btn-sm"><i class="fa fa-search"></i>
-                                        </button>
-                                     </span>
-                        </div>
-                    </div>
-                    <!-- END panel-footer-->
-                </div>
-            </div>
+
         </div>
     </div>
 <!-- END dashboard main content-->
