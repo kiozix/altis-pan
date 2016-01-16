@@ -15,6 +15,7 @@ class AdminController extends Controller {
 
 	public function __construct(Guard $auth){
 		$this->middleware('auth');
+		$this->middleware('admin');
 		$this->auth = $auth;
 	}
 
