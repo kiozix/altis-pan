@@ -104,7 +104,7 @@
                                             class="caret"></span><span class="border"></span></a>
                                 <ul class="dropdown-menu">
                                     @if (Auth::user()->admin == 1)
-                                        <li><a href="#"><i class="fa fa-wrench"></i>&nbsp;&nbsp;Admin<span
+                                        <li><a href="{{ url('admin') }}"><i class="fa fa-wrench"></i>&nbsp;&nbsp;Admin<span
                                                         class="border"></span></a></li>
                                         <li role="separator" class="divider"></li>
                                     @endif

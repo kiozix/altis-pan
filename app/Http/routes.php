@@ -26,6 +26,7 @@ Route::get('shop/payment/accepted', ['uses' => 'ShopsController@accepted']);
 Route::get('shop/payment/failed', ['uses' => 'ShopsController@failed']);
 
 Route::get('admin', ['uses' => 'AdminController@index']);
+Route::get('admin/dev', ['uses' => 'AdminController@dev']);
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',

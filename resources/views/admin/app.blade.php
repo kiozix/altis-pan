@@ -4,9 +4,21 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="Bootstrap Admin App + jQuery">
-    <meta name="keywords" content="app, responsive, jquery, bootstrap, dashboard, admin">
-    <title>Angle - Bootstrap Admin Template</title>
+    <meta name="description" content="Site réalisée avec AltisPan, CMS dédiée au Mod multijoueur Altis Life. Réalisation : Lucas GRELAUD, Emile LEPTIT."/>
+    <meta name="keywords" content="altis life, cms, altispan, arma, 3, serveur"/>
+    <meta name="author" content="Lucas GRELAUD, Emile LEPETIT"/>
+
+    <title>{{ env('SITE_NAME', 'AltisPan') }} - Admin</title>
+
+    <!-- Don't modify the web_author meta , only the author meta please -->
+    <meta name="web_author" content="Lucas GRELAUD, Emile LEPETIT">
+    <meta name="contact" content="">
+    <meta name="revisit-after" content="7 days">
+    <meta name="copyright" content="AltisPan">
+    <meta name="language" content="French">
+
+    <link rel="shortcut icon" href="{{ asset('/img/favicon.ico') }}">
+
     <!-- =============== VENDOR STYLES ===============-->
     <!-- FONT AWESOME-->
     <link rel="stylesheet" href="{{ asset('/vendor/fontawesome/css/font-awesome.min.css') }}">
@@ -33,12 +45,12 @@
         <nav role="navigation" class="navbar topnavbar">
             <!-- START navbar header-->
             <div class="navbar-header">
-                <a href="#/" class="navbar-brand">
+                <a href="{{ url('/') }}" class="navbar-brand">
                     <div class="brand-logo">
-                        <img src="img/logo.png" alt="App Logo" class="img-responsive">
+                        <img src="/img/logo.png" alt="App Logo" class="img-responsive">
                     </div>
                     <div class="brand-logo-collapsed">
-                        <img src="img/logo-single.png" alt="App Logo" class="img-responsive">
+                        <img src="/img/logo-single.png" alt="App Logo" class="img-responsive">
                     </div>
                 </a>
             </div>
@@ -102,10 +114,10 @@
             <!-- START Search form-->
             <form role="search" action="search.html" class="navbar-form">
                 <div class="form-group has-feedback">
-                    <input type="text" placeholder="Type and hit enter ..." class="form-control">
+                    <input type="text" placeholder="Chercher un joueur..." class="form-control">
                     <div data-search-dismiss="" class="fa fa-times form-control-feedback"></div>
                 </div>
-                <button type="submit" class="hidden btn btn-default">Submit</button>
+                <button type="submit" class="hidden btn btn-default">Envoyer</button>
             </form>
             <!-- END Search form-->
         </nav>
@@ -125,7 +137,11 @@
                                 <!-- User picture-->
                                 <div class="user-block-picture">
                                     <div class="user-block-status">
+                                        @if($user->avatar)
                                         <img src="{{ url($user->avatar) }}" alt="Avatar" width="60" height="60" class="img-thumbnail img-circle">
+                                        @else
+                                            <img src="{{ asset('/img/user_default.png') }}" alt="Avatar" width="60" height="60" class="img-thumbnail img-circle">
+                                        @endif
                                         <div class="circle circle-success circle-lg"></div>
                                     </div>
                                 </div>
@@ -149,6 +165,15 @@
                             <span>Dashboard</span>
                         </a>
                     </li>
+
+                    <li class="">
+                        <a title="Widgets" href="{{ url('admin/dev') }}">
+                            <div class="pull-right label label-success">30</div>
+                            <em class="icon-book-open"></em>
+                            <span>News</span>
+                        </a>
+                    </li>
+
                 </ul>
                 <!-- END sidebar nav-->
             </nav>
@@ -529,19 +554,10 @@
     <section>
         <!-- Page content-->
         <div class="content-wrapper">
-            <div class="content-heading">
-                <!-- END Language list    -->
-                Dashboard
-                <small data-localize="dashboard.WELCOME"></small>
-            </div>
-            <!-- START widgets box-->
-            <div class="row">
-                @yield('widget')
-            </div>
-            <!-- END widgets box-->
-            <div class="row">
-                @yield('content')
-            </div>
+            @yield('page-info')
+
+            @yield('content')
+
         </div>
     </section>
     <!-- Page footer-->

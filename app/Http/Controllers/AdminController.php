@@ -27,4 +27,10 @@ class AdminController extends Controller {
 		return view('admin.index', compact('user'));
 	}
 
+	public function dev(Guard $auth)
+	{
+		$user = $this->auth->user();
+		return view('admin.news.form', compact('user'));
+	}
+
 }

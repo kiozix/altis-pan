@@ -27,6 +27,8 @@
                             <div class="col-md-12">
                                 @if($user->avatar)
                                     <img class="img-responsive img-circle" src="{{ url($user->avatar) }}"><br/>
+                                @else
+                                    <img class="img-responsive img-circle" src="{{ asset('/img/user_default.png') }}"><br/>
                                 @endif
                             </div>
                             {!! Form::file('avatar', ['class' => '']) !!}
