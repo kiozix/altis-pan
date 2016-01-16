@@ -71,19 +71,54 @@
                                 </tr>
                                 <tr>
                                     <td>Grade Admin</td>
-                                    <td>{{ $rank }}</td>
+                                    <td>
+                                        <select name="admin" class="form-control">
+                                            <option value="0"{{ $player->adminlevel == 0 ? 'selected' : '' }}>0</option>
+                                            <option value="1"{{ $player->adminlevel == 1 ? 'selected' : '' }}>1</option>
+                                            <option value="2"{{ $player->adminlevel == 2 ? 'selected' : '' }}>2</option>
+                                            <option value="3"{{ $player->adminlevel == 3 ? 'selected' : '' }}>3</option>
+                                        </select>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>Grade Policier</td>
-                                    <td>{{ $coplevel }}</td>
+                                    <td>
+                                        <select name="policier" class="form-control">
+                                            <option value="1"{{ $player->coplevel == 1 ? 'selected' : '' }}>{{ env('POLICE_GRADE_1') }}</option>
+                                            <option value="2"{{ $player->coplevel == 2 ? 'selected' : '' }}>{{ env('POLICE_GRADE_2') }}</option>
+                                            <option value="3"{{ $player->coplevel == 3 ? 'selected' : '' }}>{{ env('POLICE_GRADE_3') }}</option>
+                                            <option value="4"{{ $player->coplevel == 4 ? 'selected' : '' }}>{{ env('POLICE_GRADE_4') }}</option>
+                                            <option value="5"{{ $player->coplevel == 5 ? 'selected' : '' }}>{{ env('POLICE_GRADE_5') }}</option>
+                                            <option value="6"{{ $player->coplevel == 6 ? 'selected' : '' }}>{{ env('POLICE_GRADE_6') }}</option>
+                                            <option value="7"{{ $player->coplevel == 7 ? 'selected' : '' }}>{{ env('POLICE_GRADE_7') }}</option>
+                                            <option value="8"{{ $player->coplevel == 8 ? 'selected' : '' }}>{{ env('POLICE_GRADE_8') }}</option>
+                                        </select>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>Grade Pompier</td>
-                                    <td>{{ $mediclevel }}</td>
+                                    <td>
+                                        <select name="medic" class="form-control">
+                                            <option value="1"{{ $player->mediclevel == 1 ? 'selected' : '' }}>{{ env('POMPIER_GRADE_1') }}</option>
+                                            <option value="2"{{ $player->mediclevel == 2 ? 'selected' : '' }}>{{ env('POMPIER_GRADE_2') }}</option>
+                                            <option value="3"{{ $player->mediclevel == 3 ? 'selected' : '' }}>{{ env('POMPIER_GRADE_3') }}</option>
+                                            <option value="4"{{ $player->mediclevel == 4 ? 'selected' : '' }}>{{ env('POMPIER_GRADE_4') }}</option>
+                                            <option value="5"{{ $player->mediclevel == 5 ? 'selected' : '' }}>{{ env('POMPIER_GRADE_5') }}</option>
+                                        </select>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>Grade Donateur</td>
-                                    <td>{{ $player->donatorlvl }}</td>
+                                    <td>
+                                        <select name="donator" class="form-control">
+                                            <option value="0"{{ $player->donatorlvl == 0 ? 'selected' : '' }}>0</option>
+                                            <option value="1"{{ $player->donatorlvl == 1 ? 'selected' : '' }}>1</option>
+                                            <option value="2"{{ $player->donatorlvl == 2 ? 'selected' : '' }}>2</option>
+                                            <option value="3"{{ $player->donatorlvl == 3 ? 'selected' : '' }}>3</option>
+                                            <option value="4"{{ $player->donatorlvl == 4 ? 'selected' : '' }}>4</option>
+                                            <option value="5"{{ $player->donatorlvl == 5 ? 'selected' : '' }}>5</option>
+                                        </select>
+                                    </td>
                                 </tr>
                             </table>
 
@@ -91,6 +126,13 @@
 
                             <label>Inventaire civil</label>
                             <pre>{{ $player->civ_gear }}</pre>
+
+                            <hr />
+
+                            <div class="text-right">
+                                <a href="" class="btn btn-success"><i class="fa fa-check"></i></a>
+                            </div>
+
                         </div>
                     </div>
                 </div>

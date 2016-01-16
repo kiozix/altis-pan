@@ -23,7 +23,7 @@
                             </tr>
                             @foreach($players as $player)
                                 <tr>
-                                    <td><a href="{{ url('admin/players/'. $player->playerid) }}">{{ $player->name }}</a></td>
+                                    <td><a href="{{ url('admin/player/'. $player->playerid) }}">{{ $player->name }}</a></td>
                                     <td>{{ $player->playerid }}</td>
                                     <td>
                                         <?php

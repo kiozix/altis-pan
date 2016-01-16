@@ -81,7 +81,7 @@
                     <!-- END User avatar toggle-->
                     <!-- START lock screen-->
                     <li>
-                        <a href="{{ url('/auth/logout') }}" title="Lock screen">
+                        <a href="{{ url('/auth/logout') }}" title="Déconnexion">
                             <em class="icon-logout"></em>
                         </a>
                     </li>
@@ -114,12 +114,11 @@
             </div>
             <!-- END Nav wrapper-->
             <!-- START Search form-->
-            <form role="search" action="search.html" class="navbar-form">
+            <form method="get" action="{{ url('admin/search') }}" class="navbar-form">
                 <div class="form-group has-feedback">
-                    <input type="text" placeholder="Chercher un joueur..." class="form-control">
+                    <input name="q" type="text" placeholder="Rechercher un joueur..." class="form-control">
                     <div data-search-dismiss="" class="fa fa-times form-control-feedback"></div>
                 </div>
-                <button type="submit" class="hidden btn btn-default">Envoyer</button>
             </form>
             <!-- END Search form-->
         </nav>
