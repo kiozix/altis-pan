@@ -210,13 +210,13 @@
                 <!-- Tab panes-->
                 <div class="tab-content">
                     <div id="app-settings" role="tabpanel" class="tab-pane fade in active">
-                        <h3 class="text-center text-thin">Settings</h3>
+                        <h3 class="text-center text-thin">Paramètres</h3>
                         <div class="p">
                             <h4 class="text-muted text-thin">Themes</h4>
                             <div class="table-grid mb">
                                 <div class="col mb">
                                     <div class="setting-color">
-                                        <label data-load-css="css/theme-a.css">
+                                        <label data-load-css="{{ asset('/css/theme-a.css') }}">
                                             <input type="radio" name="setting-theme" checked="checked">
                                             <span class="icon-check"></span>
                                     <span class="split">
@@ -229,7 +229,7 @@
                                 </div>
                                 <div class="col mb">
                                     <div class="setting-color">
-                                        <label data-load-css="css/theme-b.css">
+                                        <label data-load-css="{{ asset('/css/theme-b.css') }}">
                                             <input type="radio" name="setting-theme">
                                             <span class="icon-check"></span>
                                     <span class="split">
@@ -242,7 +242,7 @@
                                 </div>
                                 <div class="col mb">
                                     <div class="setting-color">
-                                        <label data-load-css="css/theme-c.css">
+                                        <label data-load-css="{{ asset('/css/theme-c.css') }}">
                                             <input type="radio" name="setting-theme">
                                             <span class="icon-check"></span>
                                     <span class="split">
@@ -255,7 +255,7 @@
                                 </div>
                                 <div class="col mb">
                                     <div class="setting-color">
-                                        <label data-load-css="css/theme-d.css">
+                                        <label data-load-css="{{ asset('/css/theme-d.css') }}">
                                             <input type="radio" name="setting-theme">
                                             <span class="icon-check"></span>
                                     <span class="split">
@@ -270,7 +270,7 @@
                             <div class="table-grid mb">
                                 <div class="col mb">
                                     <div class="setting-color">
-                                        <label data-load-css="css/theme-e.css">
+                                        <label data-load-css="{{ asset('/css/theme-e.css') }}">
                                             <input type="radio" name="setting-theme">
                                             <span class="icon-check"></span>
                                     <span class="split">
@@ -283,7 +283,7 @@
                                 </div>
                                 <div class="col mb">
                                     <div class="setting-color">
-                                        <label data-load-css="css/theme-f.css">
+                                        <label data-load-css="{{ asset('/css/theme-f.css') }}">
                                             <input type="radio" name="setting-theme">
                                             <span class="icon-check"></span>
                                     <span class="split">
@@ -296,7 +296,7 @@
                                 </div>
                                 <div class="col mb">
                                     <div class="setting-color">
-                                        <label data-load-css="css/theme-g.css">
+                                        <label data-load-css="{{ asset('/css/theme-g.css') }}">
                                             <input type="radio" name="setting-theme">
                                             <span class="icon-check"></span>
                                     <span class="split">
@@ -309,7 +309,7 @@
                                 </div>
                                 <div class="col mb">
                                     <div class="setting-color">
-                                        <label data-load-css="css/theme-h.css">
+                                        <label data-load-css="{{ asset('/css/theme-h.css') }}">
                                             <input type="radio" name="setting-theme">
                                             <span class="icon-check"></span>
                                     <span class="split">

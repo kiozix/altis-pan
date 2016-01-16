@@ -29,10 +29,11 @@ class AdminController extends Controller {
 	{
 		$user = $this->auth->user();
 		$players = DB::table('players')->count();
+		$players_last = DB::table('players')->take(5)->get();
 		$users = DB::table('users')->count();
 		$news = DB::table('news')->count();
 
-		return view('admin.index', compact('user', 'players', 'users', 'news'));
+		return view('admin.index', compact('user', 'players', 'players_last', 'users', 'news'));
 	}
 
 	public function joueur()

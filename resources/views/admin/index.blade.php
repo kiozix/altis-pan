@@ -82,143 +82,54 @@
                     <!-- START widget-->
                     <div id="panelChart9" class="panel panel-default panel-demo">
                         <div class="panel-heading">
-                            <a href="#" data-tool="panel-refresh" data-toggle="tooltip" title="Refresh Panel"
-                               class="pull-right">
-                                <em class="fa fa-refresh"></em>
-                            </a>
                             <a href="#" data-tool="panel-collapse" data-toggle="tooltip" title="Collapse Panel"
                                class="pull-right">
                                 <em class="fa fa-minus"></em>
                             </a>
-                            <div class="panel-title">Inbound visitor statistics</div>
+                            <div class="panel-title">Dernier joueurs</div>
                         </div>
                         <div class="panel-body">
-                            <div class="chart-spline flot-chart"></div>
+                            <table class="table table-responsive table-striped">
+                                <tr>
+                                    <th>Nom du joueur</th>
+                                    <th>ID Arma</th>
+                                    <th>Argent</th>
+                                </tr>
+                                @foreach($players_last as $player)
+                                    <tr>
+                                        <td><a href="{{ url('admin/player/'. $player->playerid) }}">{{ $player->name }}</a></td>
+                                        <td>{{ $player->playerid }}</td>
+                                        <td>
+                                            <?php
+                                            $money = $player->cash + $player->bankacc;
+
+                                            if ($money < 500000) {
+                                                $argent = number_format($money, 2, ',', ' ');
+                                                echo "<span class='label label-success'>". $argent ." $</span>";
+                                            } elseif (800000 > $money) {
+                                                $argent = number_format($money, 2, ',', ' ');
+                                                echo "<span class='label label-warning'>". $argent ." $</span>";
+                                            } else {
+                                                $argent = number_format($money, 2, ',', ' ');
+                                                echo "<span class='label label-danger'>". $argent ." $</span>";
+                                            }
+                                            ?>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </table>
                         </div>
                     </div>
                     <!-- END widget-->
                 </div>
             </div>
             <!-- END chart-->
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="panel widget">
-                        <div class="row row-table">
-                            <div class="col-md-2 col-sm-3 col-xs-6 text-center bg-info pv-xl">
-                                <em class="wi wi-day-sunny fa-4x"></em>
-                            </div>
-                            <div class="col-md-2 col-sm-3 col-xs-6 pv br">
-                                <div class="h1 m0 text-bold">32&deg;</div>
-                                <div class="text-uppercase">Clear</div>
-                            </div>
-                            <div class="col-md-2 col-sm-3 hidden-xs pv text-center br">
-                                <div class="text-info text-sm">10 AM</div>
-                                <div class="text-muted text-md">
-                                    <em class="wi wi-day-cloudy"></em>
-                                </div>
-                                <div class="text-info">
-                                    <em class="wi wi-sprinkles"></em>
-                                    <span class="text-muted">20%</span>
-                                </div>
-                                <div class="text-muted">27&deg;</div>
-                            </div>
-                            <div class="col-md-2 col-sm-3 hidden-xs pv text-center br">
-                                <div class="text-info text-sm">11 AM</div>
-                                <div class="text-muted text-md">
-                                    <em class="wi wi-day-cloudy"></em>
-                                </div>
-                                <div class="text-info">
-                                    <em class="wi wi-sprinkles"></em>
-                                    <span class="text-muted">30%</span>
-                                </div>
-                                <div class="text-muted">28&deg;</div>
-                            </div>
-                            <div class="col-md-2 hidden-sm hidden-xs pv text-center br">
-                                <div class="text-info text-sm">12 PM</div>
-                                <div class="text-muted text-md">
-                                    <em class="wi wi-day-cloudy"></em>
-                                </div>
-                                <div class="text-info">
-                                    <em class="wi wi-sprinkles"></em>
-                                    <span class="text-muted">20%</span>
-                                </div>
-                                <div class="text-muted">30&deg;</div>
-                            </div>
-                            <div class="col-md-2 hidden-sm hidden-xs pv text-center">
-                                <div class="text-info text-sm">1 PM</div>
-                                <div class="text-muted text-md">
-                                    <em class="wi wi-day-sunny-overcast"></em>
-                                </div>
-                                <div class="text-info">
-                                    <em class="wi wi-sprinkles"></em>
-                                    <span class="text-muted">0%</span>
-                                </div>
-                                <div class="text-muted">30&deg;</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-4">
-                    <!-- START widget-->
-                    <div class="panel widget">
-                        <div class="panel-body">
-                            <div class="clearfix">
-                                <h3 class="pull-left text-muted mt0">300</h3>
-                                <em class="pull-right text-muted fa fa-coffee fa-2x"></em>
-                            </div>
-                            <div data-sparkline="" data-type="line" data-height="80" data-width="100%"
-                                 data-line-width="2"
-                                 data-line-color="#7266ba" data-spot-color="#888" data-min-spot-color="#7266ba"
-                                 data-max-spot-color="#7266ba" data-fill-color=""
-                                 data-highlight-line-color="#fff" data-spot-radius="3"
-                                 data-values="1,3,4,7,5,9,4,4,7,5,9,6,4"
-                                 data-resize="true" class="pv-lg"></div>
-                            <p>
-                                <small class="text-muted">Actual progress</small>
-                            </p>
-                            <div class="progress progress-xs">
-                                <div role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"
-                                     style="width: 80%" class="progress-bar progress-bar-info progress-bar-striped">
-                                    <span class="sr-only">80% Complete</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- END widget-->
-                </div>
 
-            </div>
         </div>
         <!-- END dashboard main content-->
 
         <!-- START dashboard sidebar-->
         <aside class="col-lg-3">
-            <!-- START loader widget-->
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <a href="#" class="text-muted pull-right">
-                        <em class="fa fa-arrow-right"></em>
-                    </a>
-                    <div class="text-info">Average Monthly Uploads</div>
-                    <canvas data-classyloader="" data-percentage="70" data-speed="20" data-font-size="40px"
-                            data-diameter="70" data-line-color="#23b7e5"
-                            data-remaining-line-color="rgba(200,200,200,0.4)" data-line-width="10"
-                            data-rounded-line="true" class="center-block"></canvas>
-                    <div data-sparkline="" data-bar-color="#23b7e5" data-height="30" data-bar-width="5"
-                         data-bar-spacing="2" data-values="5,4,8,7,8,5,4,6,5,5,9,4,6,3,4,7,5,4,7"
-                         class="text-center"></div>
-                </div>
-                <div class="panel-footer">
-                    <p class="text-muted">
-                        <em class="fa fa-upload fa-fw"></em>
-                        <span>This Month</span>
-                        <span class="text-dark">1000 Gb</span>
-                    </p>
-                </div>
-            </div>
-            <!-- END loader widget-->
             <!-- START messages and activity-->
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -230,10 +141,10 @@
                     <div class="list-group-item">
                         <div class="media-box">
                             <div class="pull-left">
-                                         <span class="fa-stack">
-                                            <em class="fa fa-circle fa-stack-2x text-purple"></em>
-                                            <em class="fa fa-cloud-upload fa-stack-1x fa-inverse text-white"></em>
-                                         </span>
+                                <span class="fa-stack">
+                                   <em class="fa fa-circle fa-stack-2x text-purple"></em>
+                                   <em class="fa fa-cloud-upload fa-stack-1x fa-inverse text-white"></em>
+                                </span>
                             </div>
                             <div class="media-box-body clearfix">
                                 <small class="text-muted pull-right ml">15m</small>
