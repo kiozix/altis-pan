@@ -80,8 +80,8 @@ class ShopsController extends Controller {
 			$transaction_id = $response['PAYMENTINFO_0_TRANSACTIONID'];
 
 			$paypal_store = New Paypal();
-			$paypal_store->id_shop = $shops->id;
-			$paypal_store->id_user = $request->user()->id;
+			$paypal_store->id_shop = $shops->name;
+			$paypal_store->id_user = $request->user()->name;
 			$paypal_store->id_transaction = $transaction_id;
 			$paypal_store->price = $shops->price;
 			$paypal_store->save();

@@ -26,7 +26,9 @@ Route::get('shop/payment/accepted', ['uses' => 'ShopsController@accepted']);
 Route::get('shop/payment/failed', ['uses' => 'ShopsController@failed']);
 
 Route::get('admin', ['uses' => 'AdminController@index']);
-Route::get('admin/dev', ['uses' => 'AdminController@dev']);
+Route::get('admin/players', ['uses' => 'AdminController@joueur']);
+Route::get('admin/players/{id}', ['uses' => 'AdminController@joueur_show']);
+Route::get('admin/paypal', ['uses' => 'AdminController@paypal']);
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',

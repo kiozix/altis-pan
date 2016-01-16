@@ -160,14 +160,15 @@
                                                                 @endif
                                                             </td>
                                                         </tr>
-                                                    @endforeach</table>
+                                                    @endforeach
+                                                </table>
                                             </div>
                                         </div>
                                         <div class="panel panel-default">
                                             <div class="panel-heading" role="tab" id="headingTwo">
                                                 <h4 class="panel-title">
                                                     <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                                        Aquatique
+                                                        Aérien
                                                     </a>
                                                 </h4>
                                             </div>
@@ -192,14 +193,15 @@
                                                                 @endif
                                                             </td>
                                                         </tr>
-                                                    @endforeach</table>
+                                                    @endforeach
+                                                </table>
                                             </div>
                                         </div>
                                         <div class="panel panel-default">
                                             <div class="panel-heading" role="tab" id="headingThree">
                                                 <h4 class="panel-title">
                                                     <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                                        Aérien
+                                                        Aquatique
                                                     </a>
                                                 </h4>
                                             </div>

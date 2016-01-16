@@ -4,7 +4,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="Site réalisée avec AltisPan, CMS dédiée au Mod multijoueur Altis Life. Réalisation : Lucas GRELAUD, Emile LEPTIT."/>
+    <meta name="description"
+          content="Site réalisée avec AltisPan, CMS dédiée au Mod multijoueur Altis Life. Réalisation : Lucas GRELAUD, Emile LEPTIT."/>
     <meta name="keywords" content="altis life, cms, altispan, arma, 3, serveur"/>
     <meta name="author" content="Lucas GRELAUD, Emile LEPETIT"/>
 
@@ -47,10 +48,10 @@
             <div class="navbar-header">
                 <a href="{{ url('/') }}" class="navbar-brand">
                     <div class="brand-logo">
-                        <img src="/img/logo.png" alt="App Logo" class="img-responsive">
+                        <img src="{{ asset('/img/logo.png') }}" alt="App Logo" class="img-responsive">
                     </div>
                     <div class="brand-logo-collapsed">
-                        <img src="/img/logo-single.png" alt="App Logo" class="img-responsive">
+                        <img src="{{ asset('/img/logo-single.png') }}" alt="App Logo" class="img-responsive">
                     </div>
                 </a>
             </div>
@@ -65,7 +66,8 @@
                             <em class="fa fa-navicon"></em>
                         </a>
                         <!-- Button to show/hide the sidebar on mobile. Visible on mobile only.-->
-                        <a href="#" data-toggle-state="aside-toggled" data-no-persist="true" class="visible-xs sidebar-toggle">
+                        <a href="#" data-toggle-state="aside-toggled" data-no-persist="true"
+                           class="visible-xs sidebar-toggle">
                             <em class="fa fa-navicon"></em>
                         </a>
                     </li>
@@ -79,8 +81,8 @@
                     <!-- END User avatar toggle-->
                     <!-- START lock screen-->
                     <li>
-                        <a href="lock.html" title="Lock screen">
-                            <em class="icon-lock"></em>
+                        <a href="{{ url('/auth/logout') }}" title="Lock screen">
+                            <em class="icon-logout"></em>
                         </a>
                     </li>
                     <!-- END lock screen-->
@@ -138,9 +140,11 @@
                                 <div class="user-block-picture">
                                     <div class="user-block-status">
                                         @if($user->avatar)
-                                        <img src="{{ url($user->avatar) }}" alt="Avatar" width="60" height="60" class="img-thumbnail img-circle">
+                                            <img src="{{ url($user->avatar) }}" alt="Avatar" width="60" height="60"
+                                                 class="img-thumbnail img-circle">
                                         @else
-                                            <img src="{{ asset('/img/user_default.png') }}" alt="Avatar" width="60" height="60" class="img-thumbnail img-circle">
+                                            <img src="{{ asset('/img/user_default.png') }}" alt="Avatar" width="60"
+                                                 height="60" class="img-thumbnail img-circle">
                                         @endif
                                         <div class="circle circle-success circle-lg"></div>
                                     </div>
@@ -166,11 +170,17 @@
                         </a>
                     </li>
 
-                    <li class="">
-                        <a title="Widgets" href="{{ url('admin/dev') }}">
-                            <div class="pull-right label label-success">30</div>
-                            <em class="icon-book-open"></em>
-                            <span>News</span>
+                    <li class="{{ Request::is('admin/players') ? 'active' : '' }}">
+                        <a title="Widgets" href="{{ url('admin/players') }}">
+                            <em class="icon-game-controller"></em>
+                            <span>Joueur</span>
+                        </a>
+                    </li>
+
+                    <li class="{{ Request::is('admin/paypal') ? 'active' : '' }}">
+                        <a title="Widgets" href="{{ url('admin/paypal') }}">
+                            <em class="icon-paypal"></em>
+                            <span>PayPal</span>
                         </a>
                     </li>
 
@@ -376,7 +386,8 @@
                                 <p class="pull-left">Show Scrollbar</p>
                                 <div class="pull-right">
                                     <label class="switch">
-                                        <input id="chk-hover" type="checkbox" data-toggle-state="show-scrollbar" data-target=".sidebar">
+                                        <input id="chk-hover" type="checkbox" data-toggle-state="show-scrollbar"
+                                               data-target=".sidebar">
                                         <span></span>
                                     </label>
                                 </div>
@@ -399,7 +410,7 @@
                               </span>
                               <span class="pull-left">
                                  <!-- Contact avatar-->
-                                 <img src="img/user/05.jpg" alt="Image" class="media-box-object img-circle thumb48">
+                                 <img src="" alt="Image" class="media-box-object img-circle thumb48">
                               </span>
                                     <!-- Contact info-->
                               <span class="media-box-body">
@@ -411,139 +422,8 @@
                               </span>
                                 </a>
                                 <!-- END User status-->
-                                <!-- START User status-->
-                                <a href="#" class="media-box p mt0">
-                              <span class="pull-right">
-                                 <span class="circle circle-success circle-lg"></span>
-                              </span>
-                              <span class="pull-left">
-                                 <!-- Contact avatar-->
-                                 <img src="img/user/06.jpg" alt="Image" class="media-box-object img-circle thumb48">
-                              </span>
-                                    <!-- Contact info-->
-                              <span class="media-box-body">
-                                 <span class="media-box-heading">
-                                    <strong>Maureen Jenkins</strong>
-                                    <br>
-                                    <small class="text-muted">Designeer</small>
-                                 </span>
-                              </span>
-                                </a>
-                                <!-- END User status-->
-                                <!-- START User status-->
-                                <a href="#" class="media-box p mt0">
-                              <span class="pull-right">
-                                 <span class="circle circle-danger circle-lg"></span>
-                              </span>
-                              <span class="pull-left">
-                                 <!-- Contact avatar-->
-                                 <img src="img/user/07.jpg" alt="Image" class="media-box-object img-circle thumb48">
-                              </span>
-                                    <!-- Contact info-->
-                              <span class="media-box-body">
-                                 <span class="media-box-heading">
-                                    <strong>Billie Dunn</strong>
-                                    <br>
-                                    <small class="text-muted">Designeer</small>
-                                 </span>
-                              </span>
-                                </a>
-                                <!-- END User status-->
-                                <!-- START User status-->
-                                <a href="#" class="media-box p mt0">
-                              <span class="pull-right">
-                                 <span class="circle circle-warning circle-lg"></span>
-                              </span>
-                              <span class="pull-left">
-                                 <!-- Contact avatar-->
-                                 <img src="img/user/08.jpg" alt="Image" class="media-box-object img-circle thumb48">
-                              </span>
-                                    <!-- Contact info-->
-                              <span class="media-box-body">
-                                 <span class="media-box-heading">
-                                    <strong>Tomothy Roberts</strong>
-                                    <br>
-                                    <small class="text-muted">Designer</small>
-                                 </span>
-                              </span>
-                                </a>
-                                <!-- END User status-->
-                            </li>
-                            <!-- START list title-->
-                            <li class="p">
-                                <small class="text-muted">OFFLINE</small>
-                            </li>
-                            <!-- END list title-->
-                            <li>
-                                <!-- START User status-->
-                                <a href="#" class="media-box p mt0">
-                              <span class="pull-right">
-                                 <span class="circle circle-lg"></span>
-                              </span>
-                              <span class="pull-left">
-                                 <!-- Contact avatar-->
-                                 <img src="img/user/09.jpg" alt="Image" class="media-box-object img-circle thumb48">
-                              </span>
-                                    <!-- Contact info-->
-                              <span class="media-box-body">
-                                 <span class="media-box-heading">
-                                    <strong>Lawrence Robinson</strong>
-                                    <br>
-                                    <small class="text-muted">Developer</small>
-                                 </span>
-                              </span>
-                                </a>
-                                <!-- END User status-->
-                                <!-- START User status-->
-                                <a href="#" class="media-box p mt0">
-                              <span class="pull-right">
-                                 <span class="circle circle-lg"></span>
-                              </span>
-                              <span class="pull-left">
-                                 <!-- Contact avatar-->
-                                 <img src="img/user/10.jpg" alt="Image" class="media-box-object img-circle thumb48">
-                              </span>
-                                    <!-- Contact info-->
-                              <span class="media-box-body">
-                                 <span class="media-box-heading">
-                                    <strong>Tyrone Owens</strong>
-                                    <br>
-                                    <small class="text-muted">Designer</small>
-                                 </span>
-                              </span>
-                                </a>
-                                <!-- END User status-->
-                            </li>
-                            <li>
-                                <div class="p-lg text-center">
-                                    <!-- Optional link to list more users-->
-                                    <a href="#" title="See more contacts" class="btn btn-purple btn-sm">
-                                        <strong>Load more..</strong>
-                                    </a>
-                                </div>
                             </li>
                         </ul>
-                        <!-- Extra items-->
-                        <div class="p">
-                            <p>
-                                <small class="text-muted">Tasks completion</small>
-                            </p>
-                            <div class="progress progress-xs m0">
-                                <div role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-success progress-80">
-                                    <span class="sr-only">80% Complete</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="p">
-                            <p>
-                                <small class="text-muted">Upload quota</small>
-                            </p>
-                            <div class="progress progress-xs m0">
-                                <div role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" class="progress-bar progress-bar-warning progress-40">
-                                    <span class="sr-only">40% Complete</span>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -586,8 +466,6 @@
 <script src="{{ asset('/vendor/screenfull/dist/screenfull.js') }}"></script>
 <!-- LOCALIZE-->
 <script src="{{ asset('/vendor/jquery-localize-i18n/dist/jquery.localize.js') }}"></script>
-<!-- RTL demo-->
-<script src="{{ asset('js/demo/demo-rtl.js') }}"></script>
 <!-- =============== PAGE VENDOR SCRIPTS ===============-->
 <!-- SPARKLINE-->
 <script src="{{ asset('/vendor/sparkline/index.js') }}"></script>
@@ -603,8 +481,7 @@
 <script src="{{ asset('/vendor/jquery-classyloader/js/jquery.classyloader.min.js') }}"></script>
 <!-- MOMENT JS-->
 <script src="{{ asset('/vendor/moment/min/moment-with-locales.min.js') }}"></script>
-<!-- DEMO-->
-<script src="{{ asset('/js/demo/demo-flot.js') }}"></script>
+
 <!-- =============== APP SCRIPTS ===============-->
 <script src="{{ asset('/js/app.js')}}"></script>
 </body>
