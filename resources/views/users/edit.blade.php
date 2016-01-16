@@ -73,11 +73,11 @@
                                 <div class="form-group">
                                     <label class="col-md-4 control-label">ID Arma 3</label>
                                     <div class="col-md-8">
-                                        @if($user->arma)
-                                            {!! Form::text('arma', null, ['class' => 'form-control', 'maxlength' => '17', 'value' => "$user->arma"]) !!}
-                                        @else
+                                        <?php if(empty($user->arma)){ ?>
                                             {!! Form::text('arma', null, ['class' => 'form-control', 'maxlength' => '17']) !!}
-                                        @endif
+                                        <?php }else{ ?>
+                                            {!! Form::text('arma', null, ['class' => 'form-control', 'value' => "$user->arma", 'disabled']) !!}
+                                        <?php } ?>
                                     </div>
                                 </div>
                             </div>

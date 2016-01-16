@@ -22,13 +22,23 @@ class UsersController extends Controller {
 
 	public function update(Guard $auth, Request $request){
 		$user = $this->auth->user();
-		$this->validate($request, [
-			'name' => "required|unique:users,name,{$user->id}|min:2",
-            'arma' => "required|unique:users,arma,{$user->id}|numeric",
-			'avatar' => "image"
-		]);
 
-		$user->update($request->only('name', 'firstname', 'lastname', 'avatar', 'arma'));
+		if(empty($user->arma)) {
+			$this->validate($request, [
+				'name' => "required|unique:users,name,{$user->id}|min:2",
+				'arma' => "required|unique:users,arma,{$user->id}|numeric",
+				'avatar' => "image"
+			]);
+			$user->update($request->only('name', 'firstname', 'lastname', 'avatar', 'arma'));
+		} else {
+			$this->validate($request, [
+				'name' => "required|unique:users,name,{$user->id}|min:2",
+				'avatar' => "image"
+			]);
+			$user->update($request->only('name', 'firstname', 'lastname', 'avatar'));
+		}
+
+
 		return view('users.edit', compact('user'));
 		return redirect()->back()->with('success', 'Votre profil a bien été modifié');
 	}
