@@ -28,7 +28,9 @@ class AdminController extends Controller {
 		$users = DB::table('users')->count();
 		$news = DB::table('news')->count();
 
-		return view('admin.index', compact('user', 'players', 'players_last', 'users', 'news'));
+		$paypal = DB::table('paypals')->take(4)->get();
+
+		return view('admin.index', compact('user', 'players', 'players_last', 'users', 'news', 'paypal'));
 	}
 
 	public function joueur()
