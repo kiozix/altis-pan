@@ -34,7 +34,7 @@ class AdminController extends Controller {
 	public function joueur()
 	{
 		$user = $this->auth->user();
-		$players = DB::table('players')->get();
+		$players = DB::table('players')->paginate(5);
 		return view('admin.players.index', compact('user', 'players'));
 	}
 

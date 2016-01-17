@@ -44,6 +44,7 @@
                                 </tr>
                             @endforeach
                         </table>
+                        {!! $players->render() !!}
                     </div>
                 </div>
             </div>
