@@ -20,11 +20,6 @@ class AdminController extends Controller {
 		$this->auth = $auth;
 	}
 
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
 	public function index()
 	{
 		$user = $this->auth->user();
@@ -59,6 +54,27 @@ class AdminController extends Controller {
 
 	}
 
+	public function updatePlayer($id)
+	{
+		$user = $this->auth->user();
+
+		$admin = $_POST['admin'];
+		$policier = $_POST['policier'];
+		$medic = $_POST['medic'];
+		$donator = $_POST['donator'];
+
+		DB::table('players')
+			->where('playerid', $id)
+			->update(array(
+				'adminlevel' => $admin,
+				'coplevel' => $policier,
+				'mediclevel' => $medic,
+				'donatorlvl' => $donator
+			));
+
+		return redirect(url('admin/player/'. $id))->with('success', 'Le joueur à bien été modifié');
+	}
+
 	public function search()
 	{
 		$q = Input::get('q');
@@ -72,12 +88,6 @@ class AdminController extends Controller {
 
 		return view('admin.players.search', compact('user', 'players', 'q'));
 	}
-
-	public function update_joueur()
-	{
-
-	}
-
 
 	public function paypal()
 	{
