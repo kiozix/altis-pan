@@ -11,7 +11,7 @@
                         <div class="col-md-8 col-md-offset-2">
                             <div class="fh5co-owl-text-wrap">
                                 <div class="fh5co-owl-text text-center to-animate">
-                                    <h1 class="fh5co-lead">Bienvenue sur AltisForLife</h1>
+                                    <h1 class="fh5co-lead">Bienvenue sur {{ env('SITE_NAME', 'AltisPan') }}</h1>
                                     <h2 class="fh5co-sub-lead">Pour vous connecter sur le serveur cliquer <a href="#">ici</a></h2>
                                 </div>
                             </div>
