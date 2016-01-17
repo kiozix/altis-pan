@@ -8,7 +8,7 @@
     <div class="container-fluid">
         <div class="row">
             <div id="panelDemo1" class="panel panel-default">
-                <div class="panel-heading">Joueurs
+                <div class="panel-heading">Joueurs {{ Route::getCurrentRoute()->getPath() }}
                     <a href="#" data-tool="panel-collapse" data-toggle="tooltip" title="" class="pull-right">
                         <em class="fa fa-minus"></em>
                     </a>
