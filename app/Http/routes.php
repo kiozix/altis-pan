@@ -19,7 +19,7 @@ Route::post('profil', ['uses' => 'UsersController@update']);
 
 Route::resource('stream', 'StreamsController');
 Route::resource('news', 'NewsController');
-Route::resource('players', 'PlayersController');
+Route::resource('player', 'PlayersController');
 
 Route::resource('shop', 'ShopsController');
 Route::get('shop/payment/accepted', ['uses' => 'ShopsController@accepted']);

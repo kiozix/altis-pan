@@ -68,7 +68,7 @@ class AdminController extends Controller {
 			return view('admin.index', compact('user'))->with('error', 'Le champ de recherche est vide');
 		}
 
-		$players = DB::table('players')->where('name', 'LIKE', '%' . $q . '%')->get();
+		$players = DB::table('players')->where('name', 'LIKE', '%' . $q . '%')->OrWhere('playerid', $q)->get();
 
 		return view('admin.players.search', compact('user', 'players', 'q'));
 	}

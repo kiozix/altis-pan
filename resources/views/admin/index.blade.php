@@ -82,10 +82,6 @@
                     <!-- START widget-->
                     <div id="panelChart9" class="panel panel-default panel-demo">
                         <div class="panel-heading">
-                            <a href="#" data-tool="panel-collapse" data-toggle="tooltip" title="Collapse Panel"
-                               class="pull-right">
-                                <em class="fa fa-minus"></em>
-                            </a>
                             <div class="panel-title">Dernier joueurs</div>
                         </div>
                         <div class="panel-body">

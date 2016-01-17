@@ -162,7 +162,7 @@
                         <span data-localize="sidebar.heading.HEADER">Menu</span>
                     </li>
                     <li class="{{ Request::is('admin') ? 'active' : '' }}">
-                        <a title="Widgets" href="{{ url('admin') }}">
+                        <a title="Dashboard" href="{{ url('admin') }}">
                             {{--<div class="pull-right label label-success">30</div>--}}
                             <em class="icon-speedometer"></em>
                             <span>Dashboard</span>
@@ -170,14 +170,14 @@
                     </li>
 
                     <li class="{{ Request::is('admin/players') ? 'active' : '' }}">
-                        <a title="Widgets" href="{{ url('admin/players') }}">
+                        <a title="Jouers" href="{{ url('admin/players') }}">
                             <em class="icon-game-controller"></em>
-                            <span>Joueur</span>
+                            <span>Joueurs</span>
                         </a>
                     </li>
 
                     <li class="{{ Request::is('admin/paypal') ? 'active' : '' }}">
-                        <a title="Widgets" href="{{ url('admin/paypal') }}">
+                        <a title="PayPal" href="{{ url('admin/paypal') }}">
                             <em class="icon-paypal"></em>
                             <span>PayPal</span>
                         </a>
