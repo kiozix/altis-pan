@@ -43,6 +43,7 @@ class AdminController extends Controller {
 		$user = $this->auth->user();
 
 		$player = DB::table('players')->where('playerid', $id)->first();
+		$user_show = DB::table('users')->where('arma', $id)->first();
 
 		$vehicles_car = DB::table('vehicles')->where('pid', $id)->where('type', 'Car')->get();
 		$vehicles_air = DB::table('vehicles')->where('pid', $id)->where('type', 'Air')->get();
@@ -50,14 +51,12 @@ class AdminController extends Controller {
 
 		$gang = DB::table('gangs')->where('owner', $id)->first();
 
-		return view('admin.players.show', compact('user', 'player', 'vehicles_car', 'vehicles_air', 'vehicles_ship', 'gang'));
+		return view('admin.players.show', compact('user', 'player', 'vehicles_car', 'vehicles_air', 'vehicles_ship', 'gang', 'user_show'));
 
 	}
 
 	public function updatePlayer($id)
 	{
-		$user = $this->auth->user();
-
 		$admin = $_POST['admin'];
 		$policier = $_POST['policier'];
 		$medic = $_POST['medic'];
@@ -95,6 +94,20 @@ class AdminController extends Controller {
 		$logs = Paypal::all();
 
 		return view('admin.paypal.index', compact('user', 'logs'));
+	}
+
+	public function updateUser($id)
+	{
+		$admin = $_POST['rank_website'];
+		$id_user = $_POST['id'];
+
+		DB::table('users')
+			->where('id', $id_user)
+			->update(array(
+				'admin' => $admin,
+			));
+
+		return redirect(url('admin/player/'. $id))->with('success', 'Le joueur à bien été modifié');
 	}
 
 }

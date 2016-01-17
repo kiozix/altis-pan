@@ -31,6 +31,7 @@ Route::get('admin/player/{id}', ['uses' => 'AdminController@joueur_show']);
 Route::post('admin/player/{id}', ['uses' => 'AdminController@updatePlayer']);
 Route::get('admin/paypal', ['uses' => 'AdminController@paypal']);
 Route::get('admin/search', ['uses' => 'AdminController@search']);
+Route::post('admin/user/update/{id}', ['uses' => 'AdminController@updateUser']);
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',
