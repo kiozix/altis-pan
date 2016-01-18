@@ -13,8 +13,7 @@
     <meta name="csrf-token" content="{!! csrf_token() !!}">
     <title>{{ env('SITE_NAME', 'AltisPan') }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description"
-          content="Site réalisée avec AltisPan, CMS dédiée au Mod multijoueur Altis Life. Réalisation : Lucas GRELAUD, Emile LEPTIT."/>
+    <meta name="description" content="Site réalisée avec AltisPan, CMS dédiée au Mod multijoueur Altis Life. Réalisation : Lucas GRELAUD, Emile LEPTIT."/>
     <meta name="keywords" content="altis life, cms, altispan, arma, 3, serveur"/>
     <meta name="author" content="Lucas GRELAUD, Emile LEPETIT"/>
     <!-- Don't modify the web_author meta , only the author meta please -->
@@ -76,45 +75,53 @@
                 </div>
                 <div id="fh5co-navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li <?php if (Request::is('home') OR Request::is('/')) {
-                            echo 'class="active"';
-                        } ?>><a href="{{ url('/') }}"><span><i class="fa fa-home"></i> Accueil<span
-                                            class="border"></span></span></a></li>
-                        <li class="{{ Request::is('news') ? 'active' : '' }}"><a href="{{ url('/news') }}"><span><i
-                                            class="fa fa-newspaper-o"></i>&nbsp;&nbsp;News<span
-                                            class="border"></span></span></a></li>
+                        <li <?php if (Request::is('home') OR Request::is('/')) { echo 'class="active"'; } ?>>
+                            <a href="{{ url('/') }}"><span><i class="fa fa-home"></i> Accueil<span class="border"></span></span></a>
+                        </li>
+
+                        <li class="{{ Request::is('news') ? 'active' : '' }}">
+                            <a href="{{ url('/news') }}"><span><i class="fa fa-newspaper-o"></i>&nbsp;&nbsp;News<span class="border"></span></span></a>
+                        </li>
+
                         <!--<li><a href="#"><span><i class="fa fa-comments-o"></i>&nbsp;&nbsp;Forum<span class="border"></span></span></a></li>-->
-                        <li class="{{ Request::is('shop') ? 'active' : '' }}"><a href="{{ url('/shop') }}"><span><i class="fa fa-shopping-cart"></i>&nbsp;&nbsp;Boutique<span
-                                            class="border"></span></span></a></li>
-                        <li class="{{ Request::is('stream') ? 'active' : '' }}"><a href="{{ url('/stream') }}"><span><i
-                                            class="fa fa-video-camera"></i>&nbsp;&nbsp;Stream<span
-                                            class="border"></span></span></a></li>
+
+                        <li class="{{ Request::is('shop') ? 'active' : '' }}">
+                            <a href="{{ url('/shop') }}"><span><i class="fa fa-shopping-cart"></i>&nbsp;&nbsp;Boutique<span class="border"></span></span></a>
+                        </li>
+
+                        <li class="{{ Request::is('stream') ? 'active' : '' }}">
+                            <a href="{{ url('/stream') }}"><span><i class="fa fa-video-camera"></i>&nbsp;&nbsp;Stream<span class="border"></span></span></a>
+                        </li>
+
                         @if (Auth::guest())
-                            <li class="{{ Request::is('auth/login') ? 'active' : '' }}"><a
-                                        href="{{ url('/auth/login') }}"><span><i class="fa fa-unlock"></i>&nbsp;&nbsp;Connexion<span
-                                                class="border"></span></span></a></li>
-                            <li class="{{ Request::is('auth/register') ? 'active' : '' }}"><a
-                                        href="{{ url('/auth/register') }}"><span><i class="fa fa-pencil"></i>&nbsp;&nbsp;Inscription<span
-                                                class="border"></span></span></a></li>
+                            <li class="{{ Request::is('auth/login') ? 'active' : '' }}">
+                                <a href="{{ url('/auth/login') }}"><span><i class="fa fa-unlock"></i>&nbsp;&nbsp;Connexion<span class="border"></span></span></a>
+                            </li>
+
+                            <li class="{{ Request::is('auth/register') ? 'active' : '' }}">
+                                <a href="{{ url('/auth/register') }}"><span><i class="fa fa-pencil"></i>&nbsp;&nbsp;Inscription<span class="border"></span></span></a>
+                            </li>
                         @else
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                                   aria-haspopup="true"
-                                   aria-expanded="false"><i class="fa fa-user"></i>&nbsp;&nbsp;Mon Compte<span
-                                            class="caret"></span><span class="border"></span></a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i>&nbsp;&nbsp;Mon Compte<span class="caret"></span><span class="border"></span></a>
                                 <ul class="dropdown-menu">
                                     @if (Auth::user()->admin == 1)
-                                        <li><a href="{{ url('admin') }}"><i class="fa fa-wrench"></i>&nbsp;&nbsp;Admin<span
-                                                        class="border"></span></a></li>
+                                        <li>
+                                            <a href="{{ url('admin') }}"><i class="fa fa-wrench"></i>&nbsp;&nbsp;Admin<span class="border"></span></a>
+                                        </li>
                                         <li role="separator" class="divider"></li>
                                     @endif
-                                    <li><a href="{{ route('profil') }}"><i class="fa fa-cogs"></i>&nbsp;&nbsp;Mon compte<span
-                                                    class="border"></span></a></li>
+                                    <li>
+                                        <a href="{{ route('profil') }}"><i class="fa fa-cogs"></i>&nbsp;&nbsp;Mon compte<span class="border"></span></a>
+                                    </li>
                                     @if(Auth::user()->arma)
-                                    <li><a href="{{ url('/player') }}"><i class="fa fa-server"></i>&nbsp;&nbsp;AltisLife<span class="border"></span></a></li>
+                                    <li>
+                                        <a href="{{ url('/player') }}"><i class="fa fa-server"></i>&nbsp;&nbsp;AltisLife<span class="border"></span></a>
+                                    </li>
                                     @endif
                                     <li role="separator" class="divider"></li>
-                                    <li><a href="{{ url('/auth/logout') }}"><i class="fa fa-sign-out"></i>&nbsp;&nbsp;&nbsp;Déconnexion</a>
+                                    <li>
+                                        <a href="{{ url('/auth/logout') }}"><i class="fa fa-sign-out"></i>&nbsp;&nbsp;&nbsp;Déconnexion</a>
                                     </li>
                                 </ul>
                             </li>
@@ -124,7 +131,6 @@
             </div>
         </nav>
     </header>
-    <!-- END .header -->
     @yield('content')
 </div>
 
