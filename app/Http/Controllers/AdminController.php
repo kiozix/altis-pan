@@ -36,7 +36,7 @@ class AdminController extends Controller {
 	public function joueur()
 	{
 		$user = $this->auth->user();
-		$players = DB::table('players')->paginate(5);
+		$players = DB::table('players')->paginate(10);
 		return view('admin.players.index', compact('user', 'players'));
 	}
 
@@ -85,7 +85,7 @@ class AdminController extends Controller {
 			return view('admin.index', compact('user'))->with('error', 'Le champ de recherche est vide');
 		}
 
-		$players = DB::table('players')->where('name', 'LIKE', '%' . $q . '%')->OrWhere('playerid', $q)->get();
+		$players = DB::table('players')->where('name', 'LIKE', '%' . $q . '%')->OrWhere('playerid', $q)->paginate(10);
 
 		return view('admin.players.search', compact('user', 'players', 'q'));
 	}

@@ -66,7 +66,7 @@
                 </div>
             </div>
             @endforeach
-
+            {!! $players->appends(['q' => $q])->render() !!}
         </div>
     </div>
 @endsection
