@@ -21,6 +21,7 @@ Route::resource('stream', 'StreamsController');
 Route::resource('news', 'NewsController');
 Route::resource('player', 'PlayersController');
 Route::post('player/gang/delete', ['uses' => 'PlayersController@deleteGang', 'as' => 'deleteGang']);
+Route::post('player/gang/add', ['uses' => 'PlayersController@addUserGang', 'as' => 'addPlayerGang']);
 
 Route::resource('shop', 'ShopsController');
 Route::get('shop/payment/accepted', ['uses' => 'ShopsController@accepted']);

@@ -302,8 +302,18 @@
                                             <th>Actions</th>
                                         </tr>
                                         <tr>
-                                            <td><input type="text" placeholder="7656XXXXXXXXXXXXX" class="form-control gang-input"></td>
-                                            <td><button class="btn btn-success gang-button"><i class="fa fa-check"></i></button></td>
+                                            <form action="{{ route('addPlayerGang') }}" method="post">
+                                                <td>
+                                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                    <input type="hidden" name="groupId" value="{{ $gang->id }}">
+                                                    <select name="playerid" class="form-control player-gang">
+                                                        @foreach($allPlayers as $player)
+                                                            <option value="{{ $player->playerid }}">{{ $player->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                                <td><button type="submit" class="btn btn-success gang-button"><i class="fa fa-check"></i></button></td>
+                                            </form>
                                         </tr>
                                         @foreach($gangMembers as $member)
                                             <tr>

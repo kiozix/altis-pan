@@ -56,6 +56,8 @@
     <link rel="stylesheet" href="{{ asset('/css/style.css') }}">
     <!-- SweetAlert-->
     <link rel="stylesheet" href="{{ asset('/css/sweetalert.css') }}">
+    <!-- Select2 -->
+    <link rel="stylesheet" href="{{ asset('/css/select2.min.css') }}">
     <!-- Modernizr JS -->
     <script src="{{ asset('/js/modernizr-2.6.2.min.js') }}"></script>
     <!-- FOR IE9 below -->
@@ -197,7 +199,9 @@
 
 <script src="{{ asset('/js/laravel.js') }}"></script>
 
+<script src="{{ asset('/js/select2.full.min.js') }}"></script>
 <script src="{{ asset('/js/altispan.js') }}"></script>
+
 
 
 </body>

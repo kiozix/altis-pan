@@ -29,6 +29,7 @@ class PlayersController extends Controller {
 	public function index(Guard $auth)
 	{
 		$players = DB::table('players')->where('playerid', $auth->user()->arma)->first();
+		$allPlayers = DB::table('players')->get();
 
 		$gang = DB::table('gangs')->where('owner', $auth->user()->arma)->first();
 
@@ -107,47 +108,90 @@ class PlayersController extends Controller {
 				break;
 		}
 
-		return view('players.index', compact('players', 'mediclevel', 'coplevel', 'rank', 'gang', 'vehicles_cars', 'vehicles_airs', 'vehicles_ships', 'gangMembers'));
+		return view('players.index', compact('allPlayers', 'players', 'mediclevel', 'coplevel', 'rank', 'gang', 'vehicles_cars', 'vehicles_airs', 'vehicles_ships', 'gangMembers'));
 	}
 
-	public function deleteGang(Request $request)
+	public function deleteGang(Request $request, Guard $auth)
 	{
 		if($request->isMethod('POST')){
 			$userId = $request->get("userId");
 			$groupId = $request->get("groupId");
 
+			$gang = DB::table('gangs')->where('id', $groupId)->first();
+
+			if($auth->user()->arma == $gang->owner) {
+
+				$suppr = array("\"", "`", "[", "]");
+				$lineGang = str_replace($suppr, "", $gang->members);
+				$ArrayGang = preg_split("/,/", $lineGang);
+				$gangMembers = array();
+
+				foreach ($ArrayGang as $member) {
+					$gangMembers[] = $member;
+				}
+				unset($gangMembers[$userId]);
+				$gangMembersString = '"[';
+				$gangList = "";
+				foreach ($gangMembers as $gangMember) {
+					if ($gangMember != $userId) {
+						$gangList .= "`" . $gangMember . "`,";
+					}
+				}
+				$gangList = rtrim($gangList, ",");
+				$gangMembersString .= $gangList;
+				$gangMembersString .= ']"';
+
+				DB::table('gangs')
+					->where('id', $groupId)
+					->update(array(
+						'members' => $gangMembersString,
+					));
+			}
+		}
+		return response()->json(['status' => 'success']);
+	}
+
+	public function addUserGang(Request $request, Guard $auth)
+	{
+		if($request->isMethod('POST')){
+			$playerId = $request->get("playerid");
+			$groupId = $request->get("groupId");
 
 			$gang = DB::table('gangs')->where('id', $groupId)->first();
 
-			$suppr = array("\"", "`", "[", "]");
-			$lineGang = str_replace($suppr, "", $gang->members);
-			$ArrayGang = preg_split("/,/", $lineGang);
-			$gangMembers = array();
+			if($auth->user()->arma == $gang->owner) {
 
-			foreach($ArrayGang as $member){
-				$gangMembers[] = $member;
-			}
-			unset($gangMembers[$userId]);
-			$gangMembersString = '"[';
-			$gangList = "";
-			foreach ($gangMembers as $gangMember) {
-				if($gangMember != $userId){
-					$gangList .= "`".$gangMember."`,";
+				$suppr = array("\"", "`", "[", "]");
+				$lineGang = str_replace($suppr, "", $gang->members);
+				$ArrayGang = preg_split("/,/", $lineGang);
+				$gangMembers = array();
+
+				foreach ($ArrayGang as $member) {
+					$gangMembers[] = $member;
 				}
+
+				$gangMembersString = '"[';
+				$gangList = "";
+				foreach ($gangMembers as $gangMember) {
+					$gangList .= "`" . $gangMember . "`,";
+				}
+				$gangList.= "`" . $playerId . "`,";
+				$gangList = rtrim($gangList, ",");
+				$gangMembersString .= $gangList;
+				$gangMembersString .= ']"';
+
+				DB::table('gangs')
+					->where('id', $groupId)
+					->update(array(
+						'members' => $gangMembersString,
+					))
+				;
+
+				return redirect(url('player'))->with('success', 'Le joueur à bien rajouté au gang');
+			}else {
+				return Response::view('errors.403', array(), 403);
 			}
-			$gangList = rtrim($gangList,",");
-			$gangMembersString .= $gangList;
-			$gangMembersString .= ']"';
-
-			// dd($gangMembersString);
-
-			DB::table('gangs')
-				->where('id', $groupId)
-				->update(array(
-					'members' => $gangMembersString,
-				));
 		}
-		return response()->json(['status' => 'success']);
 	}
 
 	/**
