@@ -54,6 +54,8 @@
     <link rel="stylesheet" href="{{ asset('/css/magnific-popup.css') }}">
     <!-- Theme Style -->
     <link rel="stylesheet" href="{{ asset('/css/style.css') }}">
+    <!-- SweetAlert-->
+    <link rel="stylesheet" href="{{ asset('/css/sweetalert.css') }}">
     <!-- Modernizr JS -->
     <script src="{{ asset('/js/modernizr-2.6.2.min.js') }}"></script>
     <!-- FOR IE9 below -->
@@ -143,7 +145,7 @@
                     <h2 class="fh5co-footer-logo">{{ env('SITE_NAME', 'AltisPan') }}</h2>
                     <p>Site réalisé avec AltisPan, CMS dédiée au Mod multijoueur Altis Life. Réalisation : Lucas
                         GRELAUD, Emile LEPETIT.</p><!-- Correspond a la meta "description" -->
-                    <p> &copy; Copyright <a href="#">AltisPan</a>, site par <a href="http://emix-dev.fr/">EmixDev</a>
+                    <p> &copy; Copyright <a href="#">AltisPan</a>, site par <a href="https://madebyhost.com/" target="_blank">MadeByhost</a>
                 </div>
             </div>
 
@@ -178,6 +180,8 @@
 
 <!-- jQuery -->
 <script src="{{ asset('/js/jquery.min.js') }}"></script>
+<!-- SweetAlert -->
+<script src="{{ asset('/js/sweetalert.min.js') }}"></script>
 <!-- jQuery Easing -->
 <script src="{{ asset('/js/jquery.easing.1.3.js') }}"></script>
 <!-- Bootstrap -->
@@ -192,6 +196,8 @@
 <script src="{{ asset('/js/main.js') }}"></script>
 
 <script src="{{ asset('/js/laravel.js') }}"></script>
+
+<script src="{{ asset('/js/altispan.js') }}"></script>
 
 
 </body>

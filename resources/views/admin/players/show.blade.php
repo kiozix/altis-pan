@@ -28,10 +28,10 @@
                                         <td>
                                             <?php
                                                 $money = $player->cash;
-                                                if ($money < 500000) {
+                                                if ($money < 150000) {
                                                     $argent = number_format($money, 2, ',', ' ');
                                                     echo "<span class='label label-success'>". $argent ." $</span>";
-                                                } elseif (800000 > $money) {
+                                                } elseif (200000 > $money) {
                                                     $argent = number_format($money, 2, ',', ' ');
                                                     echo "<span class='label label-warning'>". $argent ." $</span>";
                                                 } else {
@@ -337,6 +337,7 @@
                                     ?>
                                 @endfor
                             </table>
+
                         </div>
                     </div>
                 </div>

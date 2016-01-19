@@ -6,7 +6,9 @@ use App\Players;
 
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Routing\ResponseFactory;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Response;
 
 class PlayersController extends Controller {
 
@@ -27,13 +29,23 @@ class PlayersController extends Controller {
 	public function index(Guard $auth)
 	{
 		$players = DB::table('players')->where('playerid', $auth->user()->arma)->first();
+
 		$gang = DB::table('gangs')->where('owner', $auth->user()->arma)->first();
+
+		$suppr = array("\"", "`", "[", "]");
+		$lineGang = str_replace($suppr, "", $gang->members);
+		$ArrayGang = preg_split("/,/", $lineGang);
+		$gangMembers = array();
+
+		foreach($ArrayGang as $member) {
+			$gangMembers[$member] = DB::table('players')->where('playerid', $member)->first();
+			// var_dump($gangMembers);die();
+		}
+		// dd($ArrayGang, $gangMembers);
 
 		$vehicles_cars = DB::table('vehicles')->where('pid', $auth->user()->arma)->where('type', 'Car')->get();
 		$vehicles_airs = DB::table('vehicles')->where('pid', $auth->user()->arma)->where('type', 'Air')->get();
 		$vehicles_ships = DB::table('vehicles')->where('pid', $auth->user()->arma)->where('type', 'Ship')->get();
-
-		// dd($gang);
 
 		switch ($players->coplevel) {
 			case 1:
@@ -95,9 +107,48 @@ class PlayersController extends Controller {
 				break;
 		}
 
-		return view('players.index', compact('players', 'mediclevel', 'coplevel', 'rank', 'gang', 'vehicles_cars', 'vehicles_airs', 'vehicles_ships'));
+		return view('players.index', compact('players', 'mediclevel', 'coplevel', 'rank', 'gang', 'vehicles_cars', 'vehicles_airs', 'vehicles_ships', 'gangMembers'));
 	}
 
+	public function deleteGang(Request $request)
+	{
+		if($request->isMethod('POST')){
+			$userId = $request->get("userId");
+			$groupId = $request->get("groupId");
+
+
+			$gang = DB::table('gangs')->where('id', $groupId)->first();
+
+			$suppr = array("\"", "`", "[", "]");
+			$lineGang = str_replace($suppr, "", $gang->members);
+			$ArrayGang = preg_split("/,/", $lineGang);
+			$gangMembers = array();
+
+			foreach($ArrayGang as $member){
+				$gangMembers[] = $member;
+			}
+			unset($gangMembers[$userId]);
+			$gangMembersString = '"[';
+			$gangList = "";
+			foreach ($gangMembers as $gangMember) {
+				if($gangMember != $userId){
+					$gangList .= "`".$gangMember."`,";
+				}
+			}
+			$gangList = rtrim($gangList,",");
+			$gangMembersString .= $gangList;
+			$gangMembersString .= ']"';
+
+			// dd($gangMembersString);
+
+			DB::table('gangs')
+				->where('id', $groupId)
+				->update(array(
+					'members' => $gangMembersString,
+				));
+		}
+		return response()->json(['status' => 'success']);
+	}
 
 	/**
 	 * Show the form for creating a new resource.

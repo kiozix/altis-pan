@@ -19,13 +19,13 @@
             <div class="col-md-8 col-md-offset-2">
                 <div class="tabbable ">
                     <ul class="nav nav-tabs">
-                        <li class="active"><a href="#a" data-toggle="tab">Informations</a></li>
+                        <li class=""><a href="#a" data-toggle="tab">Informations</a></li>
                         <li><a href="#b" data-toggle="tab">Véhicules</a></li>
                         <li><a href="#d" data-toggle="tab">Licences</a></li>
-                    @if($gang)<li><a href="#c" data-toggle="tab">Gangs</a></li>@endif
+                    @if($gang)<li class="active"><a href="#c" data-toggle="tab">Gangs</a></li>@endif
                     </ul>
                     <div class="tab-content">
-                        <div class="tab-pane active" id="a">
+                        <div class="tab-pane " id="a">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h3 class="panel-title">Votre personnage :</h3>
@@ -282,21 +282,39 @@
                         </div>
 
                         @if($gang)
-                        <div class="tab-pane" id="c">
+                        <div class="tab-pane active" id="c">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title">Votre Gang : {!! $gang->name !!}</h3>
+                                    <h3 class="panel-title">Votre Gang : {{ $gang->name }}</h3>
                                 </div>
                                 <div class="panel-body">
                                     <h3>Information :</h3>
                                     <ul>
-                                        <li>Nombres de membres maximum : {!! $gang->maxmembers !!}</li>
+                                        <li>Nombres de membres maximum : {{ $gang->maxmembers }}</li>
                                         <li>Compte en banque : {{ number_format($gang->bank, 2, ',', ' ') . ' $' }}</li>
                                     </ul>
 
                                     <h4>Membres</h4>
 
-                                    <pre>{{ $gang->members }}</pre>
+                                    <table class="table table-responsive group-members" data-group="{{ $gang->id }}" data-groupname="{{ $gang->name }}" data-callback="{{ route('deleteGang') }}">
+                                        <tr>
+                                            <th>Nom du joueur</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="text" placeholder="7656XXXXXXXXXXXXX" class="form-control gang-input"></td>
+                                            <td><button class="btn btn-success gang-button"><i class="fa fa-check"></i></button></td>
+                                        </tr>
+                                        @foreach($gangMembers as $member)
+                                            <tr>
+                                                <td><a href="#">{{ $member->name }}</a></td>
+                                                <td>
+                                                    <a href="#" data-user="{{ $member->playerid }}" data-csrf="{{ csrf_token() }}" class="group-userlist"><i class="fa fa-close" style="color: #c0392b"></i></a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </table>
+
                                 </div>
                             </div>
                         </div>
@@ -306,7 +324,7 @@
             </div>
         </div>
     </div>
-
     @include('players.modal')
+
 
 @endsection

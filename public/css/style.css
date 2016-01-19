@@ -6000,3 +6000,14 @@ a > img.fh5co-align-center {
     padding: 15px;
     font-size: 1.8rem;
 }
+
+.gang-input{
+  height: 30px;
+}
+
+.gang-button{
+  padding: 6px 5px;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 3px;
+}

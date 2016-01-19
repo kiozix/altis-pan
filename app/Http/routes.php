@@ -20,6 +20,7 @@ Route::post('profil', ['uses' => 'UsersController@update']);
 Route::resource('stream', 'StreamsController');
 Route::resource('news', 'NewsController');
 Route::resource('player', 'PlayersController');
+Route::post('player/gang/delete', ['uses' => 'PlayersController@deleteGang', 'as' => 'deleteGang']);
 
 Route::resource('shop', 'ShopsController');
 Route::get('shop/payment/accepted', ['uses' => 'ShopsController@accepted']);
