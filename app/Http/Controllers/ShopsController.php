@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
 
 use App\Http\Requests\ShopsRequest;
 use App\Shops;
@@ -76,16 +77,24 @@ class ShopsController extends Controller {
 		$response = $paypal->request('DoExpressCheckoutPayment',$params);
 
 		if($response){
-			// dd($response);
-			$transaction_id = $response['PAYMENTINFO_0_TRANSACTIONID'];
+				// dd($response);
+				$transaction_id = $response['PAYMENTINFO_0_TRANSACTIONID'];
 
-			$paypal_store = New Paypal();
-			$paypal_store->id_shop = $shops->name;
-			$paypal_store->id_user = $request->user()->name;
-			$paypal_store->id_arma = $request->user()->arma;
-			$paypal_store->id_transaction = $transaction_id;
-			$paypal_store->price = $shops->price;
-			$paypal_store->save();
+				$paypal_store = New Paypal();
+				$paypal_store->id_shop = $shops->name;
+				$paypal_store->id_user = $request->user()->name;
+				$paypal_store->id_arma = $request->user()->arma;
+				$paypal_store->id_transaction = $transaction_id;
+				$paypal_store->price = $shops->price;
+				$paypal_store->save();
+
+
+				DB::table('players')
+					->where('playerid', $request->user()->arma)
+					->update(array(
+						'donatorlvl' => $shops->level
+					));
+
 
 
 			return view('shops.accepted');
@@ -122,7 +131,7 @@ class ShopsController extends Controller {
 	 */
 	public function store(ShopsRequest $request)
 	{
-		Shops::create($request->only('name', 'time', 'content', 'price', 'image'));
+		Shops::create($request->only('name', 'time', 'content', 'price', 'image', 'level'));
 		return redirect(action('ShopsController@index'))->with('success', 'L\'offre à bien été ajouter');
 	}
 
@@ -185,7 +194,7 @@ class ShopsController extends Controller {
 	public function update($id, ShopsRequest $request)
 	{
 		$shops = Shops::findOrFail($id);
-		$shops->update($request->only('name', 'time', 'content', 'price', 'image'));
+		$shops->update($request->only('name', 'time', 'content', 'price', 'image', 'level'));
 		return redirect(action('ShopsController@index'))->with('success', 'L\'offre à bien été modifiée');
 	}
 

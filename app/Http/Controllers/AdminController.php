@@ -24,11 +24,11 @@ class AdminController extends Controller {
 	{
 		$user = $this->auth->user();
 		$players = DB::table('players')->count();
-		$players_last = DB::table('players')->take(5)->get();
+		$players_last = DB::table('players')->orderBy('uid', 'desc')->take(5)->get();
 		$users = DB::table('users')->count();
 		$news = DB::table('news')->count();
 
-		$paypal = DB::table('paypals')->take(4)->get();
+		$paypal = DB::table('paypals')->orderBy('id', 'desc')->take(4)->get();
 
 		return view('admin.index', compact('user', 'players', 'players_last', 'users', 'news', 'paypal'));
 	}
@@ -36,7 +36,7 @@ class AdminController extends Controller {
 	public function joueur()
 	{
 		$user = $this->auth->user();
-		$players = DB::table('players')->paginate(10);
+		$players = DB::table('players')->orderBy('uid', 'desc')->paginate(10);
 		return view('admin.players.index', compact('user', 'players'));
 	}
 
@@ -45,15 +45,19 @@ class AdminController extends Controller {
 		$user = $this->auth->user();
 
 		$player = DB::table('players')->where('playerid', $id)->first();
+		if(empty($player)){
+			return redirect(url('admin'))->with('error', 'Le joueur demander n\'à pas été trouver');
+		}
+
 		$user_show = DB::table('users')->where('arma', $id)->first();
 
-		$vehicles_car = DB::table('vehicles')->where('pid', $id)->where('type', 'Car')->get();
-		$vehicles_air = DB::table('vehicles')->where('pid', $id)->where('type', 'Air')->get();
-		$vehicles_ship = DB::table('vehicles')->where('pid', $id)->where('type', 'Ship')->get();
+		$vehicles_cars = DB::table('vehicles')->where('pid', $id)->where('type', 'Car')->get();
+		$vehicles_airs = DB::table('vehicles')->where('pid', $id)->where('type', 'Air')->get();
+		$vehicles_ships = DB::table('vehicles')->where('pid', $id)->where('type', 'Ship')->get();
 
 		$gang = DB::table('gangs')->where('owner', $id)->first();
 
-		return view('admin.players.show', compact('user', 'player', 'vehicles_car', 'vehicles_air', 'vehicles_ship', 'gang', 'user_show'));
+		return view('admin.players.show', compact('user', 'player', 'vehicles_cars', 'vehicles_airs', 'vehicles_ships', 'gang', 'user_show'));
 
 	}
 

@@ -170,7 +170,7 @@
                                         <tr>
                                             <td>Grade</td>
                                             <td>
-                                                <select name="rank_website" id="" class="form-control">
+                                                <select name="rank_website" class="form-control">
                                                     <option value="0" {{ $user_show->admin == 0 ? 'selected' : '' }} >Utilisateur</option>
                                                     <option value="1" {{ $user_show->admin == 1 ? 'selected' : '' }} >Administrateur</option>
                                                 </select>
@@ -208,7 +208,7 @@
                                                     <th>Type</th>
                                                     <th>Active</th>
                                                 </tr>
-                                                @foreach($vehicles_car as $vehicle_car)
+                                                @foreach($vehicles_cars as $vehicle_car)
                                                     <tr>
                                                         <td>{!! $vehicle_car->classname !!}</td>
                                                         <td>{!! $vehicle_car->side !!}</td>
@@ -241,7 +241,7 @@
                                                     <th>Type</th>
                                                     <th>Active</th>
                                                 </tr>
-                                                @foreach($vehicles_air as $vehicle_air)
+                                                @foreach($vehicles_airs as $vehicle_air)
                                                     <tr>
                                                         <td>{!! $vehicle_air->classname !!}</td>
                                                         <td>{!! $vehicle_air->side !!}</td>
@@ -274,7 +274,7 @@
                                                     <th>Type</th>
                                                     <th>Active</th>
                                                 </tr>
-                                                @foreach($vehicles_ship as $vehicle_ship)
+                                                @foreach($vehicles_ships as $vehicle_ship)
                                                     <tr>
                                                         <td>{!! $vehicle_ship->classname !!}</td>
                                                         <td>{!! $vehicle_ship->side !!}</td>
@@ -300,47 +300,47 @@
 
             <div class="col-md-6">
                 <div id="licenses-civ" class="panel panel-default">
-                        <div class="panel-heading">
-                            <span style="font-weight: bold;font-size: 20px !important;">Licenses Civil</span>
-                        </div>
-                        <div class="panel-wrapper collapse in" aria-expanded="true">
-                            <div class="panel-body">
-                                <table class="table table-striped table-responsive">
+                    <div class="panel-heading">
+                        <span style="font-weight: bold;font-size: 20px !important;">Licenses Civil</span>
+                    </div>
+                    <div class="panel-wrapper collapse in" aria-expanded="true">
+                        <div class="panel-body">
+                            <table class="table table-striped table-responsive">
+                                <tr>
+                                    <th>Nom</th>
+                                    <th>Status</th>
+                                </tr>
+                                <?php
+                                $suppr = array("\"", "`", "[", "]");
+                                $lineLicenses = str_replace($suppr, "", $player->civ_licenses);
+                                $arrayLicenses = preg_split("/,/", $lineLicenses);
+                                $totarrayLicenses = count($arrayLicenses);
+                                $y = 0;
+                                $n = 0;
+                                ?>
+                                @for($i = 1; $y < $totarrayLicenses; $i++)
                                     <tr>
-                                        <th>Nom</th>
-                                        <th>Status</th>
+                                        <td>{{ $arrayLicenses[$y] }}</td>
+                                        <td>
+                                            @if($arrayLicenses[$i] == 1)
+                                                <i class="fa fa-check" style="color: #2cc36b;"></i>
+                                            @else
+                                                <i class="fa fa-close" style="color: #c0392b;"></i>
+                                            @endif
+                                        </td>
                                     </tr>
-                                    <?php
-                                    $suppr = array("\"", "`", "[", "]");
-                                    $lineLicenses = str_replace($suppr, "", $player->civ_licenses);
-                                    $arrayLicenses = preg_split("/,/", $lineLicenses);
-                                    $totarrayLicenses = count($arrayLicenses);
-                                    $y = 0;
-                                    $n = 0;
-                                    ?>
-                                    @for($i = 1; $y < $totarrayLicenses; $i++)
-                                        <tr>
-                                            <td>{{ $arrayLicenses[$y] }}</td>
-                                            <td>
-                                                @if($arrayLicenses[$i] == 1)
-                                                    <i class="fa fa-check" style="color: #2cc36b;"></i>
-                                                @else
-                                                    <i class="fa fa-close" style="color: #c0392b;"></i>
-                                                @endif
-                                            </td>
-                                        </tr>
 
-                                        <?php
-                                        $y = $y + 2;
-                                        $i = $i + 1;
-                                        $n = $n + 1;
-                                        ?>
-                                    @endfor
-                                </table>
-                            </div>
+                                    <?php
+                                    $y = $y + 2;
+                                    $i = $i + 1;
+                                    $n = $n + 1;
+                                    ?>
+                                @endfor
+                            </table>
                         </div>
                     </div>
-
+                </div>
+                @if($player->coplevel >= 1)
                 <div id="licenses-cop" class="panel panel-default">
                         <div class="panel-heading">
                             <span style="font-weight: bold;font-size: 20px !important;">Licenses Policier</span>
@@ -382,7 +382,9 @@
                             </div>
                         </div>
                     </div>
+                @endif
 
+                @if($player->mediclevel >= 1)
                 <div id="licenses-med" class="panel panel-default">
                         <div class="panel-heading">
                             <span style="font-weight: bold;font-size: 20px !important;">Licenses Pompier</span>
@@ -424,6 +426,7 @@
                             </div>
                         </div>
                     </div>
+                @endif
             </div>
 
         </div>

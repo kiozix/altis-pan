@@ -127,7 +127,7 @@
                                 </span>
                             </div>
                             <div class="media-box-body clearfix">
-                                <small class="text-muted pull-right ml">2h</small>
+                                <small class="text-muted pull-right ml">{!! $achat->created_at !!}</small>
                                 <div class="media-box-heading"><a href="{{ url('admin/paypal') }}" class="text-info m0">{!! $achat->id_shop !!}</a>
                                 </div>
                                 <p class="m0">

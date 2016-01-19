@@ -36,6 +36,14 @@
             </div>
 
             <div class="form-group">
+                <label class="col-md-4 control-label">Level (Donatorlvl)</label>
+
+                <div class="col-md-6">
+                    {!! Form::text('level', null, ['class' => 'form-control', 'placeholder' => 'Ex : 2']) !!}
+                </div>
+            </div>
+
+            <div class="form-group">
                 <label class="col-md-4 control-label">Image</label>
 
                 <div class="col-md-6">
