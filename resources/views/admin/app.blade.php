@@ -130,8 +130,7 @@
                         </a>
                     </li>
 
-                    <li class="{{ Request::is('admin/players/*') ? 'active' : '' }} <?php $path = Route::getCurrentRoute()->getPath(); ?>
-                    <?php if (starts_with($path, 'admin/player')) echo "active"; ?>">
+                    <li class="{{ Request::is('admin/players/*') ? 'active' : '' }} <?php $path = Route::getCurrentRoute()->getPath(); if (starts_with($path, 'admin/player')) echo "active"; ?>">
                         <a title="Jouers" href="{{ url('admin/players') }}">
                             <em class="icon-game-controller"></em>
                             <span>Joueurs</span>

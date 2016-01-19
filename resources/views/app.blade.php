@@ -79,17 +79,17 @@
                             <a href="{{ url('/') }}"><span><i class="fa fa-home"></i> Accueil<span class="border"></span></span></a>
                         </li>
 
-                        <li class="{{ Request::is('news') ? 'active' : '' }}">
+                        <li class="{{ Request::is('news') ? 'active' : '' }} <?php $path = Route::getCurrentRoute()->getPath(); if (starts_with($path, 'news/')) echo "active"; ?>">
                             <a href="{{ url('/news') }}"><span><i class="fa fa-newspaper-o"></i>&nbsp;&nbsp;News<span class="border"></span></span></a>
                         </li>
 
                         <!--<li><a href="#"><span><i class="fa fa-comments-o"></i>&nbsp;&nbsp;Forum<span class="border"></span></span></a></li>-->
 
-                        <li class="{{ Request::is('shop') ? 'active' : '' }}">
+                        <li class="{{ Request::is('shop') ? 'active' : '' }} <?php $path = Route::getCurrentRoute()->getPath(); if (starts_with($path, 'shop/')) echo "active"; ?>">
                             <a href="{{ url('/shop') }}"><span><i class="fa fa-shopping-cart"></i>&nbsp;&nbsp;Boutique<span class="border"></span></span></a>
                         </li>
 
-                        <li class="{{ Request::is('stream') ? 'active' : '' }}">
+                        <li class="{{ Request::is('stream') ? 'active' : '' }} <?php $path = Route::getCurrentRoute()->getPath(); if (starts_with($path, 'stream/')) echo "active"; ?>">
                             <a href="{{ url('/stream') }}"><span><i class="fa fa-video-camera"></i>&nbsp;&nbsp;Stream<span class="border"></span></span></a>
                         </li>
 
