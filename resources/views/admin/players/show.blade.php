@@ -149,23 +149,23 @@
                                         <input type="hidden" name="id" value="{{ $user_show->id }}">
                                         <tr>
                                             <td>Nom d'utilisateur</td>
-                                            <td>{!! $user_show->name !!}</td>
+                                            <td>{{ $user_show->name }}</td>
                                         </tr>
                                         @if($user_show->firstname)
                                             <tr>
                                                 <td>Prénom</td>
-                                                <td>{!! $user_show->firstname !!}</td>
+                                                <td>{{ $user_show->firstname }}</td>
                                             </tr>
                                         @endif
                                         @if($user_show->lastname)
                                             <tr>
                                                 <td>Nom de famille</td>
-                                                <td>{!! $user_show->lastname !!}</td>
+                                                <td>{{ $user_show->lastname }}</td>
                                             </tr>
                                         @endif
                                         <tr>
                                             <td>E-mail</td>
-                                            <td>{!! $user_show->email !!}</td>
+                                            <td>{{ $user_show->email }}</td>
                                         </tr>
                                         <tr>
                                             <td>Grade</td>
@@ -210,9 +210,9 @@
                                                 </tr>
                                                 @foreach($vehicles_cars as $vehicle_car)
                                                     <tr>
-                                                        <td>{!! $vehicle_car->classname !!}</td>
-                                                        <td>{!! $vehicle_car->side !!}</td>
-                                                        <td>{!! $vehicle_car->type !!}</td>
+                                                        <td>{{ $vehicle_car->classname }}</td>
+                                                        <td>{{ $vehicle_car->side }}</td>
+                                                        <td>{{ $vehicle_car->type }}</td>
                                                         <td>
                                                             @if($vehicle_car->active == 1)
                                                                 <i class="fa fa-check" style="color: #2cc36b;"></i>
@@ -243,9 +243,9 @@
                                                 </tr>
                                                 @foreach($vehicles_airs as $vehicle_air)
                                                     <tr>
-                                                        <td>{!! $vehicle_air->classname !!}</td>
-                                                        <td>{!! $vehicle_air->side !!}</td>
-                                                        <td>{!! $vehicle_air->type !!}</td>
+                                                        <td>{{ $vehicle_air->classname }}</td>
+                                                        <td>{{ $vehicle_air->side }}</td>
+                                                        <td>{{ $vehicle_air->type }}</td>
                                                         <td>
                                                             @if($vehicle_air->active == 1)
                                                                 <i class="fa fa-check" style="color: #2cc36b;"></i>
@@ -276,9 +276,9 @@
                                                 </tr>
                                                 @foreach($vehicles_ships as $vehicle_ship)
                                                     <tr>
-                                                        <td>{!! $vehicle_ship->classname !!}</td>
-                                                        <td>{!! $vehicle_ship->side !!}</td>
-                                                        <td>{!! $vehicle_ship->type !!}</td>
+                                                        <td>{{ $vehicle_ship->classname }}</td>
+                                                        <td>{{ $vehicle_ship->side }}</td>
+                                                        <td>{{ $vehicle_ship->type }}</td>
                                                         <td>
                                                             @if($vehicle_ship->active == 1)
                                                                 <i class="fa fa-check" style="color: #2cc36b;"></i>
@@ -340,92 +340,93 @@
                         </div>
                     </div>
                 </div>
+
                 @if($player->coplevel >= 1)
                 <div id="licenses-cop" class="panel panel-default">
-                        <div class="panel-heading">
-                            <span style="font-weight: bold;font-size: 20px !important;">Licenses Policier</span>
-                        </div>
-                        <div class="panel-wrapper collapse in" aria-expanded="true">
-                            <div class="panel-body">
-                                <table class="table table-striped table-responsive">
+                    <div class="panel-heading">
+                        <span style="font-weight: bold;font-size: 20px !important;">Licenses Policier</span>
+                    </div>
+                    <div class="panel-wrapper collapse in" aria-expanded="true">
+                        <div class="panel-body">
+                            <table class="table table-striped table-responsive">
+                                <tr>
+                                    <th>Nom</th>
+                                    <th>Status</th>
+                                </tr>
+                                <?php
+                                $suppr = array("\"", "`", "[", "]");
+                                $lineLicenses = str_replace($suppr, "", $player->cop_licenses);
+                                $arrayLicenses = preg_split("/,/", $lineLicenses);
+                                $totarrayLicenses = count($arrayLicenses);
+                                $y = 0;
+                                $n = 0;
+                                ?>
+                                @for($i = 1; $y < $totarrayLicenses; $i++)
                                     <tr>
-                                        <th>Nom</th>
-                                        <th>Status</th>
+                                        <td>{{ $arrayLicenses[$y] }}</td>
+                                        <td>
+                                            @if($arrayLicenses[$i] == 1)
+                                                <i class="fa fa-check" style="color: #2cc36b;"></i>
+                                            @else
+                                                <i class="fa fa-close" style="color: #c0392b;"></i>
+                                            @endif
+                                        </td>
                                     </tr>
-                                    <?php
-                                    $suppr = array("\"", "`", "[", "]");
-                                    $lineLicenses = str_replace($suppr, "", $player->cop_licenses);
-                                    $arrayLicenses = preg_split("/,/", $lineLicenses);
-                                    $totarrayLicenses = count($arrayLicenses);
-                                    $y = 0;
-                                    $n = 0;
-                                    ?>
-                                    @for($i = 1; $y < $totarrayLicenses; $i++)
-                                        <tr>
-                                            <td>{{ $arrayLicenses[$y] }}</td>
-                                            <td>
-                                                @if($arrayLicenses[$i] == 1)
-                                                    <i class="fa fa-check" style="color: #2cc36b;"></i>
-                                                @else
-                                                    <i class="fa fa-close" style="color: #c0392b;"></i>
-                                                @endif
-                                            </td>
-                                        </tr>
 
-                                        <?php
-                                        $y = $y + 2;
-                                        $i = $i + 1;
-                                        $n = $n + 1;
-                                        ?>
-                                    @endfor
-                                </table>
-                            </div>
+                                    <?php
+                                    $y = $y + 2;
+                                    $i = $i + 1;
+                                    $n = $n + 1;
+                                    ?>
+                                @endfor
+                            </table>
                         </div>
                     </div>
+                </div>
                 @endif
 
                 @if($player->mediclevel >= 1)
                 <div id="licenses-med" class="panel panel-default">
-                        <div class="panel-heading">
-                            <span style="font-weight: bold;font-size: 20px !important;">Licenses Pompier</span>
-                        </div>
-                        <div class="panel-wrapper collapse in" aria-expanded="true">
-                            <div class="panel-body">
-                                <table class="table table-striped table-responsive">
+                    <div class="panel-heading">
+                        <span style="font-weight: bold;font-size: 20px !important;">Licenses Pompier</span>
+                    </div>
+                    <div class="panel-wrapper collapse in" aria-expanded="true">
+                        <div class="panel-body">
+                            <table class="table table-striped table-responsive">
+                                <tr>
+                                    <th>Nom</th>
+                                    <th>Status</th>
+                                </tr>
+                                <?php
+                                $suppr = array("\"", "`", "[", "]");
+                                $lineLicenses = str_replace($suppr, "", $player->med_licenses);
+                                $arrayLicenses = preg_split("/,/", $lineLicenses);
+                                $totarrayLicenses = count($arrayLicenses);
+                                $y = 0;
+                                $n = 0;
+                                ?>
+                                @for($i = 1; $y < $totarrayLicenses; $i++)
                                     <tr>
-                                        <th>Nom</th>
-                                        <th>Status</th>
+                                        <td>{{ $arrayLicenses[$y] }}</td>
+                                        <td>
+                                            @if($arrayLicenses[$i] == 1)
+                                                <i class="fa fa-check" style="color: #2cc36b;"></i>
+                                            @else
+                                                <i class="fa fa-close" style="color: #c0392b;"></i>
+                                            @endif
+                                        </td>
                                     </tr>
-                                    <?php
-                                    $suppr = array("\"", "`", "[", "]");
-                                    $lineLicenses = str_replace($suppr, "", $player->med_licenses);
-                                    $arrayLicenses = preg_split("/,/", $lineLicenses);
-                                    $totarrayLicenses = count($arrayLicenses);
-                                    $y = 0;
-                                    $n = 0;
-                                    ?>
-                                    @for($i = 1; $y < $totarrayLicenses; $i++)
-                                        <tr>
-                                            <td>{{ $arrayLicenses[$y] }}</td>
-                                            <td>
-                                                @if($arrayLicenses[$i] == 1)
-                                                    <i class="fa fa-check" style="color: #2cc36b;"></i>
-                                                @else
-                                                    <i class="fa fa-close" style="color: #c0392b;"></i>
-                                                @endif
-                                            </td>
-                                        </tr>
 
-                                        <?php
-                                        $y = $y + 2;
-                                        $i = $i + 1;
-                                        $n = $n + 1;
-                                        ?>
-                                    @endfor
-                                </table>
-                            </div>
+                                    <?php
+                                    $y = $y + 2;
+                                    $i = $i + 1;
+                                    $n = $n + 1;
+                                    ?>
+                                @endfor
+                            </table>
                         </div>
                     </div>
+                </div>
                 @endif
             </div>
 

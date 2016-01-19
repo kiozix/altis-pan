@@ -127,11 +127,11 @@
                                 </span>
                             </div>
                             <div class="media-box-body clearfix">
-                                <small class="text-muted pull-right ml">{!! $achat->created_at !!}</small>
-                                <div class="media-box-heading"><a href="{{ url('admin/paypal') }}" class="text-info m0">{!! $achat->id_shop !!}</a>
+                                <small class="text-muted pull-right ml">{{ $achat->created_at }}</small>
+                                <div class="media-box-heading"><a href="{{ url('admin/paypal') }}" class="text-info m0">{{ $achat->id_shop }}</a>
                                 </div>
                                 <p class="m0">
-                                    <small><a href="{{ url('admin/player/'. $achat->id_arma) }}">{!! $achat->id_user !!}</a></small>
+                                    <small><a href="{{ url('admin/player/'. $achat->id_arma) }}">{{ $achat->id_user }}</a></small>
                                 </p>
                             </div>
                         </div>

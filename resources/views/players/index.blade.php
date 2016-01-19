@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <h1 class="fh5co-page-heading-lead">
-                        {!! $players->name !!}
+                        {{ $players->name }}
                         <span class="fh5co-border"></span>
                     </h1>
                 </div>
@@ -36,8 +36,7 @@
                                         <div class="form-group">
                                             <label class="col-md-4 control-label">Nom</label>
                                             <div class="col-md-8">
-                                                <input class="form-control input-lg" name="name" type="text"
-                                                       value="{!! $players->name !!}" disabled>
+                                                <input class="form-control input-lg" name="name" type="text" value="{{ $players->name }}" disabled>
                                             </div>
                                         </div>
                                     </div>
@@ -48,8 +47,7 @@
                                         <div class="form-group">
                                             <label class="col-md-4 control-label">Rang</label>
                                             <div class="col-md-8">
-                                                <input class="form-control input-lg" name="name" type="text"
-                                                       value="{!! $rank !!}" disabled>
+                                                <input class="form-control input-lg" name="name" type="text" value="{{ $rank }}" disabled>
                                             </div>
                                         </div>
                                     </div>
@@ -83,8 +81,7 @@
                                             <div class="form-group">
                                                 <label class="col-md-4 control-label">Rang Pompier <a type="button" data-toggle="modal" data-target="#pompier">(?)</a></label>
                                                 <div class="col-md-8">
-                                                    <input type="text" class="form-control input-lg"
-                                                           value="{!! $mediclevel !!}" disabled>
+                                                    <input type="text" class="form-control input-lg" value="{{ $mediclevel }}" disabled>
                                                 </div>
                                             </div>
                                         </div>
@@ -96,8 +93,7 @@
                                             <div class="form-group">
                                                 <label class="col-md-4 control-label">Rang Policier <a type="button" data-toggle="modal" data-target="#police">(?)</a></label>
                                                 <div class="col-md-8">
-                                                    <input type="text" class="form-control input-lg"
-                                                           value="{!! $coplevel !!}" disabled>
+                                                    <input type="text" class="form-control input-lg" value="{{ $coplevel }}" disabled>
                                                 </div>
                                             </div>
                                         </div>
@@ -114,7 +110,7 @@
                                                 @else
                                                     <span class="donatorlvl"><i class="fa fa-close"></i> Vous n'êtes pas donateur</span>
                                                     <br>
-                                                    <a href="">Le devenir ?</a>
+                                                    <a href="{{ url('shop/') }}">Le devenir ?</a>
                                                 @endif
                                             </div>
                                         </div>
@@ -147,11 +143,11 @@
                                                         <th>Type</th>
                                                         <th>Active</th>
                                                     </tr>
-                                                    @foreach($vehicles_car as $vehicle_car)
+                                                    @foreach($vehicles_cars as $vehicle_car)
                                                         <tr>
-                                                            <td>{!! $vehicle_car->classname !!}</td>
-                                                            <td>{!! $vehicle_car->side !!}</td>
-                                                            <td>{!! $vehicle_car->type !!}</td>
+                                                            <td>{{ $vehicle_car->classname }}</td>
+                                                            <td>{{ $vehicle_car->side }}</td>
+                                                            <td>{{ $vehicle_car->type }}</td>
                                                             <td>
                                                                 @if($vehicle_car->active == 1)
                                                                     <i class="fa fa-check" style="color: #2cc36b;"></i>
@@ -180,11 +176,11 @@
                                                         <th>Type</th>
                                                         <th>Active</th>
                                                     </tr>
-                                                    @foreach($vehicles_air as $vehicle_air)
+                                                    @foreach($vehicles_airs as $vehicle_air)
                                                         <tr>
-                                                            <td>{!! $vehicle_air->classname !!}</td>
-                                                            <td>{!! $vehicle_air->side !!}</td>
-                                                            <td>{!! $vehicle_air->type !!}</td>
+                                                            <td>{{ $vehicle_air->classname }}</td>
+                                                            <td>{{ $vehicle_air->side }}</td>
+                                                            <td>{{ $vehicle_air->type }}</td>
                                                             <td>
                                                                 @if($vehicle_air->active == 1)
                                                                     <i class="fa fa-check" style="color: #2cc36b;"></i>
@@ -213,11 +209,11 @@
                                                         <th>Type</th>
                                                         <th>Active</th>
                                                     </tr>
-                                                    @foreach($vehicles_ship as $vehicle_ship)
+                                                    @foreach($vehicles_ships as $vehicle_ship)
                                                         <tr>
-                                                            <td>{!! $vehicle_ship->classname !!}</td>
-                                                            <td>{!! $vehicle_ship->side !!}</td>
-                                                            <td>{!! $vehicle_ship->type !!}</td>
+                                                            <td>{{ $vehicle_ship->classname }}</td>
+                                                            <td>{{ $vehicle_ship->side }}</td>
+                                                            <td>{{ $vehicle_ship->type }}</td>
                                                             <td>
                                                                 @if($vehicle_ship->active == 1)
                                                                     <i class="fa fa-check" style="color: #2cc36b;"></i>
@@ -300,7 +296,7 @@
 
                                     <h4>Membres</h4>
 
-                                    <pre>{!! $gang->members !!}</pre>
+                                    <pre>{{ $gang->members }}</pre>
                                 </div>
                             </div>
                         </div>

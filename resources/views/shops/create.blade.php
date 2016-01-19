@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <h1 class="fh5co-page-heading-lead">
-                        Ajouter une offre VIP
+                        Ajouter une offre à la boutique
                         <span class="fh5co-border"></span>
                     </h1>
                 </div>

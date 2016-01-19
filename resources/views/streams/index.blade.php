@@ -44,7 +44,7 @@
                                 @endif
 
                             <div class="col-md-12">
-                                <p class="stream-text">{!!  $stream->content !!}</p>
+                                <p class="stream-text">{{ $stream->content }}}</p>
                             </div>
                         </div>
                     @endforeach

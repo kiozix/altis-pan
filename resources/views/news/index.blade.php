@@ -34,9 +34,9 @@
                     <a href="{{ url("/news/$new->slug ")}}">
                         <div class="fh5co-post-media"><img src="{{ asset('img/news.png') }}" alt="News"></div>
                         <div class="fh5co-post-blurb">
-                            <h3 class="text-uppercase">{!! $new->name !!}</h3>
+                            <h3 class="text-uppercase">{{ $new->name }}</h3>
                             {!! $new->content !!}
-                            <span class="fh5co-post-meta">{{  $new->updated_at }}</span>
+                            <span class="fh5co-post-meta">{{ $new->updated_at }}</span>
                         </div>
                     </a>
                 </div>

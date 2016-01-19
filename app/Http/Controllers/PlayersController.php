@@ -29,9 +29,9 @@ class PlayersController extends Controller {
 		$players = DB::table('players')->where('playerid', $auth->user()->arma)->first();
 		$gang = DB::table('gangs')->where('owner', $auth->user()->arma)->first();
 
-		$vehicles_car = DB::table('vehicles')->where('pid', $auth->user()->arma)->where('type', 'Car')->get();
-		$vehicles_air = DB::table('vehicles')->where('pid', $auth->user()->arma)->where('type', 'Air')->get();
-		$vehicles_ship = DB::table('vehicles')->where('pid', $auth->user()->arma)->where('type', 'Ship')->get();
+		$vehicles_cars = DB::table('vehicles')->where('pid', $auth->user()->arma)->where('type', 'Car')->get();
+		$vehicles_airs = DB::table('vehicles')->where('pid', $auth->user()->arma)->where('type', 'Air')->get();
+		$vehicles_ships = DB::table('vehicles')->where('pid', $auth->user()->arma)->where('type', 'Ship')->get();
 
 		// dd($gang);
 
@@ -95,7 +95,7 @@ class PlayersController extends Controller {
 				break;
 		}
 
-		return view('players.index', compact('players', 'mediclevel', 'coplevel', 'rank', 'gang', 'vehicles_car', 'vehicles_air', 'vehicles_ship'));
+		return view('players.index', compact('players', 'mediclevel', 'coplevel', 'rank', 'gang', 'vehicles_cars', 'vehicles_airs', 'vehicles_ships'));
 	}
 
 
@@ -127,69 +127,7 @@ class PlayersController extends Controller {
 	 */
 	public function show($id)
 	{
-		$players = DB::table('players')->where('playerid', $id)->first();
 
-		switch ($players->coplevel) {
-			case 1:
-				$coplevel = env('POLICE_GRADE_1');
-				break;
-			case 2:
-				$coplevel = env('POLICE_GRADE_2');
-				break;
-			case 3:
-				$coplevel = env('POLICE_GRADE_3');
-				break;
-			case 4:
-				$coplevel = env('POLICE_GRADE_4');
-				break;
-			case 5:
-				$coplevel = env('POLICE_GRADE_5');
-				break;
-			case 6:
-				$coplevel = env('POLICE_GRADE_6');
-				break;
-			case 7:
-				$coplevel = env('POLICE_GRADE_7');
-				break;
-			case 8:
-				$coplevel = env('POLICE_GRADE_8');
-				break;
-		}
-
-		switch ($players->mediclevel) {
-			case 1:
-				$mediclevel = env('POMPIER_GRADE_1');
-				break;
-			case 2:
-				$mediclevel = env('POMPIER_GRADE_2');
-				break;
-			case 3:
-				$mediclevel = env('POMPIER_GRADE_3');
-				break;
-			case 4:
-				$mediclevel = env('POMPIER_GRADE_4');
-				break;
-			case 5:
-				$mediclevel = env('POMPIER_GRADE_5');
-				break;
-		}
-
-		switch($players->adminlevel){
-			case 0:
-				$rank = env('ADMIN_GRADE_0');
-				break;
-			case 1:
-				$rank = env('ADMIN_GRADE_1');
-				break;
-			case 2:
-				$rank = env('ADMIN_GRADE_2');
-				break;
-			case 3:
-				$rank = env('ADMIN_GRADE_3');
-				break;
-		}
-
-		return view('players.show', compact('players', 'mediclevel', 'coplevel', 'rank', 'vehicles'));
 	}
 
 	/**
