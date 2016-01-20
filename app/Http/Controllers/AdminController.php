@@ -15,8 +15,8 @@ class AdminController extends Controller {
 	private $auth;
 
 	public function __construct(Guard $auth){
-		// $this->middleware('auth');
-		// $this->middleware('admin');
+		$this->middleware('auth');
+		$this->middleware('admin');
 		$this->auth = $auth;
 	}
 
@@ -233,9 +233,6 @@ class AdminController extends Controller {
 			$pid = $request->get("pid");
 			$id = $request->get("id");
 
-
-			dd($status, $pid, $id);
-
 			// Tests
 			if (is_numeric($status) == false || is_numeric($pid) == false) {
 				echo "2;not a number !";
@@ -265,23 +262,23 @@ class AdminController extends Controller {
 
 				// Début
 				if ($n == $id && $y == 0) {
-					$fdp_arma[] = "\"[[`" . $arrayLicenses[$y] . "`," . $status . "],";
+					$licenses_arma[] = "\"[[`" . $arrayLicenses[$y] . "`," . $status . "],";
 				} elseif ($n == 0 && $id !== $n) {
-					$fdp_arma[] = "\"[[`" . $arrayLicenses[$y] . "`," . $arrayLicenses[$i] . "],";
+					$licenses_arma[] = "\"[[`" . $arrayLicenses[$y] . "`," . $arrayLicenses[$i] . "],";
 				}
 
 				// Millieux
 				if ($n == $id && $n !== 0 && $y !== ($totarrayLicenses - 2)) {
-					$fdp_arma[] = "[`" . $arrayLicenses[$y] . "`," . $status . "],";
+					$licenses_arma[] = "[`" . $arrayLicenses[$y] . "`," . $status . "],";
 				} elseif ($n !== $id && $y !== 0 && $y !== ($totarrayLicenses - 2)) {
-					$fdp_arma[] = "[`" . $arrayLicenses[$y] . "`," . $arrayLicenses[$i] . "],";
+					$licenses_arma[] = "[`" . $arrayLicenses[$y] . "`," . $arrayLicenses[$i] . "],";
 				}
 
 				// Fin
 				if ($n == $id && $y == ($totarrayLicenses - 2)) {
-					$fdp_arma[] = "[`" . $arrayLicenses[$y] . "`," . $status . "]]\"";
+					$licenses_arma[] = "[`" . $arrayLicenses[$y] . "`," . $status . "]]\"";
 				} elseif ($n !== $id && $y == ($totarrayLicenses - 2)) {
-					$fdp_arma[] = "[`" . $arrayLicenses[$y] . "`," . $arrayLicenses[$i] . "]]\"";
+					$licenses_arma[] = "[`" . $arrayLicenses[$y] . "`," . $arrayLicenses[$i] . "]]\"";
 				}
 
 				// Pair
@@ -293,7 +290,7 @@ class AdminController extends Controller {
 			}
 			// transformation de l'array en chaîne
 			// die('implode');
-			$civ_licenses = implode($fdp_arma);
+			$civ_licenses = implode($licenses_arma);
 
 			// var_dump($civ_licenses);die();
 			// Maj

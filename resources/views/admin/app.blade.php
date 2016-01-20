@@ -168,7 +168,7 @@
 
 <script src="{{ asset('/vendor/modernizr/modernizr.custom.js') }}"></script>
 <script src="{{ asset('/vendor/matchMedia/matchMedia.js') }}"></script>
-<script src="{{ asset('/vendor/jquery/dist/jquery.js') }}"></script>
+<script src="{{ asset('/js/jquery.min.js') }}"></script>
 <script src="{{ asset('/vendor/bootstrap/dist/js/bootstrap.js') }}"></script>
 <script src="{{ asset('/vendor/jQuery-Storage-API/jquery.storageapi.js') }}"></script>
 <script src="{{ asset('/vendor/jquery.easing/js/jquery.easing.js') }}"></script>
