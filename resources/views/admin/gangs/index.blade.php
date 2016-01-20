@@ -1,14 +1,14 @@
 @extends('admin.app')
 
 @section('page-info')
-    <h3>Joueurs</h3>
+    <h3>Gang</h3>
 @endsection
 
 @section('content')
     <div class="container-fluid">
         <div class="row">
-            <div id="list_players" class="panel panel-default">
-                <div class="panel-heading">Joueurs
+            <div id="panelDemo1" class="panel panel-default">
+                <div class="panel-heading">Gangs
                     <a href="#" data-tool="panel-collapse" data-toggle="tooltip" title="" class="pull-right">
                         <em class="fa fa-minus"></em>
                     </a>
@@ -17,22 +17,22 @@
                     <div class="panel-body">
                         <table class="table table-responsive table-striped">
                             <tr>
-                                <th>Nom du joueur</th>
-                                <th>ID Arma</th>
+                                <th>Nom</th>
+                                <th>Fondateur</th>
                                 <th>Argent</th>
                             </tr>
-                            @foreach($players as $player)
+                            @foreach($gangs as $gang)
                                 <tr>
-                                    <td><a href="{{ route('player', ['id' => $player->playerid]) }}">{{ $player->name }}</a></td>
-                                    <td>{{ $player->playerid }}</td>
+                                    <td><a href="{{ url('admin/gang/'. $gang->id) }}">{{ $gang->name }}</a></td>
+                                    <td><a href="{{ route('player', ['id' => $gang->owner]) }}">{{ $gang->owner }}</a></td>
                                     <td>
                                         <?php
-                                            $money = $player->cash + $player->bankacc;
+                                            $money = $gang->bank;
 
-                                            if ($money < 500000) {
+                                            if ($money < 25000) {
                                                 $argent = number_format($money, 2, ',', ' ');
                                                 echo "<span class='label label-success'>". $argent ." $</span>";
-                                            } elseif (800000 > $money) {
+                                            } elseif (150000 > $money) {
                                                 $argent = number_format($money, 2, ',', ' ');
                                                 echo "<span class='label label-warning'>". $argent ." $</span>";
                                             } else {
@@ -44,7 +44,7 @@
                                 </tr>
                             @endforeach
                         </table>
-                        {!! $players->render() !!}
+                        {!! $gangs->render() !!}
                     </div>
                 </div>
             </div>

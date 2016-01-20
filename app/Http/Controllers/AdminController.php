@@ -40,7 +40,7 @@ class AdminController extends Controller {
 		return view('admin.players.index', compact('user', 'players'));
 	}
 
-	public function joueur_show($id)
+	public function joueurShow($id)
 	{
 		$user = $this->auth->user();
 
@@ -116,4 +116,112 @@ class AdminController extends Controller {
 		return redirect(url('admin/player/'. $id))->with('success', 'Le joueur à bien été modifié');
 	}
 
+	public function gangs()
+	{
+		$user = $this->auth->user();
+		$gangs = DB::table('gangs')->orderBy('id', 'desc')->paginate(10);
+
+		return view('admin.gangs.index', compact('user', 'gangs'));
+	}
+
+	public function gangShow($id)
+	{
+		$user = $this->auth->user();
+		$allPlayers = DB::table('players')->get();
+		$gang = DB::table('gangs')->where('id', $id)->first();
+
+		$suppr = array("\"", "`", "[", "]");
+		$lineGang = str_replace($suppr, "", $gang->members);
+		$ArrayGang = preg_split("/,/", $lineGang);
+		$gangMembers = array();
+
+		foreach($ArrayGang as $member) {
+			$gangMembers[$member] = DB::table('players')->where('playerid', $member)->first();
+		}
+
+		return view('admin.gangs.show', compact('user', 'gang', 'allPlayers', 'gangMembers'));
+	}
+
+	public function deleteGang(Request $request)
+	{
+		if($request->isMethod('POST')){
+			$userId = $request->get("userId");
+			$groupId = $request->get("groupId");
+
+			$gang = DB::table('gangs')->where('id', $groupId)->first();
+
+			$suppr = array("\"", "`", "[", "]");
+			$lineGang = str_replace($suppr, "", $gang->members);
+			$ArrayGang = preg_split("/,/", $lineGang);
+			$gangMembers = array();
+
+			foreach ($ArrayGang as $member) {
+				$gangMembers[] = $member;
+			}
+			unset($gangMembers[$userId]);
+			$gangMembersString = '"[';
+			$gangList = "";
+			foreach ($gangMembers as $gangMember) {
+				if ($gangMember != $userId) {
+					$gangList .= "`" . $gangMember . "`,";
+				}
+			}
+			$gangList = rtrim($gangList, ",");
+			$gangMembersString .= $gangList;
+			$gangMembersString .= ']"';
+
+			DB::table('gangs')
+				->where('id', $groupId)
+				->update(array(
+					'members' => $gangMembersString,
+				))
+			;
+		}
+		return response()->json(['status' => 'success']);
+	}
+
+	public function addUserGang(Request $request)
+	{
+		if($request->isMethod('POST')){
+			$playerId = $request->get("playerid");
+			$groupId = $request->get("groupId");
+
+			$gang = DB::table('gangs')->where('id', $groupId)->first();
+
+			$suppr = array("\"", "`", "[", "]");
+			$lineGang = str_replace($suppr, "", $gang->members);
+			$ArrayGang = preg_split("/,/", $lineGang);
+			$gangMembers = array();
+
+			if(count($ArrayGang) <= $gang->maxmembers) {
+
+				foreach ($ArrayGang as $member) {
+					$gangMembers[] = $member;
+				}
+
+				$gangMembersString = '"[';
+				$gangList = "";
+				foreach ($gangMembers as $gangMember) {
+					$gangList .= "`" . $gangMember . "`,";
+				}
+				$gangList .= "`" . $playerId . "`,";
+				$gangList = rtrim($gangList, ",");
+				$gangMembersString .= $gangList;
+				$gangMembersString .= ']"';
+
+				// dd($gangMembersString);
+
+				DB::table('gangs')
+					->where('id', $groupId)
+					->update(array(
+						'members' => $gangMembersString,
+					));
+
+				return redirect(url('admin/gang/'. $groupId))->with('success', 'Le joueur à bien rajouté au gang');
+			}else{
+				return redirect(url('admin/gang/'. $groupId))->with('error', 'Vous avez atteint le nombre maximum de membres');
+			}
+
+		}
+	}
 }

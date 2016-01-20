@@ -173,7 +173,7 @@ class PlayersController extends Controller {
 			$gangMembers = array();
 
 			if($auth->user()->arma == $gang->owner) {
-				if(count($gangMembers) > $gang->maxmembers) {
+				if(count($ArrayGang) <= $gang->maxmembers) {
 
 					foreach ($ArrayGang as $member) {
 						$gangMembers[] = $member;

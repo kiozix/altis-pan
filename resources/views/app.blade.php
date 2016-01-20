@@ -198,8 +198,9 @@
 <script src="{{ asset('/js/main.js') }}"></script>
 
 <script src="{{ asset('/js/laravel.js') }}"></script>
-
+<!-- Select 2 -->
 <script src="{{ asset('/js/select2.full.min.js') }}"></script>
+<!-- AltisPan -->
 <script src="{{ asset('/js/altispan.js') }}"></script>
 
 

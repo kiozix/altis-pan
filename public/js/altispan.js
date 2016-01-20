@@ -6,6 +6,7 @@ $(function(){
         var crsfToken = csrfToken;
         var groupName = $(".group-members").data("groupname");
         var userId = user;
+        console.log(deleteUrl, groupId, crsfToken, groupName, userId)
         swal({
             title: "Voulez supprimer l'utilisateur du groupe "+groupName + " ?",
             type: "warning",
@@ -18,6 +19,7 @@ $(function(){
         },
         function(isConfirm){
          if(isConfirm) {
+             console.log('before')
              $.ajax({
                  method: "POST",
                  url: deleteUrl,
@@ -29,7 +31,7 @@ $(function(){
                          swal("Utilisateur bien supprimé du groupe ", null, "success");
 
                  });
-
+             console.log('after')
          }else {
              swal("Annuler", "Le joueur n'a pas été suprimmer", "error");
          }
@@ -39,6 +41,7 @@ $(function(){
 
     $(".group-members").on("click","a.group-userlist",function(event){
         event.preventDefault();
+        console.log('INIT')
         var userId = $(this).data("user");
         var csrfToken = $(this).data("csrf");
         deleteUserGroup(userId, csrfToken);

@@ -26,6 +26,8 @@
     <link rel="stylesheet" href="{{ asset('/vendor/weather-icons/css/weather-icons.min.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/bootstrap.css') }}" id="bscss">
     <link rel="stylesheet" href="{{ asset('/css/app.css') }}" id="maincss">
+    <link rel="stylesheet" href="{{ asset('/css/sweetalert.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/select2.min.css') }}">
 </head>
 
 <body>
@@ -137,6 +139,13 @@
                         </a>
                     </li>
 
+                    <li class="{{ Request::is('admin/gangs/*') ? 'active' : '' }} <?php $path = Route::getCurrentRoute()->getPath(); if (starts_with($path, 'admin/gang')) echo "active"; ?>">
+                        <a title="Jouers" href="{{ url('admin/gangs') }}">
+                            <em class="icon-people"></em>
+                            <span>Gangs</span>
+                        </a>
+                    </li>
+
                     <li class="{{ Request::is('admin/paypal') ? 'active' : '' }}">
                         <a title="PayPal" href="{{ url('admin/paypal') }}">
                             <em class="icon-paypal"></em>
@@ -184,6 +193,9 @@
 <script src="{{ asset('/vendor/moment/min/moment-with-locales.min.js') }}"></script>
 
 <script src="{{ asset('/js/app.js')}}"></script>
+<script src="{{ asset('/js/sweetalert.min.js') }}"></script>
+<script src="{{ asset('/js/select2.full.min.js') }}"></script>
+<script src="{{ asset('/js/altispan.js') }}"></script>
 
 </body>
 

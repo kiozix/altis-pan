@@ -62,7 +62,7 @@
                                     @if($gang)
                                     <tr>
                                         <td>Gang</td>
-                                        <td>{{ $gang->name }}</td>
+                                        <td><a href="{{ route('gang', ['id' => $gang->id ]) }}">{{ $gang->name }}</a></td>
                                     </tr>
                                     @endif
                                     <tr>
