@@ -305,7 +305,7 @@
                     </div>
                     <div class="panel-wrapper collapse in" aria-expanded="true">
                         <div class="panel-body">
-                            <table class="table table-striped table-responsive">
+                            <table class="table table-striped table-responsive licenses" data-callback="{{ route('setLicenses') }}">
                                 <tr>
                                     <th>Nom</th>
                                     <th>Status</th>
@@ -323,9 +323,9 @@
                                         <td>{{ $arrayLicenses[$y] }}</td>
                                         <td>
                                             @if($arrayLicenses[$i] == 1)
-                                                <i class="fa fa-check" style="color: #2cc36b;"></i>
+                                                <a href="#" data-csrf="{{ csrf_token() }}" data-user="{{ $player->playerid }}" data-type="{{ $arrayLicenses[$i] }}" data-id="{{ $n }}" class="licenses-list"><i class="fa fa-check" style="color: #2cc36b;"></i></a>
                                             @else
-                                                <i class="fa fa-close" style="color: #c0392b;"></i>
+                                                <a href="#" data-csrf="{{ csrf_token() }}" data-user="{{ $player->playerid }}" data-type="{{ $arrayLicenses[$i] }}" data-id="{{ $n }}" class="licenses-list"><i class="fa fa-close" style="color: #c0392b;"></i></a>
                                             @endif
                                         </td>
                                     </tr>

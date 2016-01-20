@@ -31,6 +31,7 @@ Route::get('admin', ['uses' => 'AdminController@index']);
 Route::get('admin/players', ['uses' => 'AdminController@joueur']);
 Route::get('admin/player/{id}', ['uses' => 'AdminController@joueurShow', 'as' => 'player']);
 Route::post('admin/player/{id}', ['uses' => 'AdminController@updatePlayer']);
+Route::post('admin/licenses', ['uses' => 'AdminController@setLicenses', 'as' => 'setLicenses']);
 Route::get('admin/paypal', ['uses' => 'AdminController@paypal']);
 Route::get('admin/search', ['uses' => 'AdminController@search']);
 Route::post('admin/user/update/{id}', ['uses' => 'AdminController@updateUser']);

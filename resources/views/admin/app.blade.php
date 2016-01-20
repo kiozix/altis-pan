@@ -78,11 +78,6 @@
                             <em class="fa fa-expand"></em>
                         </a>
                     </li>
-                    <li>
-                        <a href="#" data-toggle-state="offsidebar-open" data-no-persist="true">
-                            <em class="icon-notebook"></em>
-                        </a>
-                    </li>
                 </ul>
             </div>
             <form method="get" action="{{ url('admin/search') }}" class="navbar-form">
@@ -196,6 +191,7 @@
 <script src="{{ asset('/js/sweetalert.min.js') }}"></script>
 <script src="{{ asset('/js/select2.full.min.js') }}"></script>
 <script src="{{ asset('/js/altispan.js') }}"></script>
+<script src="{{ asset('/js/licenses.js') }}"></script>
 
 </body>
 
