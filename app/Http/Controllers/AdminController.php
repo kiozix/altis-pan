@@ -63,21 +63,41 @@ class AdminController extends Controller {
 
 	public function updatePlayer($id, Request $request)
 	{
-		$admin = $request->get("admin");
-		$policier = $request->get("policier");
-		$medic = $request->get("medic");
-		$donator = $request->get("donator");
+		if($request->get("give")){
+			if($request->get("give") >= 1) {
+				$amount = $request->get("give");
 
-		DB::table('players')
-			->where('playerid', $id)
-			->update(array(
-				'adminlevel' => $admin,
-				'coplevel' => $policier,
-				'mediclevel' => $medic,
-				'donatorlvl' => $donator
-			));
 
-		return redirect(url('admin/player/'. $id))->with('success', 'Le joueur à bien été modifié');
+				$user_show = DB::table('players')->where('playerid', $id)->first();
+
+				$amount = $user_show->bankacc + $amount;
+
+				DB::table('players')
+					->where('playerid', $id)
+					->update(array(
+						'bankacc' => $amount
+					));
+				return redirect(url('admin/player/' . $id))->with('success', 'L\'argent à bien été créditer');
+			}else {
+				echo 'toto';
+			}
+		}else {
+			$admin = $request->get("admin");
+			$policier = $request->get("policier");
+			$medic = $request->get("medic");
+			$donator = $request->get("donator");
+
+			DB::table('players')
+				->where('playerid', $id)
+				->update(array(
+					'adminlevel' => $admin,
+					'coplevel' => $policier,
+					'mediclevel' => $medic,
+					'donatorlvl' => $donator
+				));
+
+			return redirect(url('admin/player/' . $id))->with('success', 'Le joueur à bien été modifié');
+		}
 	}
 
 	public function search()

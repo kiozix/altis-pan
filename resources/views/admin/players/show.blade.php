@@ -130,7 +130,9 @@
                                 <hr />
 
                                 <div class="text-right">
-                                    <button type="submit" class="btn btn-success"><i class="fa fa-check"></i></button>
+                                    <button type="submit" class="btn btn-labeled btn-success">
+                                    <span class="btn-label"><i class="fa fa-check"></i></span>Valider
+                                    </button>
                                 </div>
                             </form>
                         </div>
@@ -179,7 +181,9 @@
                                     </table>
                                     <hr />
                                     <div class="text-right">
-                                        <button type="submit" class="btn btn-success"><i class="fa fa-check"></i></button>
+                                        <button type="submit" class="btn btn-labeled btn-success">
+                                            <span class="btn-label"><i class="fa fa-check"></i></span>Valider
+                                        </button>
                                     </div>
                                 </form>
                             </div>
@@ -299,6 +303,32 @@
             </div>
 
             <div class="col-md-6">
+
+                <div id="money" class="panel panel-default">
+                    <div class="panel-heading">
+                        <span style="font-weight: bold;font-size: 20px !important;">Ajouter de l'argent</span>
+                    </div>
+                    <div class="panel-wrapper collapse in" aria-expanded="true">
+                        <div class="panel-body">
+                            <form action="{{url('admin/player/'. $player->playerid)}}" method="post">
+                                <div class="input-group">
+                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                    <input type="number" placeholder="Montant à ajouter" class="form-control" name="give" autocomplete="off">
+                                    <div class="input-group-addon">$</div>
+                                </div>
+
+                                <br>
+                                <div class="text-right">
+                                    <button type="submit" class="btn btn-labeled btn-success">
+                                        <span class="btn-label"><i class="fa fa-check"></i></span>Ajouter
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+
                 <div id="licenses-civ" class="panel panel-default">
                     <div class="panel-heading">
                         <span style="font-weight: bold;font-size: 20px !important;">Licenses Civil</span>
