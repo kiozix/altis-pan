@@ -61,12 +61,12 @@ class AdminController extends Controller {
 
 	}
 
-	public function updatePlayer($id)
+	public function updatePlayer($id, Request $request)
 	{
-		$admin = $_POST['admin'];
-		$policier = $_POST['policier'];
-		$medic = $_POST['medic'];
-		$donator = $_POST['donator'];
+		$admin = $request->get("admin");
+		$policier = $request->get("policier");
+		$medic = $request->get("medic");
+		$donator = $request->get("donator");
 
 		DB::table('players')
 			->where('playerid', $id)
@@ -102,10 +102,10 @@ class AdminController extends Controller {
 		return view('admin.paypal.index', compact('user', 'logs'));
 	}
 
-	public function updateUser($id)
+	public function updateUser($id, Request $request)
 	{
-		$admin = $_POST['rank_website'];
-		$id_user = $_POST['id'];
+		$admin = $request->get("rank_website");
+		$id_user = $request->get('id');
 
 		DB::table('users')
 			->where('id', $id_user)
@@ -232,6 +232,7 @@ class AdminController extends Controller {
 			$status = $request->get("type");
 			$pid = $request->get("pid");
 			$id = $request->get("id");
+			$group = $request->get('group');
 
 			// Tests
 			if (is_numeric($status) == false || is_numeric($pid) == false) {
@@ -245,60 +246,73 @@ class AdminController extends Controller {
 			} else {
 				$status = $status - 1;
 			}
+
 			// MAJ BDD
 			$rows = DB::table('players')->where('playerid', $pid)->first();
 
+			if($group == 'civ'){
+				$table = $rows->civ_licenses;
+				$line = 'civ_licenses';
+			}elseif($group == 'cop') {
+				$table = $rows->cop_licenses;
+				$line = 'cop_licenses';
+			}elseif($group == 'med'){
+				$table = $rows->med_licenses;
+				$line = 'med_licenses';
+			}
+
 			// Gestion du parse
 			$suppr = array("\"", "`", "[", "]");
-			$lineLicenses = str_replace($suppr, "", $rows->civ_licenses);
+			$lineLicenses = str_replace($suppr, "", $table);
 			$arrayLicenses = preg_split("/,/", $lineLicenses);
 			$totarrayLicenses = count($arrayLicenses);
 			$y = 0;
 			$n = 0;
 
-			// test
-			for ($i = 1; $y < $totarrayLicenses; $i++) {
-				// Reconstruction du contenu de civ_licenses pour Arma
+			if($totarrayLicenses == 2) {
+				$licenses = "[[\"$arrayLicenses[0],$status]]";
+			}else {
+				for ($i = 1; $y < $totarrayLicenses; $i++) {
+					// Reconstruction du contenu de civ_licenses pour Arma
 
-				// Début
-				if ($n == $id && $y == 0) {
-					$licenses_arma[] = "\"[[`" . $arrayLicenses[$y] . "`," . $status . "],";
-				} elseif ($n == 0 && $id !== $n) {
-					$licenses_arma[] = "\"[[`" . $arrayLicenses[$y] . "`," . $arrayLicenses[$i] . "],";
+					// Début
+					if ($n == $id && $y == 0) {
+						$licenses_arma[] = "\"[[`" . $arrayLicenses[$y] . "`," . $status . "],";
+					} elseif ($n == 0 && $id !== $n) {
+						$licenses_arma[] = "\"[[`" . $arrayLicenses[$y] . "`," . $arrayLicenses[$i] . "],";
+					}
+
+					// Millieux
+					if ($n == $id && $n !== 0 && $y !== ($totarrayLicenses - 2)) {
+						$licenses_arma[] = "[`" . $arrayLicenses[$y] . "`," . $status . "],";
+					} elseif ($n !== $id && $y !== 0 && $y !== ($totarrayLicenses - 2)) {
+						$licenses_arma[] = "[`" . $arrayLicenses[$y] . "`," . $arrayLicenses[$i] . "],";
+					}
+
+					// Fin
+					if ($n == $id && $y == ($totarrayLicenses - 2)) {
+						$licenses_arma[] = "[`" . $arrayLicenses[$y] . "`," . $status . "]]\"";
+					} elseif ($n !== $id && $y == ($totarrayLicenses - 2)) {
+						$licenses_arma[] = "[`" . $arrayLicenses[$y] . "`," . $arrayLicenses[$i] . "]]\"";
+					}
+
+					// Pair
+					$y = $y + 2;
+					// Impair
+					$i = $i + 1;
+					// Normal
+					$n = $n + 1;
 				}
-
-				// Millieux
-				if ($n == $id && $n !== 0 && $y !== ($totarrayLicenses - 2)) {
-					$licenses_arma[] = "[`" . $arrayLicenses[$y] . "`," . $status . "],";
-				} elseif ($n !== $id && $y !== 0 && $y !== ($totarrayLicenses - 2)) {
-					$licenses_arma[] = "[`" . $arrayLicenses[$y] . "`," . $arrayLicenses[$i] . "],";
-				}
-
-				// Fin
-				if ($n == $id && $y == ($totarrayLicenses - 2)) {
-					$licenses_arma[] = "[`" . $arrayLicenses[$y] . "`," . $status . "]]\"";
-				} elseif ($n !== $id && $y == ($totarrayLicenses - 2)) {
-					$licenses_arma[] = "[`" . $arrayLicenses[$y] . "`," . $arrayLicenses[$i] . "]]\"";
-				}
-
-				// Pair
-				$y = $y + 2;
-				// Impair
-				$i = $i + 1;
-				// Normal
-				$n = $n + 1;
+				// transformation de l'array en chaîne
+				$licenses = implode($licenses_arma);
 			}
-			// transformation de l'array en chaîne
-			// die('implode');
-			$civ_licenses = implode($licenses_arma);
-
-			// var_dump($civ_licenses);die();
 			// Maj
 			DB::table('players')
 				->where('playerid', $pid)
 				->update(array(
-					'civ_licenses' => $civ_licenses,
+					$line => $licenses,
 				));
+
 
 			// Retour
 			if ($status == 0) {

@@ -25,7 +25,6 @@ class ShopsRequest extends Request {
 			"name" => "required|min:2",
 			"content" => "required|min:10",
 			"price" => "required|min:1|numeric",
-			"time" => "required|min:1|numeric",
 			"image" => "required|min:5|url"
 		];
 	}

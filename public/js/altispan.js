@@ -25,7 +25,6 @@ $(function(){
                  data: { groupId: groupId, userId: userId, _token: crsfToken }
                  })
                  .done(function(data){
-                     console.log("aaa")
                          $(".group-members a.group-userlist[data-user='" + user + "']").parent().parent().remove();
                          swal("Utilisateur bien supprimé du groupe ", null, "success");
 

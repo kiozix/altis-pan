@@ -1,15 +1,16 @@
 $(function () {
-    var setLicenses = function (userId, csrfToken, type, id) {
+    var setLicenses = function (userId, csrfToken, type, id, group) {
         var updateUrl = $(".licenses").data("callback");
         var csrfToken = csrfToken;
         var userId = userId;
         var type = type;
         var id = id;
+        var group = group
 
         $.ajax({
             type: "POST",
             url: updateUrl,
-            data: {type: type, pid:userId, id:id, _token:csrfToken},
+            data: {type: type, pid:userId, id:id, _token:csrfToken, group:group},
             success: function (msg) {
                 // Récupération des données du echo dans un tableau
                 var res = msg.split(";");
@@ -35,6 +36,7 @@ $(function () {
         var csrfToken = $(this).data("csrf");
         var type = $(this).data("type");
         var id = $(this).data("id");
-        setLicenses(userId, csrfToken, type, id);
+        var group = $(this).data("group");
+        setLicenses(userId, csrfToken, type, id, group);
     });
 });
