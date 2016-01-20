@@ -17,6 +17,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
+                @include('flash')
                 <div class="tabbable ">
                     <ul class="nav nav-tabs">
                         <li class=""><a href="#a" data-toggle="tab">Informations</a></li>
@@ -301,6 +302,7 @@
                                             <th>Nom du joueur</th>
                                             <th>Actions</th>
                                         </tr>
+
                                         <tr>
                                             <form action="{{ route('addPlayerGang') }}" method="post">
                                                 <td>
@@ -315,6 +317,7 @@
                                                 <td><button type="submit" class="btn btn-success gang-button"><i class="fa fa-check"></i></button></td>
                                             </form>
                                         </tr>
+
                                         @foreach($gangMembers as $member)
                                             <tr>
                                                 <td><a href="#">{{ $member->name }}</a></td>

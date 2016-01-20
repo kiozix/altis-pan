@@ -40,9 +40,7 @@ class PlayersController extends Controller {
 
 		foreach($ArrayGang as $member) {
 			$gangMembers[$member] = DB::table('players')->where('playerid', $member)->first();
-			// var_dump($gangMembers);die();
 		}
-		// dd($ArrayGang, $gangMembers);
 
 		$vehicles_cars = DB::table('vehicles')->where('pid', $auth->user()->arma)->where('type', 'Car')->get();
 		$vehicles_airs = DB::table('vehicles')->where('pid', $auth->user()->arma)->where('type', 'Air')->get();
@@ -111,6 +109,11 @@ class PlayersController extends Controller {
 		return view('players.index', compact('allPlayers', 'players', 'mediclevel', 'coplevel', 'rank', 'gang', 'vehicles_cars', 'vehicles_airs', 'vehicles_ships', 'gangMembers'));
 	}
 
+	/**
+	 * @param Request $request
+	 * @param Guard $auth
+	 * @return mixed
+     */
 	public function deleteGang(Request $request, Guard $auth)
 	{
 		if($request->isMethod('POST')){
@@ -151,6 +154,11 @@ class PlayersController extends Controller {
 		return response()->json(['status' => 'success']);
 	}
 
+	/**
+	 * @param Request $request
+	 * @param Guard $auth
+	 * @return \Illuminate\Http\RedirectResponse
+     */
 	public function addUserGang(Request $request, Guard $auth)
 	{
 		if($request->isMethod('POST')){
@@ -159,35 +167,38 @@ class PlayersController extends Controller {
 
 			$gang = DB::table('gangs')->where('id', $groupId)->first();
 
+			$suppr = array("\"", "`", "[", "]");
+			$lineGang = str_replace($suppr, "", $gang->members);
+			$ArrayGang = preg_split("/,/", $lineGang);
+			$gangMembers = array();
+
 			if($auth->user()->arma == $gang->owner) {
+				if(count($gangMembers) > $gang->maxmembers) {
 
-				$suppr = array("\"", "`", "[", "]");
-				$lineGang = str_replace($suppr, "", $gang->members);
-				$ArrayGang = preg_split("/,/", $lineGang);
-				$gangMembers = array();
+					foreach ($ArrayGang as $member) {
+						$gangMembers[] = $member;
+					}
 
-				foreach ($ArrayGang as $member) {
-					$gangMembers[] = $member;
+					$gangMembersString = '"[';
+					$gangList = "";
+					foreach ($gangMembers as $gangMember) {
+						$gangList .= "`" . $gangMember . "`,";
+					}
+					$gangList .= "`" . $playerId . "`,";
+					$gangList = rtrim($gangList, ",");
+					$gangMembersString .= $gangList;
+					$gangMembersString .= ']"';
+
+					DB::table('gangs')
+						->where('id', $groupId)
+						->update(array(
+							'members' => $gangMembersString,
+						));
+
+					return redirect(url('player'))->with('success', 'Le joueur à bien rajouté au gang');
+				}else{
+					return redirect(url('player'))->with('error', 'Vous avez atteint le nombre maximum de membres');
 				}
-
-				$gangMembersString = '"[';
-				$gangList = "";
-				foreach ($gangMembers as $gangMember) {
-					$gangList .= "`" . $gangMember . "`,";
-				}
-				$gangList.= "`" . $playerId . "`,";
-				$gangList = rtrim($gangList, ",");
-				$gangMembersString .= $gangList;
-				$gangMembersString .= ']"';
-
-				DB::table('gangs')
-					->where('id', $groupId)
-					->update(array(
-						'members' => $gangMembersString,
-					))
-				;
-
-				return redirect(url('player'))->with('success', 'Le joueur à bien rajouté au gang');
 			}else {
 				return Response::view('errors.403', array(), 403);
 			}
