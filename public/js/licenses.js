@@ -5,11 +5,6 @@ $(function () {
         var userId = userId;
         var type = type;
         var id = id;
-        console.log('Update URL : '+updateUrl)
-        console.log('csrfToken : '+csrfToken)
-        console.log('userId : '+userId)
-        console.log('type : '+type)
-        console.log('id : '+id)
 
         $.ajax({
             type: "POST",
@@ -31,13 +26,11 @@ $(function () {
                 }
             }
         });
-        console.log('FIN')
         return false;
     }
 
     $(".licenses").on("click","a.licenses-list",function(event){
         event.preventDefault();
-        console.log('INIT')
         var userId = $(this).data("user");
         var csrfToken = $(this).data("csrf");
         var type = $(this).data("type");
