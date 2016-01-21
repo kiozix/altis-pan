@@ -9,15 +9,13 @@ use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Routing\ResponseFactory;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Response;
-
+use App\Refund;
 class PlayersController extends Controller {
 
 	public function __construct()
 	{
 		$this->middleware('auth');
 		$this->middleware('arma');
-
-		$this->middleware('admin', ['except' => ['index', 'show']]);
 	}
 
 	/**
@@ -30,6 +28,7 @@ class PlayersController extends Controller {
 	{
 		$players = DB::table('players')->where('playerid', $auth->user()->arma)->first();
 		$allPlayers = DB::table('players')->get();
+		$refunds = DB::table('refunds')->where('playerid', $auth->user()->arma)->orderBy('id', 'desc')->get();
 
 		$gang = DB::table('gangs')->where('owner', $auth->user()->arma)->first();
 
@@ -106,7 +105,40 @@ class PlayersController extends Controller {
 				break;
 		}
 
-		return view('players.index', compact('allPlayers', 'players', 'mediclevel', 'coplevel', 'rank', 'gang', 'vehicles_cars', 'vehicles_airs', 'vehicles_ships', 'gangMembers'));
+		return view('players.index', compact('refunds', 'allPlayers', 'players', 'mediclevel', 'coplevel', 'rank', 'gang', 'vehicles_cars', 'vehicles_airs', 'vehicles_ships', 'gangMembers'));
+	}
+
+	public function refundsView(){
+		return view('players.refunds');
+	}
+
+	public function refunds(Request $request, Guard $auth){
+
+		$this->validate($request, [
+			'g-recaptcha-response' => 'required',
+			'amount' => 'required|min:1|numeric',
+			'content' => 'required|min:10'
+		]);
+
+		$amount = $request->get('amount');
+		$content = $request->get('content');
+
+		if(DB::table('refunds')->where('playerid', $auth->user()->arma)->where('status', 0)->first()) {
+			return redirect(action('PlayersController@index'))->with('error', 'Vous avez déjà une demande de remboursement en attente');
+		}
+
+		$player = DB::table('players')->where('playerid', $auth->user()->arma)->first();
+
+		$refunds = New Refund();
+		$refunds->playerid = $auth->user()->arma;
+		$refunds->name = $player->name;
+		$refunds->amount = $amount;
+		$refunds->content = $content;
+		$refunds->status = 0;
+		$refunds->save();
+
+		return redirect(action('PlayersController@index'))->with('success', 'La demande de remboursement à bien été envoyer');
+
 	}
 
 	/**
@@ -203,70 +235,6 @@ class PlayersController extends Controller {
 				return Response::view('errors.403', array(), 403);
 			}
 		}
-	}
-
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		//
-	}
-
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
-	public function store()
-	{
-		//
-	}
-
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-
-	}
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
-
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
-	}
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
 	}
 
 }

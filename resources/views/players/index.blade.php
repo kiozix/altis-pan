@@ -20,13 +20,14 @@
                 @include('flash')
                 <div class="tabbable ">
                     <ul class="nav nav-tabs">
-                        <li class=""><a href="#a" data-toggle="tab">Informations</a></li>
+                        <li class="active"><a href="#a" data-toggle="tab">Informations</a></li>
                         <li><a href="#b" data-toggle="tab">Véhicules</a></li>
                         <li><a href="#d" data-toggle="tab">Licences</a></li>
-                    @if($gang)<li class="active"><a href="#c" data-toggle="tab">Gangs</a></li>@endif
+                    @if($gang)<li><a href="#c" data-toggle="tab">Gangs</a></li>@endif
+                    <li><a href="#e" data-toggle="tab">Demande de remboursement</a></li>
                     </ul>
                     <div class="tab-content">
-                        <div class="tab-pane " id="a">
+                        <div class="tab-pane active" id="a">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h3 class="panel-title">Votre personnage :</h3>
@@ -238,7 +239,6 @@
                                     <h3 class="panel-title">Vos Licences</h3>
                                 </div>
                                 <div class="panel-body">
-
                                     <table class="table table-striped table-responsive">
                                         <tr>
                                             <th>Nom</th>
@@ -276,14 +276,13 @@
                                         ?>
 
                                     </table>
-
-
                                 </div>
                             </div>
                         </div>
 
                         @if($gang)
-                        <div class="tab-pane active" id="c">
+                        <div class="tab-pane" id="c">
+                            <!-- TODO: si la ligne 286 contient la class active "select2" ne bug pas-->
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h3 class="panel-title">Votre Gang : {{ $gang->name }}</h3>
@@ -304,7 +303,7 @@
                                         </tr>
 
                                         <tr>
-                                            <form action="{{ route('addPlayerGang') }}" method="post">
+                                            <form action="{{ route('addPlayerGang') }}" method="post" class="form-horizontal">
                                                 <td>
                                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                     <input type="hidden" name="groupId" value="{{ $gang->id }}">
@@ -332,6 +331,45 @@
                             </div>
                         </div>
                         @endif
+
+                        <div class="tab-pane" id="e">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Demande de remboursement :</h3>
+                                    <a href="{{ url('remboursement') }}" data-tool="panel-collapse">
+                                        <em class="fa fa-plus"></em>
+                                    </a>
+                                </div>
+                                <div class="panel-body">
+                                    <table class="table table-responsive table-striped">
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Montant</th>
+                                            <th>Dernière action</th>
+                                            <th>Status</th>
+                                        </tr>
+                                        @foreach($refunds as $refund)
+                                            <tr>
+                                                <td>{{ $refund->id }}</td>
+                                                <td>{{ number_format($refund->amount, 2, ',', ' ') . ' $' }}</td>
+                                                <td>{{ $refund->updated_at }}</td>
+                                                <td><?php
+                                                    if($refund->status == 0){
+                                                        echo '<span class="label label-warning">En cours de validation</span>';
+                                                    }elseif($refund->status == 1){
+                                                        echo '<span class="label label-danger">Refusé</span>';
+                                                    }elseif($refund->status == 2){
+                                                        echo '<span class="label label-success">Effectué</span>';
+                                                    }
+                                                    ?>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -339,5 +377,5 @@
     </div>
     @include('players.modal')
 
-
+    <script src="{{ asset('/js/ckeditor/ckeditor.js') }}"></script>
 @endsection

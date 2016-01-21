@@ -194,6 +194,7 @@ class AdminController extends Controller {
 		return view('admin.gangs.index', compact('user', 'gangs'));
 	}
 
+
 	public function gangShow($id)
 	{
 		$user = $this->auth->user();
@@ -395,4 +396,57 @@ class AdminController extends Controller {
 
 		}
 	}
+
+	public function refunds()
+	{
+		$user = $this->auth->user();
+		$refunds = DB::table('refunds')->orderBy('id', 'desc')->paginate(10);
+
+		return view('admin.refunds.index', compact('user', 'refunds'));
+	}
+
+	public function refundsShow($id)
+	{
+		$user = $this->auth->user();
+		$refund = DB::table('refunds')->where('id', $id)->first();
+
+
+		return view('admin.refunds.show', compact('user', 'refund'));
+	}
+
+	public function refundsUpdate($id, Request $request)
+	{
+		$user = $this->auth->user();
+		$refund = DB::table('refunds')->where('id', $id)->first();
+		$player = DB::table('players')->where('playerid', $refund->playerid)->first();
+
+		if($request->get('status') == 2){
+			$amount = $player->bankacc + $refund->amount;
+
+			DB::table('players')
+				->where('playerid', $refund->playerid)
+				->update(array(
+					'bankacc' => $amount,
+				));
+
+			DB::table('refunds')
+				->where('id', $id)
+				->update(array(
+					'status' => 2,
+				));
+
+			return redirect(url('admin/remboursements/'))->with('success', 'Remboursement effectué');
+
+		}elseif($request->get('status') == 1){
+			DB::table('refunds')
+				->where('id', $id)
+				->update(array(
+					'status' => 1,
+				));
+			return redirect(url('admin/remboursements/'))->with('error', 'Remboursement refusé');
+		}
+
+		return view('admin.refunds.show', compact('user', 'refund'));
+	}
+
 }

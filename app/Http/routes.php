@@ -20,6 +20,8 @@ Route::post('profil', ['uses' => 'UsersController@update']);
 Route::resource('stream', 'StreamsController');
 Route::resource('news', 'NewsController');
 Route::resource('player', 'PlayersController');
+Route::post('player', ['uses' => 'PlayersController@refunds']);
+Route::get('remboursement', ['uses' => 'PlayersController@refundsView']);
 Route::post('player/gang/delete', ['uses' => 'PlayersController@deleteGang', 'as' => 'deleteGang']);
 Route::post('player/gang/add', ['uses' => 'PlayersController@addUserGang', 'as' => 'addPlayerGang']);
 
@@ -42,6 +44,9 @@ Route::post('admin/gang/add', ['uses' => 'AdminController@addUserGang', 'as' => 
 Route::get('admin/users', ['uses' => 'AdminController@users']);
 Route::get('admin/user/{id}', ['uses' => 'AdminController@userShow', 'as' => 'user']);
 Route::post('admin/user/{id}', ['uses' => 'AdminController@userUpdate']);
+Route::get('admin/remboursements', ['uses' => 'AdminController@refunds']);
+Route::get('admin/remboursement/{id}', ['uses' => 'AdminController@refundsShow', 'as' => 'refund']);
+Route::post('admin/remboursement/{id}', ['uses' => 'AdminController@refundsUpdate']);
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',

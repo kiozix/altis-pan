@@ -12,7 +12,7 @@
             </div>
             <div class="col-md-6">
                 <div id="informations" class="panel panel-default">
-                    <div class="panel-heading"><span style="font-weight: bold;font-size: 20px !important;">Information</span>
+                    <div class="panel-heading"><span style="font-weight: bold;font-size: 20px !important;">Informations</span>
                         <a href="#" data-tool="panel-collapse" data-toggle="tooltip" title="" class="pull-right">
                             <em class="fa fa-minus"></em>
                         </a>

@@ -148,6 +148,13 @@
                         </a>
                     </li>
 
+                    <li class="{{ Request::is('admin/remboursements/*') ? 'active' : '' }} <?php $path = Route::getCurrentRoute()->getPath(); if (starts_with($path, 'admin/remboursement')) echo "active"; ?>">
+                        <a title="Gangs" href="{{ url('admin/remboursements') }}">
+                            <em class="icon-credit-card"></em>
+                            <span>Remboursements</span>
+                        </a>
+                    </li>
+
                     <li class="{{ Request::is('admin/paypal') ? 'active' : '' }}">
                         <a title="PayPal" href="{{ url('admin/paypal') }}">
                             <em class="icon-paypal"></em>
