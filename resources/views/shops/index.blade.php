@@ -18,8 +18,7 @@
     @else
         @if (Auth::user()->admin == 1)
             <p class="text-right">
-                <a href="{{ action('ShopsController@create') }}" class="btn btn-primary"><i class="fa fa-plus"></i>
-                    Ajouter une offre </a>
+                <a href="{{ action('ShopsController@create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Ajouter une offre </a>
             </p>
         @endif
     @endif
@@ -43,7 +42,7 @@
                       @endif
                     </div>
                     <br />
-                    {{--<img class="img-responsive img-rounded" src="{{ $shop->image }}">--}}
+                    <img class="img-responsive img-rounded" src="{{ $shop->image }}">
                     <br />
                     <p>{{ $shop->content }}</p>
                     <a class="btn btn-outline" href="{{ action('ShopsController@show', $shop) }}">Achetter</a>

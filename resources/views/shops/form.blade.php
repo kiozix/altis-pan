@@ -28,8 +28,7 @@
             </div>
 
             <div class="form-group">
-                <label class="col-md-4 control-label">Durée (Jours)</label>
-
+                <label class="col-md-4 control-label">Durée (Jours) <br><small>0 pour "A vie"</small></label>
                 <div class="col-md-6">
                     {!! Form::text('time', null, ['class' => 'form-control', 'placeholder' => 'Ex : 30']) !!}
                 </div>

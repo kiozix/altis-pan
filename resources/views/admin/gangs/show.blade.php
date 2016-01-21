@@ -53,7 +53,7 @@
                             <table class="table table-responsive group-members" data-group="{{ $gang->id }}" data-groupname="{{ $gang->name }}" data-callback="{{ route('deleteGangAdmin') }}">
                                 <tr>
                                     <th>Nom du joueur</th>
-                                    <th>Actions</th>
+                                    <th>Action</th>
                                 </tr>
 
                                 <tr>

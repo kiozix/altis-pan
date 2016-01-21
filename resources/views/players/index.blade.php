@@ -141,7 +141,7 @@
                                                 <table class="table table-striped table-responsive">
                                                     <tr>
                                                         <th>Nom</th>
-                                                        <th>Coté</th>
+                                                        <th>Emplacement du garage</th>
                                                         <th>Type</th>
                                                         <th>Active</th>
                                                     </tr>
@@ -174,7 +174,7 @@
                                                 <table class="table table-striped table-responsive">
                                                     <tr>
                                                         <th>Nom</th>
-                                                        <th>Coté</th>
+                                                        <th>Emplacement du garage</th>
                                                         <th>Type</th>
                                                         <th>Active</th>
                                                     </tr>
@@ -207,7 +207,7 @@
                                                 <table class="table table-striped table-responsive">
                                                     <tr>
                                                         <th>Nom</th>
-                                                        <th>Coté</th>
+                                                        <th>Emplacement du garage</th>
                                                         <th>Type</th>
                                                         <th>Active</th>
                                                     </tr>
@@ -288,7 +288,7 @@
                                     <h3 class="panel-title">Votre Gang : {{ $gang->name }}</h3>
                                 </div>
                                 <div class="panel-body">
-                                    <h3>Information :</h3>
+                                    <h3>Informations :</h3>
                                     <ul>
                                         <li>Nombres de membres maximum : {{ $gang->maxmembers }}</li>
                                         <li>Compte en banque : {{ number_format($gang->bank, 2, ',', ' ') . ' $' }}</li>

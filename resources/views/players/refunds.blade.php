@@ -18,6 +18,13 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 @include('flash')
+                <div class="alert alert-warning">
+                    Conditions :
+                    <ul>
+                        <li>La descrition doit être complète et au minimum de 10caractères</li>
+                        <li>La description doit ce munir d'un screen ou d'une vidéo</li>
+                    </ul>
+                </div>
                 <form action="{{ url('player')}}" method="post" class="form-horizontal">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <label for="amount">Montant</label>

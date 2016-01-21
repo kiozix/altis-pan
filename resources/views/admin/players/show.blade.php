@@ -208,7 +208,7 @@
                                             <table class="table table-striped table-responsive">
                                                 <tr>
                                                     <th>Nom</th>
-                                                    <th>Coté</th>
+                                                    <th>Emplacement du garage</th>
                                                     <th>Type</th>
                                                     <th>Active</th>
                                                 </tr>
@@ -241,7 +241,7 @@
                                             <table class="table table-striped table-responsive">
                                                 <tr>
                                                     <th>Nom</th>
-                                                    <th>Coté</th>
+                                                    <th>Emplacement du garage</th>
                                                     <th>Type</th>
                                                     <th>Active</th>
                                                 </tr>
@@ -274,7 +274,7 @@
                                             <table class="table table-striped table-responsive">
                                                 <tr>
                                                     <th>Nom</th>
-                                                    <th>Coté</th>
+                                                    <th>Emplacement du garage</th>
                                                     <th>Type</th>
                                                     <th>Active</th>
                                                 </tr>
@@ -331,7 +331,7 @@
 
                 <div id="licenses-civ" class="panel panel-default">
                     <div class="panel-heading">
-                        <span style="font-weight: bold;font-size: 20px !important;">Licenses Civil</span>
+                        <span style="font-weight: bold;font-size: 20px !important;">Licences civiles</span>
                     </div>
                     <div class="panel-wrapper collapse in" aria-expanded="true">
                         <div class="panel-body">
@@ -375,7 +375,7 @@
                 @if($player->coplevel >= 1)
                 <div id="licenses-cop" class="panel panel-default">
                     <div class="panel-heading">
-                        <span style="font-weight: bold;font-size: 20px !important;">Licenses Policier</span>
+                        <span style="font-weight: bold;font-size: 20px !important;">Licences policier</span>
                     </div>
                     <div class="panel-wrapper collapse in" aria-expanded="true">
                         <div class="panel-body">
@@ -419,7 +419,7 @@
                 @if($player->mediclevel >= 1)
                 <div id="licenses-med" class="panel panel-default">
                     <div class="panel-heading">
-                        <span style="font-weight: bold;font-size: 20px !important;">Licenses Pompier</span>
+                        <span style="font-weight: bold;font-size: 20px !important;">Licences pompier</span>
                     </div>
                     <div class="panel-wrapper collapse in" aria-expanded="true">
                         <div class="panel-body">

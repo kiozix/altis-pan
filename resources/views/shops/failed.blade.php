@@ -20,9 +20,9 @@
               <i class="fa fa-circle fa-stack-2x"></i>
               <i class="fa fa-thumbs-down fa-stack-1x fa-inverse"></i>
             </span><br />
-            <div class="alert alert-danger col-md-8 col-md-offset-2" role="alert">Une erreur est survenue, votre transaction a échouée merci de réesayer Si le problème persistecontactez le support.</div>
+            <div class="alert alert-danger col-md-8 col-md-offset-2" role="alert">Une erreur est survenue, votre transaction a échoué merci de réessayer si le problème persiste contactez le support.</div>
             <div class="col-md-12 text-center">
-                <a href="{{ url('/') }}" class="btn btn-outline"><i class="fa fa-home"></i> Retouner à l'accueil</a>
+                <a href="{{ url('/') }}" class="btn btn-outline"><i class="fa fa-home"></i> Retourner à l'accueil</a>
             </div>
         </div>
     </div>
