@@ -26,7 +26,7 @@ class UsersController extends Controller {
 		if(empty($user->arma)) {
 			$this->validate($request, [
 				'name' => "required|unique:users,name,{$user->id}|min:2",
-				'arma' => "required|unique:users,arma,{$user->id}|numeric",
+				'arma' => "required|unique:users,arma,{$user->id}|numeric|min:17",
 				'avatar' => "image"
 			]);
 			$user->update($request->only('name', 'firstname', 'lastname', 'avatar', 'arma'));

@@ -32,13 +32,16 @@ class PlayersController extends Controller {
 
 		$gang = DB::table('gangs')->where('owner', $auth->user()->arma)->first();
 
-		$suppr = array("\"", "`", "[", "]");
-		$lineGang = str_replace($suppr, "", $gang->members);
-		$ArrayGang = preg_split("/,/", $lineGang);
-		$gangMembers = array();
+		if($gang) {
 
-		foreach($ArrayGang as $member) {
-			$gangMembers[$member] = DB::table('players')->where('playerid', $member)->first();
+			$suppr = array("\"", "`", "[", "]");
+			$lineGang = str_replace($suppr, "", $gang->members);
+			$ArrayGang = preg_split("/,/", $lineGang);
+			$gangMembers = array();
+
+			foreach ($ArrayGang as $member) {
+				$gangMembers[$member] = DB::table('players')->where('playerid', $member)->first();
+			}
 		}
 
 		$vehicles_cars = DB::table('vehicles')->where('pid', $auth->user()->arma)->where('type', 'Car')->get();
@@ -105,7 +108,12 @@ class PlayersController extends Controller {
 				break;
 		}
 
-		return view('players.index', compact('refunds', 'allPlayers', 'players', 'mediclevel', 'coplevel', 'rank', 'gang', 'vehicles_cars', 'vehicles_airs', 'vehicles_ships', 'gangMembers'));
+		if($gang) {
+			return view('players.index', compact('refunds', 'allPlayers', 'players', 'mediclevel', 'coplevel', 'rank', 'gang', 'vehicles_cars', 'vehicles_airs', 'vehicles_ships', 'gangMembers'));
+		} else {
+			return view('players.index', compact('refunds', 'players', 'mediclevel', 'coplevel', 'rank', 'gang', 'vehicles_cars', 'vehicles_airs', 'vehicles_ships'));
+
+		}
 	}
 
 	public function refundsView(){

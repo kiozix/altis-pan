@@ -75,6 +75,10 @@ class AuthController extends Controller {
 
 		$user = User::where('name', $request->get('name'))->orWhere('email', $request->get('name'))->first();
 
+		if($user->confirmed != 1){
+			return redirect('/auth/login')->with('error', 'Vous devez confirmer votre compte');
+		}
+
 		if ($user && Hash::check($request->get('password'), $user->password))
 		{
 			$this->auth->login($user, $request->has('remember'));

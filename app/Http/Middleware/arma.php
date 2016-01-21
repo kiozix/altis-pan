@@ -4,6 +4,7 @@ use Closure;
 use Illuminate\Support\Facades\Response;
 use ReflectionMethod;
 use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Support\Facades\DB;
 
 class Arma {
 
@@ -35,6 +36,22 @@ class Arma {
 			else
 			{
 				return redirect('/profil')->with('error', 'Veuillez indiquez votre ID Arma 3');
+			}
+		}
+
+		if ($this->auth->user()->arma)
+		{
+			$players = DB::table('players')->where('playerid', $this->auth->user()->arma)->first();
+
+			if(empty($players)){
+				if ($request->ajax())
+				{
+					return Response::view('errors.401', array(), 401);
+				}
+				else
+				{
+					return redirect('/profil')->with('error', 'L\'ID Arma que vous avez renseigné est invalide, veuillez contacter un support pour effectuer le changement');
+				}
 			}
 		}
 
