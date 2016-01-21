@@ -38,10 +38,10 @@
             <div class="navbar-header">
                 <a href="{{ url('/') }}" class="navbar-brand">
                     <div class="brand-logo">
-                        <img src="{{ asset('/img/logo.png') }}" alt="App Logo" class="img-responsive">
+                        <img src="{{ asset('/img/logo.png') }}" alt="App Logo" class="img-responsive" style="width:120px">
                     </div>
                     <div class="brand-logo-collapsed">
-                        <img src="{{ asset('/img/logo-single.png') }}" alt="App Logo" class="img-responsive">
+                        <img src="{{ asset('/img/logo-single.png') }}" alt="App Logo" class="img-responsive" style="width:40px">
                     </div>
                 </a>
             </div>

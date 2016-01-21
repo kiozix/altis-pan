@@ -46,7 +46,7 @@ class Registrar implements RegistrarContract {
 			'confirmation_token' => $token,
 			'password' => bcrypt($data['password']),
 		]);
-		$this->mailer->send(['text' => 'emails.register'], compact('token', 'user'), function($message) use ($user){
+		$this->mailer->send(['emails.register', 'emails.register-text'], compact('token', 'user'), function($message) use ($user){
 			$message->to($user->email)->subject('Confirmation de votre compte');
 		});
 		return $user;

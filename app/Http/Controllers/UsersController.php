@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class UsersController extends Controller {
 
