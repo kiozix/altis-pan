@@ -103,15 +103,65 @@ class AdminController extends Controller {
 	public function search()
 	{
 		$q = Input::get('q');
-		$user = $this->auth->user();
-
-		if(empty($q)){
+		if (empty($q)) {
 			return view('admin.index', compact('user'))->with('error', 'Le champ de recherche est vide');
 		}
+		$user = $this->auth->user();
 
-		$players = DB::table('players')->where('name', 'LIKE', '%' . $q . '%')->OrWhere('playerid', $q)->paginate(10);
+		if (filter_var($q, FILTER_VALIDATE_EMAIL)) {
+			$user_show = DB::table('users')->where('email', $q)->first();
 
-		return view('admin.players.search', compact('user', 'players', 'q'));
+			return redirect(url('admin/user/' . $user_show->id));
+		}else {
+			$players = DB::table('players')->where('name', 'LIKE', '%' . $q . '%')->OrWhere('playerid', $q)->paginate(10);
+
+			return view('admin.players.search', compact('user', 'players', 'q'));
+		}
+	}
+
+	public function users()
+	{
+		$user = $this->auth->user();
+		$users = DB::table('users')->orderBy('id', 'desc')->paginate(10);
+		return view('admin.users.index', compact('user', 'users'));
+	}
+
+	public function userShow($id)
+	{
+		$user = $this->auth->user();
+		$user_show = DB::table('users')->where('id', $id)->first();
+
+		return view('admin.users.show', compact('user', 'user_show'));
+	}
+
+	public function userUpdate($id, Request $request)
+	{
+		$name = $request->get("username");
+		$firstname = $request->get("firstname");
+		$lastname = $request->get("lastname");
+		$email = $request->get("email");
+		$admin = $request->get("rank_website");
+		$arma = $request->get("arma");
+
+		if(empty($email)){
+			return redirect(url('admin/user/' . $id))->with('error', 'Le champs email est vide !');
+		}else{
+
+			DB::table('users')
+				->where('id', $id)
+				->update(array(
+					'name' => $name,
+					'firstname' => $firstname,
+					'lastname' => $lastname,
+					'email'=> $email,
+					'admin' => $admin,
+					'arma' => $arma
+				));
+
+			return redirect(url('admin/user/' . $id))->with('success', 'L\'utilisateur à bien été modifié');
+		}
+
+
 	}
 
 	public function paypal()

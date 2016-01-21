@@ -39,6 +39,9 @@ Route::get('admin/gangs', ['uses' => 'AdminController@gangs']);
 Route::get('admin/gang/{id}', ['uses' => 'AdminController@gangShow', 'as' => 'gang']);
 Route::post('admin/gang/delete', ['uses' => 'AdminController@deleteGang', 'as' => 'deleteGangAdmin']);
 Route::post('admin/gang/add', ['uses' => 'AdminController@addUserGang', 'as' => 'addPlayerGangAdmin']);
+Route::get('admin/users', ['uses' => 'AdminController@users']);
+Route::get('admin/user/{id}', ['uses' => 'AdminController@userShow', 'as' => 'user']);
+Route::post('admin/user/{id}', ['uses' => 'AdminController@userUpdate']);
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',

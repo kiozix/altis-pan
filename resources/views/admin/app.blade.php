@@ -127,16 +127,23 @@
                         </a>
                     </li>
 
+                    <li class="{{ Request::is('admin/users/*') ? 'active' : '' }} <?php $path = Route::getCurrentRoute()->getPath(); if (starts_with($path, 'admin/user')) echo "active"; ?>">
+                        <a title="users" href="{{ url('admin/users') }}">
+                            <em class="icon-people"></em>
+                            <span>Utilisateurs</span>
+                        </a>
+                    </li>
+
                     <li class="{{ Request::is('admin/players/*') ? 'active' : '' }} <?php $path = Route::getCurrentRoute()->getPath(); if (starts_with($path, 'admin/player')) echo "active"; ?>">
-                        <a title="Jouers" href="{{ url('admin/players') }}">
+                        <a title="Joueurs" href="{{ url('admin/players') }}">
                             <em class="icon-game-controller"></em>
                             <span>Joueurs</span>
                         </a>
                     </li>
 
                     <li class="{{ Request::is('admin/gangs/*') ? 'active' : '' }} <?php $path = Route::getCurrentRoute()->getPath(); if (starts_with($path, 'admin/gang')) echo "active"; ?>">
-                        <a title="Jouers" href="{{ url('admin/gangs') }}">
-                            <em class="icon-people"></em>
+                        <a title="Gangs" href="{{ url('admin/gangs') }}">
+                            <em class="icon-tag"></em>
                             <span>Gangs</span>
                         </a>
                     </li>
