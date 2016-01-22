@@ -1,3 +1,1 @@
-@extends('app')
-
 @include('welcome')

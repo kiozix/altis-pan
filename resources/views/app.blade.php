@@ -18,23 +18,24 @@
     <meta name="author" content="Lucas GRELAUD, Emile LEPETIT"/>
     <!-- Don't modify the web_author meta , only the author meta please -->
     <meta name="web_author" content="Lucas GRELAUD, Emile LEPETIT">
-    <meta name="contact" content="">
+    <meta name="contact" content="emile.lepetit@gmail.com">
     <meta name="revisit-after" content="7 days">
     <meta name="copyright" content="AltisPan">
     <meta name="language" content="French">
 
     <!-- Facebook and Twitter integration -->
-    <meta property="og:title" content=""/>
-    <meta property="og:image" content=""/>
-    <meta property="og:url" content=""/>
-    <meta property="og:site_name" content=""/>
-    <meta property="og:description" content=""/>
-    <meta name="twitter:title" content=""/>
-    <meta name="twitter:image" content=""/>
-    <meta name="twitter:url" content=""/>
-    <meta name="twitter:card" content=""/>
+    <meta property="og:title" content="{{ env('SITE_NAME', 'AltisPan') }}"/>
+    <meta property="og:image" content="{{ asset('/img/logo-single.png') }}"/>
+    <meta property="og:url" content="{{ url('/') }}"/>
+    <meta property="og:site_name" content="{{ env('SITE_NAME', 'AltisPan') }}"/>
+    <meta property="og:description" content="Bienvenue sur {{ env('SITE_NAME', 'AltisPan') }}, un serveur AltisLife qui n'attend que vous !"/>
 
-    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <meta name="twitter:title" content="{{ env('SITE_NAME', 'AltisPan') }}"/>
+    <meta name="twitter:image" content="{{ asset('/img/logo-single.png') }}"/>
+    <meta name="twitter:url" content="{{ url('/') }}"/>
+    <meta name="twitter:description" content="Bienvenue sur {{ env('SITE_NAME', 'AltisPan') }}, un serveur AltisLife qui n'attend que vous !"/>
+    <meta name="twitter:card" content="summary"/>
+
     <link rel="shortcut icon" href="{{ asset('/img/favicon.ico') }}">
 
     <!-- Google Webfonts -->
@@ -72,7 +73,6 @@
         <nav class="navbar navbar-default" role="navigation">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <!-- Mobile Toggle Menu Button -->
                     <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle" data-toggle="collapse"
                        data-target="#fh5co-navbar" aria-expanded="false" aria-controls="navbar"><i></i></a>
                     <a class="navbar-brand" href="{{ url('/') }}">{{ env('SITE_NAME', 'AltisPan') }}</a>
@@ -169,10 +169,10 @@
                 <div class="fh5co-footer-widget top-level">
                     <h4 class="fh5co-footer-lead">Nous suivre</h4>
                     <ul class="fh5co-list-check">
-                        <li><a href="#">Steam</a></li>
-                        <li><a href="#">Twitch</a></li>
-                        <li><a href="#">FaceBook</a></li>
-                        <li><a href="#">GameTracker</a></li>
+                        <li><a href="{{ env('LINK_STEAM') }}">Steam</a></li>
+                        <li><a href="{{ env('LINK_TWITCH') }}">Twitch</a></li>
+                        <li><a href="{{ env('LINK_FACEBOOK') }}">FaceBook</a></li>
+                        <li><a href="{{ env('LINK_GAMETRACKER') }}">GameTracker</a></li>
                     </ul>
                 </div>
             </div>
