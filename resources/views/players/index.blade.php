@@ -282,7 +282,6 @@
 
                         @if($gang)
                         <div class="tab-pane" id="c">
-                            <!-- TODO: si la ligne 286 contient la class active "select2" ne bug pas-->
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h3 class="panel-title">Votre Gang : {{ $gang->name }}</h3>
@@ -336,9 +335,11 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h3 class="panel-title">Demande de remboursement :</h3>
-                                    <a href="{{ url('remboursement') }}" data-tool="panel-collapse">
-                                        <em class="fa fa-plus"></em>
-                                    </a>
+                                    <div class="text-right">
+                                        <a href="{{ url('remboursement') }}">
+                                            <em class="fa fa-plus"></em>
+                                        </a>
+                                    </div>
                                 </div>
                                 <div class="panel-body">
                                     <table class="table table-responsive table-striped">
