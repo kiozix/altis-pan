@@ -94,7 +94,7 @@
             <nav data-sidebar-anyclick-close="" class="sidebar">
                 <ul class="nav">
                     <li class="has-user-block">
-                        <div id="user-block" class="collapse">
+                        <div id="user-block" class="collapse in" aria-expanded="true">
                             <div class="item user-block">
 
                                 <div class="user-block-picture">
@@ -128,7 +128,7 @@
                     </li>
 
                     <li class="{{ Request::is('admin/users/*') ? 'active' : '' }} <?php $path = Route::getCurrentRoute()->getPath(); if (starts_with($path, 'admin/user')) echo "active"; ?>">
-                        <a title="users" href="{{ url('admin/users') }}">
+                        <a title="Utilisateurs" href="{{ url('admin/users') }}">
                             <em class="icon-people"></em>
                             <span>Utilisateurs</span>
                         </a>
@@ -149,7 +149,7 @@
                     </li>
 
                     <li class="{{ Request::is('admin/remboursements/*') ? 'active' : '' }} <?php $path = Route::getCurrentRoute()->getPath(); if (starts_with($path, 'admin/remboursement')) echo "active"; ?>">
-                        <a title="Gangs" href="{{ url('admin/remboursements') }}">
+                        <a title="Remboursements" href="{{ url('admin/remboursements') }}">
                             <em class="icon-credit-card"></em>
                             <span>Remboursements</span>
                         </a>

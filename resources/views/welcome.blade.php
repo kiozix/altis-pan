@@ -4,7 +4,7 @@
     <div class="fh5co-slider">
         <div class="owl-carousel owl-carousel-fullwidth">
             <!-- Slide type 1 -->
-            <div class="item" style="background-image:url({{ asset('img/carousel/bg1.jpg') }})">
+            <div class="item" style="background-image:url({{ asset('/img/carousel/bg1.jpg') }})">
                 <div class="fh5co-overlay"></div>
                 <div class="container">
                     <div class="row">
@@ -20,7 +20,7 @@
                 </div>
             </div>
             <!-- Slide type 2 -->
-            <div class="item" style="background-image:url(http://puu.sh/mfQOq/6f0e3420bb.jpg);" >
+            <div class="item" style="background-image:url({{ asset('/img/carousel/bg2.jpg') }});" >
                 <div class="fh5co-overlay"></div>
                 <div class="container">
                     <div class="row">

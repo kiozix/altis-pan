@@ -12,7 +12,7 @@
             <div class="panel widget bg-primary">
                 <div class="row row-table">
                     <div class="col-xs-4 text-center bg-primary-dark pv-lg">
-                        <em class="icon-people fa-3x"></em>
+                        <em class="icon-game-controller fa-3x"></em>
                     </div>
                     <div class="col-xs-8 pv-lg">
                         <div class="h2 mt0">{{ $players }}</div>
