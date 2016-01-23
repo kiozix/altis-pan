@@ -435,7 +435,7 @@ class AdminController extends Controller {
 					'status' => 2,
 				));
 
-			return redirect(url('admin/remboursements/'))->with('success', 'Remboursement effectué');
+			return redirect(url('admin/remboursement/'))->with('success', 'Remboursement effectué');
 
 		}elseif($request->get('status') == 1){
 			DB::table('refunds')
@@ -443,7 +443,7 @@ class AdminController extends Controller {
 				->update(array(
 					'status' => 1,
 				));
-			return redirect(url('admin/remboursements/'))->with('error', 'Remboursement refusé');
+			return redirect(url('admin/remboursement/'))->with('error', 'Remboursement refusé');
 		}
 
 		return view('admin.refunds.show', compact('user', 'refund'));
