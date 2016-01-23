@@ -17,7 +17,9 @@ Route::get('home', 'HomeController@index');
 Route::get('profil', ['uses' => 'UsersController@edit', 'as' => 'profil']);
 Route::post('profil', ['uses' => 'UsersController@update']);
 
-Route::resource('stream', 'StreamsController');
+Route::get('stream', ['uses' => 'StreamsController@index_home']);
+Route::get('stream/{id}', ['uses' => 'StreamsController@show']);
+
 Route::resource('news', 'NewsController');
 Route::resource('player', 'PlayersController');
 Route::post('player', ['uses' => 'PlayersController@refunds']);
@@ -29,24 +31,35 @@ Route::resource('shop', 'ShopsController');
 Route::get('shop/payment/accepted', ['uses' => 'ShopsController@accepted']);
 Route::get('shop/payment/failed', ['uses' => 'ShopsController@failed']);
 
-Route::get('admin', ['uses' => 'AdminController@index']);
-Route::get('admin/players', ['uses' => 'AdminController@joueur']);
-Route::get('admin/player/{id}', ['uses' => 'AdminController@joueurShow', 'as' => 'player']);
-Route::post('admin/player/{id}', ['uses' => 'AdminController@updatePlayer']);
-Route::post('admin/licenses', ['uses' => 'AdminController@setLicenses', 'as' => 'setLicenses']);
-Route::get('admin/paypal', ['uses' => 'AdminController@paypal']);
-Route::get('admin/search', ['uses' => 'AdminController@search']);
-Route::post('admin/user/update/{id}', ['uses' => 'AdminController@updateUser']);
-Route::get('admin/gangs', ['uses' => 'AdminController@gangs']);
-Route::get('admin/gang/{id}', ['uses' => 'AdminController@gangShow', 'as' => 'gang']);
-Route::post('admin/gang/delete', ['uses' => 'AdminController@deleteGang', 'as' => 'deleteGangAdmin']);
-Route::post('admin/gang/add', ['uses' => 'AdminController@addUserGang', 'as' => 'addPlayerGangAdmin']);
-Route::get('admin/users', ['uses' => 'AdminController@users']);
-Route::get('admin/user/{id}', ['uses' => 'AdminController@userShow', 'as' => 'user']);
-Route::post('admin/user/{id}', ['uses' => 'AdminController@userUpdate']);
-Route::get('admin/remboursements', ['uses' => 'AdminController@refunds']);
-Route::get('admin/remboursement/{id}', ['uses' => 'AdminController@refundsShow', 'as' => 'refund']);
-Route::post('admin/remboursement/{id}', ['uses' => 'AdminController@refundsUpdate']);
+/* Admin Route */
+Route::group(['prefix' => 'admin'], function () {
+	Route::get('/', ['uses' => 'AdminController@index']);
+
+	Route::post('/licenses', ['uses' => 'AdminController@setLicenses', 'as' => 'setLicenses']);
+	Route::get('/paypal', ['uses' => 'AdminController@paypal']);
+	Route::get('/search', ['uses' => 'AdminController@search']);
+
+	Route::get('/player', ['uses' => 'AdminController@joueur']);
+	Route::get('/player/{id}', ['uses' => 'AdminController@joueurShow', 'as' => 'player']);
+	Route::post('/player/{id}', ['uses' => 'AdminController@updatePlayer']);
+
+	Route::get('/gang', ['uses' => 'AdminController@gangs']);
+	Route::get('/gang/{id}', ['uses' => 'AdminController@gangShow', 'as' => 'gang']);
+	Route::post('/gang/delete', ['uses' => 'AdminController@deleteGang', 'as' => 'deleteGangAdmin']);
+	Route::post('/gang/add', ['uses' => 'AdminController@addUserGang', 'as' => 'addPlayerGangAdmin']);
+
+	Route::post('/user/update/{id}', ['uses' => 'AdminController@updateUser']);
+	Route::get('/user', ['uses' => 'AdminController@users']);
+	Route::get('/user/{id}', ['uses' => 'AdminController@userShow', 'as' => 'user']);
+	Route::post('/user/{id}', ['uses' => 'AdminController@userUpdate']);
+
+	Route::get('/remboursement', ['uses' => 'AdminController@refunds']);
+	Route::get('/remboursement/{id}', ['uses' => 'AdminController@refundsShow', 'as' => 'refund']);
+	Route::post('/remboursement/{id}', ['uses' => 'AdminController@refundsUpdate']);
+
+	Route::resource('stream', 'StreamsController');
+
+});
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',

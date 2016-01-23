@@ -12,10 +12,12 @@ class StreamsController extends Controller {
 	/**
 	 * StreamsController constructor.
      */
-	public function __construct()
+	public function __construct(Guard $auth)
 	{
-		$this->middleware('auth', ['except' => ['index', 'show']]);
-		$this->middleware('admin', ['except' => ['index', 'show']]);
+		$this->middleware('auth', ['except' => ['inindex_home']]);
+		$this->middleware('admin', ['except' => ['inindex_home']]);
+
+		$this->auth = $auth;
 	}
 
 	/**
@@ -24,6 +26,14 @@ class StreamsController extends Controller {
 	 * @return Response
 	 */
 	public function index()
+	{
+		$user = $this->auth->user();
+
+		$streams = Streams::all();
+		return view('admin.streams.index', compact('streams', 'user'));
+	}
+
+	public function index_home()
 	{
 		$streams = Streams::all();
 		return view('streams.index', compact('streams'));
@@ -37,8 +47,10 @@ class StreamsController extends Controller {
 	 */
 	public function create()
 	{
+		$user = $this->auth->user();
+
 		$streams = new Streams();
-		return view('streams.create', compact('streams'));
+		return view('admin.streams.create', compact('streams', 'user'));
 	}
 
 	/**
@@ -71,8 +83,9 @@ class StreamsController extends Controller {
 	 */
 	public function edit($id)
 	{
+		$user = $this->auth->user();
 		$streams = Streams::findOrFail($id);
-		return view('streams.edit', compact('streams'));
+		return view('admin.streams.edit', compact('streams', 'user'));
 	}
 
 	/**
@@ -84,7 +97,7 @@ class StreamsController extends Controller {
 	public function update($id, StreamsRequest $request)
 	{
 		$streams = Streams::findOrFail($id);
-		$streams->update($request->only('name', 'slug', 'contents'));
+		$streams->update($request->only('name', 'slug', 'content'));
 		return redirect(action('StreamsController@index'))->with('success', 'Le streamer à bien été modifié');
 	}
 

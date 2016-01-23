@@ -100,7 +100,7 @@
                                 <div class="user-block-picture">
                                     <div class="user-block-status">
                                         @if($user->avatar)
-                                            <img src="{{ url($user->avatar) }}" alt="Avatar" width="60" height="60" class="img-thumbnail img-circle">
+                                            <img src="{{ Request::is('admin/user') ? asset('/img/avatars/'.$user->avatar.'.jpg') : url($user->avatar) }}" alt="Avatar" width="60" height="60" class="img-thumbnail img-circle">
                                         @else
                                             <img src="{{ asset('/img/user_default.png') }}" alt="Avatar" width="60" height="60" class="img-thumbnail img-circle">
                                         @endif
@@ -117,41 +117,47 @@
                     </li>
 
                     <li class="nav-heading ">
-                        <span data-localize="sidebar.heading.HEADER">Menu</span>
+                        <span>Menu</span>
                     </li>
                     <li class="{{ Request::is('admin') ? 'active' : '' }}">
                         <a title="Dashboard" href="{{ url('admin') }}">
-                            {{--<div class="pull-right label label-success">30</div>--}}
                             <em class="icon-speedometer"></em>
                             <span>Dashboard</span>
                         </a>
                     </li>
 
-                    <li class="{{ Request::is('admin/users/*') ? 'active' : '' }} <?php $path = Route::getCurrentRoute()->getPath(); if (starts_with($path, 'admin/user')) echo "active"; ?>">
-                        <a title="Utilisateurs" href="{{ url('admin/users') }}">
+                    <li class="{{ Request::is('admin/user') ? 'active' : '' }} <?php $path = Route::getCurrentRoute()->getPath(); if (starts_with($path, 'admin/user')) echo "active"; ?>">
+                        <a title="Utilisateurs" href="{{ url('admin/user') }}">
                             <em class="icon-people"></em>
                             <span>Utilisateurs</span>
                         </a>
                     </li>
 
-                    <li class="{{ Request::is('admin/players/*') ? 'active' : '' }} <?php $path = Route::getCurrentRoute()->getPath(); if (starts_with($path, 'admin/player')) echo "active"; ?>">
-                        <a title="Joueurs" href="{{ url('admin/players') }}">
+                    <li class="{{ Request::is('admin/player') ? 'active' : '' }} <?php $path = Route::getCurrentRoute()->getPath(); if (starts_with($path, 'admin/player')) echo "active"; ?>">
+                        <a title="Joueurs" href="{{ url('admin/player') }}">
                             <em class="icon-game-controller"></em>
                             <span>Joueurs</span>
                         </a>
                     </li>
 
-                    <li class="{{ Request::is('admin/gangs/*') ? 'active' : '' }} <?php $path = Route::getCurrentRoute()->getPath(); if (starts_with($path, 'admin/gang')) echo "active"; ?>">
-                        <a title="Gangs" href="{{ url('admin/gangs') }}">
+                    <li class="{{ Request::is('admin/gang') ? 'active' : '' }} <?php $path = Route::getCurrentRoute()->getPath(); if (starts_with($path, 'admin/gang')) echo "active"; ?>">
+                        <a title="Gangs" href="{{ url('admin/gang') }}">
                             <em class="icon-tag"></em>
                             <span>Gangs</span>
                         </a>
                     </li>
 
-                    <li class="{{ Request::is('admin/remboursements/*') ? 'active' : '' }} <?php $path = Route::getCurrentRoute()->getPath(); if (starts_with($path, 'admin/remboursement')) echo "active"; ?>">
-                        <a title="Remboursements" href="{{ url('admin/remboursements') }}">
+                    <li class="{{ Request::is('admin/remboursement') ? 'active' : '' }} <?php $path = Route::getCurrentRoute()->getPath(); if (starts_with($path, 'admin/remboursement')) echo "active"; ?>">
+                        <a title="Remboursements" href="{{ url('admin/remboursement') }}">
                             <em class="icon-credit-card"></em>
                             <span>Remboursements</span>
+                        </a>
+                    </li>
+
+                    <li class="{{ Request::is('admin/stream') ? 'active' : '' }} <?php $path = Route::getCurrentRoute()->getPath(); if (starts_with($path, 'admin/stream')) echo "active"; ?>">
+                        <a title="Stream" href="{{ url('admin/stream') }}">
+                            <em class="icon-control-play"></em>
+                            <span>Stream</span>
                         </a>
                     </li>
 
