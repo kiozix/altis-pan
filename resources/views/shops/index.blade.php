@@ -14,15 +14,6 @@
         </div>
     </aside>
 
-    @if (Auth::guest())
-    @else
-        @if (Auth::user()->admin == 1)
-            <p class="text-right">
-                <a href="{{ action('ShopsController@create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Ajouter une offre </a>
-            </p>
-        @endif
-    @endif
-
     <div class="container">
         @include('flash')
         <div class="row">
@@ -46,16 +37,11 @@
                     <br />
                     <p>{{ $shop->content }}</p>
                     <a class="btn btn-outline" href="{{ action('ShopsController@show', $shop) }}">Achetter</a>
-                    @if (Auth::guest())
-                    @else
-                        @if (Auth::user()->admin == 1)
-                            <a href="{{ action('ShopsController@edit', $shop) }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
-                            <a href="{{ action('ShopsController@destroy', $shop) }}" data-method="delete" data-confirm="Voulez vous vraiment suprimer cette enregistrement ?" class="btn btn-danger"><i class="fa fa-trash"></i></a>
-                        @endif
-                    @endif
                 </div>
             </div>
             @endforeach
+
         </div>
+        {!! $shops->render() !!}
     </div>
 @endsection

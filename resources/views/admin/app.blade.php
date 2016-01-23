@@ -168,6 +168,13 @@
                         </a>
                     </li>
 
+                    <li class="{{ Request::is('admin/shop') ? 'active' : '' }} <?php $path = Route::getCurrentRoute()->getPath(); if (starts_with($path, 'admin/shop')) echo "active"; ?>">
+                        <a title="Boutique" href="{{ url('admin/shop') }}">
+                            <em class="icon-basket"></em>
+                            <span>Boutique</span>
+                        </a>
+                    </li>
+
                     <li class="{{ Request::is('admin/paypal') ? 'active' : '' }}">
                         <a title="PayPal" href="{{ url('admin/paypal') }}">
                             <em class="icon-paypal"></em>

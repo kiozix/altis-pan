@@ -1,18 +1,18 @@
 @extends('admin.app')
 
 @section('page-info')
-    <h3>News</h3>
+    <h3>Boutique</h3>
 @endsection
 
 @section('content')
     <div class="container-fluid">
         <div class="row">
             <div class="text-right">
-                <a href="{{ action('NewsController@create') }}" class="btn btn-success"><i class="fa fa-plus">&nbsp;&nbsp; Ajouter une News</i></a>
+                <a href="{{ action('ShopsController@create') }}" class="btn btn-success"><i class="fa fa-plus">&nbsp;&nbsp; Ajouter un Streamer</i></a>
                 <br><br>
             </div>
             <div id="streamer" class="panel panel-default">
-                <div class="panel-heading">News
+                <div class="panel-heading">Boutique
                     <a href="#" data-tool="panel-collapse" data-toggle="tooltip" title="" class="pull-right">
                         <em class="fa fa-minus"></em>
                     </a>
@@ -23,26 +23,27 @@
                         <table class="table table-responsive table-striped">
                             <tr>
                                 <th>Nom</th>
-                                <th>Slug</th>
+                                <th>Prix</th>
+                                <th>Level</th>
                                 <th>Dernière édition</th>
                                 <th>Actions</th>
                             </tr>
-                            @foreach($news as $new)
+                            @foreach($shops as $shop)
                                 <tr>
-                                    <td>{{$new->name}}</td>
-                                    <td>{{$new->slug}}</td>
-                                    <td>{{$new->updated_at}}</td>
+                                    <td>{{$shop->name}}</td>
+                                    <td>{{$shop->price}}</td>
+                                    <td>{{$shop->level}}</td>
+                                    <td>{{$shop->updated_at}}</td>
                                     <td>
-                                        <a href="{{ url('/news/'. $new->slug) }}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
-                                        <a href="{{ action('NewsController@edit', $new) }}" class="btn btn-success"><i class="fa fa-pencil"></i></a>
-                                        {!!Form::open(['url' => action("NewsController@destroy", $new), 'method' => 'delete']) !!}
+                                        <a href="{{ url('/stream/'. $shop->id) }}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
+                                        <a href="{{ action('ShopsController@edit', $shop) }}" class="btn btn-success"><i class="fa fa-pencil"></i></a>
+                                        {!!Form::open(['url' => action("ShopsController@destroy", $shop), 'method' => 'delete']) !!}
                                         <button class="btn btn-danger" type="submit"><i class="fa fa-trash"></i></button>
                                         {!! Form::close() !!}
                                     </td>
                                 </tr>
                             @endforeach
                         </table>
-                        {!! $news->render() !!}
                     </div>
                 </div>
             </div>

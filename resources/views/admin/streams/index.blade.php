@@ -35,7 +35,9 @@
                                     <td>
                                         <a href="{{ url('/stream/'. $stream->slug) }}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
                                         <a href="{{ action('StreamsController@edit', $stream) }}" class="btn btn-success"><i class="fa fa-pencil"></i></a>
-                                        <a href="{{ action('StreamsController@destroy', $stream) }}" data-method="delete" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                                        {!!Form::open(['url' => action("StreamsController@destroy", $stream), 'method' => 'delete']) !!}
+                                            <button class="btn btn-danger" type="submit"><i class="fa fa-trash"></i></button>
+                                        {!! Form::close() !!}
                                     </td>
                                 </tr>
                             @endforeach

@@ -29,7 +29,8 @@ Route::get('remboursement', ['uses' => 'PlayersController@refundsView']);
 Route::post('player/gang/delete', ['uses' => 'PlayersController@deleteGang', 'as' => 'deleteGang']);
 Route::post('player/gang/add', ['uses' => 'PlayersController@addUserGang', 'as' => 'addPlayerGang']);
 
-Route::resource('shop', 'ShopsController');
+Route::get('shop', ['uses' => 'ShopsController@index_home']);
+Route::get('shop/{slug}', ['uses' => 'ShopsController@show']);
 Route::get('shop/payment/accepted', ['uses' => 'ShopsController@accepted']);
 Route::get('shop/payment/failed', ['uses' => 'ShopsController@failed']);
 
@@ -61,6 +62,7 @@ Route::group(['prefix' => 'admin'], function () {
 
 	Route::resource('stream', 'StreamsController');
 	Route::resource('news', 'NewsController');
+	Route::resource('shop', 'ShopsController');
 
 });
 

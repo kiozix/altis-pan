@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers;
 
 use App\Http\Requests;
+use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -15,10 +16,12 @@ use App\Behaviour\PaypalPayment;
 
 class ShopsController extends Controller {
 
-	public function __construct()
+	public function __construct(Guard $auth)
 	{
-		$this->middleware('auth', ['except' => ['index']]);
-		$this->middleware('arma', ['except' => ['index']]);
+		$this->middleware('auth', ['except' => ['index_home', 'show']]);
+		$this->middleware('arma', ['except' => ['index_home', 'show']]);
+
+		$this->auth = $auth;
 	}
 
 	/**
@@ -28,7 +31,14 @@ class ShopsController extends Controller {
 	 */
 	public function index()
 	{
+		$user = $this->auth->user();
 		$shops = Shops::all();
+		return view('admin.shops.index', compact('shops', 'user'));
+	}
+
+	public function index_home()
+	{
+		$shops = Shops::orderBy('id', 'DESC')->paginate(3);
 		return view('shops.index', compact('shops'));
 	}
 
@@ -120,8 +130,9 @@ class ShopsController extends Controller {
 	 */
 	public function create()
 	{
+		$user = $this->auth->user();
 		$shops = new Shops();
-		return view('shops.create', compact('shops'));
+		return view('admin.shops.create', compact('shops', 'user'));
 	}
 
 	/**
@@ -181,8 +192,9 @@ class ShopsController extends Controller {
 	 */
 	public function edit($id)
 	{
+		$user = $this->auth->user();
 		$shops = Shops::findOrFail($id);
-		return view('shops.edit', compact('shops'));
+		return view('admin.shops.edit', compact('shops', 'user'));
 	}
 
 	/**
