@@ -1,18 +1,18 @@
 @extends('admin.app')
 
 @section('page-info')
-    <h3>Streamers</h3>
+    <h3>News</h3>
 @endsection
 
 @section('content')
     <div class="container-fluid">
         <div class="row">
             <div class="text-right">
-                <a href="{{ action('StreamsController@create') }}" class="btn btn-success"><i class="fa fa-plus">&nbsp;&nbsp; Ajouter un Streamer</i></a>
+                <a href="{{ action('NewsController@create') }}" class="btn btn-success"><i class="fa fa-plus">&nbsp;&nbsp; Ajouter une News</i></a>
                 <br><br>
             </div>
             <div id="streamer" class="panel panel-default">
-                <div class="panel-heading">Streamers
+                <div class="panel-heading">News
                     <a href="#" data-tool="panel-collapse" data-toggle="tooltip" title="" class="pull-right">
                         <em class="fa fa-minus"></em>
                     </a>
@@ -27,20 +27,20 @@
                                 <th>Dernière édition</th>
                                 <th>Actions</th>
                             </tr>
-                            @foreach($streams as $stream)
+                            @foreach($news as $new)
                                 <tr>
-                                    <td>{{$stream->name}}</td>
-                                    <td>{{$stream->slug}}</td>
-                                    <td>{{$stream->updated_at}}</td>
+                                    <td>{{$new->name}}</td>
+                                    <td>{{$new->slug}}</td>
+                                    <td>{{$new->updated_at}}</td>
                                     <td>
-                                        <a href="{{ url('/stream/'. $stream->slug) }}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
-                                        <a href="{{ action('StreamsController@edit', $stream) }}" class="btn btn-success"><i class="fa fa-pencil"></i></a>
-                                        <a href="{{ action('StreamsController@destroy', $stream) }}" data-method="delete" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                                        <a href="{{ url('/news/'. $new->slug) }}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
+                                        <a href="{{ action('NewsController@edit', $new) }}" class="btn btn-success"><i class="fa fa-pencil"></i></a>
+                                        <a href="{{ action('NewsController@destroy', $new) }}" data-method="delete" class="btn btn-danger"><i class="fa fa-trash"></i></a>
                                     </td>
                                 </tr>
                             @endforeach
                         </table>
-                        {!! $streams->render() !!}
+                        {!! $news->render() !!}
                     </div>
                 </div>
             </div>

@@ -14,8 +14,8 @@ class StreamsController extends Controller {
      */
 	public function __construct(Guard $auth)
 	{
-		$this->middleware('auth', ['except' => ['inindex_home']]);
-		$this->middleware('admin', ['except' => ['inindex_home']]);
+		$this->middleware('auth', ['except' => ['index_home', 'show']]);
+		$this->middleware('admin', ['except' => ['index_home', 'show']]);
 
 		$this->auth = $auth;
 	}
@@ -28,14 +28,13 @@ class StreamsController extends Controller {
 	public function index()
 	{
 		$user = $this->auth->user();
-
-		$streams = Streams::all();
+		$streams = Streams::orderBy('id', 'DESC')->paginate(15);
 		return view('admin.streams.index', compact('streams', 'user'));
 	}
 
 	public function index_home()
 	{
-		$streams = Streams::all();
+		$streams = Streams::orderBy('id', 'DESC')->paginate(4);
 		return view('streams.index', compact('streams'));
 	}
 

@@ -32,7 +32,9 @@
                         </div>
                     </div>
                 @endforeach
+
             </div>
+            {!! $streams->render() !!}
         </div>
     </div>
 @endsection

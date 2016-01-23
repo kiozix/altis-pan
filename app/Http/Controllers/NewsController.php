@@ -12,10 +12,12 @@ class NewsController extends Controller {
 	/**
 	 * NewsController constructor.
      */
-	public function __construct()
+	public function __construct(Guard $auth)
 	{
-		$this->middleware('auth', ['except' => ['index', 'show']]);
-		$this->middleware('admin', ['except' => ['index', 'show']]);
+		$this->middleware('auth', ['except' => ['index_home', 'show']]);
+		$this->middleware('admin', ['except' => ['index_home', 'show']]);
+
+		$this->auth = $auth;
 	}
 
 	/**
@@ -25,7 +27,14 @@ class NewsController extends Controller {
 	 */
 	public function index()
 	{
-		$news = News::all();
+		$user = $this->auth->user();
+		$news = News::orderBy('id', 'DESC')->paginate(15);
+		return view('admin.news.index', compact('news', 'user'));
+	}
+
+	public function index_home()
+	{
+		$news = News::orderBy('id', 'DESC')->paginate(10);
 		return view('news.index', compact('news'));
 	}
 
@@ -36,8 +45,9 @@ class NewsController extends Controller {
 	 */
 	public function create()
 	{
+		$user = $this->auth->user();
 		$news = new News();
-		return view('news.create', compact('news'));
+		return view('admin.news.create', compact('news', 'user'));
 	}
 
 	/**
@@ -72,8 +82,9 @@ class NewsController extends Controller {
 	 */
 	public function edit($id)
 	{
+		$user = $this->auth->user();
 		$news = News::findOrFail($id);
-		return view('news.edit', compact('news'));
+		return view('admin.news.edit', compact('news', 'user'));
 	}
 
 	/**

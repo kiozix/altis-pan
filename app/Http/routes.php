@@ -18,9 +18,11 @@ Route::get('profil', ['uses' => 'UsersController@edit', 'as' => 'profil']);
 Route::post('profil', ['uses' => 'UsersController@update']);
 
 Route::get('stream', ['uses' => 'StreamsController@index_home']);
-Route::get('stream/{id}', ['uses' => 'StreamsController@show']);
+Route::get('stream/{slug}', ['uses' => 'StreamsController@show']);
 
-Route::resource('news', 'NewsController');
+Route::get('news', ['uses' => 'NewsController@index_home']);
+Route::get('news/{slug}', ['uses' => 'NewsController@show']);
+
 Route::resource('player', 'PlayersController');
 Route::post('player', ['uses' => 'PlayersController@refunds']);
 Route::get('remboursement', ['uses' => 'PlayersController@refundsView']);
@@ -58,6 +60,7 @@ Route::group(['prefix' => 'admin'], function () {
 	Route::post('/remboursement/{id}', ['uses' => 'AdminController@refundsUpdate']);
 
 	Route::resource('stream', 'StreamsController');
+	Route::resource('news', 'NewsController');
 
 });
 
