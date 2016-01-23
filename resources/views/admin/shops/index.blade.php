@@ -8,7 +8,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="text-right">
-                <a href="{{ action('ShopsController@create') }}" class="btn btn-success"><i class="fa fa-plus">&nbsp;&nbsp; Ajouter un Streamer</i></a>
+                <a href="{{ action('ShopsController@create') }}" class="btn btn-success"><i class="fa fa-plus">&nbsp;&nbsp; Ajouter une offre</i></a>
                 <br><br>
             </div>
             <div id="streamer" class="panel panel-default">
@@ -37,9 +37,11 @@
                                     <td>
                                         <a href="{{ url('/stream/'. $shop->id) }}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
                                         <a href="{{ action('ShopsController@edit', $shop) }}" class="btn btn-success"><i class="fa fa-pencil"></i></a>
-                                        {!!Form::open(['url' => action("ShopsController@destroy", $shop), 'method' => 'delete']) !!}
-                                        <button class="btn btn-danger" type="submit"><i class="fa fa-trash"></i></button>
-                                        {!! Form::close() !!}
+                                        <span style="display: inline-block">
+                                            {!!Form::open(['url' => action("ShopsController@destroy", $shop), 'method' => 'delete']) !!}
+                                            <button class="btn btn-danger" type="submit"><i class="fa fa-trash"></i></button>
+                                            {!! Form::close() !!}
+                                        </span>
                                     </td>
                                 </tr>
                             @endforeach
