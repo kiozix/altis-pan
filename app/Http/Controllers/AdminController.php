@@ -79,7 +79,29 @@ class AdminController extends Controller {
 					));
 				return redirect(url('admin/player/' . $id))->with('success', 'L\'argent à bien été créditer');
 			}else {
-				echo 'toto';
+				return redirect(url('admin/player/' . $id))->with('error', 'Veuillez saisir un nombre positif');
+			}
+		}elseif($request->get("take")){
+			if($request->get("take") >= 1) {
+				$amount = $request->get("take");
+
+				$user_show = DB::table('players')->where('playerid', $id)->first();
+
+				$amount = $user_show->bankacc - $amount;
+
+				if($amount <= 0){
+					$amount = 0;
+				}
+
+				DB::table('players')
+					->where('playerid', $id)
+					->update(array(
+						'bankacc' => $amount
+					));
+
+				return redirect(url('admin/player/' . $id))->with('success', 'L\'argent à bien été retiré');
+			}else {
+				return redirect(url('admin/player/' . $id))->with('error', 'Veuillez saisir un nombre positif');
 			}
 		}else {
 			$admin = $request->get("admin");
