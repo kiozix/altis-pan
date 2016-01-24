@@ -137,12 +137,16 @@ class AdminController extends Controller {
 	{
 		$q = Input::get('q');
 		if (empty($q)) {
-			return view('admin.index', compact('user'))->with('error', 'Le champ de recherche est vide');
+			return redirect(action('AdminController@index'))->with('error', 'Le champ de recherche est vide');
 		}
 		$user = $this->auth->user();
 
 		if (filter_var($q, FILTER_VALIDATE_EMAIL)) {
 			$user_show = DB::table('users')->where('email', $q)->first();
+
+			if(empty($user_show)){
+				return redirect(action('AdminController@index'))->with('error', 'Aucun utilisateur n\'a été trouver');
+			}
 
 			return redirect(url('admin/user/' . $user_show->id));
 		}else {
