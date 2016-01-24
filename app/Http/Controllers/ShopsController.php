@@ -19,7 +19,8 @@ class ShopsController extends Controller {
 	public function __construct(Guard $auth)
 	{
 		$this->middleware('auth', ['except' => ['index_home', 'show']]);
-		$this->middleware('arma', ['except' => ['index_home', 'show']]);
+		$this->middleware('admin', ['except' => ['index_home', 'show']]);
+		$this->middleware('arma', ['except' => ['index', 'index_home', 'create', 'store', 'edit', 'update', 'destroy']]);
 
 		$this->auth = $auth;
 	}
