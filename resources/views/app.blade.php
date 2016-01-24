@@ -146,7 +146,7 @@
                 <div class="fh5co-footer-widget">
                     <h2 class="fh5co-footer-logo">{{ env('SITE_NAME', 'AltisPan') }}</h2>
                     <p>{{ env('DESCRIPTION', 'Site réalisé avec AltisPan, CMS dédiée au Mod multijoueur Altis Life. Réalisation : Lucas GRELAUD, Emile LEPETIT.') }}</p><!-- Correspond a la meta "description" -->
-                    <p> &copy; Copyright <a href="#">AltisPan</a>, site par <a href="https://madebyhost.com/" target="_blank">MadeByhost</a>
+                    <p> &copy; Copyright <a href="#">AltisPan</a>, site par <a href="http://emile-lepetit.fr/" target="_blank">Emile LEPETIT</a>
                 </div>
             </div>
 
