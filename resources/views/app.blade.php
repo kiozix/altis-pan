@@ -13,8 +13,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ env('SITE_NAME', 'AltisPan') }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Site réalisée avec AltisPan, CMS dédiée au Mod multijoueur Altis Life. Réalisation : Lucas GRELAUD, Emile LEPTIT."/>
-    <meta name="keywords" content="altis life, cms, altispan, arma, 3, serveur"/>
+    <meta name="description" content="{{ env('DESCRIPTION', 'Site réalisé avec AltisPan, CMS dédiée au Mod multijoueur Altis Life. Réalisation : Lucas GRELAUD, Emile LEPETIT.') }}"/>
+    <meta name="keywords" content="altis life, cms, altispan, arma, 3, serveur, {{ env('SITE_NAME', 'AltisPan') }}"/>
     <meta name="author" content="Lucas GRELAUD, Emile LEPETIT"/>
     <!-- Don't modify the web_author meta , only the author meta please -->
     <meta name="web_author" content="Lucas GRELAUD, Emile LEPETIT">
@@ -145,8 +145,7 @@
             <div class="col-md-6 col-sm-6">
                 <div class="fh5co-footer-widget">
                     <h2 class="fh5co-footer-logo">{{ env('SITE_NAME', 'AltisPan') }}</h2>
-                    <p>Site réalisé avec AltisPan, CMS dédiée au Mod multijoueur Altis Life. Réalisation : Lucas
-                        GRELAUD, Emile LEPETIT.</p><!-- Correspond a la meta "description" -->
+                    <p>{{ env('DESCRIPTION', 'Site réalisé avec AltisPan, CMS dédiée au Mod multijoueur Altis Life. Réalisation : Lucas GRELAUD, Emile LEPETIT.') }}</p><!-- Correspond a la meta "description" -->
                     <p> &copy; Copyright <a href="#">AltisPan</a>, site par <a href="https://madebyhost.com/" target="_blank">MadeByhost</a>
                 </div>
             </div>
