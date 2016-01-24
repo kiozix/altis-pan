@@ -42,7 +42,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>Banque</td>
+                                        <td>Compte Banque</td>
                                         <td>
                                             <?php
                                             $money = $player->bankacc;

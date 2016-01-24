@@ -70,7 +70,7 @@
 
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label class="col-md-4 control-label">Banque</label>
+                                            <label class="col-md-4 control-label">Compte Banque</label>
                                             <div class="col-md-8">
                                                 <input class="form-control input-lg" type="text"
                                                        value="{{ number_format($players->bankacc, 2, ',', ' ') . ' $' }}" disabled>
