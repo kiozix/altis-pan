@@ -27,7 +27,29 @@
 
 			.title {
 				font-size: 72px;
+				font-weight: bold;
 				margin-bottom: 40px;
+			}
+
+			.sub-title{
+				color: #2c3e50;
+				font-weight: 900;
+				font-size: 22px;
+			}
+
+			a{
+				color: #2980b9;
+				text-decoration: none;
+			}
+
+			a:visited{
+				color: #2980b9;
+				text-decoration: none;
+			}
+
+			a:hover{
+				color: #34495e;
+				text-decoration: none;
 			}
 		</style>
 	</head>
@@ -35,6 +57,7 @@
 		<div class="container">
 			<div class="content">
 				<div class="title">De retour bientôt.</div>
+				<div class="sub-title">&copy; Copyright <a href="#">AltisPan</a>, site par <a href="http://emile-lepetit.fr/" target="_blank">Emile LEPETIT</a></div>
 			</div>
 		</div>
 	</body>
