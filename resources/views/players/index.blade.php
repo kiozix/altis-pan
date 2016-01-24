@@ -108,7 +108,8 @@
                                             <label class="col-md-4 control-label">Rang donateur</label>
                                             <div class="col-md-8">
                                                 @if($players->donatorlvl > 0)
-                                                    <span class="donatorlvl"><i class="fa fa-check"></i> Vous êtes donateur</span>
+                                                    <span class="donatorlvl"><i class="fa fa-check"></i> Vous êtes donateur jusqu'au</span>
+                                                    {{ date("d-m-Y à H:i:s", $players->timestamp + (60 * 60 * 24 * $players->duredon)) }}
                                                 @else
                                                     <span class="donatorlvl"><i class="fa fa-close"></i> Vous n'êtes pas donateur</span>
                                                     <br>

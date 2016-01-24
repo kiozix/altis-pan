@@ -110,14 +110,20 @@
                                     <tr>
                                         <td>Grade Donateur</td>
                                         <td>
-                                            <select name="donator" class="form-control">
-                                                <option value="0"{{ $player->donatorlvl == 0 ? 'selected' : '' }}>0</option>
-                                                <option value="1"{{ $player->donatorlvl == 1 ? 'selected' : '' }}>1</option>
-                                                <option value="2"{{ $player->donatorlvl == 2 ? 'selected' : '' }}>2</option>
-                                                <option value="3"{{ $player->donatorlvl == 3 ? 'selected' : '' }}>3</option>
-                                                <option value="4"{{ $player->donatorlvl == 4 ? 'selected' : '' }}>4</option>
-                                                <option value="5"{{ $player->donatorlvl == 5 ? 'selected' : '' }}>5</option>
-                                            </select>
+                                            <div class="col-md-3">
+                                                <select name="donator" class="form-control">
+                                                    <option value="0"{{ $player->donatorlvl == 0 ? 'selected' : '' }}>0</option>
+                                                    <option value="1"{{ $player->donatorlvl == 1 ? 'selected' : '' }}>1</option>
+                                                    <option value="2"{{ $player->donatorlvl == 2 ? 'selected' : '' }}>2</option>
+                                                    <option value="3"{{ $player->donatorlvl == 3 ? 'selected' : '' }}>3</option>
+                                                    <option value="4"{{ $player->donatorlvl == 4 ? 'selected' : '' }}>4</option>
+                                                    <option value="5"{{ $player->donatorlvl == 5 ? 'selected' : '' }}>5</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <input type="number" name="duredon" placeholder="Nombre de jours" class="form-control" value="{{ $player->duredon }}">
+                                            </div>
+
                                         </td>
                                     </tr>
                                 </table>

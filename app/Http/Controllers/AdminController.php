@@ -108,6 +108,15 @@ class AdminController extends Controller {
 			$policier = $request->get("policier");
 			$medic = $request->get("medic");
 			$donator = $request->get("donator");
+			$duredon = $request->get("duredon");
+
+			$user_show = DB::table('players')->where('playerid', $id)->first();
+
+			if($duredon != $user_show->duredon){
+				$timestamp = time();
+			}else{
+				$timestamp = $user_show->timestamp;
+			}
 
 			DB::table('players')
 				->where('playerid', $id)
@@ -115,7 +124,9 @@ class AdminController extends Controller {
 					'adminlevel' => $admin,
 					'coplevel' => $policier,
 					'mediclevel' => $medic,
-					'donatorlvl' => $donator
+					'donatorlvl' => $donator,
+					'duredon' => $duredon,
+					'timestamp' => $timestamp
 				));
 
 			return redirect(url('admin/player/' . $id))->with('success', 'Le joueur à bien été modifié');

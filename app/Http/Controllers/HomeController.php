@@ -38,8 +38,10 @@ class HomeController extends Controller {
 
 			$timestamp = time() - (60 * 60 * 24 * $row->duredon);
 
-			if ($row->timestamp < $timestamp){
-				DB::table('players')->where('timestamp', $row->timestamp)->where('duredon', $row->duredon)->update(array('donatorlvl' => 0, 'duredon' => 0, 'timestamp' => 0));
+			if ($row->timestamp != 0){
+				if($row->timestamp < $timestamp) {
+					DB::table('players')->where('timestamp', $row->timestamp)->where('duredon', $row->duredon)->update(array('donatorlvl' => 0, 'duredon' => 0, 'timestamp' => 0));
+				}
 			}
 
 		}
