@@ -84,7 +84,7 @@
                                         <td>Grade Policier</td>
                                         <td>
                                             <select name="policier" class="form-control">
-                                                <option value="1"{{ $player->coplevel == 0 ? 'selected' : '' }}>&nbsp;</option>
+                                                <option value="1"{{ $player->coplevel == 0 ? 'selected' : '' }}>Non admis</option>
                                                 <option value="1"{{ $player->coplevel == 1 ? 'selected' : '' }}>{{ env('POLICE_GRADE_1') }}</option>
                                                 <option value="2"{{ $player->coplevel == 2 ? 'selected' : '' }}>{{ env('POLICE_GRADE_2') }}</option>
                                                 <option value="3"{{ $player->coplevel == 3 ? 'selected' : '' }}>{{ env('POLICE_GRADE_3') }}</option>
@@ -100,7 +100,7 @@
                                         <td>Grade Pompier</td>
                                         <td>
                                             <select name="medic" class="form-control">
-                                                <option value="1"{{ $player->mediclevel == 0 ? 'selected' : '' }}>&nbsp;</option>
+                                                <option value="1"{{ $player->mediclevel == 0 ? 'selected' : '' }}>Non admis</option>
                                                 <option value="1"{{ $player->mediclevel == 1 ? 'selected' : '' }}>{{ env('POMPIER_GRADE_1') }}</option>
                                                 <option value="2"{{ $player->mediclevel == 2 ? 'selected' : '' }}>{{ env('POMPIER_GRADE_2') }}</option>
                                                 <option value="3"{{ $player->mediclevel == 3 ? 'selected' : '' }}>{{ env('POMPIER_GRADE_3') }}</option>
