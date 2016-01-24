@@ -98,11 +98,14 @@ class ShopsController extends Controller {
 				$paypal_store->price = $shops->price;
 				$paypal_store->save();
 
+				$time = time();
 
 				DB::table('players')
 					->where('playerid', $request->user()->arma)
 					->update(array(
-						'donatorlvl' => $shops->level
+						'donatorlvl' => $shops->level,
+						'duredon' => $shops->time,
+						'timestamp' => $time,
 					));
 
 

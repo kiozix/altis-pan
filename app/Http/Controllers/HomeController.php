@@ -1,5 +1,7 @@
 <?php namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
+
 class HomeController extends Controller {
 
 	/*
@@ -30,6 +32,18 @@ class HomeController extends Controller {
 	 */
 	public function index()
 	{
+		$rows = DB::table('players')->get();
+
+		foreach ($rows as $row) {
+
+			$timestamp = time() - (60 * 60 * 24 * $row->duredon);
+
+			if ($row->timestamp < $timestamp){
+				DB::table('players')->where('timestamp', $row->timestamp)->where('duredon', $row->duredon)->update(array('donatorlvl' => 0, 'duredon' => 0, 'timestamp' => 0));
+			}
+
+		}
+
 		return view('home');
 	}
 
