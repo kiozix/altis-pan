@@ -24,6 +24,7 @@ class StreamsRequest extends Request {
 		return [
 			"name" => "required|min:2",
 			"content" => "required|min:5",
+			"tips" => "required|url"
 		];
 	}
 

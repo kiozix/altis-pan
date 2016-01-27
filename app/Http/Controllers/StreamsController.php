@@ -59,7 +59,7 @@ class StreamsController extends Controller {
 	 */
 	public function store(StreamsRequest $request)
 	{
-		Streams::create($request->only('name', 'slug', 'content'));
+		Streams::create($request->only('name', 'slug', 'content', 'tips'));
 		return redirect(action('StreamsController@index'))->with('success', 'Le streamer à bien été ajouter');
 	}
 
@@ -96,7 +96,7 @@ class StreamsController extends Controller {
 	public function update($id, StreamsRequest $request)
 	{
 		$streams = Streams::findOrFail($id);
-		$streams->update($request->only('name', 'slug', 'content'));
+		$streams->update($request->only('name', 'slug', 'content', 'tips'));
 		return redirect(action('StreamsController@index'))->with('success', 'Le streamer à bien été modifié');
 	}
 

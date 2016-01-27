@@ -7,7 +7,15 @@
     <label class="col-md-4 control-label">Nom du streamer</label>
 
     <div class="col-md-6">
-        {!! Form::text('name', null, ['class' => 'form-control']) !!}
+        {!! Form::text('name', null, ['class' => 'form-control', 'required', 'placeholder' => 'http://www.twitch.tv/...']) !!}
+    </div>
+</div>
+
+<div class="form-group">
+    <label class="col-md-4 control-label">Lien tips</label>
+
+    <div class="col-md-6">
+        {!! Form::url('tips', null, ['class' => 'form-control', 'placeholder'=> 'http://...']) !!}
     </div>
 </div>
 
@@ -16,7 +24,7 @@
     <label class="col-md-4 control-label">Description</label>
 
     <div class="col-md-6">
-        {!! Form::textarea('content', null, ['class' => 'form-control']) !!}
+        {!! Form::textarea('content', null, ['class' => 'form-control', 'required']) !!}
     </div>
 </div>
 

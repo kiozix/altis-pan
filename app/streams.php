@@ -5,7 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Streams extends Model {
 
-	public $fillable = ['name', 'slug', 'content'];
+	public $fillable = ['name', 'slug', 'content', 'tips'];
 
     use Sluggable;
 
