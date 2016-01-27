@@ -97,6 +97,10 @@
                             <a href="{{ url('/stream') }}"><span><i class="fa fa-video-camera"></i>&nbsp;&nbsp;Stream<span class="border"></span></span></a>
                         </li>
 
+                        <!--<li class="{{-- Request::is('page') ? 'active' : '' --}} <?php // $path = Route::getCurrentRoute()->getPath(); if (starts_with($path, 'page/')) echo "active"; ?>">
+                            <a href="{{-- url('/page/{slug}') --}}"><span><i class="fa fa-xxxxx"></i>&nbsp;&nbsp;XXXXXXX<span class="border"></span></span></a>
+                        </li>-->
+
                         @if (Auth::guest())
                             <li class="{{ Request::is('auth/login') ? 'active' : '' }}">
                                 <a href="{{ url('/auth/login') }}"><span><i class="fa fa-unlock"></i>&nbsp;&nbsp;Connexion<span class="border"></span></span></a>

@@ -154,6 +154,13 @@
                         </a>
                     </li>
 
+                    <li class="{{ Request::is('admin/page') ? 'active' : '' }} <?php $path = Route::getCurrentRoute()->getPath(); if (starts_with($path, 'admin/page')) echo "active"; ?>">
+                        <a title="Pages" href="{{ url('admin/page') }}">
+                            <em class="icon-doc"></em>
+                            <span>Pages</span>
+                        </a>
+                    </li>
+
                     <li class="{{ Request::is('admin/stream') ? 'active' : '' }} <?php $path = Route::getCurrentRoute()->getPath(); if (starts_with($path, 'admin/stream')) echo "active"; ?>">
                         <a title="Stream" href="{{ url('admin/stream') }}">
                             <em class="icon-control-play"></em>

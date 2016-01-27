@@ -23,6 +23,8 @@ Route::get('stream/{slug}', ['uses' => 'StreamsController@show']);
 Route::get('news', ['uses' => 'NewsController@index_home']);
 Route::get('news/{slug}', ['uses' => 'NewsController@show']);
 
+Route::get('page/{slug}', ['uses' => 'PagesController@show']);
+
 Route::resource('player', 'PlayersController');
 Route::post('player', ['uses' => 'PlayersController@refunds']);
 Route::get('remboursement', ['uses' => 'PlayersController@refundsView']);
@@ -63,6 +65,7 @@ Route::group(['prefix' => 'admin'], function () {
 	Route::resource('stream', 'StreamsController');
 	Route::resource('news', 'NewsController');
 	Route::resource('shop', 'ShopsController');
+	Route::resource('page', 'PagesController');
 
 });
 
