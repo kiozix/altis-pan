@@ -66,6 +66,7 @@ Route::group(['prefix' => 'admin'], function () {
 	Route::resource('news', 'NewsController');
 	Route::resource('shop', 'ShopsController');
 	Route::resource('page', 'PagesController');
+	Route::resource('offense', 'OffensesController');
 
 });
 

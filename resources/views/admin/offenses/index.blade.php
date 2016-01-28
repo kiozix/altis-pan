@@ -1,18 +1,18 @@
 @extends('admin.app')
 
 @section('page-info')
-    <h3>Boutiques</h3>
+    <h3>Casier Judiciaires</h3>
 @endsection
 
 @section('content')
     <div class="container-fluid">
         <div class="row">
             <div class="text-right">
-                <a href="{{ action('ShopsController@create') }}" class="btn btn-success"><i class="fa fa-plus">&nbsp;&nbsp; Ajouter une offre</i></a>
+                <a href="{{ action('OffensesController@create') }}" class="btn btn-success"><i class="fa fa-plus">&nbsp;&nbsp; Ajouter une infraction</i></a>
                 <br><br>
             </div>
             <div id="streamer" class="panel panel-default">
-                <div class="panel-heading">Boutique
+                <div class="panel-heading">Casier Judiciaires
                     <a href="#" data-tool="panel-collapse" data-toggle="tooltip" title="" class="pull-right">
                         <em class="fa fa-minus"></em>
                     </a>
@@ -22,23 +22,20 @@
                         @include('flash')
                         <table class="table table-responsive table-striped">
                             <tr>
-                                <th>Nom</th>
-                                <th>Prix</th>
-                                <th>Level</th>
-                                <th>Dernière édition</th>
+                                <th>Arma ID</th>
+                                <th>Raison</th>
+                                <th>Auteur</th>
                                 <th>Actions</th>
                             </tr>
-                            @foreach($shops as $shop)
+                            @foreach($offenses as $offense)
                                 <tr>
-                                    <td>{{$shop->name}}</td>
-                                    <td>{{$shop->price}}</td>
-                                    <td>{{$shop->level}}</td>
-                                    <td>{{$shop->updated_at}}</td>
+                                    <td><a href="{{ url('admin/player/' . $offense->arma_id) }}">{{ $offense->arma_id }}</a></td>
+                                    <td>{{$offense->content}}</td>
+                                    <td>{{$offense->author}}</td>
                                     <td>
-                                        <a href="{{ url('/shop/'. $shop->id) }}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
-                                        <a href="{{ action('ShopsController@edit', $shop) }}" class="btn btn-success"><i class="fa fa-pencil"></i></a>
+                                        <a href="{{ action('OffensesController@edit', $offense) }}" class="btn btn-success"><i class="fa fa-pencil"></i></a>
                                         <span style="display: inline-block">
-                                            {!!Form::open(['url' => action("ShopsController@destroy", $shop), 'method' => 'delete']) !!}
+                                            {!!Form::open(['url' => action("OffensesController@destroy", $offense), 'method' => 'delete']) !!}
                                             <button class="btn btn-danger" type="submit"><i class="fa fa-trash"></i></button>
                                             {!! Form::close() !!}
                                         </span>
@@ -46,6 +43,7 @@
                                 </tr>
                             @endforeach
                         </table>
+                        {!! $offenses->render() !!}
                     </div>
                 </div>
             </div>

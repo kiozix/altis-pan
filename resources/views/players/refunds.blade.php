@@ -21,8 +21,8 @@
                 <div class="alert alert-warning">
                     Conditions :
                     <ul>
-                        <li>La descrition doit être complète et au minimum de 10caractères</li>
-                        <li>La description doit ce munir d'un screen ou d'une vidéo</li>
+                        <li>La description doit être complète et au minimum de 25 caractères</li>
+                        <li>La description doit se munir d'un screen ou d'une vidéo</li>
                     </ul>
                 </div>
                 <form action="{{ url('player')}}" method="post" class="form-horizontal">

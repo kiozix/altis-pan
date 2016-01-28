@@ -84,7 +84,7 @@
                                         <td>Grade Policier</td>
                                         <td>
                                             <select name="policier" class="form-control">
-                                                <option value="1"{{ $player->coplevel == 0 ? 'selected' : '' }}>Non admis</option>
+                                                <option value="0"{{ $player->coplevel == 0 ? 'selected' : '' }}>Non admis</option>
                                                 <option value="1"{{ $player->coplevel == 1 ? 'selected' : '' }}>{{ env('POLICE_GRADE_1') }}</option>
                                                 <option value="2"{{ $player->coplevel == 2 ? 'selected' : '' }}>{{ env('POLICE_GRADE_2') }}</option>
                                                 <option value="3"{{ $player->coplevel == 3 ? 'selected' : '' }}>{{ env('POLICE_GRADE_3') }}</option>
@@ -100,7 +100,7 @@
                                         <td>Grade Pompier</td>
                                         <td>
                                             <select name="medic" class="form-control">
-                                                <option value="1"{{ $player->mediclevel == 0 ? 'selected' : '' }}>Non admis</option>
+                                                <option value="0"{{ $player->mediclevel == 0 ? 'selected' : '' }}>Non admis</option>
                                                 <option value="1"{{ $player->mediclevel == 1 ? 'selected' : '' }}>{{ env('POMPIER_GRADE_1') }}</option>
                                                 <option value="2"{{ $player->mediclevel == 2 ? 'selected' : '' }}>{{ env('POMPIER_GRADE_2') }}</option>
                                                 <option value="3"{{ $player->mediclevel == 3 ? 'selected' : '' }}>{{ env('POMPIER_GRADE_3') }}</option>
@@ -198,6 +198,34 @@
                         </div>
                     </div>
                 @endif
+
+                @if($offenses)
+                    <div id="offenses" class="panel panel-default">
+                        <div class="panel-heading">
+                            <span style="font-weight: bold;font-size: 20px !important;">Casier judiciare</span>
+                        </div>
+                        <div class="panel-wrapper collapse in" aria-expanded="true">
+                            <div class="panel-body">
+                                    <table class="table table-responsive table-striped">
+                                        <tr>
+                                            <th>Auteur</th>
+                                            <th>Infraction</th>
+                                            <th>Sanction</th>
+                                        </tr>
+                                        @foreach($offenses as $offense)
+                                        <tr>
+                                            <td>{{ $offense->author }}</td>
+                                            <td>{{ $offense->content }}</td>
+                                            <td>{{ $offense->sanction }}</td>
+                                        </tr>
+                                        @endforeach
+                                    </table>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                @endif
+
                 <div id="vehicules" class="panel panel-default">
                     <div class="panel-heading">
                         <span style="font-weight: bold;font-size: 20px !important;">Véhicules</span>

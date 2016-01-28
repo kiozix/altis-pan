@@ -154,6 +154,13 @@
                         </a>
                     </li>
 
+                    <li class="{{ Request::is('admin/offense') ? 'active' : '' }} <?php $path = Route::getCurrentRoute()->getPath(); if (starts_with($path, 'admin/offense')) echo "active"; ?>">
+                        <a title="Casier Judiciaires" href="{{ url('admin/offense') }}">
+                            <em class="icon-paper-clip"></em>
+                            <span>Casier Judiciaires</span>
+                        </a>
+                    </li>
+
                     <li class="{{ Request::is('admin/page') ? 'active' : '' }} <?php $path = Route::getCurrentRoute()->getPath(); if (starts_with($path, 'admin/page')) echo "active"; ?>">
                         <a title="Pages" href="{{ url('admin/page') }}">
                             <em class="icon-doc"></em>

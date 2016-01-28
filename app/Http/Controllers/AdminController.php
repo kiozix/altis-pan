@@ -50,6 +50,7 @@ class AdminController extends Controller {
 		}
 
 		$user_show = DB::table('users')->where('arma', $id)->first();
+		$offenses = DB::table('offenses')->where('arma_id', $id)->get();
 
 		$vehicles_cars = DB::table('vehicles')->where('pid', $id)->where('type', 'Car')->get();
 		$vehicles_airs = DB::table('vehicles')->where('pid', $id)->where('type', 'Air')->get();
@@ -57,7 +58,7 @@ class AdminController extends Controller {
 
 		$gang = DB::table('gangs')->where('owner', $id)->first();
 
-		return view('admin.players.show', compact('user', 'player', 'vehicles_cars', 'vehicles_airs', 'vehicles_ships', 'gang', 'user_show'));
+		return view('admin.players.show', compact('offenses', 'user', 'player', 'vehicles_cars', 'vehicles_airs', 'vehicles_ships', 'gang', 'user_show'));
 
 	}
 

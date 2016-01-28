@@ -39,7 +39,7 @@ class ShopsController extends Controller {
 
 	public function index_home()
 	{
-		$shops = Shops::orderBy('id', 'DESC')->paginate(3);
+		$shops = Shops::orderBy('id', 'ASC')->paginate(3);
 		return view('shops.index', compact('shops'));
 	}
 
