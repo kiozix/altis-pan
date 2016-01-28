@@ -62,6 +62,9 @@ Route::group(['prefix' => 'admin'], function () {
 	Route::get('/remboursement/{id}', ['uses' => 'AdminController@refundsShow', 'as' => 'refund']);
 	Route::post('/remboursement/{id}', ['uses' => 'AdminController@refundsUpdate']);
 
+	Route::get('/vehicule/{id}', ['uses' => 'AdminController@vehicule']);
+	Route::post('/vehicule/{id}', ['uses' => 'AdminController@vehicule_update']);
+
 	Route::resource('stream', 'StreamsController');
 	Route::resource('news', 'NewsController');
 	Route::resource('shop', 'ShopsController');

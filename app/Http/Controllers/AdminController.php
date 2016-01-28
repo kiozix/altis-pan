@@ -487,4 +487,26 @@ class AdminController extends Controller {
 		return view('admin.refunds.show', compact('user', 'refund'));
 	}
 
+	public function vehicule($id){
+		$user = $this->auth->user();
+
+		$vehicule = DB::table('vehicles')->where('id', $id)->first();
+		$owner = DB::table('players')->where('playerid', $vehicule->pid)->first();
+		$allPlayers = DB::table('players')->get();
+
+		return view('admin.vehicles.show', compact('vehicule', 'user', 'allPlayers', 'owner'));
+	}
+
+	public function vehicule_update($id, Request $request){
+		$new_owner = $request->get("playerid");
+		$vehicule = DB::table('vehicles')->where('id', $id)->first();
+		DB::table('vehicles')
+			->where('id', $id)
+			->update(array(
+				'pid' => $new_owner,
+			));
+
+		return redirect(url('admin/player/'. $vehicule->pid))->with('success', 'Véhicule transférer');
+	}
+
 }

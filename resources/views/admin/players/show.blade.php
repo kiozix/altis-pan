@@ -247,6 +247,7 @@
                                                     <th>Emplacement du garage</th>
                                                     <th>Type</th>
                                                     <th>Active</th>
+                                                    <th>Action</th>
                                                 </tr>
                                                 @foreach($vehicles_cars as $vehicle_car)
                                                     <tr>
@@ -260,6 +261,7 @@
                                                                 <i class="fa fa-close" style="color: #c0392b;"></i>
                                                             @endif
                                                         </td>
+                                                        <td><a href="{{ url('admin/vehicule', ['id' => $vehicle_car->id]) }}"><i class="fa fa-exchange" style="color: #4aa3df;"></i></a></td>
                                                     </tr>
                                                 @endforeach
                                             </table>
@@ -280,6 +282,7 @@
                                                     <th>Emplacement du garage</th>
                                                     <th>Type</th>
                                                     <th>Active</th>
+                                                    <th>Action</th>
                                                 </tr>
                                                 @foreach($vehicles_airs as $vehicle_air)
                                                     <tr>
@@ -293,6 +296,7 @@
                                                                 <i class="fa fa-close" style="color: #c0392b;"></i>
                                                             @endif
                                                         </td>
+                                                        <td><a href="{{ url('admin/vehicule', ['id' => $vehicle_air->id]) }}"><i class="fa fa-exchange" style="color: #4aa3df;"></i></a></td>
                                                     </tr>
                                                 @endforeach
                                             </table>
@@ -313,6 +317,7 @@
                                                     <th>Emplacement du garage</th>
                                                     <th>Type</th>
                                                     <th>Active</th>
+                                                    <th>Action</th>
                                                 </tr>
                                                 @foreach($vehicles_ships as $vehicle_ship)
                                                     <tr>
@@ -326,6 +331,7 @@
                                                                 <i class="fa fa-close" style="color: #c0392b;"></i>
                                                             @endif
                                                         </td>
+                                                        <td><a href="{{ url('admin/vehicule', ['id' => $vehicle_ship->id]) }}"><i class="fa fa-exchange" style="color: #4aa3df;"></i></a></td>
                                                     </tr>
                                                 @endforeach
                                             </table>
