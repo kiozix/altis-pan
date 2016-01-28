@@ -113,7 +113,7 @@ class OffensesController extends Controller {
 	{
 		$offenses = Offenses::findOrFail($id);
 		$offenses->delete();
-		return redirect(action('OffensesController@index'))->with('success', 'La news à bien été supprimé');
+		return redirect(action('OffensesController@index'))->with('success', 'L\'infraction à bien été supprimé');
 	}
 
 }
