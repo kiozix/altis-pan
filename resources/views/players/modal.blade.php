@@ -7,14 +7,9 @@
             </div>
             <div class="modal-body">
                 <ul>
-                    <li>{{ env('POLICE_GRADE_1') }}</li>
-                    <li>{{ env('POLICE_GRADE_2') }}</li>
-                    <li>{{ env('POLICE_GRADE_3') }}</li>
-                    <li>{{ env('POLICE_GRADE_4') }}</li>
-                    <li>{{ env('POLICE_GRADE_5') }}</li>
-                    <li>{{ env('POLICE_GRADE_6') }}</li>
-                    <li>{{ env('POLICE_GRADE_7') }}</li>
-                    <li>{{ env('POLICE_GRADE_8') }}</li>
+                    @foreach($ranks_cop as $cops)
+                        <li>{{ $cops->name }}</li>
+                    @endforeach
                 </ul>
             </div>
             <div class="modal-footer">
@@ -33,11 +28,9 @@
             </div>
             <div class="modal-body">
                 <ul>
-                    <li>{{ env('POMPIER_GRADE_1') }}</li>
-                    <li>{{ env('POMPIER_GRADE_2') }}</li>
-                    <li>{{ env('POMPIER_GRADE_3') }}</li>
-                    <li>{{ env('POMPIER_GRADE_4') }}</li>
-                    <li>{{ env('POMPIER_GRADE_5') }}</li>
+                    @foreach($ranks_medic as $medics)
+                        <li>{{ $medics->name }}</li>
+                    @endforeach
                 </ul>
             </div>
             <div class="modal-footer">

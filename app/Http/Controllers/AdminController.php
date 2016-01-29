@@ -57,10 +57,12 @@ class AdminController extends Controller {
 		$vehicles_airs = DB::table('vehicles')->where('pid', $id)->where('type', 'Air')->get();
 		$vehicles_ships = DB::table('vehicles')->where('pid', $id)->where('type', 'Ship')->get();
 
-		$gang = DB::table('gangs')->where('owner', $id)->first();
 		$ranks_cop = DB::table('ranks')->where('side', 'COP')->get();
+		$ranks_medic = DB::table('ranks')->where('side', 'MEDIC')->get();
 
-		return view('admin.players.show', compact('ranks_cop', 'offenses', 'user', 'player', 'vehicles_cars', 'vehicles_airs', 'vehicles_ships', 'gang', 'user_show'));
+		$gang = DB::table('gangs')->where('owner', $id)->first();
+
+		return view('admin.players.show', compact('ranks_cop', 'ranks_medic', 'offenses', 'user', 'player', 'vehicles_cars', 'vehicles_airs', 'vehicles_ships', 'gang', 'user_show'));
 
 	}
 

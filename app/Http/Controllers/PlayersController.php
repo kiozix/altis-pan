@@ -48,50 +48,11 @@ class PlayersController extends Controller {
 		$vehicles_airs = DB::table('vehicles')->where('pid', $auth->user()->arma)->where('type', 'Air')->get();
 		$vehicles_ships = DB::table('vehicles')->where('pid', $auth->user()->arma)->where('type', 'Ship')->get();
 
-		switch ($players->coplevel) {
-			case 1:
-				$coplevel = env('POLICE_GRADE_1');
-				break;
-			case 2:
-				$coplevel = env('POLICE_GRADE_2');
-				break;
-			case 3:
-				$coplevel = env('POLICE_GRADE_3');
-				break;
-			case 4:
-				$coplevel = env('POLICE_GRADE_4');
-				break;
-			case 5:
-				$coplevel = env('POLICE_GRADE_5');
-				break;
-			case 6:
-				$coplevel = env('POLICE_GRADE_6');
-				break;
-			case 7:
-				$coplevel = env('POLICE_GRADE_7');
-				break;
-			case 8:
-				$coplevel = env('POLICE_GRADE_8');
-				break;
-		}
+		$ranks_cop = DB::table('ranks')->where('side', 'COP')->get();
+		$ranks_medic = DB::table('ranks')->where('side', 'MEDIC')->get();
 
-		switch ($players->mediclevel) {
-			case 1:
-				$mediclevel = env('POMPIER_GRADE_1');
-				break;
-			case 2:
-				$mediclevel = env('POMPIER_GRADE_2');
-				break;
-			case 3:
-				$mediclevel = env('POMPIER_GRADE_3');
-				break;
-			case 4:
-				$mediclevel = env('POMPIER_GRADE_4');
-				break;
-			case 5:
-				$mediclevel = env('POMPIER_GRADE_5');
-				break;
-		}
+		$cop = DB::table('ranks')->where('side', 'COP')->where('value_associated', $players->coplevel)->first();
+		$medic = DB::table('ranks')->where('side', 'MEDIC')->where('value_associated', $players->mediclevel)->first();
 
 		switch($players->adminlevel){
 			case 0:
@@ -109,11 +70,12 @@ class PlayersController extends Controller {
 		}
 
 		if($gang) {
-			return view('players.index', compact('refunds', 'allPlayers', 'players', 'mediclevel', 'coplevel', 'rank', 'gang', 'vehicles_cars', 'vehicles_airs', 'vehicles_ships', 'gangMembers'));
+			return view('players.index', compact('cop', 'medic' ,'ranks_cop','ranks_medic', 'refunds', 'allPlayers', 'players', 'mediclevel', 'coplevel', 'rank', 'gang', 'vehicles_cars', 'vehicles_airs', 'vehicles_ships', 'gangMembers'));
 		} else {
-			return view('players.index', compact('refunds', 'players', 'mediclevel', 'coplevel', 'rank', 'gang', 'vehicles_cars', 'vehicles_airs', 'vehicles_ships'));
+			return view('players.index', compact('cop', 'medic' ,'ranks_cop','ranks_medic', 'refunds', 'players', 'mediclevel', 'coplevel', 'rank', 'gang', 'vehicles_cars', 'vehicles_airs', 'vehicles_ships'));
 
 		}
+
 	}
 
 	public function refundsView(){

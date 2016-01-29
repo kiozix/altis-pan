@@ -72,18 +72,18 @@
                                         <div class="form-group">
                                             <label class="col-md-4 control-label">Compte Banque</label>
                                             <div class="col-md-8">
-                                                <input class="form-control input-lg" type="text"
-                                                       value="{{ number_format($players->bankacc, 2, ',', ' ') . ' $' }}" disabled>
+                                                <input class="form-control input-lg" type="text" value="{{ number_format($players->bankacc, 2, ',', ' ') . ' $' }}" disabled>
                                             </div>
                                         </div>
                                     </div>
                                     <br /><br />
+
                                     @if($players->mediclevel > 0)
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label class="col-md-4 control-label">Rang Pompier <a type="button" data-toggle="modal" data-target="#pompier">(?)</a></label>
                                                 <div class="col-md-8">
-                                                    <input type="text" class="form-control input-lg" value="{{ $mediclevel }}" disabled>
+                                                    <input type="text" class="form-control input-lg" value="{{ $medic->name }}" disabled>
                                                 </div>
                                             </div>
                                         </div>
@@ -95,7 +95,7 @@
                                             <div class="form-group">
                                                 <label class="col-md-4 control-label">Rang Policier <a type="button" data-toggle="modal" data-target="#police">(?)</a></label>
                                                 <div class="col-md-8">
-                                                    <input type="text" class="form-control input-lg" value="{{ $coplevel }}" disabled>
+                                                    <input type="text" class="form-control input-lg" value="{{ $cop->name }}" disabled>
                                                 </div>
                                             </div>
                                         </div>

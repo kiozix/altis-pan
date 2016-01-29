@@ -96,11 +96,9 @@
                                         <td>
                                             <select name="medic" class="form-control">
                                                 <option value="0"{{ $player->mediclevel == 0 ? 'selected' : '' }}>Non admis</option>
-                                                <option value="1"{{ $player->mediclevel == 1 ? 'selected' : '' }}>{{ env('POMPIER_GRADE_1') }}</option>
-                                                <option value="2"{{ $player->mediclevel == 2 ? 'selected' : '' }}>{{ env('POMPIER_GRADE_2') }}</option>
-                                                <option value="3"{{ $player->mediclevel == 3 ? 'selected' : '' }}>{{ env('POMPIER_GRADE_3') }}</option>
-                                                <option value="4"{{ $player->mediclevel == 4 ? 'selected' : '' }}>{{ env('POMPIER_GRADE_4') }}</option>
-                                                <option value="5"{{ $player->mediclevel == 5 ? 'selected' : '' }}>{{ env('POMPIER_GRADE_5') }}</option>
+                                                @foreach($ranks_medic as $medic)
+                                                    <option value="{{ $medic->value_associated }}" {{ $player->coplevel == $medic->value_associated ? 'selected' : '' }}>{{ $medic->name }}</option>
+                                                @endforeach
                                             </select>
                                         </td>
                                     </tr>
