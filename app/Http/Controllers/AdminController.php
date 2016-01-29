@@ -59,10 +59,11 @@ class AdminController extends Controller {
 
 		$ranks_cop = DB::table('ranks')->where('side', 'COP')->get();
 		$ranks_medic = DB::table('ranks')->where('side', 'MEDIC')->get();
+		$ranks_admin = DB::table('ranks')->where('side', 'ADMIN')->get();
 
 		$gang = DB::table('gangs')->where('owner', $id)->first();
 
-		return view('admin.players.show', compact('ranks_cop', 'ranks_medic', 'offenses', 'user', 'player', 'vehicles_cars', 'vehicles_airs', 'vehicles_ships', 'gang', 'user_show'));
+		return view('admin.players.show', compact('ranks_admin', 'ranks_cop', 'ranks_medic', 'offenses', 'user', 'player', 'vehicles_cars', 'vehicles_airs', 'vehicles_ships', 'gang', 'user_show'));
 
 	}
 
@@ -517,8 +518,9 @@ class AdminController extends Controller {
 		$user = $this->auth->user();
 		$ranks_cop = DB::table('ranks')->where('side', 'COP')->get();
 		$ranks_medic = DB::table('ranks')->where('side', 'MEDIC')->get();
+		$ranks_admin = DB::table('ranks')->where('side', 'ADMIN')->get();
 
-		return view('admin.settings.index', compact('user', 'ranks_cop', 'ranks_medic'));
+		return view('admin.settings.index', compact('ranks_admin', 'user', 'ranks_cop', 'ranks_medic'));
 	}
 
 	public function settingsCop(Request $request){

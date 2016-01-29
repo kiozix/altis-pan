@@ -49,7 +49,7 @@
                                         <div class="form-group">
                                             <label class="col-md-4 control-label">Rang</label>
                                             <div class="col-md-8">
-                                                <input class="form-control input-lg" name="name" type="text" value="{{ $rank }}" disabled>
+                                                <input class="form-control input-lg" name="name" type="text" value="{{ $admin->name }}" disabled>
                                             </div>
                                         </div>
                                     </div>
@@ -60,8 +60,7 @@
                                         <div class="form-group">
                                             <label class="col-md-4 control-label">Cash</label>
                                             <div class="col-md-8">
-                                                <input class="form-control input-lg" type="text"
-                                                       value="{{ number_format($players->cash, 2, ',', ' ') . ' $' }}" disabled>
+                                                <input class="form-control input-lg" type="text" value="{{ number_format($players->cash, 2, ',', ' ') . ' $' }}" disabled>
                                             </div>
                                         </div>
                                     </div>
