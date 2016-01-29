@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Input;
 
 use App\Paypal;
 use App\Players;
+use App\Ranks;
 use Illuminate\Support\Facades\DB;
 class AdminController extends Controller {
 
@@ -57,8 +58,9 @@ class AdminController extends Controller {
 		$vehicles_ships = DB::table('vehicles')->where('pid', $id)->where('type', 'Ship')->get();
 
 		$gang = DB::table('gangs')->where('owner', $id)->first();
+		$ranks_cop = DB::table('ranks')->where('side', 'COP')->get();
 
-		return view('admin.players.show', compact('offenses', 'user', 'player', 'vehicles_cars', 'vehicles_airs', 'vehicles_ships', 'gang', 'user_show'));
+		return view('admin.players.show', compact('ranks_cop', 'offenses', 'user', 'player', 'vehicles_cars', 'vehicles_airs', 'vehicles_ships', 'gang', 'user_show'));
 
 	}
 
@@ -507,6 +509,36 @@ class AdminController extends Controller {
 			));
 
 		return redirect(url('admin/player/'. $vehicule->pid))->with('success', 'Véhicule transférer');
+	}
+
+	public function settings(){
+		$user = $this->auth->user();
+		$ranks_cop = DB::table('ranks')->where('side', 'COP')->get();
+		$ranks_medic = DB::table('ranks')->where('side', 'MEDIC')->get();
+
+		return view('admin.settings.index', compact('user', 'ranks_cop', 'ranks_medic'));
+	}
+
+	public function settingsCop(Request $request){
+		$value = $request->get("value_associated");
+		$name = $request->get("name");
+		$side = $request->get("side");
+
+		$ranks = New Ranks();
+		$ranks->side = $side;
+		$ranks->value_associated = $value;
+		$ranks->name = $name;
+		$ranks->save();
+
+		return redirect(action('AdminController@settings'))->with('success', 'Le grade à bien été créer');
+
+	}
+
+	public function settingDestroy($id)
+	{
+		$rank = Ranks::findOrFail($id);
+		$rank->delete();
+		return redirect(action('AdminController@settings'))->with('success', 'Le grade à bien été supprimer');
 	}
 
 }

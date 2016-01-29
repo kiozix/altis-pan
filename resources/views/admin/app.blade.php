@@ -196,6 +196,13 @@
                         </a>
                     </li>
 
+                    <li class="{{ Request::is('admin/settings') ? 'active' : '' }}">
+                        <a title="Paramètres" href="{{ url('admin/settings') }}">
+                            <em class="icon-wrench"></em>
+                            <span>Paramètres</span>
+                        </a>
+                    </li>
+
                 </ul>
             </nav>
         </div>

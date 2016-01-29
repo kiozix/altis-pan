@@ -53,8 +53,8 @@ Route::group(['prefix' => 'admin'], function () {
 	Route::post('/gang/delete', ['uses' => 'AdminController@deleteGang', 'as' => 'deleteGangAdmin']);
 	Route::post('/gang/add', ['uses' => 'AdminController@addUserGang', 'as' => 'addPlayerGangAdmin']);
 
-	Route::post('/user/update/{id}', ['uses' => 'AdminController@updateUser']);
 	Route::get('/user', ['uses' => 'AdminController@users']);
+	Route::post('/user/update/{id}', ['uses' => 'AdminController@updateUser']);
 	Route::get('/user/{id}', ['uses' => 'AdminController@userShow', 'as' => 'user']);
 	Route::post('/user/{id}', ['uses' => 'AdminController@userUpdate']);
 
@@ -64,6 +64,10 @@ Route::group(['prefix' => 'admin'], function () {
 
 	Route::get('/vehicule/{id}', ['uses' => 'AdminController@vehicule']);
 	Route::post('/vehicule/{id}', ['uses' => 'AdminController@vehicule_update']);
+
+	Route::get('/settings', ['uses' => 'AdminController@settings']);
+	Route::post('/settings', ['uses' => 'AdminController@settingsCop']);
+	Route::DELETE('/settings/{id}', ['uses' => 'AdminController@settingDestroy']);
 
 	Route::resource('stream', 'StreamsController');
 	Route::resource('news', 'NewsController');

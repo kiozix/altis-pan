@@ -85,14 +85,9 @@
                                         <td>
                                             <select name="policier" class="form-control">
                                                 <option value="0"{{ $player->coplevel == 0 ? 'selected' : '' }}>Non admis</option>
-                                                <option value="1"{{ $player->coplevel == 1 ? 'selected' : '' }}>{{ env('POLICE_GRADE_1') }}</option>
-                                                <option value="2"{{ $player->coplevel == 2 ? 'selected' : '' }}>{{ env('POLICE_GRADE_2') }}</option>
-                                                <option value="3"{{ $player->coplevel == 3 ? 'selected' : '' }}>{{ env('POLICE_GRADE_3') }}</option>
-                                                <option value="4"{{ $player->coplevel == 4 ? 'selected' : '' }}>{{ env('POLICE_GRADE_4') }}</option>
-                                                <option value="5"{{ $player->coplevel == 5 ? 'selected' : '' }}>{{ env('POLICE_GRADE_5') }}</option>
-                                                <option value="6"{{ $player->coplevel == 6 ? 'selected' : '' }}>{{ env('POLICE_GRADE_6') }}</option>
-                                                <option value="7"{{ $player->coplevel == 7 ? 'selected' : '' }}>{{ env('POLICE_GRADE_7') }}</option>
-                                                <option value="8"{{ $player->coplevel == 8 ? 'selected' : '' }}>{{ env('POLICE_GRADE_8') }}</option>
+                                                @foreach($ranks_cop as $cop)
+                                                    <option value="{{ $cop->value_associated }}" {{ $player->coplevel == $cop->value_associated ? 'selected' : '' }}>{{ $cop->name }}</option>
+                                                @endforeach
                                             </select>
                                         </td>
                                     </tr>
