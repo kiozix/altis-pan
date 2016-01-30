@@ -62,9 +62,11 @@ class AdminController extends Controller {
 		$ranks_medic = DB::table('ranks')->where('side', 'MEDIC')->get();
 		$ranks_admin = DB::table('ranks')->where('side', 'ADMIN')->get();
 
+		$insure = DB::table('settings')->where('name', 'insure')->first();
+
 		$gang = DB::table('gangs')->where('owner', $id)->first();
 
-		return view('admin.players.show', compact('ranks_admin', 'ranks_cop', 'ranks_medic', 'offenses', 'user', 'player', 'vehicles_cars', 'vehicles_airs', 'vehicles_ships', 'gang', 'user_show'));
+		return view('admin.players.show', compact('insure', 'ranks_admin', 'ranks_cop', 'ranks_medic', 'offenses', 'user', 'player', 'vehicles_cars', 'vehicles_airs', 'vehicles_ships', 'gang', 'user_show'));
 
 	}
 
@@ -522,8 +524,9 @@ class AdminController extends Controller {
 		$ranks_admin = DB::table('ranks')->where('side', 'ADMIN')->get();
 
 		$licenses = DB::table('settings')->where('action', 'LICENSES')->get();
+		$insure = DB::table('settings')->where('name', 'insure')->first();
 
-		return view('admin.settings.index', compact('licenses', 'ranks_admin', 'user', 'ranks_cop', 'ranks_medic'));
+		return view('admin.settings.index', compact('licenses', 'insure', 'ranks_admin', 'user', 'ranks_cop', 'ranks_medic'));
 	}
 
 	public function settingsUpdate(Request $request){
@@ -540,17 +543,44 @@ class AdminController extends Controller {
 
 			return redirect(action('AdminController@settings'))->with('success', 'Le grade à bien été créer');
 		}elseif($request->get("action")){
-			$value = $request->get("value_associated");
-			$name = $request->get("name");
-			$action = $request->get("action");
 
-			$settings = New Settings();
-			$settings->action = $action;
-			$settings->value_associated = $value;
-			$settings->name = $name;
-			$settings->save();
+			if($request->get("insure_var") == 1 or $request->get("insure_var") == 0){
+				$value = $request->get("insure_var");
 
-			return redirect(action('AdminController@settings'))->with('success', 'Le nom de la licenses à bien été enregistrer');
+				$insure = DB::table('settings')->where('name', 'insure')->first();
+
+				if($insure && $insure->value_associated == 1 OR $insure && $insure->value_associated == 0){
+					if($insure->value_associated == 1){
+						$set = 0;
+					}else{
+						$set = 1;
+					}
+
+					DB::table('settings')
+						->where('name', 'insure')
+						->update(array(
+							'value_associated' => $set,
+						));
+				}else{
+					$settings = New Settings();
+					$settings->action = 'SETTINGS';
+					$settings->value_associated = $value;
+					$settings->name = 'insure';
+					$settings->save();
+				}
+
+			}else {
+				$value = $request->get("value_associated");
+				$name = $request->get("name");
+				$action = $request->get("action");
+
+				$settings = New Settings();
+				$settings->action = $action;
+				$settings->value_associated = $value;
+				$settings->name = $name;
+				$settings->save();
+			}
+			return redirect(action('AdminController@settings'))->with('success', 'L\'action à bien été effectuer');
 		}
 
 

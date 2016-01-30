@@ -238,6 +238,9 @@
                                                     <th>Nom</th>
                                                     <th>Emplacement du garage</th>
                                                     <th>Type</th>
+                                                    @if($insure && $insure->value_associated == 1)
+                                                        <th>Assurance</th>
+                                                    @endif
                                                     <th>Active</th>
                                                     <th>Action</th>
                                                 </tr>
@@ -246,6 +249,15 @@
                                                         <td>{{ $vehicle_car->classname }}</td>
                                                         <td>{{ $vehicle_car->side }}</td>
                                                         <td>{{ $vehicle_car->type }}</td>
+                                                        @if($insure && $insure->value_associated == 1)
+                                                            <td>
+                                                                @if($vehicle_car->insure == 1)
+                                                                    <i class="fa fa-check" style="color: #2cc36b;"></i>
+                                                                @elseif($vehicle_car->insure == 0)
+                                                                    <i class="fa fa-close" style="color: #c0392b;"></i>
+                                                                @endif
+                                                            </td>
+                                                        @endif
                                                         <td>
                                                             @if($vehicle_car->active == 1)
                                                                 <i class="fa fa-check" style="color: #2cc36b;"></i>
@@ -273,6 +285,9 @@
                                                     <th>Nom</th>
                                                     <th>Emplacement du garage</th>
                                                     <th>Type</th>
+                                                    @if($insure && $insure->value_associated == 1)
+                                                        <th>Assurance</th>
+                                                    @endif
                                                     <th>Active</th>
                                                     <th>Action</th>
                                                 </tr>
@@ -281,6 +296,15 @@
                                                         <td>{{ $vehicle_air->classname }}</td>
                                                         <td>{{ $vehicle_air->side }}</td>
                                                         <td>{{ $vehicle_air->type }}</td>
+                                                        @if($insure && $insure->value_associated == 1)
+                                                            <td>
+                                                                @if($vehicle_air->insure == 1)
+                                                                    <i class="fa fa-check" style="color: #2cc36b;"></i>
+                                                                @elseif($vehicle_air->insure == 0)
+                                                                    <i class="fa fa-close" style="color: #c0392b;"></i>
+                                                                @endif
+                                                            </td>
+                                                        @endif
                                                         <td>
                                                             @if($vehicle_air->active == 1)
                                                                 <i class="fa fa-check" style="color: #2cc36b;"></i>
@@ -308,6 +332,9 @@
                                                     <th>Nom</th>
                                                     <th>Emplacement du garage</th>
                                                     <th>Type</th>
+                                                    @if($insure && $insure->value_associated == 1)
+                                                        <th>Assurance</th>
+                                                    @endif
                                                     <th>Active</th>
                                                     <th>Action</th>
                                                 </tr>
@@ -316,6 +343,15 @@
                                                         <td>{{ $vehicle_ship->classname }}</td>
                                                         <td>{{ $vehicle_ship->side }}</td>
                                                         <td>{{ $vehicle_ship->type }}</td>
+                                                        @if($insure && $insure->value_associated == 1)
+                                                            <td>
+                                                                @if($vehicle_ship->insure == 1)
+                                                                    <i class="fa fa-check" style="color: #2cc36b;"></i>
+                                                                @elseif($vehicle_ship->insure == 0)
+                                                                    <i class="fa fa-close" style="color: #c0392b;"></i>
+                                                                @endif
+                                                            </td>
+                                                        @endif
                                                         <td>
                                                             @if($vehicle_ship->active == 1)
                                                                 <i class="fa fa-check" style="color: #2cc36b;"></i>
@@ -337,7 +373,6 @@
             </div>
 
             <div class="col-md-6">
-
                 <div id="money-give" class="panel panel-default">
                     <div class="panel-heading">
                         <span style="font-weight: bold;font-size: 20px !important;">Ajouter de l'argent</span>
@@ -385,7 +420,6 @@
                         </div>
                     </div>
                 </div>
-
 
                 <div id="licenses-civ" class="panel panel-default">
                     <div class="panel-heading">
