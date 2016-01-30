@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Input;
 use App\Paypal;
 use App\Players;
 use App\Ranks;
+use App\Settings;
 use Illuminate\Support\Facades\DB;
 class AdminController extends Controller {
 
@@ -520,29 +521,55 @@ class AdminController extends Controller {
 		$ranks_medic = DB::table('ranks')->where('side', 'MEDIC')->get();
 		$ranks_admin = DB::table('ranks')->where('side', 'ADMIN')->get();
 
-		return view('admin.settings.index', compact('ranks_admin', 'user', 'ranks_cop', 'ranks_medic'));
+		$licenses = DB::table('settings')->where('action', 'LICENSES')->get();
+
+		return view('admin.settings.index', compact('licenses', 'ranks_admin', 'user', 'ranks_cop', 'ranks_medic'));
 	}
 
-	public function settingsCop(Request $request){
-		$value = $request->get("value_associated");
-		$name = $request->get("name");
-		$side = $request->get("side");
+	public function settingsUpdate(Request $request){
+		if($request->get("side")){
+			$value = $request->get("value_associated");
+			$name = $request->get("name");
+			$side = $request->get("side");
 
-		$ranks = New Ranks();
-		$ranks->side = $side;
-		$ranks->value_associated = $value;
-		$ranks->name = $name;
-		$ranks->save();
+			$ranks = New Ranks();
+			$ranks->side = $side;
+			$ranks->value_associated = $value;
+			$ranks->name = $name;
+			$ranks->save();
 
-		return redirect(action('AdminController@settings'))->with('success', 'Le grade à bien été créer');
+			return redirect(action('AdminController@settings'))->with('success', 'Le grade à bien été créer');
+		}elseif($request->get("action")){
+			$value = $request->get("value_associated");
+			$name = $request->get("name");
+			$action = $request->get("action");
+
+			$settings = New Settings();
+			$settings->action = $action;
+			$settings->value_associated = $value;
+			$settings->name = $name;
+			$settings->save();
+
+			return redirect(action('AdminController@settings'))->with('success', 'Le nom de la licenses à bien été enregistrer');
+		}
+
+
 
 	}
 
-	public function settingDestroy($id)
+	public function settingDestroy($id, Request $request)
 	{
-		$rank = Ranks::findOrFail($id);
-		$rank->delete();
-		return redirect(action('AdminController@settings'))->with('success', 'Le grade à bien été supprimer');
+		if($request->get("action") == 'ranks'){
+
+			$rank = Ranks::findOrFail($id);
+			$rank->delete();
+			return redirect(action('AdminController@settings'))->with('success', 'Le grade à bien été supprimer');
+		}elseif($request->get("action") == 'settings'){
+
+			$setting = Settings::findOrFail($id);
+			$setting->delete();
+			return redirect(action('AdminController@settings'))->with('success', 'L\'action à bien été effectuer');
+		}
 	}
 
 }
