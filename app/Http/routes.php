@@ -67,6 +67,7 @@ Route::group(['prefix' => 'admin'], function () {
 
 	Route::get('/settings', ['uses' => 'AdminController@settings']);
 	Route::post('/settings', ['uses' => 'AdminController@settingsUpdate']);
+	Route::post('/settings/parameters', ['uses' => 'AdminController@settingParam']);
 	Route::DELETE('/settings/{id}', ['uses' => 'AdminController@settingDestroy']);
 
 	Route::resource('stream', 'StreamsController');

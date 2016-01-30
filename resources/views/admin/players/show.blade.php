@@ -433,15 +433,22 @@
                                     <th>Status</th>
                                 </tr>
                                 <?php
-                                $suppr = array("\"", "`", "[", "]");
-                                $lineLicenses = str_replace($suppr, "", $player->civ_licenses);
-                                $arrayLicenses = preg_split("/,/", $lineLicenses);
-                                $totarrayLicenses = count($arrayLicenses);
-                                $y = 0;
-                                $n = 0;
+                                    $suppr = array("\"", "`", "[", "]");
+                                    $lineLicenses = str_replace($suppr, "", $player->civ_licenses);
+                                    $arrayLicenses = preg_split("/,/", $lineLicenses);
+                                    $totarrayLicenses = count($arrayLicenses);
+                                    $y = 0;
+                                    $n = 0;
                                 ?>
                                 @for($i = 1; $y < $totarrayLicenses; $i++)
                                     <tr>
+                                        <?php
+                                        foreach($licensesName as $license){
+                                            if($arrayLicenses[$y] == $license->value_associated){
+                                                $arrayLicenses[$y]= $license->name;
+                                            }
+                                        }
+                                        ?>
                                         <td>{{ $arrayLicenses[$y] }}</td>
                                         <td>
                                             @if($arrayLicenses[$i] == 1)
@@ -486,6 +493,14 @@
                                 ?>
                                 @for($i = 1; $y < $totarrayLicenses; $i++)
                                     <tr>
+                                        <?php
+                                        foreach($licensesName as $license){
+                                            if($arrayLicenses[$y] == $license->value_associated){
+                                                $arrayLicenses[$y]= $license->name;
+                                            }
+                                        }
+                                        ?>
+
                                         <td>{{ $arrayLicenses[$y] }}</td>
                                         <td>
                                             @if($arrayLicenses[$i] == 1)
@@ -530,6 +545,13 @@
                                 ?>
                                 @for($i = 1; $y < $totarrayLicenses; $i++)
                                     <tr>
+                                        <?php
+                                        foreach($licensesName as $license){
+                                            if($arrayLicenses[$y] == $license->value_associated){
+                                                $arrayLicenses[$y]= $license->name;
+                                            }
+                                        }
+                                        ?>
                                         <td>{{ $arrayLicenses[$y] }}</td>
                                         <td>
                                             @if($arrayLicenses[$i] == 1)

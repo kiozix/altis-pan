@@ -19,7 +19,7 @@
                     </div>
                     <div class="panel-wrapper collapse in" aria-expanded="true">
                         <div class="panel-body">
-                            <form action="{{ url('/admin/settings') }}" method="post" class="form-horizontal">
+                            <form action="{{ url('/admin/settings/parameters') }}" method="post" class="form-horizontal">
                                 <input type="hidden" name="action" value="SETTINGS">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
