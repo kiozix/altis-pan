@@ -44,7 +44,8 @@
                                     </div>
 
                                     <br/><br/>
-
+                                    
+                                    @if($admin)
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="col-md-4 control-label">Rang</label>
@@ -55,6 +56,7 @@
                                     </div>
 
                                     <br/><br/>
+                                    @endif
 
                                     <div class="col-md-12">
                                         <div class="form-group">
