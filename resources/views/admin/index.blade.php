@@ -128,7 +128,7 @@
                             </div>
                             <div class="media-box-body clearfix">
                                 <small class="text-muted pull-right ml">{{ $player->playerid }}</small>
-                                <div class="media-box-heading"><a href="{{ url('admin/paypal') }}" class="text-info m0">{{ $player->name }}</a>
+                                <div class="media-box-heading"><a href="{{ url('admin/player/'. $player->playerid) }}" class="text-info m0">{{ $player->name }}</a>
                                 </div>
                                 <p class="m0">
                                     <small><a href="{{ url('admin/player/'. $player->playerid) }}">Afficher</a></small>
