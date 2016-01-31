@@ -243,7 +243,6 @@ class AdminController extends Controller {
 		return view('admin.gangs.index', compact('user', 'gangs'));
 	}
 
-
 	public function gangShow($id)
 	{
 		$user = $this->auth->user();
@@ -397,9 +396,9 @@ class AdminController extends Controller {
 
 					// Début
 					if ($n == $id && $y == 0) {
-						$licenses_arma[] = "\"[[`" . $arrayLicenses[$y] . "`," . $status . "],";
+						$licenses_arma[] = "[[`" . $arrayLicenses[$y] . "`," . $status . "],";
 					} elseif ($n == 0 && $id !== $n) {
-						$licenses_arma[] = "\"[[`" . $arrayLicenses[$y] . "`," . $arrayLicenses[$i] . "],";
+						$licenses_arma[] = "[[`" . $arrayLicenses[$y] . "`," . $arrayLicenses[$i] . "],";
 					}
 
 					// Millieux
@@ -411,9 +410,9 @@ class AdminController extends Controller {
 
 					// Fin
 					if ($n == $id && $y == ($totarrayLicenses - 2)) {
-						$licenses_arma[] = "[`" . $arrayLicenses[$y] . "`," . $status . "]]\"";
+						$licenses_arma[] = "[`" . $arrayLicenses[$y] . "`," . $status . "]]";
 					} elseif ($n !== $id && $y == ($totarrayLicenses - 2)) {
-						$licenses_arma[] = "[`" . $arrayLicenses[$y] . "`," . $arrayLicenses[$i] . "]]\"";
+						$licenses_arma[] = "[`" . $arrayLicenses[$y] . "`," . $arrayLicenses[$i] . "]]";
 					}
 
 					// Pair
