@@ -242,7 +242,7 @@
                                                         <th>Assurance</th>
                                                     @endif
                                                     <th>Active</th>
-                                                    <th>Action</th>
+                                                    <th>Actions</th>
                                                 </tr>
                                                 @foreach($vehicles_cars as $vehicle_car)
                                                     <tr>
@@ -296,7 +296,7 @@
                                                         <th>Assurance</th>
                                                     @endif
                                                     <th>Active</th>
-                                                    <th>Action</th>
+                                                    <th>Actions</th>
                                                 </tr>
                                                 @foreach($vehicles_airs as $vehicle_air)
                                                     <tr>
@@ -350,7 +350,7 @@
                                                         <th>Assurance</th>
                                                     @endif
                                                     <th>Active</th>
-                                                    <th>Action</th>
+                                                    <th>Actions</th>
                                                 </tr>
                                                 @foreach($vehicles_ships as $vehicle_ship)
                                                     <tr>
