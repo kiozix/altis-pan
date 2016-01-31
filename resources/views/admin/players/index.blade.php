@@ -28,11 +28,10 @@
                                     <td>
                                         <?php
                                             $money = $player->cash + $player->bankacc;
-
-                                            if ($money < 500000) {
+                                            if ($money < env('MONEY_WARNING', 500000)) {
                                                 $argent = number_format($money, 2, ',', ' ');
                                                 echo "<span class='label label-success'>". $argent ." $</span>";
-                                            } elseif (800000 > $money) {
+                                            } elseif (env('MONEY_DANGER', 5000000) >= $money) {
                                                 $argent = number_format($money, 2, ',', ' ');
                                                 echo "<span class='label label-warning'>". $argent ." $</span>";
                                             } else {

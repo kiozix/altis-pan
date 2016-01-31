@@ -27,12 +27,13 @@ class AdminController extends Controller {
 		$user = $this->auth->user();
 		$players = DB::table('players')->count();
 		$players_last = DB::table('players')->orderBy('uid', 'desc')->take(5)->get();
+		$players_money = DB::table('players')->orderBy('bankacc', 'desc')->take(15)->get();
 		$users = DB::table('users')->count();
 		$news = DB::table('news')->count();
 
 		$paypal = DB::table('paypals')->orderBy('id', 'desc')->take(4)->get();
 
-		return view('admin.index', compact('user', 'players', 'players_last', 'users', 'news', 'paypal'));
+		return view('admin.index', compact('user', 'players', 'players_last', 'users', 'news', 'paypal', 'players_money'));
 	}
 
 	public function joueur()

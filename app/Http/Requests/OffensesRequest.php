@@ -23,7 +23,7 @@ class OffensesRequest extends Request {
 	{
 		return [
 			"arma_id" => "required",
-			"content" => "required|min:5",
+			"content" => "required|min:2",
 			"sanction" => "required|min:2",
 			"author" => "required|min:2",
 			"author_id" => "required|numeric",

@@ -28,8 +28,15 @@
                                 <th>Actions</th>
                             </tr>
                             @foreach($offenses as $offense)
+                                <?php
+                                foreach($PlayersName as $player){
+                                    if($offense->arma_id == $player->playerid){
+                                        $name = $player->name;
+                                    }
+                                }
+                                ?>
                                 <tr>
-                                    <td><a href="{{ url('admin/player/' . $offense->arma_id) }}">{{ $offense->arma_id }}</a></td>
+                                    <td><a href="{{ url('admin/player/' . $offense->arma_id) }}">{{ $name }}</a></td>
                                     <td>{{$offense->content}}</td>
                                     <td>{{$offense->author}}</td>
                                     <td>

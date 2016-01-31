@@ -30,7 +30,8 @@ class OffensesController extends Controller {
 	{
 		$user = $this->auth->user();
 		$offenses = Offenses::orderBy('id', 'DESC')->paginate(15);
-		return view('admin.offenses.index', compact('offenses', 'user'));
+		$PlayersName = DB::table('players')->get();
+		return view('admin.offenses.index', compact('offenses', 'user', 'PlayersName'));
 	}
 
 	public function index_home()

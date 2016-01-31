@@ -71,9 +71,9 @@
             @include('flash')
             <div class="row">
                 <div class="col-lg-12">
-                    <div id="panelChart9" class="panel panel-default panel-demo">
+                    <div id="money-player" class="panel panel-default panel-demo">
                         <div class="panel-heading">
-                            <div class="panel-title">Dernier joueurs</div>
+                            <div class="panel-title">Joueur les plus riche</div>
                         </div>
                         <div class="panel-body">
                             <table class="table table-responsive table-striped">
@@ -82,7 +82,7 @@
                                     <th>ID Arma</th>
                                     <th>Argent</th>
                                 </tr>
-                                @foreach($players_last as $player)
+                                @foreach($players_money as $player)
                                     <tr>
                                         <td><a href="{{ url('admin/player/'. $player->playerid) }}">{{ $player->name }}</a></td>
                                         <td>{{ $player->playerid }}</td>
@@ -90,17 +90,17 @@
                                             <?php
                                             $money = $player->cash + $player->bankacc;
 
-                                            if ($money < 500000) {
+                                            if ($money < env('MONEY_WARNING', 500000)) {
                                                 $argent = number_format($money, 2, ',', ' ');
                                                 echo "<span class='label label-success'>". $argent ." $</span>";
-                                            } elseif (800000 > $money) {
+                                            } elseif (env('MONEY_DANGER', 5000000) >= $money) {
                                                 $argent = number_format($money, 2, ',', ' ');
                                                 echo "<span class='label label-warning'>". $argent ." $</span>";
                                             } else {
                                                 $argent = number_format($money, 2, ',', ' ');
                                                 echo "<span class='label label-danger'>". $argent ." $</span>";
                                             }
-                                            ?>
+                                        ?>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -112,6 +112,39 @@
         </div>
 
         <aside class="col-lg-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="panel-title">Dernier Joueurs</div>
+                </div>
+                @foreach($players_last as $player)
+                <div class="list-group">
+                    <div class="list-group-item">
+                        <div class="media-box">
+                            <div class="pull-left">
+                                <span class="fa-stack">
+                                   <em class="fa fa-circle fa-stack-2x text-success"></em>
+                                   <em class="fa fa-male fa-stack-1x fa-inverse text-white"></em>
+                                </span>
+                            </div>
+                            <div class="media-box-body clearfix">
+                                <small class="text-muted pull-right ml">{{ $player->playerid }}</small>
+                                <div class="media-box-heading"><a href="{{ url('admin/paypal') }}" class="text-info m0">{{ $player->name }}</a>
+                                </div>
+                                <p class="m0">
+                                    <small><a href="{{ url('admin/player/'. $player->playerid) }}">Afficher</a></small>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+                <div class="panel-footer clearfix">
+                    <a href="{{ url('admin/player') }}" class="pull-left">
+                        <small>Voir plus</small>
+                    </a>
+                </div>
+            </div>
+
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <div class="panel-title">Dernier Achat</div>
