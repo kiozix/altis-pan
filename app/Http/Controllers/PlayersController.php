@@ -140,7 +140,7 @@ class PlayersController extends Controller {
 					$gangMembers[] = $member;
 				}
 				unset($gangMembers[$userId]);
-				$gangMembersString = '"[';
+				$gangMembersString = '[';
 				$gangList = "";
 				foreach ($gangMembers as $gangMember) {
 					if ($gangMember != $userId) {
@@ -149,7 +149,7 @@ class PlayersController extends Controller {
 				}
 				$gangList = rtrim($gangList, ",");
 				$gangMembersString .= $gangList;
-				$gangMembersString .= ']"';
+				$gangMembersString .= ']';
 
 				DB::table('gangs')
 					->where('id', $groupId)
@@ -186,7 +186,7 @@ class PlayersController extends Controller {
 						$gangMembers[] = $member;
 					}
 
-					$gangMembersString = '"[';
+					$gangMembersString = '[';
 					$gangList = "";
 					foreach ($gangMembers as $gangMember) {
 						$gangList .= "`" . $gangMember . "`,";
@@ -194,7 +194,7 @@ class PlayersController extends Controller {
 					$gangList .= "`" . $playerId . "`,";
 					$gangList = rtrim($gangList, ",");
 					$gangMembersString .= $gangList;
-					$gangMembersString .= ']"';
+					$gangMembersString .= ']';
 
 					DB::table('gangs')
 						->where('id', $groupId)
