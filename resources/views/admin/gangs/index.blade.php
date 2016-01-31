@@ -22,9 +22,17 @@
                                 <th>Argent</th>
                             </tr>
                             @foreach($gangs as $gang)
+                                <?php
+                                foreach($PlayersName as $player){
+                                    if($gang->owner == $player->playerid){
+                                        $name = $player->name;
+                                    }
+                                }
+                                ?>
+
                                 <tr>
                                     <td><a href="{{ url('admin/gang/'. $gang->id) }}">{{ $gang->name }}</a></td>
-                                    <td><a href="{{ route('player', ['id' => $gang->owner]) }}">{{ $gang->owner }}</a></td>
+                                    <td><a href="{{ route('player', ['id' => $gang->owner]) }}">{{ $name }}</a></td>
                                     <td>
                                         <?php
                                             $money = $gang->bank;

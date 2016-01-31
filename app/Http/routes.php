@@ -47,6 +47,7 @@ Route::group(['prefix' => 'admin'], function () {
 	Route::get('/player', ['uses' => 'AdminController@joueur']);
 	Route::get('/player/{id}', ['uses' => 'AdminController@joueurShow', 'as' => 'player']);
 	Route::post('/player/{id}', ['uses' => 'AdminController@updatePlayer']);
+	Route::post('/civ_gear/delete', ['uses' => 'AdminController@removePlayer']);
 
 	Route::get('/gang', ['uses' => 'AdminController@gangs']);
 	Route::get('/gang/{id}', ['uses' => 'AdminController@gangShow', 'as' => 'gang']);

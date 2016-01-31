@@ -240,8 +240,8 @@ class AdminController extends Controller {
 	{
 		$user = $this->auth->user();
 		$gangs = DB::table('gangs')->orderBy('id', 'desc')->paginate(10);
-
-		return view('admin.gangs.index', compact('user', 'gangs'));
+		$PlayersName = DB::table('players')->get();
+		return view('admin.gangs.index', compact('user', 'gangs', 'PlayersName'));
 	}
 
 	public function gangShow($id)
@@ -615,6 +615,18 @@ class AdminController extends Controller {
 			$setting->delete();
 			return redirect(action('AdminController@settings'))->with('success', 'L\'action à bien été effectuer');
 		}
+	}
+
+	public function removePlayer(Request $request){
+		$pid = $request->get("pid");
+
+		DB::table('players')
+			->where('playerid', $pid)
+			->update(array(
+				'civ_gear' => '[]',
+			));
+
+		return redirect(url('admin/player/' . $pid))->with('success', 'L\'inventaire civil à bien été vider !');
 	}
 
 }

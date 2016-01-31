@@ -83,7 +83,7 @@
                                         <td>Grade Policier</td>
                                         <td>
                                             <select name="policier" class="form-control">
-                                                <option value="0"{{ $player->coplevel == 0 ? 'selected' : '' }}>Non admis</option>
+                                                <option value="0" {{ $player->coplevel == 0 ? 'selected' : '' }}>Non admis</option>
                                                 @foreach($ranks_cop as $cop)
                                                     <option value="{{ $cop->value_associated }}" {{ $player->coplevel == $cop->value_associated ? 'selected' : '' }}>{{ $cop->name }}</option>
                                                 @endforeach
@@ -94,9 +94,9 @@
                                         <td>Grade Pompier</td>
                                         <td>
                                             <select name="medic" class="form-control">
-                                                <option value="0"{{ $player->mediclevel == 0 ? 'selected' : '' }}>Non admis</option>
+                                                <option value="0" {{ $player->mediclevel == 0 ? 'selected' : '' }}>Non admis</option>
                                                 @foreach($ranks_medic as $medic)
-                                                    <option value="{{ $medic->value_associated }}" {{ $player->coplevel == $medic->value_associated ? 'selected' : '' }}>{{ $medic->name }}</option>
+                                                    <option value="{{ $medic->value_associated }}" {{ $player->mediclevel == $medic->value_associated ? 'selected' : '' }}>{{ $medic->name }}</option>
                                                 @endforeach
                                             </select>
                                         </td>
@@ -127,6 +127,17 @@
                                 <label>Inventaire civil</label>
                                 <pre>{{ $player->civ_gear }}</pre>
 
+                                @if($player->coplevel >= 1)
+                                    <br>
+                                    <label>Inventaire policier</label>
+                                    <pre>{{ $player->cop_gear }}</pre>
+                                @endif
+
+                                @if($player->mediclevel >= 1)
+                                    <br>
+                                    <label>Inventaire pompier</label>
+                                    <pre>{{ $player->med_gear }}</pre>
+                                    @endif
                                 <hr />
 
                                 <div class="text-right">
@@ -134,6 +145,15 @@
                                     <span class="btn-label"><i class="fa fa-check"></i></span>Valider
                                     </button>
                                 </div>
+                            </form>
+
+                            <form action="{{ url('admin/civ_gear/delete') }}" method="post">
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                <input type="hidden" name="pid" value="{{ $player->playerid }}">
+
+                                <button type="submit" class="btn btn-labeled btn-danger" >
+                                    <span class="btn-label"><i class="fa fa-trash"></i></span>Reset inventaire civil
+                                </button>
                             </form>
                         </div>
                     </div>

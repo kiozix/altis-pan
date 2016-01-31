@@ -1,23 +1,31 @@
-## Laravel PHP Framework
+# [CMS] AltisPan
+##### By [Emile LEPETIT](http://emile-lepetit.fr) & Lucas GRALAUD
+---
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/downloads.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
+### Description
+AltisPan est un CMS (Content management System) développer pour Arma III et plus précisément pour le mod de jeux Altis Life. Il est composé d'une partie site est d'une partie back office (Panel Admin). Depuis le panel admin il vous sera facile de réaliser toutes les modifications que vous souhaiter faires. Pour ceux qui veulent en savoir plus, le panel est développé sous le framwork laravel avec une structure de type MVC.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, queueing, and caching.
+### Installation
+1. Dézipper l'archive dans votre dossier `www`
+2. Exécuter composer.exe est suivi l'installation de celui-ci
+3. Ouvrer une invite de commande dans le dossier et exécuter ceci :
+    - `composer update --no-dev`
+    - `php artisan key:generate`
+4. Ouvrer le fichier `.env` situer à la racine est renseigné les informations demandées
+5. Ré ouvrée vôtres invites de commande est exécuté ceci (Création des tables dans la base de données):
+   - Conseil : effectuer une sauvegarde de votre base de donnée
+   - `php artisan migrate`
+6. Pointer votre `DocumentRoot` sur `/public`
+7. Créer votre utilisateur
+8. Aller sur votre base donnée puis dans la table `users` et metter `admin` à `1` sur votre utilisateur.
+9. Merci de votre achat !
 
-Laravel is accessible, yet powerful, providing powerful tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
+## Informations
+* Si `php artisan ....` ne fonctionne metter le chemain de votre `php.exe` en absolue
+* Il est **foremellement interdit** de modifié le footer de _AltisPan_
+* Toutes redistribution est **foremellement interdit** par quelconques moyen.
+* Vous disposez d'une seul licences par achat.
+* Aucune modifications n'est autorisez sans l'accord explicite écrit par [Emile LEPETIT](http://emile-lepetit.fr)
 
-## Official Documentation
-
-Documentation for the framework can be found on the [Laravel website](http://laravel.com/docs).
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
-
-### License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+## Crédits
+&copy; [Emile LEPETIT](http://emile-lepetit.fr)
