@@ -55,6 +55,8 @@ class PlayersController extends Controller {
 		$medic = DB::table('ranks')->where('side', 'MEDIC')->where('value_associated', $players->mediclevel)->first();
 		$admin = DB::table('ranks')->where('side', 'ADMIN')->where('value_associated', $players->adminlevel)->first();
 
+		$licensesName = DB::table('settings')->where('action', 'LICENSES')->get();
+
 		switch($players->adminlevel){
 			case 0:
 				$rank = env('ADMIN_GRADE_0');
@@ -71,9 +73,9 @@ class PlayersController extends Controller {
 		}
 
 		if($gang) {
-			return view('players.index', compact('admin', 'cop', 'medic' ,'ranks_cop','ranks_medic', 'refunds', 'allPlayers', 'players', 'mediclevel', 'coplevel', 'rank', 'gang', 'vehicles_cars', 'vehicles_airs', 'vehicles_ships', 'gangMembers'));
+			return view('players.index', compact('licensesName', 'admin', 'cop', 'medic' ,'ranks_cop','ranks_medic', 'refunds', 'allPlayers', 'players', 'mediclevel', 'coplevel', 'rank', 'gang', 'vehicles_cars', 'vehicles_airs', 'vehicles_ships', 'gangMembers'));
 		} else {
-			return view('players.index', compact('admin', 'cop', 'medic' ,'ranks_cop','ranks_medic', 'refunds', 'players', 'mediclevel', 'coplevel', 'rank', 'gang', 'vehicles_cars', 'vehicles_airs', 'vehicles_ships'));
+			return view('players.index', compact('licensesName', 'admin', 'cop', 'medic' ,'ranks_cop','ranks_medic', 'refunds', 'players', 'mediclevel', 'coplevel', 'rank', 'gang', 'vehicles_cars', 'vehicles_airs', 'vehicles_ships'));
 
 		}
 

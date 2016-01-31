@@ -44,18 +44,18 @@
                                     </div>
 
                                     <br/><br/>
-                                    
+
                                     @if($admin)
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label class="col-md-4 control-label">Rang</label>
-                                            <div class="col-md-8">
-                                                <input class="form-control input-lg" name="name" type="text" value="{{ $admin->name }}" disabled>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">Rang</label>
+                                                <div class="col-md-8">
+                                                    <input class="form-control input-lg" name="name" type="text" value="{{ $admin->name }}" disabled>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
 
-                                    <br/><br/>
+                                        <br/><br/>
                                     @endif
 
                                     <div class="col-md-12">
@@ -79,7 +79,7 @@
                                     </div>
                                     <br /><br />
 
-                                    @if($players->mediclevel > 0)
+                                    @if($players->mediclevel > 0 && $medic)
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label class="col-md-4 control-label">Rang Pompier <a type="button" data-toggle="modal" data-target="#pompier">(?)</a></label>
@@ -91,7 +91,7 @@
                                         <br /><br />
                                     @endif
 
-                                    @if($players->coplevel > 0)
+                                    @if($players->coplevel > 0 && $cop)
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label class="col-md-4 control-label">Rang Policier <a type="button" data-toggle="modal" data-target="#police">(?)</a></label>
@@ -256,6 +256,13 @@
                                          for($i = 1; $y < $totarrayLicenses; $i++){
                                         ?>
                                         <tr>
+                                            <?php
+                                            foreach($licensesName as $license){
+                                                if($arrayLicenses[$y] == $license->value_associated){
+                                                    $arrayLicenses[$y]= $license->name;
+                                                }
+                                            }
+                                            ?>
                                             <td>{{ $arrayLicenses[$y] }}</td>
                                             <td>
                                                 @if($arrayLicenses[$i] == 1)

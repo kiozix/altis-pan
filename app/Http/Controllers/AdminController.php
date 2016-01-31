@@ -517,7 +517,16 @@ class AdminController extends Controller {
 				'pid' => $new_owner,
 			));
 
-		return redirect(url('admin/player/'. $vehicule->pid))->with('success', 'Véhicule transférer');
+		return redirect(url('admin/player/'. $vehicule->pid))->with('success', 'Véhicule transférer !');
+	}
+
+	public function vehicule_delete(Request $request){
+		$id = $request->get("id");
+		$vehicule = DB::table('vehicles')->where('id', $id)->first();
+
+		DB::table('vehicles')->where('id', $id)->delete();
+
+		return redirect(url('admin/player/'. $vehicule->pid))->with('success', 'Véhicule supprimer !');
 	}
 
 	public function settings(){
