@@ -22,7 +22,7 @@
         </div>
 
         <div class="col-md-4">
-            <iframe src="http://www.twitch.tv/{{ $streams->name }}}/chat?popout=" frameborder="0" scrolling="no"  height="420" width="350"></iframe>
+            <iframe src="http://www.twitch.tv/{{ $streams->name }}/chat?popout=" frameborder="0" scrolling="no"  height="420" width="350"></iframe>
         </div>
         <div class="col-md-8">
             <br>
