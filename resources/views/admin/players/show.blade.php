@@ -24,7 +24,7 @@
                                         <td>{{ $player->name }}</td>
                                     </tr>
                                     <tr>
-                                        <td>Portes-monnaie</td>
+                                        <td>Porte-monnaie</td>
                                         <td>
                                             <?php
                                                 $money = $player->cash;
