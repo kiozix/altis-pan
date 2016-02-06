@@ -279,7 +279,11 @@ class AdminController extends Controller {
 				$gangMembers[] = $member;
 			}
 			unset($gangMembers[$userId]);
-			$gangMembersString = '[';
+			if(env('DB_EXTDB') == 1) {
+				$gangMembersString = '[';
+			}elseif(env('DB_EXTDB') == 2){
+				$gangMembersString = '""[';
+			}
 			$gangList = "";
 			foreach ($gangMembers as $gangMember) {
 				if ($gangMember != $userId) {
@@ -288,7 +292,12 @@ class AdminController extends Controller {
 			}
 			$gangList = rtrim($gangList, ",");
 			$gangMembersString .= $gangList;
-			$gangMembersString .= ']';
+			if(env('DB_EXTDB') == 1) {
+				$gangMembersString .= ']';
+			}elseif(env('DB_EXTDB') == 2){
+				$gangMembersString .= ']"';
+			}
+
 
 			DB::table('gangs')
 				->where('id', $groupId)
@@ -319,7 +328,12 @@ class AdminController extends Controller {
 					$gangMembers[] = $member;
 				}
 
-				$gangMembersString = '[';
+				if(env('DB_EXTDB') == 1) {
+					$gangMembersString = '[';
+				}elseif(env('DB_EXTDB') == 2){
+					$gangMembersString = '""[';
+				}
+
 				$gangList = "";
 				foreach ($gangMembers as $gangMember) {
 					$gangList .= "`" . $gangMember . "`,";
@@ -327,9 +341,11 @@ class AdminController extends Controller {
 				$gangList .= "`" . $playerId . "`,";
 				$gangList = rtrim($gangList, ",");
 				$gangMembersString .= $gangList;
-				$gangMembersString .= ']';
-
-				// dd($gangMembersString);
+				if(env('DB_EXTDB') == 1) {
+					$gangMembersString .= ']';
+				}elseif(env('DB_EXTDB') == 2){
+					$gangMembersString .= ']"';
+				}
 
 				DB::table('gangs')
 					->where('id', $groupId)
@@ -354,20 +370,17 @@ class AdminController extends Controller {
 			$id = $request->get("id");
 			$group = $request->get('group');
 
-			// Tests
 			if (is_numeric($status) == false || is_numeric($pid) == false) {
 				echo "2;not a number !";
 				exit();
 			}
 
-			// On inverse le choix à modifier
 			if ($status == 0) {
 				$status = $status + 1;
 			} else {
 				$status = $status - 1;
 			}
 
-			// MAJ BDD
 			$rows = DB::table('players')->where('playerid', $pid)->first();
 
 			if($group == 'civ'){
@@ -381,7 +394,6 @@ class AdminController extends Controller {
 				$line = 'med_licenses';
 			}
 
-			// Gestion du parse
 			$suppr = array("\"", "`", "[", "]");
 			$lineLicenses = str_replace($suppr, "", $table);
 			$arrayLicenses = preg_split("/,/", $lineLicenses);
@@ -393,40 +405,49 @@ class AdminController extends Controller {
 				$licenses = "[[\"$arrayLicenses[0],$status]]";
 			}else {
 				for ($i = 1; $y < $totarrayLicenses; $i++) {
-					// Reconstruction du contenu de civ_licenses pour Arma
 
-					// Début
 					if ($n == $id && $y == 0) {
-						$licenses_arma[] = "[[`" . $arrayLicenses[$y] . "`," . $status . "],";
+						if(env('DB_EXTDB') == 1) {
+							$licenses_arma[] = "[[`" . $arrayLicenses[$y] . "`," . $status . "],";
+						}elseif(env('DB_EXTDB') == 2){
+							$licenses_arma[] = "\"[[`" . $arrayLicenses[$y] . "`," . $status . "],";
+						}
 					} elseif ($n == 0 && $id !== $n) {
-						$licenses_arma[] = "[[`" . $arrayLicenses[$y] . "`," . $arrayLicenses[$i] . "],";
+						if(env('DB_EXTDB') == 1) {
+							$licenses_arma[] = "[[`" . $arrayLicenses[$y] . "`," . $arrayLicenses[$i] . "],";
+						}elseif(env('DB_EXTDB') == 2){
+							$licenses_arma[] = "\"[[`" . $arrayLicenses[$y] . "`," . $arrayLicenses[$i] . "],";
+						}
+
 					}
 
-					// Millieux
 					if ($n == $id && $n !== 0 && $y !== ($totarrayLicenses - 2)) {
 						$licenses_arma[] = "[`" . $arrayLicenses[$y] . "`," . $status . "],";
 					} elseif ($n !== $id && $y !== 0 && $y !== ($totarrayLicenses - 2)) {
 						$licenses_arma[] = "[`" . $arrayLicenses[$y] . "`," . $arrayLicenses[$i] . "],";
 					}
 
-					// Fin
 					if ($n == $id && $y == ($totarrayLicenses - 2)) {
-						$licenses_arma[] = "[`" . $arrayLicenses[$y] . "`," . $status . "]]";
+						if(env('DB_EXTDB') == 1) {
+							$licenses_arma[] = "[`" . $arrayLicenses[$y] . "`," . $status . "]]";
+						}elseif(env('DB_EXTDB') == 2){
+							$licenses_arma[] = "[`" . $arrayLicenses[$y] . "`," . $status . "]]\"";
+						}
 					} elseif ($n !== $id && $y == ($totarrayLicenses - 2)) {
-						$licenses_arma[] = "[`" . $arrayLicenses[$y] . "`," . $arrayLicenses[$i] . "]]";
+						if(env('DB_EXTDB') == 1) {
+							$licenses_arma[] = "[`" . $arrayLicenses[$y] . "`," . $arrayLicenses[$i] . "]]";
+						}elseif(env('DB_EXTDB') == 2){
+							$licenses_arma[] = "[`" . $arrayLicenses[$y] . "`," . $arrayLicenses[$i] . "]]\"";
+						}
 					}
 
-					// Pair
 					$y = $y + 2;
-					// Impair
 					$i = $i + 1;
-					// Normal
 					$n = $n + 1;
 				}
-				// transformation de l'array en chaîne
 				$licenses = implode($licenses_arma);
 			}
-			// Maj
+
 			DB::table('players')
 				->where('playerid', $pid)
 				->update(array(
@@ -434,7 +455,6 @@ class AdminController extends Controller {
 				));
 
 
-			// Retour
 			if ($status == 0) {
 				echo $status . ";non actif -> $pid | ID -> $id";
 			} elseif ($status == 1) {
@@ -620,10 +640,16 @@ class AdminController extends Controller {
 	public function removePlayer(Request $request){
 		$pid = $request->get("pid");
 
+		if(env('DB_EXTDB') == 1) {
+			$gear = '[]';
+		}elseif(env('DB_EXTDB') == 2){
+			$gear = '"[]"';
+		}
+
 		DB::table('players')
 			->where('playerid', $pid)
 			->update(array(
-				'civ_gear' => '[]',
+				'civ_gear' => $gear,
 			));
 
 		return redirect(url('admin/player/' . $pid))->with('success', 'L\'inventaire civil à bien été vider !');
