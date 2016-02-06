@@ -11,7 +11,13 @@
                     <input type="hidden" name="playerid" value="{{ $player->playerid }}">
                     <tr>
                         <td>Nom du joueur</td>
-                        <td><input type="text" name="username" e placeholder="Nom de l'utilisateur" value="{{ $player->name }}" class="form-control"></td>
+                        <td>
+                            @if($alias && $alias->value_associated == 1)
+                                <input type="text" name="username" e placeholder="Nom de l'utilisateur" value="{{ $player->name }}" class="form-control">
+                            @else
+                                {{ $player->name }}
+                            @endif
+                        </td>
                     </tr>
                     <tr>
                         <td>Porte-monnaie</td>

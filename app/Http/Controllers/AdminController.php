@@ -64,6 +64,8 @@ class AdminController extends Controller {
 		$ranks_admin = DB::table('ranks')->where('side', 'ADMIN')->get();
 
 		$insure = DB::table('settings')->where('name', 'insure')->first();
+		$alias = DB::table('settings')->where('name', 'alias')->first();
+
 		$houses = DB::table('houses')->where('pid', $id)->get();
 
 		$licensesName = DB::table('settings')->where('action', 'LICENSES')->get();
@@ -71,7 +73,7 @@ class AdminController extends Controller {
 
 		$gang = DB::table('gangs')->where('owner', $id)->first();
 
-		return view('admin.players.show', compact('houses', 'licensesName', 'insure', 'ranks_admin', 'ranks_cop', 'ranks_medic', 'offenses', 'user', 'player', 'vehicles_cars', 'vehicles_airs', 'vehicles_ships', 'gang', 'user_show'));
+		return view('admin.players.show', compact('alias','houses', 'licensesName', 'insure', 'ranks_admin', 'ranks_cop', 'ranks_medic', 'offenses', 'user', 'player', 'vehicles_cars', 'vehicles_airs', 'vehicles_ships', 'gang', 'user_show'));
 
 	}
 
@@ -124,8 +126,6 @@ class AdminController extends Controller {
 			$donator = $request->get("donator");
 			$duredon = $request->get("duredon");
 
-			$username = $request->get("username");
-			$username = rtrim($username);
 
 			$user_show = DB::table('players')->where('playerid', $id)->first();
 
@@ -136,19 +136,10 @@ class AdminController extends Controller {
 			}
 
 			$alias = DB::table('settings')->where('name', 'alias')->first();
-			if($alias && $alias->value_associated == 0){
-				DB::table('players')
-					->where('playerid', $id)
-					->update(array(
-						'name' => $username,
-						'adminlevel' => $admin,
-						'coplevel' => $policier,
-						'mediclevel' => $medic,
-						'donatorlvl' => $donator,
-						'duredon' => $duredon,
-						'timestamp' => $timestamp
-					));
-			}elseif($alias && $alias->value_associated == 1){
+
+			if($alias && $alias->value_associated == 1){
+				$username = $request->get("username");
+				$username = rtrim($username);
 
 				if(env('DB_EXTDB') == 2){
 					$alias_name = '"[["' . $username . '"]]"';
@@ -167,6 +158,17 @@ class AdminController extends Controller {
 						'duredon' => $duredon,
 						'timestamp' => $timestamp,
 						'aliases' => $alias_name
+					));
+			}else{
+				DB::table('players')
+					->where('playerid', $id)
+					->update(array(
+						'adminlevel' => $admin,
+						'coplevel' => $policier,
+						'mediclevel' => $medic,
+						'donatorlvl' => $donator,
+						'duredon' => $duredon,
+						'timestamp' => $timestamp
 					));
 			}
 
