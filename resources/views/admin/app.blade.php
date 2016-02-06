@@ -140,6 +140,13 @@
                         </a>
                     </li>
 
+                    <li class="{{ Request::is('admin/house') ? 'active' : '' }} <?php $path = Route::getCurrentRoute()->getPath(); if (starts_with($path, 'admin/house')) echo "active"; ?>">
+                        <a title="Maisons" href="{{ url('admin/house') }}">
+                            <em class="icon-home"></em>
+                            <span>Maisons</span>
+                        </a>
+                    </li>
+
                     <li class="{{ Request::is('admin/gang') ? 'active' : '' }} <?php $path = Route::getCurrentRoute()->getPath(); if (starts_with($path, 'admin/gang')) echo "active"; ?>">
                         <a title="Gangs" href="{{ url('admin/gang') }}">
                             <em class="icon-tag"></em>

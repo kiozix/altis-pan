@@ -717,4 +717,13 @@ class AdminController extends Controller {
 		return redirect(url('admin/player/' . $pid))->with('success', 'L\'inventaire civil à bien été vider !');
 	}
 
+	public function house()
+	{
+		$user = $this->auth->user();
+		$PlayersName = DB::table('players')->get();
+		$houses = DB::table('houses')->orderBy('id', 'desc')->paginate(15);
+
+		return view('admin.houses.index', compact('user', 'PlayersName', 'houses'));
+	}
+
 }

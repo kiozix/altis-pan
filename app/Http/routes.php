@@ -67,6 +67,8 @@ Route::group(['prefix' => 'admin'], function () {
 	Route::post('/vehicule/{id}', ['uses' => 'AdminController@vehicule_update']);
 	Route::post('/vehicule/', ['uses' => 'AdminController@vehicule_delete']);
 
+	Route::get('/house', ['uses' => 'AdminController@house']);
+
 	Route::get('/settings', ['uses' => 'AdminController@settings']);
 	Route::post('/settings', ['uses' => 'AdminController@settingsUpdate']);
 	Route::post('/settings/parameters', ['uses' => 'AdminController@settingParam']);
