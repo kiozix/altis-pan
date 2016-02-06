@@ -29,11 +29,19 @@
                                         <td>
                                             <div class="checkbox c-checkbox">
                                                 <label>
-                                                    @if($insure && $insure->value_associated == 1)
-                                                        <input type="checkbox" name="insure_var" checked value="1">
-                                                    @else
-                                                        <input type="checkbox" name="insure_var" value="1">
-                                                    @endif
+                                                    <input type="checkbox" name="insure_var" {{ $insure && $insure->value_associated == 1 ? 'checked' : '' }} value="1">
+                                                    <span class="fa fa-check"></span>
+                                                </label>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Activer la fonction d'interdiction de changement de nom</td>
+                                        <td>
+                                            <div class="checkbox c-checkbox">
+                                                <label>
+                                                    <input type="checkbox" name="alias_name" {{ $alias && $alias->value_associated == 1 ? 'checked' : '' }} value="1">
                                                     <span class="fa fa-check"></span>
                                                 </label>
                                             </div>

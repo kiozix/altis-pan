@@ -11,7 +11,7 @@
                     <input type="hidden" name="playerid" value="{{ $player->playerid }}">
                     <tr>
                         <td>Nom du joueur</td>
-                        <td>{{ $player->name }}</td>
+                        <td><input type="text" name="username" e placeholder="Nom de l'utilisateur" value="{{ $player->name }}" class="form-control"></td>
                     </tr>
                     <tr>
                         <td>Porte-monnaie</td>

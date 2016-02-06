@@ -124,6 +124,9 @@ class AdminController extends Controller {
 			$donator = $request->get("donator");
 			$duredon = $request->get("duredon");
 
+			$username = $request->get("username");
+			$username = rtrim($username);
+
 			$user_show = DB::table('players')->where('playerid', $id)->first();
 
 			if($duredon != $user_show->duredon){
@@ -132,16 +135,40 @@ class AdminController extends Controller {
 				$timestamp = $user_show->timestamp;
 			}
 
-			DB::table('players')
-				->where('playerid', $id)
-				->update(array(
-					'adminlevel' => $admin,
-					'coplevel' => $policier,
-					'mediclevel' => $medic,
-					'donatorlvl' => $donator,
-					'duredon' => $duredon,
-					'timestamp' => $timestamp
-				));
+			$alias = DB::table('settings')->where('name', 'alias')->first();
+			if($alias && $alias->value_associated == 0){
+				DB::table('players')
+					->where('playerid', $id)
+					->update(array(
+						'name' => $username,
+						'adminlevel' => $admin,
+						'coplevel' => $policier,
+						'mediclevel' => $medic,
+						'donatorlvl' => $donator,
+						'duredon' => $duredon,
+						'timestamp' => $timestamp
+					));
+			}elseif($alias && $alias->value_associated == 1){
+
+				if(env('DB_EXTDB') == 2){
+					$alias_name = '"[["' . $username . '"]]"';
+				}elseif(env('DB_EXTDB') == 1){
+					$alias_name = '"[`' . $username . '`]"';
+				}
+
+				DB::table('players')
+					->where('playerid', $id)
+					->update(array(
+						'name' => $username,
+						'adminlevel' => $admin,
+						'coplevel' => $policier,
+						'mediclevel' => $medic,
+						'donatorlvl' => $donator,
+						'duredon' => $duredon,
+						'timestamp' => $timestamp,
+						'aliases' => $alias_name
+					));
+			}
 
 			return redirect(url('admin/player/' . $id))->with('success', 'Le joueur à bien été modifié');
 		}
@@ -558,8 +585,9 @@ class AdminController extends Controller {
 
 		$licenses = DB::table('settings')->where('action', 'LICENSES')->get();
 		$insure = DB::table('settings')->where('name', 'insure')->first();
+		$alias = DB::table('settings')->where('name', 'alias')->first();
 
-		return view('admin.settings.index', compact('licenses', 'insure', 'ranks_admin', 'user', 'ranks_cop', 'ranks_medic'));
+		return view('admin.settings.index', compact('alias', 'licenses', 'insure', 'ranks_admin', 'user', 'ranks_cop', 'ranks_medic'));
 	}
 
 	public function settingsUpdate(Request $request){
@@ -595,27 +623,58 @@ class AdminController extends Controller {
 
 	public function settingParam(Request $request)
 	{
-		$value = $request->get("insure_var");
+		$value = $request->get('insure_var');
 
 		$insure = DB::table('settings')->where('name', 'insure')->first();
 
 		if($insure && $insure->value_associated == 1 OR $insure && $insure->value_associated == 0){
-			if($insure->value_associated == 1){
-				$set = 0;
+
+			if($value){
+				DB::table('settings')
+					->where('name', 'insure')
+					->update(array(
+						'value_associated' => 1,
+					));
 			}else{
-				$set = 1;
+				DB::table('settings')
+					->where('name', 'insure')
+					->update(array(
+						'value_associated' => 0,
+					));
 			}
 
-			DB::table('settings')
-				->where('name', 'insure')
-				->update(array(
-					'value_associated' => $set,
-				));
 		}else{
 			$settings = New Settings();
 			$settings->action = 'SETTINGS';
 			$settings->value_associated = $value;
 			$settings->name = 'insure';
+			$settings->save();
+		}
+
+		$alias_name = $request->get('alias_name');
+		$alias = DB::table('settings')->where('name', 'alias')->first();
+
+		if($alias && $alias->value_associated == 1 OR $alias && $alias->value_associated == 0){
+
+			if($alias_name){
+				DB::table('settings')
+					->where('name', 'alias')
+					->update(array(
+						'value_associated' => 1,
+					));
+			}else{
+				DB::table('settings')
+					->where('name', 'alias')
+					->update(array(
+						'value_associated' => 0,
+					));
+			}
+
+		}else{
+			$settings = New Settings();
+			$settings->action = 'SETTINGS';
+			$settings->value_associated = $alias_name;
+			$settings->name = 'alias';
 			$settings->save();
 		}
 

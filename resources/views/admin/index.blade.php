@@ -145,38 +145,40 @@
                 </div>
             </div>
 
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <div class="panel-title">Dernier Achat</div>
-                </div>
-                @foreach($paypal as $achat)
-                <div class="list-group">
-                    <div class="list-group-item">
-                        <div class="media-box">
-                            <div class="pull-left">
-                                <span class="fa-stack">
-                                   <em class="fa fa-circle fa-stack-2x text-info"></em>
-                                   <em class="fa fa-file-text-o fa-stack-1x fa-inverse text-white"></em>
-                                </span>
-                            </div>
-                            <div class="media-box-body clearfix">
-                                <small class="text-muted pull-right ml">{{ $achat->created_at }}</small>
-                                <div class="media-box-heading"><a href="{{ url('admin/paypal') }}" class="text-info m0">{{ $achat->id_shop }}</a>
+            @if($paypal)
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="panel-title">Dernier Achat</div>
+                    </div>
+                    @foreach($paypal as $achat)
+                    <div class="list-group">
+                        <div class="list-group-item">
+                            <div class="media-box">
+                                <div class="pull-left">
+                                    <span class="fa-stack">
+                                       <em class="fa fa-circle fa-stack-2x text-info"></em>
+                                       <em class="fa fa-file-text-o fa-stack-1x fa-inverse text-white"></em>
+                                    </span>
                                 </div>
-                                <p class="m0">
-                                    <small><a href="{{ url('admin/player/'. $achat->id_arma) }}">{{ $achat->id_user }}</a></small>
-                                </p>
+                                <div class="media-box-body clearfix">
+                                    <small class="text-muted pull-right ml">{{ $achat->created_at }}</small>
+                                    <div class="media-box-heading"><a href="{{ url('admin/paypal') }}" class="text-info m0">{{ $achat->id_shop }}</a>
+                                    </div>
+                                    <p class="m0">
+                                        <small><a href="{{ url('admin/player/'. $achat->id_arma) }}">{{ $achat->id_user }}</a></small>
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    @endforeach
+                    <div class="panel-footer clearfix">
+                        <a href="{{ url('admin/paypal') }}" class="pull-left">
+                            <small>Voir plus</small>
+                        </a>
+                    </div>
                 </div>
-                @endforeach
-                <div class="panel-footer clearfix">
-                    <a href="{{ url('admin/paypal') }}" class="pull-left">
-                        <small>Voir plus</small>
-                    </a>
-                </div>
-            </div>
+            @endif
         </aside>
 
     </div>
