@@ -64,13 +64,14 @@ class AdminController extends Controller {
 		$ranks_admin = DB::table('ranks')->where('side', 'ADMIN')->get();
 
 		$insure = DB::table('settings')->where('name', 'insure')->first();
+		$houses = DB::table('houses')->where('pid', $id)->get();
 
 		$licensesName = DB::table('settings')->where('action', 'LICENSES')->get();
 
 
 		$gang = DB::table('gangs')->where('owner', $id)->first();
 
-		return view('admin.players.show', compact('licensesName', 'insure', 'ranks_admin', 'ranks_cop', 'ranks_medic', 'offenses', 'user', 'player', 'vehicles_cars', 'vehicles_airs', 'vehicles_ships', 'gang', 'user_show'));
+		return view('admin.players.show', compact('houses', 'licensesName', 'insure', 'ranks_admin', 'ranks_cop', 'ranks_medic', 'offenses', 'user', 'player', 'vehicles_cars', 'vehicles_airs', 'vehicles_ships', 'gang', 'user_show'));
 
 	}
 
