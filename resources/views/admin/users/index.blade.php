@@ -22,13 +22,13 @@
                                 <th>Grade</th>
                                 <th>Date d'inscription</th>
                             </tr>
-                            @foreach($users as $user)
+                            @foreach($users as $user1)
                                 <tr>
-                                    <td><a href="{{ route('user', ['id' => $user->id]) }}">{{ $user->name }}</a></td>
-                                    <td>{{ $user->email }}</td>
+                                    <td><a href="{{ route('user', ['id' => $user1->id]) }}">{{ $user1->name }}</a></td>
+                                    <td>{{ $user1->email }}</td>
                                     <td>
                                         <?php
-                                        $rang = $user->admin;
+                                        $rang = $user1->admin;
 
                                         if ($rang == 0) {
                                             echo "<span class='label label-success'>Utilisateur</span>";
@@ -37,7 +37,7 @@
                                         }
                                         ?>
                                     </td>
-                                    <td>{{ $user->created_at }}</td>
+                                    <td>{{ $user1->created_at }}</td>
                                 </tr>
                             @endforeach
                         </table>

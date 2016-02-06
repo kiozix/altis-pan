@@ -100,7 +100,7 @@
                                 <div class="user-block-picture">
                                     <div class="user-block-status">
                                         @if($user->avatar)
-                                            <img src="{{ Request::is('admin/user') ? asset('/img/avatars/'.$user->avatar.'.jpg') : url($user->avatar) }}" alt="Avatar" width="60" height="60" class="img-thumbnail img-circle">
+                                            <img src="{{ url($user->avatar) }}" alt="Avatar" width="60" height="60" class="img-thumbnail img-circle">
                                         @else
                                             <img src="{{ asset('/img/user_default.png') }}" alt="Avatar" width="60" height="60" class="img-thumbnail img-circle">
                                         @endif
