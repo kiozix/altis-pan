@@ -48,13 +48,11 @@
                                         <td>
                                             <a href="{{ url('admin/vehicule', ['id' => $vehicle_car->id]) }}"><i class="fa fa-exchange" style="color: #4aa3df;"></i></a>
                                             <span style="display: inline-block">
-
-                                            <form action="{{ url('admin/vehicule') }}" method="post">
-                                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                <input type="hidden" name="id" value="{{ $vehicle_car->id }}">
-                                                <button class="btn btn-danger btn-xs " ><i class="fa fa-trash"></i></button>
-                                            </form>
-
+                                                <form action="{{ url('admin/vehicule') }}" method="post">
+                                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                    <input type="hidden" name="id" value="{{ $vehicle_car->id }}">
+                                                    <button class="btn btn-danger btn-xs " ><i class="fa fa-trash"></i></button>
+                                                </form>
                                             </span>
                                         </td>
                                     </tr>
@@ -105,11 +103,13 @@
                                         </td>
                                         <td>
                                             <a href="{{ url('admin/vehicule', ['id' => $vehicle_air->id]) }}"><i class="fa fa-exchange" style="color: #4aa3df;"></i></a>
-                                            <form action="{{ url('admin/vehicule') }}" method="post">
-                                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                <input type="hidden" name="id" value="{{ $vehicle_air->id }}">
-                                                <button class="btn btn-danger btn-xs " ><i class="fa fa-trash"></i></button>
-                                            </form>
+                                            <span style="display: inline-block">
+                                                <form action="{{ url('admin/vehicule') }}" method="post">
+                                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                    <input type="hidden" name="id" value="{{ $vehicle_air->id }}">
+                                                    <button class="btn btn-danger btn-xs " ><i class="fa fa-trash"></i></button>
+                                                </form>
+                                            </span>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -159,11 +159,13 @@
                                         </td>
                                         <td>
                                             <a href="{{ url('admin/vehicule', ['id' => $vehicle_ship->id]) }}"><i class="fa fa-exchange" style="color: #4aa3df;"></i></a>
-                                            <form action="{{ url('admin/vehicule') }}" method="post">
-                                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                <input type="hidden" name="id" value="{{ $vehicle_ship->id }}">
-                                                <button class="btn btn-danger btn-xs " ><i class="fa fa-trash"></i></button>
-                                            </form>
+                                            <span style="display: inline-block">
+                                                <form action="{{ url('admin/vehicule') }}" method="post">
+                                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                    <input type="hidden" name="id" value="{{ $vehicle_ship->id }}">
+                                                    <button class="btn btn-danger btn-xs " ><i class="fa fa-trash"></i></button>
+                                                </form>
+                                            </span>
                                         </td>
                                     </tr>
                                 @endforeach

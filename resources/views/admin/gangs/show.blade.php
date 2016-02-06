@@ -63,7 +63,6 @@
                                             <input type="hidden" name="groupId" value="{{ $gang->id }}">
                                             <select name="playerid" class="form-control player-gang">
                                                 @foreach($allPlayers as $player)
-
                                                     <option value="{{ $player->playerid }}">{{ $player->name }}</option>
                                                 @endforeach
                                             </select>
