@@ -16,8 +16,7 @@
                             <table class="table table-striped table-responsive">
                                 <tr>
                                     <th>Nom</th>
-                                    <th>Emplacement du garage</th>
-                                    <th>Type</th>
+                                    <th>Emplacement</th>
                                     @if($insure && $insure->value_associated == 1)
                                         <th>Assurance</th>
                                     @endif
@@ -28,7 +27,6 @@
                                     <tr>
                                         <td>{{ $vehicle_car->classname }}</td>
                                         <td>{{ $vehicle_car->side }}</td>
-                                        <td>{{ $vehicle_car->type }}</td>
                                         @if($insure && $insure->value_associated == 1)
                                             <td>
                                                 @if($vehicle_car->insure == 1)
@@ -72,8 +70,7 @@
                             <table class="table table-striped table-responsive">
                                 <tr>
                                     <th>Nom</th>
-                                    <th>Emplacement du garage</th>
-                                    <th>Type</th>
+                                    <th>Emplacement</th>
                                     @if($insure && $insure->value_associated == 1)
                                         <th>Assurance</th>
                                     @endif
@@ -84,7 +81,6 @@
                                     <tr>
                                         <td>{{ $vehicle_air->classname }}</td>
                                         <td>{{ $vehicle_air->side }}</td>
-                                        <td>{{ $vehicle_air->type }}</td>
                                         @if($insure && $insure->value_associated == 1)
                                             <td>
                                                 @if($vehicle_air->insure == 1)
@@ -128,8 +124,7 @@
                             <table class="table table-striped table-responsive">
                                 <tr>
                                     <th>Nom</th>
-                                    <th>Emplacement du garage</th>
-                                    <th>Type</th>
+                                    <th>Emplacement</th>
                                     @if($insure && $insure->value_associated == 1)
                                         <th>Assurance</th>
                                     @endif
@@ -140,7 +135,6 @@
                                     <tr>
                                         <td>{{ $vehicle_ship->classname }}</td>
                                         <td>{{ $vehicle_ship->side }}</td>
-                                        <td>{{ $vehicle_ship->type }}</td>
                                         @if($insure && $insure->value_associated == 1)
                                             <td>
                                                 @if($vehicle_ship->insure == 1)
