@@ -73,7 +73,7 @@
 
                                 @foreach($gangMembers as $member)
                                     <tr>
-                                        <td><a href="#">{{ $member->name }}</a></td>
+                                        <td><a target="_blank" href="{{ route('player', ['id' => $member->playerid]) }}">{{ $member->name }}</a></td>
                                         <td>
                                             <a href="#" data-user="{{ $member->playerid }}" data-csrf="{{ csrf_token() }}" class="group-userlist"><i class="fa fa-close" style="color: #c0392b"></i></a>
                                         </td>
