@@ -39,7 +39,7 @@ class AdminController extends Controller {
 	public function joueur()
 	{
 		$user = $this->auth->user();
-		$players = DB::table('players')->orderBy('uid', 'desc')->paginate(10);
+		$players = DB::table('players')->orderBy('uid', 'desc')->paginate(15);
 		return view('admin.players.index', compact('user', 'players'));
 	}
 
@@ -202,7 +202,7 @@ class AdminController extends Controller {
 	public function users()
 	{
 		$user = $this->auth->user();
-		$users = DB::table('users')->orderBy('id', 'desc')->paginate(10);
+		$users = DB::table('users')->orderBy('id', 'desc')->paginate(15);
 		return view('admin.users.index', compact('user', 'users'));
 	}
 
@@ -269,7 +269,7 @@ class AdminController extends Controller {
 	public function gangs()
 	{
 		$user = $this->auth->user();
-		$gangs = DB::table('gangs')->orderBy('id', 'desc')->paginate(10);
+		$gangs = DB::table('gangs')->orderBy('id', 'desc')->paginate(15);
 		$PlayersName = DB::table('players')->get();
 		return view('admin.gangs.index', compact('user', 'gangs', 'PlayersName'));
 	}
@@ -499,7 +499,7 @@ class AdminController extends Controller {
 	public function refunds()
 	{
 		$user = $this->auth->user();
-		$refunds = DB::table('refunds')->orderBy('id', 'desc')->paginate(10);
+		$refunds = DB::table('refunds')->orderBy('id', 'desc')->paginate(15);
 
 		return view('admin.refunds.index', compact('user', 'refunds'));
 	}
