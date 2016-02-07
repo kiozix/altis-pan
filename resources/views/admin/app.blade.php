@@ -82,7 +82,7 @@
             </div>
             <form method="get" action="{{ url('admin/search') }}" class="navbar-form">
                 <div class="form-group has-feedback">
-                    <input name="q" type="text" placeholder="Rechercher un joueur..." class="form-control">
+                    <input name="q" type="text" placeholder="Rechercher un joueur..." class="form-control" autocomplete="off">
                     <div data-search-dismiss="" class="fa fa-times form-control-feedback"></div>
                 </div>
             </form>

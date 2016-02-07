@@ -20,6 +20,7 @@
                                 <th>Nom d'utilisateur</th>
                                 <th>Adresse e-mail</th>
                                 <th>Grade</th>
+                                <th>Arma ID</th>
                                 <th>Date d'inscription</th>
                             </tr>
                             @foreach($users as $user1)
@@ -36,6 +37,15 @@
                                             echo "<span class='label label-danger'>Administrateur</span>";
                                         }
                                         ?>
+                                    </td>
+
+                                    <td>
+                                        @if($user1->arma)
+                                            <i class="fa fa-check" style="color: #2cc36b;"></i>
+                                        @else
+
+                                            <i class="fa fa-close" style="color: #c0392b;"></i>
+                                        @endif
                                     </td>
                                     <td>{{ $user1->created_at }}</td>
                                 </tr>
