@@ -21,26 +21,32 @@ class SupportsController extends Controller {
 
 	public function index()
 	{
-		// $user = $this->auth->user();
 
-		$tickets = Supports::orderBy('id', 'DESC')->where('id_author', $this->auth->user()->id)->where('message', 1)->get();
+		$tickets = Supports::orderBy('id', 'DESC')->where('id_author', $this->auth->user()->id)->where('message', 1)->where('id_refunds', '0')->get();
 		return view('supports.index', compact('tickets'));
 	}
 
 	public function show($id)
 	{
-		$ticket = Supports::where('id', $id)->where('message', '1')->first();
+		$ticket = Supports::where('id', $id)->where('message', '1')->where('id_refunds', '0')->first();
 		$users = DB::table('users')->get();
 		$responses = Supports::where('reply', 1)->where('associated', $id)->get();
-		if($this->auth->user()->id == $ticket->id_author) {
-			return view('supports.show', compact('ticket', 'users', 'responses'));
-		}else {
-			abort(403, 'Unauthorized action.');
+		if($ticket) {
+			if ($this->auth->user()->id == $ticket->id_author) {
+				return view('supports.show', compact('ticket', 'users', 'responses'));
+			} else {
+				abort(403, 'Unauthorized action.');
+			}
+		}else{
+			abort(404, 'File Not Found');
 		}
 	}
 
 	public function reply($id, Request $request){
 		$content = $request->get("content");
+		$this->validate($request, [
+			'content' => 'required|min:2',
+		]);
 
 		$ticket = Supports::where('id', $id)->where('id_author', $this->auth->user()->id)->where('message', '1')->first();
 		$last_reply = Supports::where('associated', $id)->where('reply', '1')->orderBy('id', 'desc')->first();
@@ -87,6 +93,11 @@ class SupportsController extends Controller {
 	}
 
 	public function open(Request $request){
+		$this->validate($request, [
+			'content' => 'required|min:2',
+			'title' => 'required|min:5'
+		]);
+
 		$title = $request->get("title");
 		$content = $request->get("content");
 
@@ -97,6 +108,7 @@ class SupportsController extends Controller {
 		$supports->title = $title;
 		$supports->content = $content;
 		$supports->etat = 0;
+		$supports->id_refunds = 0;
 		$supports->save();
 
 		return redirect(url('/support'))->with('success', 'Le ticket à bien été ouvert');

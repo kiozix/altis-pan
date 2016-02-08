@@ -10,12 +10,17 @@ use Illuminate\Routing\ResponseFactory;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Response;
 use App\Refund;
+use App\Supports;
 class PlayersController extends Controller {
 
-	public function __construct()
+	private $auth;
+
+	public function __construct(Guard $auth)
 	{
+
 		$this->middleware('auth');
 		$this->middleware('arma');
+		$this->auth = $auth;
 	}
 
 	/**
@@ -84,7 +89,7 @@ class PlayersController extends Controller {
 	}
 
 	public function refundsView(){
-		return view('players.refunds');
+		return view('players.refunds.create');
 	}
 
 	public function refunds(Request $request, Guard $auth){
@@ -226,6 +231,60 @@ class PlayersController extends Controller {
 			}else {
 				return Response::view('errors.403', array(), 403);
 			}
+		}
+	}
+
+	public function show_refunds($id){
+		$refund = DB::table('refunds')->where('id', $id)->first();
+
+		$ticket = DB::table('supports')->where('message', 1)->where('id_refunds', $id)->first();
+		$users = DB::table('users')->get();
+		if($ticket){
+			$responses = Supports::where('reply', 1)->where('associated', $ticket->id)->get();
+		}else{
+			$responses = null;
+		}
+
+
+		return view('players.refunds.show', compact('refund', 'ticket', 'users', 'responses'));
+
+	}
+
+	public function reply_refunds($id, Request $request){
+		$content = $request->get("content");
+		$this->validate($request, [
+			'content' => 'required|min:2',
+		]);
+
+		$ticket = Supports::where('id', $id)->where('id_author', $this->auth->user()->id)->where('message', '1')->first();
+		$last_reply = Supports::where('associated', $id)->where('reply', '1')->orderBy('id', 'desc')->first();
+		$sup = DB::table('supports')->where('id', $id)->first();
+
+		if($last_reply) {
+			if ($this->auth->user()->id == $ticket->id_author) {
+				if ($last_reply->id_author == $ticket->id_author) {
+					return redirect(url('remboursement/' . $sup->id_refunds))->with('error', 'Veuillez attendre la réponse d\'un admin !');
+				} else {
+					$supports = New Supports();
+					$supports->id_author = $this->auth->user()->id;
+					$supports->reply = 1;
+					$supports->associated = $id;
+					$supports->content = $content;
+					$supports->save();
+				}
+				return redirect(url('remboursement/' . $sup->id_refunds))->with('success', 'La réponse à bien été envoyer !');
+			} else {
+				abort(403, 'Unauthorized action.');
+			}
+		}else {
+			$supports = New Supports();
+			$supports->id_author = $this->auth->user()->id;
+			$supports->reply = 1;
+			$supports->associated = $id;
+			$supports->content = $content;
+			$supports->save();
+
+			return redirect(url('remboursement/' . $sup->id_refunds))->with('success', 'La réponse à bien été envoyer !');
 		}
 	}
 

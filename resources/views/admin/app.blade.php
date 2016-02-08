@@ -231,7 +231,7 @@
     </section>
 
     <footer>
-        <span>&copy; 2015 - AltisPan</span>
+        <span>&copy; 2016 - AltisPan</span>
     </footer>
 </div>
 

@@ -509,9 +509,18 @@ class AdminController extends Controller {
 	{
 		$user = $this->auth->user();
 		$refund = DB::table('refunds')->where('id', $id)->first();
+		if(empty($refund)){
+			abort(404);
+		}
+		$ticket = DB::table('supports')->where('message', 1)->where('id_refunds', $id)->first();
+		$Allusers = DB::table('users')->get();
+		if($ticket){
+			$responses = Supports::where('reply', 1)->where('associated', $ticket->id)->get();
+		}else{
+			$responses = null;
+		}
 
-
-		return view('admin.refunds.show', compact('user', 'refund'));
+		return view('admin.refunds.show', compact('user', 'refund', 'ticket', 'Allusers', 'responses'));
 	}
 
 	public function refundsUpdate($id, Request $request)
@@ -730,16 +739,16 @@ class AdminController extends Controller {
 	public function support(){
 		$user = $this->auth->user();
 		$Allusers = DB::table('users')->get();
-		$supports = DB::table('supports')->orderBy('id', 'desc')->where('message', 1)->paginate(15);
+		$supports = DB::table('supports')->orderBy('id', 'desc')->where('message', 1)->where('id_refunds', '0')->paginate(15);
 
 		return view('admin.supports.index', compact('user', 'supports', 'Allusers'));
 	}
 
 	public function support_show($id){
 		$user = $this->auth->user();
-		$ticket = DB::table('supports')->where('id', $id)->where('message', 1)->first();
+		$ticket = DB::table('supports')->where('id', $id)->where('message', 1)->where('id_refunds', '0')->first();
 		$Allusers = DB::table('users')->get();
-		$responses = Supports::where('reply', 1)->where('associated', $id)->get();
+		$responses = Supports::where('reply', 1)->where('associated', $ticket->id)->get();
 
 		return view('admin.supports.show', compact('ticket', 'user', 'Allusers', 'responses'));
 	}
@@ -765,6 +774,10 @@ class AdminController extends Controller {
 	public function reply($id, Request $request){
 		$content = $request->get("content");
 
+		$this->validate($request, [
+			'content' => 'required|min:2',
+		]);
+
 		$supports = New Supports();
 		$supports->id_author = $this->auth->user()->id;
 		$supports->reply = 1;
@@ -777,7 +790,64 @@ class AdminController extends Controller {
 			->update(array(
 				'etat' => 1,
 			));
-		return redirect(url('admin/support/' . $id))->with('success', 'La réponse à bien été envoyer !');
+
+		$refunds = $request->get('refunds');
+		if($refunds == 1){
+			$sup = DB::table('supports')->where('id', $id)->first();
+			DB::table('supports')
+				->where('id', $id)
+				->update(array(
+					'etat' => 3,
+				));
+			return redirect(url('admin/remboursement/' . $sup->id_refunds))->with('success', 'La réponse à bien été envoyer !');
+		}else{
+			return redirect(url('admin/support/' . $id))->with('success', 'La réponse à bien été envoyer !');
+		}
+	}
+
+	public function refunds_open($id, Request $request){
+		$this->validate($request, [
+			'content' => 'required|min:5'
+		]);
+
+		$content = $request->get("content");
+		$title = 'Remboursement #' . $id;
+
+		$refunds = DB::table('refunds')->where('id', $id)->first();
+		$user = DB::table('users')->where('arma', $refunds->playerid)->first();
+
+		$supports = New Supports();
+		$supports->id_author = $user->id;
+		$supports->message = 1;
+		$supports->title = $title;
+		$supports->content = $content;
+		$supports->etat = 3;
+		$supports->id_refunds = $id;
+		$supports->admin_refunds = $this->auth->user()->id;
+		$supports->save();
+
+		return redirect(url('admin/remboursement/' . $id))->with('success', 'Un ticket à bien été ouvert.');
+	}
+
+	public function refunds_close($id){
+		$sup = DB::table('supports')->where('id', $id)->first();
+
+		DB::table('supports')
+			->where('id', $id)
+			->update(array(
+				'etat' => 2,
+			));
+		return redirect(url('admin/remboursement/' . $sup->id_refunds))->with('success', 'Le ticket à bien été fermer !');
+	}
+
+	public function refunds_reopen($id){
+		$sup = DB::table('supports')->where('id', $id)->first();
+		DB::table('supports')
+			->where('id', $id)
+			->update(array(
+				'etat' => 1,
+			));
+		return redirect(url('admin/remboursement/' . $sup->id_refunds))->with('success', 'Le ticket à bien été réouvert !');
 	}
 
 }

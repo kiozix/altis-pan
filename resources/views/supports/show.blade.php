@@ -105,7 +105,7 @@
                                         <form action="{{ url('support/reply', ['id' => $ticket->id]) }}" method="post">
                                             <input type="hidden" value="{{ csrf_token() }}" name="_token">
                                             <textarea name="content" id="" rows="5" class="form-control" placeholder="Ecrivez votres réponse"></textarea> <br>
-                                            <button class="btn btn-success">Répondre</button>
+                                            <button type="submit" class="btn btn-success">Répondre</button>
                                             <a href="{{ url('support/close', ['id' => $ticket->id]) }}" class="btn btn-danger">Fermer le ticket</a>
                                         </form>
                                     </div>

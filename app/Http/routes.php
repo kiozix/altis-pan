@@ -27,9 +27,12 @@ Route::get('page/{slug}', ['uses' => 'PagesController@show']);
 
 Route::resource('player', 'PlayersController');
 Route::post('player', ['uses' => 'PlayersController@refunds']);
-Route::get('remboursement', ['uses' => 'PlayersController@refundsView']);
 Route::post('player/gang/delete', ['uses' => 'PlayersController@deleteGang', 'as' => 'deleteGang']);
 Route::post('player/gang/add', ['uses' => 'PlayersController@addUserGang', 'as' => 'addPlayerGang']);
+
+Route::get('remboursement', ['uses' => 'PlayersController@refundsView']);
+Route::get('remboursement/{id}', ['uses' => 'PlayersController@show_refunds'])->where('id', '[0-9]+');
+Route::post('remboursement/reply/{id}', ['uses' => 'PlayersController@reply_refunds']);
 
 Route::get('shop', ['uses' => 'ShopsController@index_home']);
 Route::get('shop/{slug}', ['uses' => 'ShopsController@show']);
@@ -67,8 +70,11 @@ Route::group(['prefix' => 'admin'], function () {
 	Route::post('/user/{id}', ['uses' => 'AdminController@userUpdate']);
 
 	Route::get('/remboursement', ['uses' => 'AdminController@refunds']);
-	Route::get('/remboursement/{id}', ['uses' => 'AdminController@refundsShow', 'as' => 'refund']);
-	Route::post('/remboursement/{id}', ['uses' => 'AdminController@refundsUpdate']);
+	Route::get('/remboursement/{id}', ['uses' => 'AdminController@refundsShow', 'as' => 'refund'])->where('id', '[0-9]+');
+	Route::post('/remboursement/{id}', ['uses' => 'AdminController@refundsUpdate'])->where('id', '[0-9]+');
+	Route::post('/remboursement/open/{id}', ['uses' => 'AdminController@refunds_open']);
+	Route::get('/remboursement/close/{id}', ['uses' => 'AdminController@refunds_close']);
+	Route::get('/remboursement/reopen/{id}', ['uses' => 'AdminController@refunds_reopen']);
 
 	Route::get('/vehicule/{id}', ['uses' => 'AdminController@vehicule']);
 	Route::post('/vehicule/{id}', ['uses' => 'AdminController@vehicule_update']);

@@ -394,6 +394,7 @@
                                             <th>Montant</th>
                                             <th>Dernière action</th>
                                             <th>Status</th>
+                                            <th>Action</th>
                                         </tr>
                                         @foreach($refunds as $refund)
                                             <tr>
@@ -410,6 +411,7 @@
                                                     }
                                                     ?>
                                                 </td>
+                                                <td><a href="{{ url('remboursement', ['id' => $refund->id]) }}"><i class="fa fa-eye"></i></a></td>
                                             </tr>
                                         @endforeach
                                     </table>
