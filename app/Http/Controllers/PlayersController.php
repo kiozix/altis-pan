@@ -140,7 +140,11 @@ class PlayersController extends Controller {
 					$gangMembers[] = $member;
 				}
 				unset($gangMembers[$userId]);
-				$gangMembersString = '[';
+				if(env('DB_EXTDB') == 1) {
+					$gangMembersString = '[';
+				}elseif(env('DB_EXTDB') == 2){
+					$gangMembersString = '""[';
+				}
 				$gangList = "";
 				foreach ($gangMembers as $gangMember) {
 					if ($gangMember != $userId) {
@@ -149,7 +153,11 @@ class PlayersController extends Controller {
 				}
 				$gangList = rtrim($gangList, ",");
 				$gangMembersString .= $gangList;
-				$gangMembersString .= ']';
+				if(env('DB_EXTDB') == 1) {
+					$gangMembersString .= ']';
+				}elseif(env('DB_EXTDB') == 2){
+					$gangMembersString .= ']"';
+				}
 
 				DB::table('gangs')
 					->where('id', $groupId)
@@ -186,7 +194,12 @@ class PlayersController extends Controller {
 						$gangMembers[] = $member;
 					}
 
-					$gangMembersString = '[';
+					if(env('DB_EXTDB') == 1) {
+						$gangMembersString = '[';
+					}elseif(env('DB_EXTDB') == 2){
+						$gangMembersString = '"[';
+					}
+
 					$gangList = "";
 					foreach ($gangMembers as $gangMember) {
 						$gangList .= "`" . $gangMember . "`,";
@@ -194,7 +207,11 @@ class PlayersController extends Controller {
 					$gangList .= "`" . $playerId . "`,";
 					$gangList = rtrim($gangList, ",");
 					$gangMembersString .= $gangList;
-					$gangMembersString .= ']';
+					if(env('DB_EXTDB') == 1) {
+						$gangMembersString .= ']';
+					}elseif(env('DB_EXTDB') == 2){
+						$gangMembersString .= ']"';
+					}
 
 					DB::table('gangs')
 						->where('id', $groupId)
@@ -202,7 +219,7 @@ class PlayersController extends Controller {
 							'members' => $gangMembersString,
 						));
 
-					return redirect(url('player'))->with('success', 'Le joueur à bien rajouté au gang');
+					return redirect(url('admin/gang/'. $groupId))->with('success', 'Le joueur à bien rajouté au gang');
 				}else{
 					return redirect(url('player'))->with('error', 'Vous avez atteint le nombre maximum de membres');
 				}

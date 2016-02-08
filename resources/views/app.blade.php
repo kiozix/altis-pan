@@ -129,6 +129,10 @@
                                     @endif
                                     <li role="separator" class="divider"></li>
                                     <li>
+                                        <a href="{{ url('/support') }}"><i class="fa fa-life-ring"></i>&nbsp;&nbsp;Support<span class="border"></span></a>
+                                    </li>
+                                    <li role="separator" class="divider"></li>
+                                    <li>
                                         <a href="{{ url('/auth/logout') }}"><i class="fa fa-sign-out"></i>&nbsp;&nbsp;&nbsp;Déconnexion</a>
                                     </li>
                                 </ul>

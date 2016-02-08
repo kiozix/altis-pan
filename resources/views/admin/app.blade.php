@@ -168,6 +168,13 @@
                         </a>
                     </li>
 
+                    <li class="{{ Request::is('admin/support') ? 'active' : '' }} <?php $path = Route::getCurrentRoute()->getPath(); if (starts_with($path, 'admin/support')) echo "active"; ?>">
+                        <a title="Support" href="{{ url('admin/support') }}">
+                            <em class="icon-support"></em>
+                            <span>Support</span>
+                        </a>
+                    </li>
+
                     <li class="{{ Request::is('admin/page') ? 'active' : '' }} <?php $path = Route::getCurrentRoute()->getPath(); if (starts_with($path, 'admin/page')) echo "active"; ?>">
                         <a title="Pages" href="{{ url('admin/page') }}">
                             <em class="icon-doc"></em>

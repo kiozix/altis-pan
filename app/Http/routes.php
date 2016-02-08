@@ -36,6 +36,13 @@ Route::get('shop/{slug}', ['uses' => 'ShopsController@show']);
 Route::get('shop/payment/accepted', ['uses' => 'ShopsController@accepted']);
 Route::get('shop/payment/failed', ['uses' => 'ShopsController@failed']);
 
+Route::get('support', ['uses' => 'SupportsController@index']);
+Route::get('support/open', ['uses' => 'SupportsController@create']);
+Route::post('support/open', ['uses' => 'SupportsController@open']);
+Route::get('support/{id}', ['uses' => 'SupportsController@show'])->where('id', '[0-9]+');
+Route::post('support/reply/{id}', ['uses' => 'SupportsController@reply']);
+Route::get('support/close/{id}', ['uses' => 'SupportsController@close']);
+
 /* Admin Route */
 Route::group(['prefix' => 'admin'], function () {
 	Route::get('/', ['uses' => 'AdminController@index']);
@@ -73,6 +80,12 @@ Route::group(['prefix' => 'admin'], function () {
 	Route::post('/settings', ['uses' => 'AdminController@settingsUpdate']);
 	Route::post('/settings/parameters', ['uses' => 'AdminController@settingParam']);
 	Route::DELETE('/settings/{id}', ['uses' => 'AdminController@settingDestroy']);
+
+	Route::get('/support', ['uses' => 'AdminController@support']);
+	Route::get('/support/{id}', ['uses' => 'AdminController@support_show'])->where('id', '[0-9]+');
+	Route::get('/support/close/{id}', ['uses' => 'AdminController@close']);
+	Route::get('/support/open/{id}', ['uses' => 'AdminController@open']);
+	Route::post('/support/reply/{id}', ['uses' => 'AdminController@reply']);
 
 	Route::resource('stream', 'StreamsController');
 	Route::resource('news', 'NewsController');

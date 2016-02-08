@@ -11,6 +11,7 @@ use App\Paypal;
 use App\Players;
 use App\Ranks;
 use App\Settings;
+use App\Supports;
 use Illuminate\Support\Facades\DB;
 class AdminController extends Controller {
 
@@ -361,7 +362,7 @@ class AdminController extends Controller {
 				if(env('DB_EXTDB') == 1) {
 					$gangMembersString = '[';
 				}elseif(env('DB_EXTDB') == 2){
-					$gangMembersString = '""[';
+					$gangMembersString = '"[';
 				}
 
 				$gangList = "";
@@ -724,6 +725,59 @@ class AdminController extends Controller {
 		$houses = DB::table('houses')->orderBy('id', 'desc')->paginate(15);
 
 		return view('admin.houses.index', compact('user', 'PlayersName', 'houses'));
+	}
+
+	public function support(){
+		$user = $this->auth->user();
+		$Allusers = DB::table('users')->get();
+		$supports = DB::table('supports')->orderBy('id', 'desc')->where('message', 1)->paginate(15);
+
+		return view('admin.supports.index', compact('user', 'supports', 'Allusers'));
+	}
+
+	public function support_show($id){
+		$user = $this->auth->user();
+		$ticket = DB::table('supports')->where('id', $id)->where('message', 1)->first();
+		$Allusers = DB::table('users')->get();
+		$responses = Supports::where('reply', 1)->where('associated', $id)->get();
+
+		return view('admin.supports.show', compact('ticket', 'user', 'Allusers', 'responses'));
+	}
+
+	public function close($id){
+		DB::table('supports')
+			->where('id', $id)
+			->update(array(
+				'etat' => 2,
+			));
+		return redirect(url('admin/support/' . $id))->with('success', 'Le ticket à bien été fermer !');
+	}
+
+	public function open($id){
+		DB::table('supports')
+			->where('id', $id)
+			->update(array(
+				'etat' => 1,
+			));
+		return redirect(url('admin/support/' . $id))->with('success', 'Le ticket à bien été réouvert !');
+	}
+
+	public function reply($id, Request $request){
+		$content = $request->get("content");
+
+		$supports = New Supports();
+		$supports->id_author = $this->auth->user()->id;
+		$supports->reply = 1;
+		$supports->associated = $id;
+		$supports->content = $content;
+		$supports->save();
+
+		DB::table('supports')
+			->where('id', $id)
+			->update(array(
+				'etat' => 1,
+			));
+		return redirect(url('admin/support/' . $id))->with('success', 'La réponse à bien été envoyer !');
 	}
 
 }

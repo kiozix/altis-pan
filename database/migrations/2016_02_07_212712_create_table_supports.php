@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRefundsTable extends Migration {
+class CreateTableSupports extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,14 +12,16 @@ class CreateRefundsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('refunds', function(Blueprint $table)
+		Schema::create('supports', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->string('playerid');
-			$table->string('name');
-			$table->string('amount');
+			$table->string('id_author');
+			$table->string('message');
+			$table->string('title');
+			$table->string('reply');
+			$table->string('associated');
 			$table->longText('content');
-			$table->string('status')->default(0);
+			$table->string('etat');
 			$table->timestamps();
 		});
 	}
@@ -31,7 +33,7 @@ class CreateRefundsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('refunds');
+		Schema::drop('supports');
 	}
 
 }
