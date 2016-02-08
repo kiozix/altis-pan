@@ -34,10 +34,11 @@
                                             $name = $user1->name;
                                             $id = $user1->id;
                                             $avatar = $user1->avatar;
+                                            $arma = $user1->arma;
                                         }
                                     }
                                     ?>
-                                    <td><a target="_blank" href="{{ route('user', ['id' => $id]) }}">{{ $name }} &nbsp; <i class="fa fa-external-link"></i></a></td>
+                                    <td><a target="_blank" href="{{ empty($arma) ? route('user', ['id' => $id]) : route('player', ['id' => $arma]) }}">{{ $name }} &nbsp; <i class="fa fa-external-link"></i></a></td>
                                 </tr>
                                 <tr>
                                     <td>Status</td>
