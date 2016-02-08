@@ -121,7 +121,7 @@
                                     <div class="media-box">
                                         <div class="pull-left">
                                             @if($avatar)
-                                                <img src="{{ asset('/img/avatars/' . $avatar . '.jpg') }}" alt="Image" class="media-box-object img-circle thumb32">
+                                                <img src="{{ asset('/img/avatars/' . $response->id_author . '.jpg') }}" alt="Image" class="media-box-object img-circle thumb32">
                                             @else
                                                 <img src="{{ asset('/img/user_default.png') }}" alt="Image" class="media-box-object img-circle thumb32">
                                             @endif

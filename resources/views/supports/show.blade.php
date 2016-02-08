@@ -67,7 +67,7 @@
                                 ?>
                                 <div class="col-md-2">
                                     @if($avatar)
-                                        <img src="{{ asset('/img/avatars/' . $avatar . '.jpg') }}" alt="Avatar" width="60" height="60" class="img-thumbnail img-circle">
+                                        <img src="{{ asset('/img/avatars/' . $response->id_author . '.jpg') }}" alt="Avatar" width="60" height="60" class="img-thumbnail img-circle">
                                     @else
                                         <img src="{{ asset('/img/user_default.png') }}" alt="Avatar" width="60" height="60" class="img-thumbnail img-circle">
                                     @endif
