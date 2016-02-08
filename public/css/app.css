@@ -7818,3 +7818,20 @@ fieldset[disabled] .flatdoc-wrapper .button.active {
   color: #23b7e5;
   background-color: #ffffff;
 }
+
+::-webkit-scrollbar {
+  width: 13px
+}
+
+::-webkit-scrollbar-thumb {
+  background: #51c6ea;
+  border-radius: 0
+}
+
+::-webkit-scrollbar-track {
+  background: #ddd
+}
+
+::-webkit-scrollbar:horizontal {
+  height: 13px
+}
