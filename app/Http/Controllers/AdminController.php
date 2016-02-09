@@ -63,6 +63,7 @@ class AdminController extends Controller {
 		$ranks_cop = DB::table('ranks')->where('side', 'COP')->get();
 		$ranks_medic = DB::table('ranks')->where('side', 'MEDIC')->get();
 		$ranks_admin = DB::table('ranks')->where('side', 'ADMIN')->get();
+		$ranks_donator = DB::table('ranks')->where('side', 'DONATOR')->get();
 
 		$insure = DB::table('settings')->where('name', 'insure')->first();
 		$alias = DB::table('settings')->where('name', 'alias')->first();
@@ -74,7 +75,7 @@ class AdminController extends Controller {
 
 		$gang = DB::table('gangs')->where('owner', $id)->first();
 
-		return view('admin.players.show', compact('alias','houses', 'licensesName', 'insure', 'ranks_admin', 'ranks_cop', 'ranks_medic', 'offenses', 'user', 'player', 'vehicles_cars', 'vehicles_airs', 'vehicles_ships', 'gang', 'user_show'));
+		return view('admin.players.show', compact('ranks_donator', 'alias','houses', 'licensesName', 'insure', 'ranks_admin', 'ranks_cop', 'ranks_medic', 'offenses', 'user', 'player', 'vehicles_cars', 'vehicles_airs', 'vehicles_ships', 'gang', 'user_show'));
 
 	}
 
@@ -596,12 +597,13 @@ class AdminController extends Controller {
 		$ranks_cop = DB::table('ranks')->where('side', 'COP')->get();
 		$ranks_medic = DB::table('ranks')->where('side', 'MEDIC')->get();
 		$ranks_admin = DB::table('ranks')->where('side', 'ADMIN')->get();
+		$ranks_donator = DB::table('ranks')->where('side', 'DONATOR')->get();
 
 		$licenses = DB::table('settings')->where('action', 'LICENSES')->get();
 		$insure = DB::table('settings')->where('name', 'insure')->first();
 		$alias = DB::table('settings')->where('name', 'alias')->first();
 
-		return view('admin.settings.index', compact('alias', 'licenses', 'insure', 'ranks_admin', 'user', 'ranks_cop', 'ranks_medic'));
+		return view('admin.settings.index', compact('ranks_donator', 'alias', 'licenses', 'insure', 'ranks_admin', 'user', 'ranks_cop', 'ranks_medic'));
 	}
 
 	public function settingsUpdate(Request $request){
