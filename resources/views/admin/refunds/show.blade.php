@@ -194,21 +194,21 @@
                                 @endforeach
 
                             </div>
-                        </div>
 
-                        @if($ticket->etat != 2)
-                            <div class="panel-footer clearfix">
-                                <form action="{{ url('admin/support/reply', ['id' => $ticket->id]) }}" method="post">
-                                    <div class="input-group">
-                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                        <input type="text" placeholder="Message..." class="form-control input-sm" name="content" autocomplete="off">
-                                    <span class="input-group-btn">
-                                       <button type="submit" class="btn btn-default btn-sm" name="refunds" value="1"><i class="fa fa-arrow-right"></i></button>
-                                    </span>
-                                    </div>
-                                </form>
-                            </div>
-                        @endif
+                            @if($ticket->etat != 2)
+                                <div class="panel-footer clearfix">
+                                    <form action="{{ url('admin/support/reply', ['id' => $ticket->id]) }}" method="post">
+                                        <div class="input-group">
+                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                            <input type="text" placeholder="Message..." class="form-control input-sm" name="content" autocomplete="off">
+                                            <span class="input-group-btn">
+                                               <button type="submit" class="btn btn-default btn-sm" name="refunds" value="1"><i class="fa fa-arrow-right"></i></button>
+                                            </span>
+                                        </div>
+                                    </form>
+                                </div>
+                            @endif
+                        </div>
                     </div>
                 </div>
             @endif
