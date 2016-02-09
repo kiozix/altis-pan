@@ -8,6 +8,9 @@ use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Facades\Session;
+use Otp\Otp;
+use Base32\Base32;
 
 class AuthController extends Controller {
 
@@ -81,13 +84,44 @@ class AuthController extends Controller {
 
 		if ($user && Hash::check($request->get('password'), $user->password))
 		{
-			$this->auth->login($user, $request->has('remember'));
-			return redirect()->intended($this->redirectPath());
+			if($user->totp_key != ''){
+				Session::put('user_id', $user->id);
+				return redirect(action('Auth\AuthController@totp'))->with('error', 'Ce compte à activer l\'authentification à 2 facteurs');
+			}else {
+				$this->auth->login($user, $request->has('remember'));
+				return redirect()->intended($this->redirectPath());
+			}
 		}
 
 		return redirect($this->loginPath())
 			->withInput($request->only('name', 'remember'))
 			->with('error', Lang::get('site.loginfailed'));
 	}
+
+	public function totp(Request $request){
+		$user_id = session()->get('user_id');
+		$key = $request->get("code");
+
+		if(empty($user_id)){
+			return redirect('/auth/login');
+		}
+
+		$otp = New Otp();
+		$user = User::where('id', $user_id)->first();
+
+		if($key){
+			if ($otp->checkTotp(Base32::decode($user->totp_key), $key)) {
+				$this->auth->login($user, $request->has('remember'));
+				return redirect()->intended($this->redirectPath());
+			}else {
+				return redirect(url('totp'))->with('error', 'Ce code ne correspond pas, veuillez recommencer l\'opération');
+			}
+		}
+
+		return view('auth.totp')->with('error', 'Ce compte à activer \'authentification à 2 facteurs');
+
+	}
+
+
 
 }

@@ -83,10 +83,25 @@
                             </div>
 
                             <div class="col-md-12">
-                                <div class="form-group">
-                                    <input type="submit" class="btn btn-primary " value="Modifier">
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <input type="submit" class="btn btn-primary " value="Modifier">
+                                    </div>
                                 </div>
+                                @if(empty($user->totp_key))
+                                    <div class="col-md-5">
+                                        <a href="{{ url('profil/totp') }}" class="btn btn-success"><i class="fa fa-check"></i>&nbsp;Authentification à 2 facteurs</a>
+                                    </div>
+                                @endif
                             </div>
+
+                            @if($user->totp_key)
+                                <div class="col-md-12">
+                                    <div class="text-right">
+                                        <a href="{{ url('profil/totp/delete') }}" class="btn btn-danger"><i class="fa fa-check"></i>&nbsp;Supprimer l'authentification à 2 facteurs</a>
+                                    </div>
+                                </div>
+                            @endif
                         </div>
                         {!! Form::close() !!}
                     </div>

@@ -870,4 +870,15 @@ class AdminController extends Controller {
 		return redirect(url('admin/remboursement/' . $sup->id_refunds))->with('success', 'Le ticket à bien été réouvert !');
 	}
 
+	public function totp($id){
+		DB::table('users')
+			->where('id', $id)
+			->update(array(
+				'totp_key' => null,
+			));
+
+		return redirect(url('admin/user/' . $id))->with('success', 'L\'authentification à 2 facteurs à bien été désactiver');
+
+	}
+
 }

@@ -40,6 +40,18 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="" class="col-md-4"></label>
+
+                            <div class="col-md-6">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="remember" value="1"> Se souvenir de moi
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
                                     Se connecter

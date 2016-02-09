@@ -5,7 +5,12 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use Otp\GoogleAuthenticator;
+use Otp\Otp;
+use Base32\Base32;
 
 class UsersController extends Controller {
 
@@ -43,6 +48,49 @@ class UsersController extends Controller {
 
 		return view('users.edit', compact('user'));
 		return redirect()->back()->with('success', 'Votre profil a bien été modifié');
+	}
+
+	public function totp(){
+		$secret = GoogleAuthenticator::generateRandom();
+		$user = $this->auth->user();
+		$site_name = env('SITE_NAME', 'AltisPan');
+		$qrcode = GoogleAuthenticator::getQrCodeUrl('totp', "$site_name - $user->name", $secret);
+		Session::put('secret', $secret);
+
+		return view('users.totp', compact('qrcode'));
+	}
+
+	public function totp_post(Request $request){
+		$otp = new Otp();
+		$secret = session()->get('secret');
+		$key = $request->get("code");
+		$user = $this->auth->user();
+
+		if ($otp->checkTotp(Base32::decode($secret), $key)) {
+
+			DB::table('users')
+				->where('id', $user->id)
+				->update(array(
+					'totp_key' => $secret
+				));
+			Session::forget('code');
+			return redirect(url('profil'))->with('success', 'L\'authentification à 2 facteurs à bien été activer');
+		}else {
+			return redirect(url('profil/totp'))->with('error', 'Ce code ne correspond pas, veuillez recommencer l\'opération');
+		}
+	}
+
+	public function totp_delete(){
+
+		$user = $this->auth->user();
+
+		DB::table('users')
+			->where('id', $user->id)
+			->update(array(
+				'totp_key' => null
+			));
+
+		return redirect(url('profil'))->with('success', 'L\'authentification à 2 facteurs à bien été déactiver');
 	}
 
 }

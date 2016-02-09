@@ -15,6 +15,9 @@ Route::get('/', 'WelcomeController@index');
 
 Route::get('home', 'HomeController@index');
 Route::get('profil', ['uses' => 'UsersController@edit', 'as' => 'profil']);
+Route::get('profil/totp', ['uses' => 'UsersController@totp']);
+Route::post('profil/totp', ['uses' => 'UsersController@totp_post']);
+Route::get('profil/totp/delete', ['uses' => 'UsersController@totp_delete']);
 Route::post('profil', ['uses' => 'UsersController@update']);
 
 Route::get('stream', ['uses' => 'StreamsController@index_home']);
@@ -69,6 +72,8 @@ Route::group(['prefix' => 'admin'], function () {
 	Route::get('/user/{id}', ['uses' => 'AdminController@userShow', 'as' => 'user'])->where('id', '[0-9]+');
 	Route::post('/user/{id}', ['uses' => 'AdminController@userUpdate']);
 
+	Route::get('/totp/{id}', ['uses' => 'AdminController@totp']);
+
 	Route::get('/remboursement', ['uses' => 'AdminController@refunds']);
 	Route::get('/remboursement/{id}', ['uses' => 'AdminController@refundsShow', 'as' => 'refund'])->where('id', '[0-9]+');
 	Route::post('/remboursement/{id}', ['uses' => 'AdminController@refundsUpdate'])->where('id', '[0-9]+');
@@ -105,3 +110,5 @@ Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
 ]);
+Route::get('totp', ['uses' => 'Auth\AuthController@totp']);
+Route::post('totp', ['uses' => 'Auth\AuthController@totp']);
