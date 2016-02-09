@@ -224,7 +224,7 @@ class PlayersController extends Controller {
 							'members' => $gangMembersString,
 						));
 
-					return redirect(url('admin/gang/'. $groupId))->with('success', 'Le joueur à bien rajouté au gang');
+					return redirect(url('player'))->with('success', 'Le joueur à bien rajouté au gang');
 				}else{
 					return redirect(url('player'))->with('error', 'Vous avez atteint le nombre maximum de membres');
 				}
