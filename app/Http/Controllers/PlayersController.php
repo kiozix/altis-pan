@@ -271,6 +271,12 @@ class PlayersController extends Controller {
 					$supports->associated = $id;
 					$supports->content = $content;
 					$supports->save();
+
+					DB::table('supports')
+					->where('id', $id)
+					->update(array(
+						'etat' => 1,
+					));
 				}
 				return redirect(url('remboursement/' . $sup->id_refunds))->with('success', 'La réponse à bien été envoyer !');
 			} else {
@@ -283,6 +289,12 @@ class PlayersController extends Controller {
 			$supports->associated = $id;
 			$supports->content = $content;
 			$supports->save();
+
+			DB::table('supports')
+			->where('id', $id)
+			->update(array(
+				'etat' => 1,
+			));
 
 			return redirect(url('remboursement/' . $sup->id_refunds))->with('success', 'La réponse à bien été envoyer !');
 		}

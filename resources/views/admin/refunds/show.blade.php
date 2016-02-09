@@ -55,13 +55,25 @@
                             <form action="{{ route('refund', ['id' => $refund->id]) }}" method="post">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <div class="text-right">
-                                    <button type="submit" class="btn btn-labeled btn-danger" name="status" value="1">
-                                        <span class="btn-label"><i class="fa fa-close"></i></span>Refusé
-                                    </button>
+                                    @if($ticket)
+                                        @if($ticket->etat == 2)
+                                            <button type="submit" class="btn btn-labeled btn-danger" name="status" value="1">
+                                                <span class="btn-label"><i class="fa fa-close"></i></span>Refusé
+                                            </button>
 
-                                    <button type="submit" class="btn btn-labeled btn-success" name="status" value="2">
-                                        <span class="btn-label"><i class="fa fa-check"></i></span>Accepté
-                                    </button>
+                                            <button type="submit" class="btn btn-labeled btn-success" name="status" value="2">
+                                                <span class="btn-label"><i class="fa fa-check"></i></span>Accepté
+                                            </button>
+                                        @endif
+                                    @else
+                                        <button type="submit" class="btn btn-labeled btn-danger" name="status" value="1">
+                                            <span class="btn-label"><i class="fa fa-close"></i></span>Refusé
+                                        </button>
+
+                                        <button type="submit" class="btn btn-labeled btn-success" name="status" value="2">
+                                            <span class="btn-label"><i class="fa fa-check"></i></span>Accepté
+                                        </button>
+                                    @endif
 
                                     @if($ticket)
                                         @if($ticket->etat == 2)
@@ -121,21 +133,20 @@
                             <div class="panel-title">{{ $ticket->title }}</div>
                         </div>
 
-                        <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 180px;"><div data-height="180" data-scrollable="" class="list-group" style="overflow: hidden; width: auto; height: 180px;">
+                        <div data-height="180" data-scrollable="" class="list-group">
                                 <?php
                                 foreach($Allusers as $user1){
                                     if($ticket->admin_refunds == $user1->id){
-                                    $name = $user1->name;
-                                    $id = $user1->id;
-                                    $avatar = $user1->avatar;
-                                    $arma = $user1->arma;
+                                        $name = $user1->name;
+                                        $id = $user1->id;
+                                        $arma = $user1->arma;
                                     }
                                 }
                                 ?>
                                 <a href="#" class="list-group-item">
                                     <div class="media-box">
                                         <div class="pull-left">
-                                            <img src="{{ asset('/img/avatars/' . $avatar . '.jpg') }}" alt="Image" class="media-box-object img-circle thumb32">
+                                            <img src="{{ asset('/img/avatars/' . $ticket->admin_refunds . '.jpg') }}" alt="Image" class="media-box-object img-circle thumb32">
                                         </div>
                                         <div class="media-box-body clearfix">
                                             <small class="pull-right">{{ $ticket->created_at }}</small>
@@ -183,8 +194,6 @@
                                 @endforeach
 
                             </div>
-                            <div class="slimScrollBar" style="width: 7px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 104.18px; background: rgb(0, 0, 0);"></div>
-                            <div class="slimScrollRail" style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; opacity: 0.2; z-index: 90; right: 1px; background: rgb(51, 51, 51);"></div>
                         </div>
 
                         @if($ticket->etat != 2)

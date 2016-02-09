@@ -88,8 +88,7 @@
                         <div class="panel-title">{{ $ticket->title }}</div>
                     </div>
 
-                    <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 180px;"><div data-height="180" data-scrollable="" class="list-group" style="overflow: hidden; width: auto; height: 180px;">
-
+                    <div data-height="180" data-scrollable="" class="list-group">
                             <a href="#" class="list-group-item">
                                 <div class="media-box">
                                     <div class="pull-left">
@@ -141,8 +140,6 @@
                             @endforeach
 
                         </div>
-                        <div class="slimScrollBar" style="width: 7px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 104.18px; background: rgb(0, 0, 0);"></div>
-                        <div class="slimScrollRail" style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; opacity: 0.2; z-index: 90; right: 1px; background: rgb(51, 51, 51);"></div>
                     </div>
 
                     @if($ticket->etat != 2)
