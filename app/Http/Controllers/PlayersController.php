@@ -148,7 +148,7 @@ class PlayersController extends Controller {
 				if(env('DB_EXTDB') == 1) {
 					$gangMembersString = '[';
 				}elseif(env('DB_EXTDB') == 2){
-					$gangMembersString = '""[';
+					$gangMembersString = '"[';
 				}
 				$gangList = "";
 				foreach ($gangMembers as $gangMember) {
