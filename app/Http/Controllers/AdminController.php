@@ -713,6 +713,7 @@ class AdminController extends Controller {
 
 	public function removePlayer(Request $request){
 		$pid = $request->get("pid");
+		$side = $request->get("side");
 
 		if(env('DB_EXTDB') == 1) {
 			$gear = '[]';
@@ -720,13 +721,21 @@ class AdminController extends Controller {
 			$gear = '"[]"';
 		}
 
+		if($side == 'civil'){
+			$inv = 'civ_gear';
+			$text = 'civil';
+		}elseif($side == 'cop'){
+			$inv = 'cop_gear';
+			$text = 'policier';
+		}
+
 		DB::table('players')
 			->where('playerid', $pid)
 			->update(array(
-				'civ_gear' => $gear,
+				$inv => $gear,
 			));
 
-		return redirect(url('admin/player/' . $pid))->with('success', 'L\'inventaire civil à bien été vider !');
+		return redirect(url('admin/player/' . $pid))->with('success', "L'inventaire $text à bien été vider !");
 	}
 
 	public function house()

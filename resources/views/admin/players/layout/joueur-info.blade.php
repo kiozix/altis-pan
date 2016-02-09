@@ -147,9 +147,14 @@
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <input type="hidden" name="pid" value="{{ $player->playerid }}">
 
-                <button type="submit" class="btn btn-labeled btn-danger" >
+                <button type="submit" class="btn btn-labeled btn-danger" name="side" value="civil">
                     <span class="btn-label"><i class="fa fa-trash"></i></span>Reset inventaire civil
                 </button>
+                @if($player->coplevel >= 1)
+                    <button type="submit" class="btn btn-labeled btn-primary" name="side" value="cop">
+                        <span class="btn-label"><i class="fa fa-trash"></i></span>Reset inventaire policier
+                    </button>
+                @endif
             </form>
         </div>
     </div>
