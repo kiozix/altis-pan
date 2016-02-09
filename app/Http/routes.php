@@ -55,18 +55,18 @@ Route::group(['prefix' => 'admin'], function () {
 	Route::get('/search', ['uses' => 'AdminController@search']);
 
 	Route::get('/player', ['uses' => 'AdminController@joueur']);
-	Route::get('/player/{id}', ['uses' => 'AdminController@joueurShow', 'as' => 'player']);
+	Route::get('/player/{id}', ['uses' => 'AdminController@joueurShow', 'as' => 'player'])->where('id', '[0-9]+');
 	Route::post('/player/{id}', ['uses' => 'AdminController@updatePlayer']);
 	Route::post('/civ_gear/delete', ['uses' => 'AdminController@removePlayer']);
 
 	Route::get('/gang', ['uses' => 'AdminController@gangs']);
-	Route::get('/gang/{id}', ['uses' => 'AdminController@gangShow', 'as' => 'gang']);
+	Route::get('/gang/{id}', ['uses' => 'AdminController@gangShow', 'as' => 'gang'])->where('id', '[0-9]+');
 	Route::post('/gang/delete', ['uses' => 'AdminController@deleteGang', 'as' => 'deleteGangAdmin']);
 	Route::post('/gang/add', ['uses' => 'AdminController@addUserGang', 'as' => 'addPlayerGangAdmin']);
 
 	Route::get('/user', ['uses' => 'AdminController@users']);
 	Route::post('/user/update/{id}', ['uses' => 'AdminController@updateUser']);
-	Route::get('/user/{id}', ['uses' => 'AdminController@userShow', 'as' => 'user']);
+	Route::get('/user/{id}', ['uses' => 'AdminController@userShow', 'as' => 'user'])->where('id', '[0-9]+');
 	Route::post('/user/{id}', ['uses' => 'AdminController@userUpdate']);
 
 	Route::get('/remboursement', ['uses' => 'AdminController@refunds']);

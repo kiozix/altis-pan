@@ -20,6 +20,7 @@ class AdminController extends Controller {
 	public function __construct(Guard $auth){
 		$this->middleware('auth');
 		$this->middleware('admin');
+		$this->middleware('ban');
 		$this->auth = $auth;
 	}
 
@@ -213,6 +214,10 @@ class AdminController extends Controller {
 		$user = $this->auth->user();
 		$user_show = DB::table('users')->where('id', $id)->first();
 
+		if(empty($user_show)){
+			return redirect(url('admin'))->with('error', 'L\'utilisateur demander n\'à pas été trouver');
+		}
+
 		return view('admin.users.show', compact('user', 'user_show'));
 	}
 
@@ -224,6 +229,7 @@ class AdminController extends Controller {
 		$email = $request->get("email");
 		$admin = $request->get("rank_website");
 		$arma = $request->get("arma");
+		$ban = $request->get("ban");
 
 		if(empty($email)){
 			return redirect(url('admin/user/' . $id))->with('error', 'Le champs email est vide !');
@@ -237,7 +243,8 @@ class AdminController extends Controller {
 					'lastname' => $lastname,
 					'email'=> $email,
 					'admin' => $admin,
-					'arma' => $arma
+					'arma' => $arma,
+					'ban' => $ban
 				));
 
 			return redirect(url('admin/user/' . $id))->with('success', 'L\'utilisateur à bien été modifié');

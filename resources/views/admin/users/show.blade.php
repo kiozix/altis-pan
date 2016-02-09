@@ -46,6 +46,15 @@
                                         </td>
                                     </tr>
                                     <tr>
+                                        <td>Banni</td>
+                                        <td>
+                                            <select name="ban" class="form-control">
+                                                <option value="0" {{ $user_show->ban == 0 ? 'selected' : '' }} >Non banni</option>
+                                                <option value="1" {{ $user_show->ban == 1 ? 'selected' : '' }} >banni</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
                                         <td>ID Arma @if($user_show->arma) <a target="_blank" href="{{ route('player', ['id' => $user_show->arma]) }}"><i class="fa fa-external-link"></i></a>@endif</td>
                                         <td><input type="text" name="arma" value="{{ $user_show->arma }}" class="form-control" maxlength="17"></td>
                                     </tr>

@@ -20,6 +20,7 @@ class PlayersController extends Controller {
 
 		$this->middleware('auth');
 		$this->middleware('arma');
+		$this->middleware('ban');
 		$this->auth = $auth;
 	}
 

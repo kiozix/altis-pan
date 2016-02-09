@@ -15,8 +15,8 @@ class OffensesController extends Controller {
      */
 	public function __construct(Guard $auth)
 	{
-		$this->middleware('auth', ['except' => ['index_home', 'show']]);
-		$this->middleware('admin', ['except' => ['index_home', 'show']]);
+		$this->middleware('auth');
+		$this->middleware('admin');
 
 		$this->auth = $auth;
 	}
@@ -32,12 +32,6 @@ class OffensesController extends Controller {
 		$offenses = Offenses::orderBy('id', 'DESC')->paginate(15);
 		$PlayersName = DB::table('players')->get();
 		return view('admin.offenses.index', compact('offenses', 'user', 'PlayersName'));
-	}
-
-	public function index_home()
-	{
-		// $news = News::orderBy('id', 'DESC')->paginate(10);
-		// return view('news.index', compact('news'));
 	}
 
 	/**
@@ -63,17 +57,6 @@ class OffensesController extends Controller {
 		Offenses::create($request->only('arma_id', 'content', 'sanction', 'author', 'author_id'));
 		return redirect(action('OffensesController@index'))->with('success', 'L\'infraction à bien été sauvegarder');
 
-	}
-
-
-	/**
-	 * @param $slug
-	 * @return \Illuminate\View\View
-     */
-	public function show($slug)
-	{
-		// $news = News::where('slug', $slug)->firstOrFail();
-		// return view('news.show', compact('news'));
 	}
 
 

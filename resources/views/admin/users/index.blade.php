@@ -24,7 +24,7 @@
                                 <th>Date d'inscription</th>
                             </tr>
                             @foreach($users as $user1)
-                                <tr>
+                                <tr class="{{ $user1->ban == 1 ? 'danger' : ''}}">
                                     <td><a href="{{ route('user', ['id' => $user1->id]) }}">{{ $user1->name }}</a></td>
                                     <td>{{ $user1->email }}</td>
                                     <td>

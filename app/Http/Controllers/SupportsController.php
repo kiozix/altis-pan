@@ -16,6 +16,7 @@ class SupportsController extends Controller {
 	public function __construct(Guard $auth)
 	{
 		$this->middleware('auth');
+		$this->middleware('ban');
 		$this->auth = $auth;
 	}
 
