@@ -29,12 +29,12 @@ class AdminController extends Controller {
 		$players = DB::table('players')->count();
 		$players_last = DB::table('players')->orderBy('uid', 'desc')->take(5)->get();
 		$players_money = DB::table('players')->orderBy('bankacc', 'desc')->take(15)->get();
-		$users = DB::table('users')->count();
-		$news = DB::table('news')->count();
+		$support = DB::table('supports')->where('etat', 1)->where('id_refunds', 0)->count();
+		$refunds = DB::table('refunds')->where('status', 0)->count();
 
 		$paypal = DB::table('paypals')->orderBy('id', 'desc')->take(4)->get();
 
-		return view('admin.index', compact('user', 'players', 'players_last', 'users', 'news', 'paypal', 'players_money'));
+		return view('admin.index', compact('user', 'players', 'players_last', 'support', 'refunds', 'paypal', 'players_money'));
 	}
 
 	public function joueur()

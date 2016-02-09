@@ -9,9 +9,9 @@
 @section('content')
     <div class="row">
         <div class="col-lg-3 col-sm-6">
-            <div class="panel widget bg-primary">
+            <div class="panel widget bg-purple">
                 <div class="row row-table">
-                    <div class="col-xs-4 text-center bg-primary-dark pv-lg">
+                    <div class="col-xs-4 text-center bg-purple-dark pv-lg">
                         <em class="icon-game-controller fa-3x"></em>
                     </div>
                     <div class="col-xs-8 pv-lg">
@@ -22,27 +22,27 @@
             </div>
         </div>
         <div class="col-lg-3 col-sm-6">
-            <div class="panel widget bg-purple">
+            <div class="panel widget bg-primary">
                 <div class="row row-table">
-                    <div class="col-xs-4 text-center bg-purple-dark pv-lg">
-                        <em class="icon-people fa-3x"></em>
+                    <div class="col-xs-4 text-center bg-primary-dark pv-lg">
+                        <em class="icon-tag fa-3x"></em>
                     </div>
                     <div class="col-xs-8 pv-lg">
-                        <div class="h2 mt0">{{ $users }}</div>
-                        <div class="text-uppercase">Utilisateurs</div>
+                        <div class="h2 mt0">{{ $support }}</div>
+                        <div class="text-uppercase">Ticket Ouvert</div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-lg-3 col-md-6 col-sm-12">
-            <div class="panel widget bg-green">
+            <div class="panel widget bg-info">
                 <div class="row row-table">
-                    <div class="col-xs-4 text-center bg-green-dark pv-lg">
-                        <em class="icon-book-open fa-3x"></em>
+                    <div class="col-xs-4 text-center bg-info-dark pv-lg">
+                        <em class="icon-credit-card fa-3x"></em>
                     </div>
                     <div class="col-xs-8 pv-lg">
-                        <div class="h2 mt0">{{ $news }}</div>
-                        <div class="text-uppercase">News</div>
+                        <div class="h2 mt0">{{ $refunds }}</div>
+                        <div class="text-uppercase">Remboursement Ouvert</div>
                     </div>
                 </div>
             </div>
@@ -50,7 +50,7 @@
         <div class="col-lg-3 col-md-6 col-sm-12">
             <div class="panel widget">
                 <div class="row row-table">
-                    <div class="col-xs-4 text-center bg-green pv-lg">
+                    <div class="col-xs-4 text-center bg-inverse-light pv-lg">
                         <div data-now="" data-format="MMMM" class="text-sm"></div>
                         <br>
                         <div data-now="" data-format="D" class="h2 mt0"></div>
