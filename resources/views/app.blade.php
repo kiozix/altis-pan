@@ -120,7 +120,7 @@
                                         <li role="separator" class="divider"></li>
                                     @endif
                                     <li>
-                                        <a href="{{ route('profil') }}"><i class="fa fa-cogs"></i>&nbsp;&nbsp;Mon compte<span class="border"></span></a>
+                                        <a href="{{ route('profil') }}"><i class="fa fa-cogs"></i>&nbsp;&nbsp;Paramètres<span class="border"></span></a>
                                     </li>
                                     @if(Auth::user()->arma)
                                     <li>
