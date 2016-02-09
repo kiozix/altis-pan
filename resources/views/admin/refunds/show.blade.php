@@ -29,17 +29,42 @@
                                     <td>Montant</td>
                                     <td>{{ number_format($refund->amount, 2, ',', ' ') . ' $' }}</td>
                                 </tr>
-                                <td>{{ $refund->updated_at }}</td>
-                                <td><?php
-                                    if($refund->status == 0){
-                                        echo '<span class="label label-warning">En cours de validation</span>';
-                                    }elseif($refund->status == 1){
-                                        echo '<span class="label label-danger">Refusé</span>';
-                                    }elseif($refund->status == 2){
-                                        echo '<span class="label label-success">Effectué</span>';
+                                <tr>
+                                    <td>Création</td>
+                                    <td>{{ $refund->created_at }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Etat</td>
+                                    <td><?php
+                                        if($refund->status == 0){
+                                            echo '<span class="label label-warning">En cours de validation</span>';
+                                        }elseif($refund->status == 1){
+                                            echo '<span class="label label-danger">Refusé</span>';
+                                        }elseif($refund->status == 2){
+                                            echo '<span class="label label-success">Effectué</span>';
+                                        }
+                                        ?>
+                                    </td>
+                                </tr>
+                                @if($refund->admin_id)
+                                    <?php
+                                    foreach($Allusers as $user0){
+                                        if($refund->admin_id == $user0->id){
+                                            $name_admin = $user0->name;
+                                        }
                                     }
                                     ?>
-                                </td>
+                                    <tr>
+                                        <td>Traiter par</td>
+                                        <td><a href="{{ route('user', ['id' => $refund->admin_id]) }}" target="_blank">{{ $name_admin }} &nbsp; <i class="fa fa-external-link"></i></a></td>
+                                    </tr>
+                                        <tr>
+                                            <td>Dernière action</td>
+                                            <td>{{ $refund->updated_at }}</td>
+                                        </tr>
+                                @endif
+
+
                             </table>
                             <br>
                             <hr>

@@ -542,6 +542,7 @@ class AdminController extends Controller {
 				->where('id', $id)
 				->update(array(
 					'status' => 2,
+					'admin_id' => $user->id,
 				));
 
 			return redirect(url('admin/remboursement/'))->with('success', 'Remboursement effectué');
@@ -551,6 +552,7 @@ class AdminController extends Controller {
 				->where('id', $id)
 				->update(array(
 					'status' => 1,
+					'admin_id' => $user->id,
 				));
 			return redirect(url('admin/remboursement/'))->with('error', 'Remboursement refusé');
 		}

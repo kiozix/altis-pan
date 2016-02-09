@@ -44,7 +44,7 @@
                                     </td>
                                     <td>{{ $ticket->updated_at }}</td>
                                     <td>
-                                        <a href="{{ url('/support', ['id' => $ticket->id]) }}" class="btn btn-info btn-xs"><i class="fa fa-eye"></i></a>
+                                        <a href="{{ url('/support', ['id' => $ticket->id]) }}"><i class="fa fa-eye"></i></a>
                                     </td>
                                     <td></td>
                                 </tr>
