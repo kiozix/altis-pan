@@ -110,7 +110,17 @@
 
                                 <div class="user-block-info">
                                     <span class="user-block-name">Bonjour, {{ $user->name }}</span>
-                                    <span class="user-block-role">Administrateur</span>
+                                    <span class="user-block-role">
+                                        <?php
+                                        if($user->rank == 1) {
+                                            echo 'Support';
+                                        }elseif($user->rank == 2) {
+                                            echo 'Modérateur';
+                                        }elseif($user->rank == 3) {
+                                            echo 'Administrateur';
+                                        }
+                                        ?>
+                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -153,14 +163,14 @@
                             <span>Gangs</span>
                         </a>
                     </li>
-
-                    <li class="{{ Request::is('admin/remboursement') ? 'active' : '' }} <?php $path = Route::getCurrentRoute()->getPath(); if (starts_with($path, 'admin/remboursement')) echo "active"; ?>">
-                        <a title="Remboursements" href="{{ url('admin/remboursement') }}">
-                            <em class="icon-credit-card"></em>
-                            <span>Remboursements</span>
-                        </a>
-                    </li>
-
+                    @if($user->rank != 1)
+                        <li class="{{ Request::is('admin/remboursement') ? 'active' : '' }} <?php $path = Route::getCurrentRoute()->getPath(); if (starts_with($path, 'admin/remboursement')) echo "active"; ?>">
+                            <a title="Remboursements" href="{{ url('admin/remboursement') }}">
+                                <em class="icon-credit-card"></em>
+                                <span>Remboursements</span>
+                            </a>
+                        </li>
+                    @endif
                     <li class="{{ Request::is('admin/offense') ? 'active' : '' }} <?php $path = Route::getCurrentRoute()->getPath(); if (starts_with($path, 'admin/offense')) echo "active"; ?>">
                         <a title="Casier Judiciaires" href="{{ url('admin/offense') }}">
                             <em class="icon-paper-clip"></em>
@@ -174,49 +184,49 @@
                             <span>Support</span>
                         </a>
                     </li>
+                    @if($user->rank == 3)
+                        <li class="{{ Request::is('admin/page') ? 'active' : '' }} <?php $path = Route::getCurrentRoute()->getPath(); if (starts_with($path, 'admin/page')) echo "active"; ?>">
+                            <a title="Pages" href="{{ url('admin/page') }}">
+                                <em class="icon-doc"></em>
+                                <span>Pages</span>
+                            </a>
+                        </li>
 
-                    <li class="{{ Request::is('admin/page') ? 'active' : '' }} <?php $path = Route::getCurrentRoute()->getPath(); if (starts_with($path, 'admin/page')) echo "active"; ?>">
-                        <a title="Pages" href="{{ url('admin/page') }}">
-                            <em class="icon-doc"></em>
-                            <span>Pages</span>
-                        </a>
-                    </li>
+                        <li class="{{ Request::is('admin/stream') ? 'active' : '' }} <?php $path = Route::getCurrentRoute()->getPath(); if (starts_with($path, 'admin/stream')) echo "active"; ?>">
+                            <a title="Stream" href="{{ url('admin/stream') }}">
+                                <em class="icon-control-play"></em>
+                                <span>Stream</span>
+                            </a>
+                        </li>
 
-                    <li class="{{ Request::is('admin/stream') ? 'active' : '' }} <?php $path = Route::getCurrentRoute()->getPath(); if (starts_with($path, 'admin/stream')) echo "active"; ?>">
-                        <a title="Stream" href="{{ url('admin/stream') }}">
-                            <em class="icon-control-play"></em>
-                            <span>Stream</span>
-                        </a>
-                    </li>
+                        <li class="{{ Request::is('admin/news') ? 'active' : '' }} <?php $path = Route::getCurrentRoute()->getPath(); if (starts_with($path, 'admin/news')) echo "active"; ?>">
+                            <a title="News" href="{{ url('admin/news') }}">
+                                <em class="icon-book-open"></em>
+                                <span>News</span>
+                            </a>
+                        </li>
 
-                    <li class="{{ Request::is('admin/news') ? 'active' : '' }} <?php $path = Route::getCurrentRoute()->getPath(); if (starts_with($path, 'admin/news')) echo "active"; ?>">
-                        <a title="News" href="{{ url('admin/news') }}">
-                            <em class="icon-book-open"></em>
-                            <span>News</span>
-                        </a>
-                    </li>
+                        <li class="{{ Request::is('admin/shop') ? 'active' : '' }} <?php $path = Route::getCurrentRoute()->getPath(); if (starts_with($path, 'admin/shop')) echo "active"; ?>">
+                            <a title="Boutique" href="{{ url('admin/shop') }}">
+                                <em class="icon-basket"></em>
+                                <span>Boutique</span>
+                            </a>
+                        </li>
 
-                    <li class="{{ Request::is('admin/shop') ? 'active' : '' }} <?php $path = Route::getCurrentRoute()->getPath(); if (starts_with($path, 'admin/shop')) echo "active"; ?>">
-                        <a title="Boutique" href="{{ url('admin/shop') }}">
-                            <em class="icon-basket"></em>
-                            <span>Boutique</span>
-                        </a>
-                    </li>
+                        <li class="{{ Request::is('admin/paypal') ? 'active' : '' }}">
+                            <a title="PayPal" href="{{ url('admin/paypal') }}">
+                                <em class="icon-paypal"></em>
+                                <span>PayPal</span>
+                            </a>
+                        </li>
 
-                    <li class="{{ Request::is('admin/paypal') ? 'active' : '' }}">
-                        <a title="PayPal" href="{{ url('admin/paypal') }}">
-                            <em class="icon-paypal"></em>
-                            <span>PayPal</span>
-                        </a>
-                    </li>
-
-                    <li class="{{ Request::is('admin/settings') ? 'active' : '' }}">
-                        <a title="Paramètres" href="{{ url('admin/settings') }}">
-                            <em class="icon-wrench"></em>
-                            <span>Paramètres</span>
-                        </a>
-                    </li>
-
+                        <li class="{{ Request::is('admin/settings') ? 'active' : '' }}">
+                            <a title="Paramètres" href="{{ url('admin/settings') }}">
+                                <em class="icon-wrench"></em>
+                                <span>Paramètres</span>
+                            </a>
+                        </li>
+                    @endif
                 </ul>
             </nav>
         </div>

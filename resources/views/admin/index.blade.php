@@ -86,7 +86,9 @@
                                     <tr>
                                         <td><a href="{{ url('admin/player/'. $player->playerid) }}">{{ $player->name }}</a></td>
                                         <td>{{ $player->playerid }}</td>
-                                        <td>
+                                        <td>@if($user->rank == 1)
+                                                <span class='label label-info'>Masqué</span>
+                                            @else
                                             <?php
                                             $money = $player->cash + $player->bankacc;
 
@@ -100,7 +102,8 @@
                                                 $argent = number_format($money, 2, ',', ' ');
                                                 echo "<span class='label label-danger'>". $argent ." $</span>";
                                             }
-                                        ?>
+                                            ?>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach
@@ -145,7 +148,7 @@
                 </div>
             </div>
 
-            @if($paypal)
+            @if($paypal && $user->rank == 3)
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <div class="panel-title">Dernier Achat</div>

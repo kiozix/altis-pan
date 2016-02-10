@@ -15,7 +15,7 @@ class StreamsController extends Controller {
 	public function __construct(Guard $auth)
 	{
 		$this->middleware('auth', ['except' => ['index_home', 'show']]);
-		$this->middleware('admin', ['except' => ['index_home', 'show']]);
+		$this->middleware('owner', ['except' => ['index_home', 'show']]);
 
 		$this->auth = $auth;
 	}

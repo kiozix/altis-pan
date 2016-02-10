@@ -34,20 +34,24 @@
                                     <td><a href="{{ url('admin/gang/'. $gang->id) }}">{{ $gang->name }}</a></td>
                                     <td><a href="{{ route('player', ['id' => $gang->owner]) }}">{{ $name }}</a></td>
                                     <td>
-                                        <?php
+                                        @if($user->rank == 1)
+                                            <span class='label label-info'>Masqué</span>
+                                        @else
+                                            <?php
                                             $money = $gang->bank;
 
-                                            if ($money < 25000) {
+                                            if ($money < env('MONEY_WARNING', 500000)) {
                                                 $argent = number_format($money, 2, ',', ' ');
                                                 echo "<span class='label label-success'>". $argent ." $</span>";
-                                            } elseif (150000 > $money) {
+                                            } elseif (env('MONEY_DANGER', 5000000) >= $money) {
                                                 $argent = number_format($money, 2, ',', ' ');
                                                 echo "<span class='label label-warning'>". $argent ." $</span>";
                                             } else {
                                                 $argent = number_format($money, 2, ',', ' ');
                                                 echo "<span class='label label-danger'>". $argent ." $</span>";
                                             }
-                                        ?>
+                                            ?>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach

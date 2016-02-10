@@ -82,7 +82,11 @@ class AdminController extends Controller {
 
 	public function updatePlayer($id, Request $request)
 	{
-		if($request->get("give")){
+		if($this->auth->user()->rank == 1) {
+			abort(403);
+		}
+
+		if($request->get("give") && $this->auth->user()->rank == 3){
 			if($request->get("give") >= 1) {
 				$amount = $request->get("give");
 
@@ -100,7 +104,7 @@ class AdminController extends Controller {
 			}else {
 				return redirect(url('admin/player/' . $id))->with('error', 'Veuillez saisir un nombre positif');
 			}
-		}elseif($request->get("take")){
+		}elseif($request->get("take") && $this->auth->user()->rank != 1){
 			if($request->get("take") >= 1) {
 				$amount = $request->get("take");
 
@@ -140,33 +144,45 @@ class AdminController extends Controller {
 
 			$alias = DB::table('settings')->where('name', 'alias')->first();
 
-			if($alias && $alias->value_associated == 1){
-				$username = $request->get("username");
-				$username = rtrim($username);
+			if($this->auth->user()->rank == 3) {
+				if ($alias && $alias->value_associated == 1) {
+					$username = $request->get("username");
+					$username = rtrim($username);
 
-				if(env('DB_EXTDB') == 2){
-					$alias_name = '"[["' . $username . '"]]"';
-				}elseif(env('DB_EXTDB') == 1){
-					$alias_name = '"[`' . $username . '`]"';
+					if (env('DB_EXTDB') == 2) {
+						$alias_name = '"[["' . $username . '"]]"';
+					} elseif (env('DB_EXTDB') == 1) {
+						$alias_name = '"[`' . $username . '`]"';
+					}
+
+					DB::table('players')
+						->where('playerid', $id)
+						->update(array(
+							'name' => $username,
+							'adminlevel' => $admin,
+							'coplevel' => $policier,
+							'mediclevel' => $medic,
+							'donatorlvl' => $donator,
+							'duredon' => $duredon,
+							'timestamp' => $timestamp,
+							'aliases' => $alias_name
+						));
+				} else {
+					DB::table('players')
+						->where('playerid', $id)
+						->update(array(
+							'adminlevel' => $admin,
+							'coplevel' => $policier,
+							'mediclevel' => $medic,
+							'donatorlvl' => $donator,
+							'duredon' => $duredon,
+							'timestamp' => $timestamp
+						));
 				}
-
+			}else {
 				DB::table('players')
 					->where('playerid', $id)
 					->update(array(
-						'name' => $username,
-						'adminlevel' => $admin,
-						'coplevel' => $policier,
-						'mediclevel' => $medic,
-						'donatorlvl' => $donator,
-						'duredon' => $duredon,
-						'timestamp' => $timestamp,
-						'aliases' => $alias_name
-					));
-			}else{
-				DB::table('players')
-					->where('playerid', $id)
-					->update(array(
-						'adminlevel' => $admin,
 						'coplevel' => $policier,
 						'mediclevel' => $medic,
 						'donatorlvl' => $donator,
@@ -223,56 +239,55 @@ class AdminController extends Controller {
 
 	public function userUpdate($id, Request $request)
 	{
+		if($this->auth->user()->rank == 1) {
+			abort(403);
+		}
+
 		$name = $request->get("username");
 		$firstname = $request->get("firstname");
 		$lastname = $request->get("lastname");
 		$email = $request->get("email");
-		$admin = $request->get("rank_website");
+		$rank = $request->get("rank_website");
 		$arma = $request->get("arma");
 		$ban = $request->get("ban");
 
-		if(empty($email)){
-			return redirect(url('admin/user/' . $id))->with('error', 'Le champs email est vide !');
-		}else{
 
+		if($this->auth->user()->rank == 2) {
+			DB::table('users')
+				->where('id', $id)
+				->update(array(
+					'arma' => $arma,
+					'ban' => $ban
+				));
+		}else {
 			DB::table('users')
 				->where('id', $id)
 				->update(array(
 					'name' => $name,
 					'firstname' => $firstname,
 					'lastname' => $lastname,
-					'email'=> $email,
-					'admin' => $admin,
+					'email' => $email,
+					'rank' => $rank,
 					'arma' => $arma,
 					'ban' => $ban
 				));
-
-			return redirect(url('admin/user/' . $id))->with('success', 'L\'utilisateur à bien été modifié');
 		}
+
+		return redirect(url('admin/user/' . $id))->with('success', 'L\'utilisateur à bien été modifié');
 
 
 	}
 
 	public function paypal()
 	{
+		if($this->auth->user()->rank != 3) {
+			abort(403);
+		}
+
 		$user = $this->auth->user();
 		$logs = Paypal::all();
 
 		return view('admin.paypal.index', compact('user', 'logs'));
-	}
-
-	public function updateUser($id, Request $request)
-	{
-		$admin = $request->get("rank_website");
-		$id_user = $request->get('id');
-
-		DB::table('users')
-			->where('id', $id_user)
-			->update(array(
-				'admin' => $admin,
-			));
-
-		return redirect(url('admin/player/'. $id))->with('success', 'Le joueur à bien été modifié');
 	}
 
 	public function gangs()
@@ -303,6 +318,10 @@ class AdminController extends Controller {
 
 	public function deleteGang(Request $request)
 	{
+		if($this->auth->user()->rank == 1) {
+			abort(403);
+		}
+
 		if($request->isMethod('POST')){
 			$userId = $request->get("userId");
 			$groupId = $request->get("groupId");
@@ -350,6 +369,10 @@ class AdminController extends Controller {
 
 	public function addUserGang(Request $request)
 	{
+		if($this->auth->user()->rank == 1) {
+			abort(403);
+		}
+
 		if($request->isMethod('POST')){
 			$playerId = $request->get("playerid");
 			$groupId = $request->get("groupId");
@@ -402,6 +425,10 @@ class AdminController extends Controller {
 
 	public function setLicenses(Request $request)
 	{
+		if($this->auth->user()->rank == 1) {
+			abort(403);
+		}
+
 		if($request->isMethod('POST')) {
 
 			$status = $request->get("type");
@@ -507,6 +534,10 @@ class AdminController extends Controller {
 
 	public function refunds()
 	{
+		if($this->auth->user()->rank == 1) {
+			abort(403);
+		}
+
 		$user = $this->auth->user();
 		$refunds = DB::table('refunds')->orderBy('id', 'desc')->paginate(15);
 
@@ -515,6 +546,10 @@ class AdminController extends Controller {
 
 	public function refundsShow($id)
 	{
+		if($this->auth->user()->rank == 1) {
+			abort(403);
+		}
+
 		$user = $this->auth->user();
 		$refund = DB::table('refunds')->where('id', $id)->first();
 		if(empty($refund)){
@@ -533,6 +568,10 @@ class AdminController extends Controller {
 
 	public function refundsUpdate($id, Request $request)
 	{
+		if($this->auth->user()->rank == 1) {
+			abort(403);
+		}
+
 		$user = $this->auth->user();
 		$refund = DB::table('refunds')->where('id', $id)->first();
 		$player = DB::table('players')->where('playerid', $refund->playerid)->first();
@@ -569,6 +608,9 @@ class AdminController extends Controller {
 	}
 
 	public function vehicule($id){
+		if($this->auth->user()->rank == 1) {
+			abort(403);
+		}
 		$user = $this->auth->user();
 
 		$vehicule = DB::table('vehicles')->where('id', $id)->first();
@@ -579,6 +621,9 @@ class AdminController extends Controller {
 	}
 
 	public function vehicule_update($id, Request $request){
+		if($this->auth->user()->rank == 1) {
+			abort(403);
+		}
 		$new_owner = $request->get("playerid");
 		$vehicule = DB::table('vehicles')->where('id', $id)->first();
 		DB::table('vehicles')
@@ -591,6 +636,9 @@ class AdminController extends Controller {
 	}
 
 	public function vehicule_delete(Request $request){
+		if($this->auth->user()->rank == 1) {
+			abort(403);
+		}
 		$id = $request->get("id");
 		$vehicule = DB::table('vehicles')->where('id', $id)->first();
 
@@ -600,6 +648,9 @@ class AdminController extends Controller {
 	}
 
 	public function settings(){
+		if($this->auth->user()->rank != 3) {
+			abort(403);
+		}
 		$user = $this->auth->user();
 		$ranks_cop = DB::table('ranks')->where('side', 'COP')->get();
 		$ranks_medic = DB::table('ranks')->where('side', 'MEDIC')->get();
@@ -614,6 +665,9 @@ class AdminController extends Controller {
 	}
 
 	public function settingsUpdate(Request $request){
+		if($this->auth->user()->rank != 3) {
+			abort(403);
+		}
 		if($request->get("side")){
 			$value = $request->get("value_associated");
 			$name = $request->get("name");
@@ -646,6 +700,9 @@ class AdminController extends Controller {
 
 	public function settingParam(Request $request)
 	{
+		if($this->auth->user()->rank != 3) {
+			abort(403);
+		}
 		$value = $request->get('insure_var');
 
 		$insure = DB::table('settings')->where('name', 'insure')->first();
@@ -707,6 +764,10 @@ class AdminController extends Controller {
 
 	public function settingDestroy($id, Request $request)
 	{
+		if($this->auth->user()->rank != 3) {
+			abort(403);
+		}
+
 		if($request->get("action") == 'ranks'){
 
 			$rank = Ranks::findOrFail($id);
@@ -721,6 +782,9 @@ class AdminController extends Controller {
 	}
 
 	public function removePlayer(Request $request){
+		if($this->auth->user()->rank == 1) {
+			abort(403);
+		}
 		$pid = $request->get("pid");
 		$side = $request->get("side");
 
@@ -826,6 +890,10 @@ class AdminController extends Controller {
 	}
 
 	public function refunds_open($id, Request $request){
+		if($this->auth->user()->rank == 1) {
+			abort(403);
+		}
+
 		$this->validate($request, [
 			'content' => 'required|min:5'
 		]);
@@ -850,6 +918,10 @@ class AdminController extends Controller {
 	}
 
 	public function refunds_close($id){
+		if($this->auth->user()->rank == 1) {
+			abort(403);
+		}
+
 		$sup = DB::table('supports')->where('id', $id)->first();
 
 		DB::table('supports')
@@ -861,6 +933,10 @@ class AdminController extends Controller {
 	}
 
 	public function refunds_reopen($id){
+		if($this->auth->user()->rank == 1) {
+			abort(403);
+		}
+
 		$sup = DB::table('supports')->where('id', $id)->first();
 		DB::table('supports')
 			->where('id', $id)
@@ -871,6 +947,10 @@ class AdminController extends Controller {
 	}
 
 	public function totp($id){
+		if($this->auth->user()->rank == 1) {
+			abort(403);
+		}
+
 		DB::table('users')
 			->where('id', $id)
 			->update(array(

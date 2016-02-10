@@ -21,7 +21,9 @@
                                         <th>Assurance</th>
                                     @endif
                                     <th>Active</th>
-                                    <th>Actions</th>
+                                    @if($user->rank != 1)
+                                        <th>Actions</th>
+                                    @endif
                                 </tr>
                                 @foreach($vehicles_cars as $vehicle_car)
                                     <tr>
@@ -43,16 +45,18 @@
                                                 <i class="fa fa-close" style="color: #c0392b;"></i>
                                             @endif
                                         </td>
-                                        <td>
-                                            <a href="{{ url('admin/vehicule', ['id' => $vehicle_car->id]) }}"><i class="fa fa-exchange" style="color: #4aa3df;"></i></a>
-                                            <span style="display: inline-block">
-                                                <form action="{{ url('admin/vehicule') }}" method="post">
-                                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                    <input type="hidden" name="id" value="{{ $vehicle_car->id }}">
-                                                    <button class="btn btn-link btn-xs" style="color: #f05050 !important;"><i class="fa fa-trash" style="font-size: 15px"></i></button>
-                                                </form>
-                                            </span>
-                                        </td>
+                                        @if($user->rank != 1)
+                                            <td>
+                                                <a href="{{ url('admin/vehicule', ['id' => $vehicle_car->id]) }}"><i class="fa fa-exchange" style="color: #4aa3df;"></i></a>
+                                                <span style="display: inline-block">
+                                                    <form action="{{ url('admin/vehicule') }}" method="post">
+                                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                        <input type="hidden" name="id" value="{{ $vehicle_car->id }}">
+                                                        <button class="btn btn-link btn-xs" style="color: #f05050 !important;"><i class="fa fa-trash" style="font-size: 15px"></i></button>
+                                                    </form>
+                                                </span>
+                                            </td>
+                                        @endif
                                     </tr>
                                 @endforeach
                             </table>
@@ -75,7 +79,9 @@
                                         <th>Assurance</th>
                                     @endif
                                     <th>Active</th>
-                                    <th>Actions</th>
+                                    @if($user->rank != 1)
+                                        <th>Actions</th>
+                                    @endif
                                 </tr>
                                 @foreach($vehicles_airs as $vehicle_air)
                                     <tr>
@@ -97,16 +103,18 @@
                                                 <i class="fa fa-close" style="color: #c0392b;"></i>
                                             @endif
                                         </td>
-                                        <td>
-                                            <a href="{{ url('admin/vehicule', ['id' => $vehicle_air->id]) }}"><i class="fa fa-exchange" style="color: #4aa3df;"></i></a>
-                                            <span style="display: inline-block">
-                                                <form action="{{ url('admin/vehicule') }}" method="post">
-                                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                    <input type="hidden" name="id" value="{{ $vehicle_air->id }}">
-                                                    <button class="btn btn-link btn-xs" style="color: #f05050 !important;"><i class="fa fa-trash" style="font-size: 15px"></i></button>
-                                                </form>
-                                            </span>
-                                        </td>
+                                        @if($user->rank != 1)
+                                            <td>
+                                                <a href="{{ url('admin/vehicule', ['id' => $vehicle_air->id]) }}"><i class="fa fa-exchange" style="color: #4aa3df;"></i></a>
+                                                <span style="display: inline-block">
+                                                    <form action="{{ url('admin/vehicule') }}" method="post">
+                                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                        <input type="hidden" name="id" value="{{ $vehicle_air->id }}">
+                                                        <button class="btn btn-link btn-xs" style="color: #f05050 !important;"><i class="fa fa-trash" style="font-size: 15px"></i></button>
+                                                    </form>
+                                                </span>
+                                            </td>
+                                        @endif
                                     </tr>
                                 @endforeach
                             </table>
@@ -129,7 +137,9 @@
                                         <th>Assurance</th>
                                     @endif
                                     <th>Active</th>
-                                    <th>Actions</th>
+                                    @if($user->rank != 1)
+                                        <th>Actions</th>
+                                    @endif
                                 </tr>
                                 @foreach($vehicles_ships as $vehicle_ship)
                                     <tr>
@@ -151,16 +161,18 @@
                                                 <i class="fa fa-close" style="color: #c0392b;"></i>
                                             @endif
                                         </td>
-                                        <td>
-                                            <a href="{{ url('admin/vehicule', ['id' => $vehicle_ship->id]) }}"><i class="fa fa-exchange" style="color: #4aa3df;"></i></a>
-                                            <span style="display: inline-block">
-                                                <form action="{{ url('admin/vehicule') }}" method="post">
-                                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                    <input type="hidden" name="id" value="{{ $vehicle_ship->id }}">
-                                                    <button class="btn btn-link btn-xs" style="color: #f05050 !important;"><i class="fa fa-trash" style="font-size: 15px"></i></button>
-                                                </form>
-                                            </span>
-                                        </td>
+                                        @if($user->rank != 1)
+                                            <td>
+                                                <a href="{{ url('admin/vehicule', ['id' => $vehicle_ship->id]) }}"><i class="fa fa-exchange" style="color: #4aa3df;"></i></a>
+                                                <span style="display: inline-block">
+                                                    <form action="{{ url('admin/vehicule') }}" method="post">
+                                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                        <input type="hidden" name="id" value="{{ $vehicle_ship->id }}">
+                                                        <button class="btn btn-link btn-xs" style="color: #f05050 !important;"><i class="fa fa-trash" style="font-size: 15px"></i></button>
+                                                    </form>
+                                                </span>
+                                            </td>
+                                        @endif
                                     </tr>
                                 @endforeach
                             </table>

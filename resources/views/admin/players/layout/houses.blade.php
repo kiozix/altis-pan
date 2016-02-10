@@ -12,11 +12,12 @@
                             <td>#{{ $nbr }}</td>
                             <td>&nbsp;</td>
                         </tr>
-                        <tr>
-                            <td>Position</td>
-                            <td>{{ $house->pos}}</td>
-                        </tr>
-
+                        @if($user->rank != 1)
+                            <tr>
+                                <td>Position</td>
+                                <td>{{ $house->pos}}</td>
+                            </tr>
+                        @endif
                         <tr>
                             <td>Inventaire</td>
                             <td>{{ $house->inventory }}</td>

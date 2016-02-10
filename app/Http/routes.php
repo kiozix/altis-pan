@@ -68,7 +68,6 @@ Route::group(['prefix' => 'admin'], function () {
 	Route::post('/gang/add', ['uses' => 'AdminController@addUserGang', 'as' => 'addPlayerGangAdmin']);
 
 	Route::get('/user', ['uses' => 'AdminController@users']);
-	Route::post('/user/update/{id}', ['uses' => 'AdminController@updateUser']);
 	Route::get('/user/{id}', ['uses' => 'AdminController@userShow', 'as' => 'user'])->where('id', '[0-9]+');
 	Route::post('/user/{id}', ['uses' => 'AdminController@userUpdate']);
 

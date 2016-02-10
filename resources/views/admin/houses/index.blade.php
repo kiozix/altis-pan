@@ -20,7 +20,9 @@
                             <tr>
                                 <th>#</th>
                                 <th>Propriétaire</th>
-                                <th>Position</th>
+                                @if($user->rank != 1)
+                                    <th>Position</th>
+                                @endif
                                 <th>Actions</th>
                             </tr>
                             @foreach($houses as $house)
@@ -35,7 +37,9 @@
                                 <tr>
                                     <td>{{ $house->id }}</td>
                                     <td>{{ $name }}</td>
-                                    <td>{{ $house->pos }}</td>
+                                    @if($user->rank != 1)
+                                        <td>{{ $house->pos }}</td>
+                                    @endif
                                     <td><a href="{{ route('player', ['id' => $house->pid]) }}" class="btn btn-primary"><i class="fa fa-eye"></i></a></td>
                                 </tr>
                             @endforeach

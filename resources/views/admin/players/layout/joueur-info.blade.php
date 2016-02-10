@@ -22,37 +22,47 @@
                     <tr>
                         <td>Porte-monnaie</td>
                         <td>
-                            <?php
-                            $money = $player->cash;
-                            if ($money < env('MONEY_WARNING', 500000)) {
-                                $argent = number_format($money, 2, ',', ' ');
-                                echo "<span class='label label-success'>". $argent ." $</span>";
-                            } elseif (env('MONEY_DANGER', 5000000) >= $money) {
-                                $argent = number_format($money, 2, ',', ' ');
-                                echo "<span class='label label-warning'>". $argent ." $</span>";
-                            } else {
-                                $argent = number_format($money, 2, ',', ' ');
-                                echo "<span class='label label-danger'>". $argent ." $</span>";
-                            }
-                            ?>
+                            @if($user->rank == 1)
+                                <span class='label label-info'>Masqué</span>
+                            @else
+                                <?php
+                                $money = $player->cash;
+
+                                if ($money < env('MONEY_WARNING', 500000)) {
+                                    $argent = number_format($money, 2, ',', ' ');
+                                    echo "<span class='label label-success'>". $argent ." $</span>";
+                                } elseif (env('MONEY_DANGER', 5000000) >= $money) {
+                                    $argent = number_format($money, 2, ',', ' ');
+                                    echo "<span class='label label-warning'>". $argent ." $</span>";
+                                } else {
+                                    $argent = number_format($money, 2, ',', ' ');
+                                    echo "<span class='label label-danger'>". $argent ." $</span>";
+                                }
+                                ?>
+                            @endif
                         </td>
                     </tr>
                     <tr>
                         <td>Compte Banque</td>
                         <td>
-                            <?php
-                            $money = $player->bankacc;
-                            if ($money < env('MONEY_WARNING', 500000)) {
-                                $argent = number_format($money, 2, ',', ' ');
-                                echo "<span class='label label-success'>". $argent ." $</span>";
-                            } elseif (env('MONEY_DANGER', 5000000) >= $money) {
-                                $argent = number_format($money, 2, ',', ' ');
-                                echo "<span class='label label-warning'>". $argent ." $</span>";
-                            } else {
-                                $argent = number_format($money, 2, ',', ' ');
-                                echo "<span class='label label-danger'>". $argent ." $</span>";
-                            }
-                            ?>
+                            @if($user->rank == 1)
+                                <span class='label label-info'>Masqué</span>
+                            @else
+                                <?php
+                                $money = $player->bankacc;
+
+                                if ($money < env('MONEY_WARNING', 500000)) {
+                                    $argent = number_format($money, 2, ',', ' ');
+                                    echo "<span class='label label-success'>". $argent ." $</span>";
+                                } elseif (env('MONEY_DANGER', 5000000) >= $money) {
+                                    $argent = number_format($money, 2, ',', ' ');
+                                    echo "<span class='label label-warning'>". $argent ." $</span>";
+                                } else {
+                                    $argent = number_format($money, 2, ',', ' ');
+                                    echo "<span class='label label-danger'>". $argent ." $</span>";
+                                }
+                                ?>
+                            @endif
                         </td>
                     </tr>
                     @if($gang)
@@ -68,7 +78,8 @@
                     <tr>
                         <td>Grade Admin</td>
                         <td>
-                            <select name="admin" class="form-control"> {{ $player->adminlevel == 0 ? 'selected' : '' }}
+                            <select name="admin" class="form-control" {{ $user->rank == 3 ? '' : 'disabled' }}>
+                                <option value="0" {{ $player->adminlevel == 0 ? 'selected' : '' }}>Pas Admin</option>
                                 @foreach($ranks_admin as  $admin)
                                     <option value="{{ $admin->value_associated }}" {{ $player->adminlevel == $admin->value_associated ? 'selected' : '' }}>{{ $admin->name }}</option>
                                 @endforeach
@@ -78,7 +89,7 @@
                     <tr>
                         <td>Grade Policier</td>
                         <td>
-                            <select name="policier" class="form-control">
+                            <select name="policier" class="form-control" {{ $user->rank == 1 ? 'disabled' : '' }}>
                                 <option value="0" {{ $player->coplevel == 0 ? 'selected' : '' }}>Non admis</option>
                                 @foreach($ranks_cop as $cop)
                                     <option value="{{ $cop->value_associated }}" {{ $player->coplevel == $cop->value_associated ? 'selected' : '' }}>{{ $cop->name }}</option>
@@ -89,7 +100,7 @@
                     <tr>
                         <td>Grade Pompier</td>
                         <td>
-                            <select name="medic" class="form-control">
+                            <select name="medic" class="form-control" {{ $user->rank == 1 ? 'disabled' : '' }}>
                                 <option value="0" {{ $player->mediclevel == 0 ? 'selected' : '' }}>Non admis</option>
                                 @foreach($ranks_medic as $medic)
                                     <option value="{{ $medic->value_associated }}" {{ $player->mediclevel == $medic->value_associated ? 'selected' : '' }}>{{ $medic->name }}</option>
@@ -101,7 +112,7 @@
                         <td>Grade Donateur</td>
                         <td>
                             <div class="col-md-7">
-                                <select name="donator" class="form-control">
+                                <select name="donator" class="form-control" {{ $user->rank == 1 ? 'disabled' : '' }}>
                                     <option value="0"{{ $player->donatorlvl == 0 ? 'selected' : '' }}>N'est pas donateur</option>
                                     @foreach($ranks_donator as $donator)
                                         <option value="{{ $donator->value_associated }}" {{ $player->donatorlvl == $donator->value_associated ? 'selected' : '' }}>{{ $donator->name }}</option>
@@ -109,7 +120,7 @@
                                 </select>
                             </div>
                             <div class="col-md-5">
-                                <input type="number" name="duredon" placeholder="Nombre de jours" class="form-control" value="{{ $player->duredon }}">
+                                <input type="number" name="duredon" placeholder="Nombre de jours" class="form-control" value="{{ $player->duredon }}" {{ $user->rank == 1 ? 'disabled' : '' }}>
                             </div>
 
                         </td>
@@ -132,28 +143,34 @@
                     <label>Inventaire pompier</label>
                     <pre>{{ $player->med_gear }}</pre>
                 @endif
-                <hr />
 
-                <div class="text-right">
-                    <button type="submit" class="btn btn-labeled btn-success">
-                        <span class="btn-label"><i class="fa fa-check"></i></span>Valider
-                    </button>
-                </div>
-            </form>
+                @if($user->rank != 1)
+                    <hr />
 
-            <form action="{{ url('admin/civ_gear/delete') }}" method="post">
-                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                <input type="hidden" name="pid" value="{{ $player->playerid }}">
+                    <div class="text-right">
+                        <button type="submit" class="btn btn-labeled btn-success">
+                            <span class="btn-label"><i class="fa fa-check"></i></span>Valider
+                        </button>
 
-                <button type="submit" class="btn btn-labeled btn-danger" name="side" value="civil">
-                    <span class="btn-label"><i class="fa fa-trash"></i></span>Reset inventaire civil
-                </button>
-                @if($player->coplevel >= 1)
-                    <button type="submit" class="btn btn-labeled btn-primary" name="side" value="cop">
-                        <span class="btn-label"><i class="fa fa-trash"></i></span>Reset inventaire policier
-                    </button>
+                    </div>
                 @endif
             </form>
+
+            @if($user->rank != 1)
+                <form action="{{ url('admin/civ_gear/delete') }}" method="post">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <input type="hidden" name="pid" value="{{ $player->playerid }}">
+
+                    <button type="submit" class="btn btn-labeled btn-danger" name="side" value="civil">
+                        <span class="btn-label"><i class="fa fa-trash"></i></span>Reset inventaire civil
+                    </button>
+                    @if($player->coplevel >= 1)
+                        <button type="submit" class="btn btn-labeled btn-primary" name="side" value="cop">
+                            <span class="btn-label"><i class="fa fa-trash"></i></span>Reset inventaire policier
+                        </button>
+                    @endif
+                </form>
+            @endif
         </div>
     </div>
 </div>

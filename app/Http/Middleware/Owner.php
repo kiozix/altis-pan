@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Response;
 use ReflectionMethod;
 use Illuminate\Contracts\Auth\Guard;
 
-class Admin {
+class Owner {
 
 	/**
 	 * Admin constructor.
@@ -26,7 +26,7 @@ class Admin {
 	public function handle($request, Closure $next)
 	{
 
-		if ($this->auth->user()->rank == 0)
+		if ($this->auth->user()->rank != 3)
 		{
 			if ($request->ajax())
 			{

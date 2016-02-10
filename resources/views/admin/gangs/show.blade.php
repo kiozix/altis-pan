@@ -21,20 +21,24 @@
                         <div class="panel-body">
                             <ul style="font-size: 15px">
                                 <li>Nombres de membres maximum : {{ $gang->maxmembers }}</li>
-                                <li>Compte en banque : <?php
-                                    $money = $gang->bank;
+                                <li>Compte en banque : @if($user->rank == 1)
+                                        <span class='label label-info'>Masqué</span>
+                                    @else
+                                        <?php
+                                        $money = $gang->bank;
 
-                                    if ($money < 25000) {
-                                        $argent = number_format($money, 2, ',', ' ');
-                                        echo "<span class='label label-success'>". $argent ." $</span>";
-                                    } elseif (150000 > $money) {
-                                        $argent = number_format($money, 2, ',', ' ');
-                                        echo "<span class='label label-warning'>". $argent ." $</span>";
-                                    } else {
-                                        $argent = number_format($money, 2, ',', ' ');
-                                        echo "<span class='label label-danger'>". $argent ." $</span>";
-                                    }
-                                    ?>
+                                        if ($money < env('MONEY_WARNING', 500000)) {
+                                            $argent = number_format($money, 2, ',', ' ');
+                                            echo "<span class='label label-success'>". $argent ." $</span>";
+                                        } elseif (env('MONEY_DANGER', 5000000) >= $money) {
+                                            $argent = number_format($money, 2, ',', ' ');
+                                            echo "<span class='label label-warning'>". $argent ." $</span>";
+                                        } else {
+                                            $argent = number_format($money, 2, ',', ' ');
+                                            echo "<span class='label label-danger'>". $argent ." $</span>";
+                                        }
+                                        ?>
+                                    @endif
                                 </li>
                             </ul>
                         </div>

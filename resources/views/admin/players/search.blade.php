@@ -25,39 +25,47 @@
                                 <tr>
                                     <td>Portes-monnaie</td>
                                     <td>
-                                        <?php
-                                        $money = $player->cash;
+                                        @if($user->rank == 1)
+                                            <span class='label label-info'>Masqué</span>
+                                        @else
+                                            <?php
+                                            $money = $player->cash;
 
-                                        if ($money < 500000) {
-                                            $argent = number_format($money, 2, ',', ' ');
-                                            echo "<span class='label label-success'>". $argent ." $</span>";
-                                        } elseif (800000 > $money) {
-                                            $argent = number_format($money, 2, ',', ' ');
-                                            echo "<span class='label label-warning'>". $argent ." $</span>";
-                                        } else {
-                                            $argent = number_format($money, 2, ',', ' ');
-                                            echo "<span class='label label-danger'>". $argent ." $</span>";
-                                        }
-                                        ?>
+                                            if ($money < env('MONEY_WARNING', 500000)) {
+                                                $argent = number_format($money, 2, ',', ' ');
+                                                echo "<span class='label label-success'>". $argent ." $</span>";
+                                            } elseif (env('MONEY_DANGER', 5000000) >= $money) {
+                                                $argent = number_format($money, 2, ',', ' ');
+                                                echo "<span class='label label-warning'>". $argent ." $</span>";
+                                            } else {
+                                                $argent = number_format($money, 2, ',', ' ');
+                                                echo "<span class='label label-danger'>". $argent ." $</span>";
+                                            }
+                                            ?>
+                                        @endif
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Banque</td>
                                     <td>
-                                        <?php
-                                        $money = $player->bankacc;
+                                        @if($user->rank == 1)
+                                            <span class='label label-info'>Masqué</span>
+                                        @else
+                                            <?php
+                                            $money = $player->bankacc;
 
-                                        if ($money < 500000) {
-                                            $argent = number_format($money, 2, ',', ' ');
-                                            echo "<span class='label label-success'>". $argent ." $</span>";
-                                        } elseif (800000 > $money) {
-                                            $argent = number_format($money, 2, ',', ' ');
-                                            echo "<span class='label label-warning'>". $argent ." $</span>";
-                                        } else {
-                                            $argent = number_format($money, 2, ',', ' ');
-                                            echo "<span class='label label-danger'>". $argent ." $</span>";
-                                        }
-                                        ?>
+                                            if ($money < env('MONEY_WARNING', 500000)) {
+                                                $argent = number_format($money, 2, ',', ' ');
+                                                echo "<span class='label label-success'>". $argent ." $</span>";
+                                            } elseif (env('MONEY_DANGER', 5000000) >= $money) {
+                                                $argent = number_format($money, 2, ',', ' ');
+                                                echo "<span class='label label-warning'>". $argent ." $</span>";
+                                            } else {
+                                                $argent = number_format($money, 2, ',', ' ');
+                                                echo "<span class='label label-danger'>". $argent ." $</span>";
+                                            }
+                                            ?>
+                                        @endif
                                     </td>
                                 </tr>
                             </table>

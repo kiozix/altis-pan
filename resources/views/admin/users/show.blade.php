@@ -22,33 +22,37 @@
                                 <table class="table table-responsive table-responsive">
                                     <tr>
                                         <td>Nom d'utilisateur</td>
-                                        <td><input type="text" name="username" value="{{ $user_show->name }}" class="form-control"></td>
+                                        <td><input type="text" name="username" value="{{ $user_show->name }}" class="form-control" {{ $user->rank == 3 ? '' : 'disabled' }}></td>
                                     </tr>
                                     <tr>
                                         <td>Prénom</td>
-                                        <td><input type="text" name="firstname" value="{{ $user_show->firstname }}" class="form-control"></td>
+                                        <td><input type="text" name="firstname" value="{{ $user_show->firstname }}" class="form-control" {{ $user->rank == 3 ? '' : 'disabled' }}></td>
                                     </tr>
                                     <tr>
                                         <td>Nom de famille</td>
-                                        <td><input type="text" name="lastname" value="{{ $user_show->lastname }}" class="form-control"></td>
+                                        <td><input type="text" name="lastname" value="{{ $user_show->lastname }}" class="form-control" {{ $user->rank == 3 ? '' : 'disabled' }}></td>
                                     </tr>
-                                    <tr>
-                                        <td>E-mail</td>
-                                        <td><input type="text" name="email" value="{{ $user_show->email }}" class="form-control"></td>
-                                    </tr>
+                                    @if($user->rank != 1)
+                                        <tr>
+                                            <td>E-mail</td>
+                                            <td><input type="text" name="email" value="{{ $user_show->email }}" class="form-control" {{ $user->rank == 3 ? '' : 'disabled' }}></td>
+                                        </tr>
+                                    @endif
                                     <tr>
                                         <td>Grade</td>
                                         <td>
-                                            <select name="rank_website" class="form-control">
-                                                <option value="0" {{ $user_show->admin == 0 ? 'selected' : '' }} >Utilisateur</option>
-                                                <option value="1" {{ $user_show->admin == 1 ? 'selected' : '' }} >Administrateur</option>
+                                            <select name="rank_website" class="form-control" {{ $user->rank == 3 ? '' : 'disabled' }}>
+                                                <option value="0" {{ $user_show->rank == 0 ? 'selected' : '' }} >Utilisateur</option>
+                                                <option value="1" {{ $user_show->rank == 1 ? 'selected' : '' }} >Support</option>
+                                                <option value="2" {{ $user_show->rank == 2 ? 'selected' : '' }} >Modérateur</option>
+                                                <option value="3" {{ $user_show->rank == 3 ? 'selected' : '' }} >Administrateur</option>
                                             </select>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Banni</td>
                                         <td>
-                                            <select name="ban" class="form-control">
+                                            <select name="ban" class="form-control" {{ $user->rank == 1 ? 'disabled' : '' }}>
                                                 <option value="0" {{ $user_show->ban == 0 ? 'selected' : '' }} >Non banni</option>
                                                 <option value="1" {{ $user_show->ban == 1 ? 'selected' : '' }} >banni</option>
                                             </select>
@@ -56,14 +60,14 @@
                                     </tr>
                                     <tr>
                                         <td>ID Arma @if($user_show->arma) <a target="_blank" href="{{ route('player', ['id' => $user_show->arma]) }}"><i class="fa fa-external-link"></i></a>@endif</td>
-                                        <td><input type="text" name="arma" value="{{ $user_show->arma }}" class="form-control" maxlength="17"></td>
+                                        <td><input type="text" name="arma" value="{{ $user_show->arma }}" class="form-control" maxlength="17" {{ $user->rank == 1 ? 'disabled' : '' }}></td>
                                     </tr>
                                 </table>
 
                                 <hr />
 
                                 <div class="text-right">
-                                    @if($user_show->totp_key)
+                                    @if($user_show->totp_key && $user->rank != 1)
                                         <a href="{{ url('admin/totp', ['id' => $user_show->id]) }}" class="btn btn-labeled btn-info">
                                             <span class="btn-label"><i class="fa fa-trash"></i></span>Supprimer l'authentification à 2 facteurs
                                         </a>

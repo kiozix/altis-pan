@@ -113,7 +113,7 @@
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i>&nbsp;&nbsp;Mon Compte<span class="caret"></span><span class="border"></span></a>
                                 <ul class="dropdown-menu">
-                                    @if (Auth::user()->admin == 1)
+                                    @if (Auth::user()->rank != 0)
                                         <li>
                                             <a href="{{ url('admin') }}"><i class="fa fa-wrench"></i>&nbsp;&nbsp;Admin<span class="border"></span></a>
                                         </li>

@@ -26,8 +26,12 @@
                                     <td><a href="{{ route('player', ['id' => $player->playerid]) }}">{{ $player->name }}</a></td>
                                     <td>{{ $player->playerid }}</td>
                                     <td>
-                                        <?php
+                                        @if($user->rank == 1)
+                                            <span class='label label-info'>Masqué</span>
+                                        @else
+                                            <?php
                                             $money = $player->cash + $player->bankacc;
+
                                             if ($money < env('MONEY_WARNING', 500000)) {
                                                 $argent = number_format($money, 2, ',', ' ');
                                                 echo "<span class='label label-success'>". $argent ." $</span>";
@@ -38,7 +42,8 @@
                                                 $argent = number_format($money, 2, ',', ' ');
                                                 echo "<span class='label label-danger'>". $argent ." $</span>";
                                             }
-                                        ?>
+                                            ?>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach
