@@ -72,9 +72,11 @@
                                             <span class="btn-label"><i class="fa fa-trash"></i></span>Supprimer l'authentification à 2 facteurs
                                         </a>
                                     @endif
-                                    <button type="submit" class="btn btn-labeled btn-success">
-                                        <span class="btn-label"><i class="fa fa-check"></i></span>Valider
-                                    </button>
+                                    @if($user->rank != 1)
+                                        <button type="submit" class="btn btn-labeled btn-success">
+                                            <span class="btn-label"><i class="fa fa-check"></i></span>Valider
+                                        </button>
+                                    @endif
                                 </div>
                             </form>
                         </div>

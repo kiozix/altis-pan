@@ -180,15 +180,40 @@ class AdminController extends Controller {
 						));
 				}
 			}else {
-				DB::table('players')
-					->where('playerid', $id)
-					->update(array(
-						'coplevel' => $policier,
-						'mediclevel' => $medic,
-						'donatorlvl' => $donator,
-						'duredon' => $duredon,
-						'timestamp' => $timestamp
-					));
+				if ($alias && $alias->value_associated == 1) {
+					$username = $request->get("username");
+					$username = rtrim($username);
+
+					if (env('DB_EXTDB') == 2) {
+						$alias_name = '"[["' . $username . '"]]"';
+					} elseif (env('DB_EXTDB') == 1) {
+						$alias_name = '"[`' . $username . '`]"';
+					}
+
+					DB::table('players')
+						->where('playerid', $id)
+						->update(array(
+							'name' => $username,
+							'adminlevel' => $admin,
+							'coplevel' => $policier,
+							'mediclevel' => $medic,
+							'donatorlvl' => $donator,
+							'duredon' => $duredon,
+							'timestamp' => $timestamp,
+							'aliases' => $alias_name
+						));
+				} else {
+					DB::table('players')
+						->where('playerid', $id)
+						->update(array(
+							'adminlevel' => $admin,
+							'coplevel' => $policier,
+							'mediclevel' => $medic,
+							'donatorlvl' => $donator,
+							'duredon' => $duredon,
+							'timestamp' => $timestamp
+						));
+				}
 			}
 
 			return redirect(url('admin/player/' . $id))->with('success', 'Le joueur à bien été modifié');
