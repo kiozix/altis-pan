@@ -56,7 +56,7 @@ class UsersController extends Controller {
 		if($user->totp_key != ''){
 			return redirect(url('profil'))->with('error', 'L\'authentification à 2 facteurs est déjà activer');
 		}
-		
+
 		$secret = GoogleAuthenticator::generateRandom();
 		$site_name = env('SITE_NAME', 'AltisPan');
 		$qrcode = GoogleAuthenticator::getQrCodeUrl('totp', "$site_name - $user->name", $secret);
