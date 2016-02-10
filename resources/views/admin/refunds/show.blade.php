@@ -165,13 +165,14 @@
                                         $name = $user1->name;
                                         $id = $user1->id;
                                         $arma = $user1->arma;
+                                        $avatar = $user1->avatar;
                                     }
                                 }
                                 ?>
                                 <a href="#" class="list-group-item">
                                     <div class="media-box">
                                         <div class="pull-left">
-                                            <img src="{{ asset('/img/avatars/' . $ticket->admin_refunds . '.jpg') }}" alt="Image" class="media-box-object img-circle thumb32">
+                                            <img src="{{ $avatar ? asset('/img/avatars/' . $ticket->admin_refunds . '.jpg') : asset('/img/user_default.png') }}" alt="Image" class="media-box-object img-circle thumb32">
                                         </div>
                                         <div class="media-box-body clearfix">
                                             <small class="pull-right">{{ $ticket->created_at }}</small>

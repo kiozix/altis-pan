@@ -38,9 +38,7 @@
                                         }
                                     }
                                     ?>
-                                    <td><a target="_blank"
-                                           href="{{ empty($arma) ? route('user', ['id' => $id]) : route('player', ['id' => $arma]) }}">{{ $name }}
-                                            &nbsp; <i class="fa fa-external-link"></i></a></td>
+                                    <td><a target="_blank"  href="{{ empty($arma) ? route('user', ['id' => $id]) : route('player', ['id' => $arma]) }}">{{ $name }} &nbsp; <i class="fa fa-external-link"></i></a></td>
                                 </tr>
                                 <tr>
                                     <td>Status</td>
@@ -96,8 +94,7 @@
                         <a href="#" class="list-group-item">
                             <div class="media-box">
                                 <div class="pull-left">
-                                    <img src="{{ asset('/img/avatars/' . $avatar . '.jpg') }}" alt="Image"
-                                         class="media-box-object img-circle thumb32">
+                                    <img src="{{ $avatar ? asset('/img/avatars/' . $id . '.jpg') : asset('/img/user_default.png') }}" alt="Image" class="media-box-object img-circle thumb32">
                                 </div>
                                 <div class="media-box-body clearfix">
                                     <small class="pull-right">{{ $ticket->created_at }}</small>
