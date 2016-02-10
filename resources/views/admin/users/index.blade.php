@@ -8,7 +8,7 @@
     <div class="container-fluid">
         <div class="row">
             <div id="panelDemo1" class="panel panel-default">
-                <div class="panel-heading">Utilisateurs
+                <div class="panel-heading">Utilisateurs ({{ $count }})
                     <a href="#" data-tool="panel-collapse" data-toggle="tooltip" title="" class="pull-right">
                         <em class="fa fa-minus"></em>
                     </a>
@@ -23,7 +23,6 @@
                                 @endif
                                 <th>Grade</th>
                                 <th>Arma ID</th>
-                                <th>Date d'inscription</th>
                             </tr>
                             @foreach($users as $user1)
                                 <tr class="{{ $user1->ban == 1 ? 'danger' : ''}}">
@@ -55,7 +54,6 @@
                                             <i class="fa fa-close" style="color: #c0392b;"></i>
                                         @endif
                                     </td>
-                                    <td>{{ $user1->created_at }}</td>
                                 </tr>
                             @endforeach
                         </table>

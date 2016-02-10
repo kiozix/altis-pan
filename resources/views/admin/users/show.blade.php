@@ -25,6 +25,10 @@
                                         <td><input type="text" name="username" value="{{ $user_show->name }}" class="form-control" {{ $user->rank == 3 ? '' : 'disabled' }}></td>
                                     </tr>
                                     <tr>
+                                        <td>Date d'inscription</td>
+                                        <td>{{ $user_show->created_at }}</td>
+                                    </tr>
+                                    <tr>
                                         <td>Prénom</td>
                                         <td><input type="text" name="firstname" value="{{ $user_show->firstname }}" class="form-control" {{ $user->rank == 3 ? '' : 'disabled' }}></td>
                                     </tr>

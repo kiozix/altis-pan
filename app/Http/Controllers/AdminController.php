@@ -247,7 +247,8 @@ class AdminController extends Controller {
 	{
 		$user = $this->auth->user();
 		$users = DB::table('users')->orderBy('id', 'desc')->paginate(15);
-		return view('admin.users.index', compact('user', 'users'));
+		$count = DB::table('users')->count();
+		return view('admin.users.index', compact('user', 'users', 'count'));
 	}
 
 	public function userShow($id)
