@@ -30,7 +30,7 @@ class AdminController extends Controller {
 		$players = DB::table('players')->count();
 		$players_last = DB::table('players')->orderBy('uid', 'desc')->take(5)->get();
 		$players_money = DB::table('players')->orderBy('bankacc', 'desc')->take(15)->get();
-		$support = DB::table('supports')->where('etat', 1)->where('id_refunds', 0)->count();
+		$support = DB::table('supports')->where('etat', 1)->Orwhere('etat', 0)->where('id_refunds', 0)->count();
 		$refunds = DB::table('refunds')->where('status', 0)->count();
 
 		$paypal = DB::table('paypals')->orderBy('id', 'desc')->take(4)->get();

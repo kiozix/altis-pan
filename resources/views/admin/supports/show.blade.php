@@ -91,21 +91,23 @@
                     </div>
 
                     <div data-height="180" data-scrollable="" class="list-group">
-                        <a href="#" class="list-group-item">
+                        <span class="list-group-item">
                             <div class="media-box">
                                 <div class="pull-left">
-                                    <img src="{{ $avatar ? asset('/img/avatars/' . $id . '.jpg') : asset('/img/user_default.png') }}" alt="Image" class="media-box-object img-circle thumb32">
+                                    <img src="{{ $avatar ? asset('/img/avatars/' . $id . '.jpg') : asset('/img/user_default.png') }}" alt="Logo_user" class="media-box-object img-circle thumb32">
                                 </div>
                                 <div class="media-box-body clearfix">
                                     <small class="pull-right">{{ $ticket->created_at }}</small>
                                     <strong class="media-box-heading text-primary">
-                                        <span class="circle circle-info circle-lg text-left"></span>{{ $name }}</strong>
+                                        <span class="circle circle-info circle-lg text-left"></span>
+                                        <a target="_blank" href="{{ $arma ? route('player', ['id' => $arma]) : route('user', ['id' => $ticket->id_author]) }}">{{ $name }}</a>
+                                    </strong>
                                     <p class="mb-sm">
                                         <small>{{ $ticket->content }}</small>
                                     </p>
                                 </div>
                             </div>
-                        </a>
+                        </span>
 
                         @foreach($responses as $response)
 
@@ -115,32 +117,32 @@
                                     $name = $user1->name;
                                     $id = $user1->id;
                                     $avatar = $user1->avatar;
+                                    $arma = $user1->arma;
                                 }
                             }
                             ?>
 
-                            <a href="#" class="list-group-item">
+                            <span class="list-group-item">
                                 <div class="media-box">
                                     <div class="pull-left">
                                         @if($avatar)
-                                            <img src="{{ asset('/img/avatars/' . $response->id_author . '.jpg') }}"
-                                                 alt="Image" class="media-box-object img-circle thumb32">
+                                            <img src="{{ asset('/img/avatars/' . $response->id_author . '.jpg') }}" alt="Logo_user" class="media-box-object img-circle thumb32">
                                         @else
-                                            <img src="{{ asset('/img/user_default.png') }}" alt="Image"
-                                                 class="media-box-object img-circle thumb32">
+                                            <img src="{{ asset('/img/user_default.png') }}" alt="Logo_user" class="media-box-object img-circle thumb32">
                                         @endif
                                     </div>
                                     <div class="media-box-body clearfix">
                                         <small class="pull-right">{{ $response->created_at }}</small>
                                         <strong class="media-box-heading text-primary">
-                                            <span class="circle {{ $response->id_author == $ticket->id_author ? 'circle-info' : 'circle-danger'}} circle-lg text-left"></span>{{ $name }}
+                                            <span class="circle {{ $response->id_author == $ticket->id_author ? 'circle-info' : 'circle-danger'}} circle-lg text-left"></span>
+                                            <a target="_blank" href="{{ $arma ? route('player', ['id' => $arma]) : route('user', ['id' => $response->id_author]) }}">{{ $name }}</a>
                                         </strong>
                                         <p class="mb-sm">
                                             <small>{{ $response->content }}</small>
                                         </p>
                                     </div>
                                 </div>
-                            </a>
+                            </span>
 
                         @endforeach
                     </div>

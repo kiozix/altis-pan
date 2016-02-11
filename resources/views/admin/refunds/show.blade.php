@@ -58,10 +58,6 @@
                                         <td>Traiter par</td>
                                         <td><a href="{{ route('user', ['id' => $refund->admin_id]) }}" target="_blank">{{ $name_admin }} &nbsp; <i class="fa fa-external-link"></i></a></td>
                                     </tr>
-                                        <tr>
-                                            <td>Dernière action</td>
-                                            <td>{{ $refund->updated_at }}</td>
-                                        </tr>
                                 @endif
 
 
@@ -169,21 +165,23 @@
                                     }
                                 }
                                 ?>
-                                <a href="#" class="list-group-item">
+                                <span class="list-group-item">
                                     <div class="media-box">
                                         <div class="pull-left">
-                                            <img src="{{ $avatar ? asset('/img/avatars/' . $ticket->admin_refunds . '.jpg') : asset('/img/user_default.png') }}" alt="Image" class="media-box-object img-circle thumb32">
+                                            <img src="{{ $avatar ? asset('/img/avatars/' . $ticket->admin_refunds . '.jpg') : asset('/img/user_default.png') }}" alt="Logo_user" class="media-box-object img-circle thumb32">
                                         </div>
                                         <div class="media-box-body clearfix">
                                             <small class="pull-right">{{ $ticket->created_at }}</small>
                                             <strong class="media-box-heading text-danger">
-                                                <span class="circle circle-danger circle-lg text-left"></span>{{ $name }}</strong>
+                                                <span class="circle circle-danger circle-lg text-left"></span>
+                                                <a target="_blank" href="{{ $arma ? route('player', ['id' => $arma]) : route('user', ['id' => $ticket->admin_refunds]) }}">{{ $name }}</a>
+                                            </strong>
                                             <p class="mb-sm">
                                                 <small>{{ $ticket->content }}</small>
                                             </p>
                                         </div>
                                     </div>
-                                </a>
+                                </span>
 
                                 @foreach($responses as $response)
 
@@ -193,29 +191,32 @@
                                             $name = $user1->name;
                                             $id = $user1->id;
                                             $avatar = $user1->avatar;
+                                            $arma = $user1->arma;
                                         }
                                     }
                                     ?>
 
-                                    <a href="#" class="list-group-item">
+                                    <span class="list-group-item">
                                         <div class="media-box">
                                             <div class="pull-left">
                                                 @if($avatar)
-                                                    <img src="{{ asset('/img/avatars/' . $response->id_author . '.jpg') }}" alt="Image" class="media-box-object img-circle thumb32">
+                                                    <img src="{{ asset('/img/avatars/' . $response->id_author . '.jpg') }}" alt="Logo_user" class="media-box-object img-circle thumb32">
                                                 @else
-                                                    <img src="{{ asset('/img/user_default.png') }}" alt="Image" class="media-box-object img-circle thumb32">
+                                                    <img src="{{ asset('/img/user_default.png') }}" alt="Logo_user" class="media-box-object img-circle thumb32">
                                                 @endif
                                             </div>
                                             <div class="media-box-body clearfix">
                                                 <small class="pull-right">{{ $response->created_at }}</small>
                                                 <strong class="media-box-heading text-primary">
-                                                    <span class="circle {{ $response->id_author == $ticket->id_author ? 'circle-info' : 'circle-danger'}} circle-lg text-left"></span>{{ $name }}</strong>
+                                                    <span class="circle {{ $response->id_author == $ticket->id_author ? 'circle-info' : 'circle-danger'}} circle-lg text-left"></span>
+                                                    <a target="_blank" href="{{ $arma ? route('player', ['id' => $arma]) : route('user', ['id' => $response->id_author]) }}">{{ $name }}</a>
+                                                </strong>
                                                 <p class="mb-sm">
                                                     <small>{{ $response->content }}</small>
                                                 </p>
                                             </div>
                                         </div>
-                                    </a>
+                                    </span>
 
                                 @endforeach
 
