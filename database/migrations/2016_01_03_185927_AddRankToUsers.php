@@ -14,7 +14,7 @@ class AddRankToUsers extends Migration {
 	{
 		Schema::table('users', function(Blueprint $table)
 		{
-			$table->boolean('admin')->default(false);
+			$table->string('rank')->default(false);
 		});
 	}
 
