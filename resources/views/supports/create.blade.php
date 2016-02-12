@@ -19,6 +19,7 @@
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
                     <div class="panel-body">
+                        @include('flash')
                         <form action="{{ url('support/open') }}" method="post">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <input placeholder="Titre" type="text" name="title" class="form-control">
