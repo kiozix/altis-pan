@@ -42,9 +42,8 @@
             </div>
         </div>
     </div>
-    <div id="fh5co-main">
-        <!-- Features -->
 
+    <div id="fh5co-main">
         <div id="fh5co-features">
             <div class="container">
                 <div class="row text-center">
@@ -62,8 +61,8 @@
                                 <i class="icon-lock"></i>
                             </div>
                             <div class="fh5co-feature-text">
-                                <h3>Verouillez vos véhicules</h3>
-                                <p>Quoi de pire que d'allez faire une course et se retrouvez sans véhicule après vos achats ? </p>
+                                <h3>Règlement du Serveur</h3>
+                                <p>Veuillez prendre connaissance des règles du serveur</p>
                                 <p><br /></p>
                             </div>
                         </div>
@@ -96,13 +95,12 @@
                             <div class="fh5co-feature-text">
                                 <h3>Un problème ?</h3>
                                 <p>En cas de besoin, n'hésitez pas a contactez les modérateurs, ils sont la pour vous aider .</p>
-                                <p><a href="#">Le Support</a></p>
+                                <p><a href="{{ url('support') }}">Le Support</a></p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Features -->
     </div>
 @endsection
