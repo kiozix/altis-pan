@@ -8,6 +8,7 @@ use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\DB;
 use Nizarii\ArmaRConClass\ARC;
+use xPaw\SourceQuery\SourceQuery;
 
 use App\Paypal;
 use App\Players;
@@ -74,10 +75,16 @@ class AdminController extends Controller {
 
 		$licensesName = DB::table('settings')->where('action', 'LICENSES')->get();
 
+		if(env('RCON_INIT') == true) {
+			$Query = new SourceQuery();
+			$Query->Connect( env('RCON_IP'), env('RCON_PORT', 2303), 1, SourceQuery::SOURCE );
+		}else {
+			$Query = false;
+		}
 
 		$gang = DB::table('gangs')->where('owner', $id)->first();
 
-		return view('admin.players.show', compact('ranks_donator', 'alias','houses', 'licensesName', 'insure', 'ranks_admin', 'ranks_cop', 'ranks_medic', 'offenses', 'user', 'player', 'vehicles_cars', 'vehicles_airs', 'vehicles_ships', 'gang', 'user_show'));
+		return view('admin.players.show', compact('Query', 'ranks_donator', 'alias','houses', 'licensesName', 'insure', 'ranks_admin', 'ranks_cop', 'ranks_medic', 'offenses', 'user', 'player', 'vehicles_cars', 'vehicles_airs', 'vehicles_ships', 'gang', 'user_show'));
 
 	}
 
@@ -997,23 +1004,53 @@ class AdminController extends Controller {
 			return response()->json(['status' => 'success']);
 
 		}catch (Exception $e) {
-			echo "Ups! Something went wrong: ".$e->getMessage();
+			echo "Une erreur c'est produite : ".$e->getMessage();
 		}
 	}
 
-	public function rconKick() {
-
+	public function rconKick(Request $request) {
 		try{
 			$rcon = new ARC(env('RCON_IP'), env('RCON_PORT', 2303), env('RCON_PASSWORD', 'password'));
 
-			if ($rcon->say_global('test')) {
-				echo "success!";
-			}else {
-				echo "failed!";
-			}
+			$rcon->kick_player($request->get("id"), $request->get("raison"));
+
+			return response()->json(['status' => 'success']);
 
 		}catch (Exception $e) {
-			echo "Ups! Something went wrong: ".$e->getMessage();
+			echo "Une erreur c'est produite : ".$e->getMessage();
+		}
+	}
+
+	public function rconBan(Request $request) {
+		try{
+			$rcon = new ARC(env('RCON_IP'), env('RCON_PORT', 2303), env('RCON_PASSWORD', 'password'));
+
+			$guid = $request->get("guid");
+			$raison = $request->get("raison");
+			$time = $request->get("time");
+			$int = intval($time);
+
+			$rcon->ban_player($guid, $raison, $int);
+
+			// $rcon->command('#exec ban ' . $guid . ' ' . $raison . ' ' . $int);
+
+			return response()->json(['status' => 'success']);
+
+		}catch (Exception $e) {
+			echo "Une erreur c'est produite : ".$e->getMessage();
+		}
+	}
+
+	public function rconMp(Request $request) {
+		try{
+			$rcon = new ARC(env('RCON_IP'), env('RCON_PORT', 2303), env('RCON_PASSWORD', 'password'));
+
+			$rcon->say_player($request->get("id"), $request->get("message"));
+
+			return response()->json(['status' => 'success']);
+
+		}catch (Exception $e) {
+			echo "Une erreur c'est produite : ".$e->getMessage();
 		}
 	}
 

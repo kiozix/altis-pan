@@ -278,6 +278,11 @@
 <script src="{{ asset('/js/licenses.js') }}"></script>
 <script src="{{ asset('/js/rcon.js') }}"></script>
 
+<script src='{{ asset('/js/rcon/core.js') }}'></script>
+<script src='{{ asset('/js/rcon/md5.js') }}'></script>
+<script src='{{ asset('/js/rcon/lib-typedarrays.js') }}'></script>
+<script src='{{ asset('/js/rcon/BigInteger.min.js') }}'></script>
+
 </body>
 
 </html>
