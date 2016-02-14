@@ -39,7 +39,7 @@
     <link rel="shortcut icon" href="{{ asset('/img/favicon.ico') }}">
 
     <!-- Google Webfonts -->
-    <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,100,500' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,100,500' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
 
     <!-- Animate.css -->
@@ -154,7 +154,7 @@
                 <div class="fh5co-footer-widget">
                     <h2 class="fh5co-footer-logo">{{ env('SITE_NAME', 'AltisPan') }}</h2>
                     <p>{{ env('DESCRIPTION', 'Site réalisé avec AltisPan, CMS dédiée au Mod multijoueur Altis Life. Réalisation : Lucas GRELAUD, Emile LEPETIT.') }}</p><!-- Correspond a la meta "description" -->
-                    <p> &copy; Copyright <a href="#">AltisPan</a>, site par <a href="http://emile-lepetit.fr/" target="_blank">Emile LEPETIT</a>
+                    <p> &copy; Copyright <a href="#">AltisPan</a>, site par <a href="http://emile-lepetit.fr/" target="_blank">Emile LEPETIT</a> et propulsé par <a href="https://madebyhost.com" target="_blank">MadeByHost</a></p>
                 </div>
             </div>
 
