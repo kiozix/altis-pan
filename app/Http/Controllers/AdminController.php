@@ -6,13 +6,14 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\DB;
+use Nizarii\ArmaRConClass\ARC;
 
 use App\Paypal;
 use App\Players;
 use App\Ranks;
 use App\Settings;
 use App\Supports;
-use Illuminate\Support\Facades\DB;
 class AdminController extends Controller {
 
 	private $auth;
@@ -985,6 +986,35 @@ class AdminController extends Controller {
 
 		return redirect(url('admin/user/' . $id))->with('success', 'L\'authentification à 2 facteurs à bien été désactiver');
 
+	}
+
+	public function rconSay(Request $request){
+		try{
+			$rcon = new ARC(env('RCON_IP'), env('RCON_PORT', 2303), env('RCON_PASSWORD', 'password'));
+
+			$rcon->say_global($request->get("message"));
+
+			return response()->json(['status' => 'success']);
+
+		}catch (Exception $e) {
+			echo "Ups! Something went wrong: ".$e->getMessage();
+		}
+	}
+
+	public function rconKick() {
+
+		try{
+			$rcon = new ARC(env('RCON_IP'), env('RCON_PORT', 2303), env('RCON_PASSWORD', 'password'));
+
+			if ($rcon->say_global('test')) {
+				echo "success!";
+			}else {
+				echo "failed!";
+			}
+
+		}catch (Exception $e) {
+			echo "Ups! Something went wrong: ".$e->getMessage();
+		}
 	}
 
 }

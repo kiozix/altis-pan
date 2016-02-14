@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "9b46acb4c98f08030cf973e523c71b0d",
-    "content-hash": "c264af2f2f4ea54806b6ccd6f6b8f51e",
+    "hash": "e5598284370c52cd4bd9a9f144cb3c6f",
+    "content-hash": "6efe1dfe78cf9ffbd66d0a573959b76c",
     "packages": [
         {
             "name": "anhskohbo/no-captcha",
@@ -1263,6 +1263,53 @@
                 "php"
             ],
             "time": "2015-09-19 14:15:08"
+        },
+        {
+            "name": "nizarii/arma-rcon-class",
+            "version": "v1.3.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Nizarii/arma-rcon-class-php.git",
+                "reference": "e856bc8a2f2846ca0be20d161aa1c19fd33327e4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Nizarii/arma-rcon-class-php/zipball/e856bc8a2f2846ca0be20d161aa1c19fd33327e4",
+                "reference": "e856bc8a2f2846ca0be20d161aa1c19fd33327e4",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Nizarii\\ArmaRConClass\\": "ArmaRConClass/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Felix Schäfer",
+                    "email": "nizari@starwolf-dev.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A lightweight class to send commands to Arma (also DayZ SA) servers via RCon",
+            "homepage": "https://github.com/Nizarii/arma-rcon-class-php/",
+            "keywords": [
+                "altislife",
+                "arma2",
+                "arma3",
+                "dayz",
+                "lightweight",
+                "operation arrowhead",
+                "rcon"
+            ],
+            "time": "2015-12-28 23:44:44"
         },
         {
             "name": "paragonie/random_compat",

@@ -71,6 +71,9 @@ Route::group(['prefix' => 'admin'], function () {
 	Route::get('/user/{id}', ['uses' => 'AdminController@userShow', 'as' => 'user'])->where('id', '[0-9]+');
 	Route::post('/user/{id}', ['uses' => 'AdminController@userUpdate']);
 
+	Route::get('/rcon/kick', ['uses' => 'AdminController@rconKick']);
+	Route::post('/rcon/say', ['uses' => 'AdminController@rconSay']);
+
 	Route::get('/totp/{id}', ['uses' => 'AdminController@totp']);
 
 	Route::get('/remboursement', ['uses' => 'AdminController@refunds']);

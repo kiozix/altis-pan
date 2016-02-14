@@ -69,6 +69,11 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li>
+                        <a id="say" data-callback="{{ url('admin/rcon/say') }}" data-csrf="{{ csrf_token() }}" href="">
+                            <em class="icon-speech"></em>
+                        </a>
+                    </li>
+                    <li>
                         <a href="#" data-search-open="">
                             <em class="icon-magnifier"></em>
                         </a>
@@ -271,6 +276,7 @@
 <script src="{{ asset('/js/select2.full.min.js') }}"></script>
 <script src="{{ asset('/js/altispan.js') }}"></script>
 <script src="{{ asset('/js/licenses.js') }}"></script>
+<script src="{{ asset('/js/rcon.js') }}"></script>
 
 </body>
 
