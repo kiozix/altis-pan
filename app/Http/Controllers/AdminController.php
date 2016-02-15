@@ -1022,6 +1022,10 @@ class AdminController extends Controller {
 	}
 
 	public function rconBan(Request $request) {
+		if($this->auth->user()->rank == 1) {
+			abort(403);
+		}
+
 		try{
 			$rcon = new ARC(env('RCON_IP'), env('RCON_PORT', 2303), env('RCON_PASSWORD', 'password'));
 
