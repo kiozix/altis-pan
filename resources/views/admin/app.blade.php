@@ -68,11 +68,13 @@
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a id="say" data-callback="{{ url('admin/rcon/say') }}" data-csrf="{{ csrf_token() }}" href="">
-                            <em class="icon-speech"></em>
-                        </a>
-                    </li>
+                    @if(env('RCON_INIT', false) == true)
+                        <li>
+                            <a id="say" data-callback="{{ url('admin/rcon/say') }}" data-csrf="{{ csrf_token() }}" href="">
+                                <em class="icon-speech"></em>
+                            </a>
+                        </li>
+                    @endif
                     <li>
                         <a href="#" data-search-open="">
                             <em class="icon-magnifier"></em>
