@@ -187,40 +187,38 @@
                 </div>
             @endif
 
-            @if(env('RCON_INIT', false) == false OR $info['Players'])
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <div class="panel-title">Dernier Joueurs</div>
-                    </div>
-                    @foreach($players_last as $player)
-                    <div class="list-group">
-                        <div class="list-group-item">
-                            <div class="media-box">
-                                <div class="pull-left">
-                                    <span class="fa-stack">
-                                       <em class="fa fa-circle fa-stack-2x text-info"></em>
-                                       <em class="fa fa-male fa-stack-1x fa-inverse text-white"></em>
-                                    </span>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="panel-title">Dernier Joueurs</div>
+                </div>
+                @foreach($players_last as $player)
+                <div class="list-group">
+                    <div class="list-group-item">
+                        <div class="media-box">
+                            <div class="pull-left">
+                                <span class="fa-stack">
+                                   <em class="fa fa-circle fa-stack-2x text-info"></em>
+                                   <em class="fa fa-male fa-stack-1x fa-inverse text-white"></em>
+                                </span>
+                            </div>
+                            <div class="media-box-body clearfix">
+                                <small class="text-muted pull-right ml">{{ $player->playerid }}</small>
+                                <div class="media-box-heading"><a href="{{ url('admin/player/'. $player->playerid) }}" class="text-info m0">{{ $player->name }}</a>
                                 </div>
-                                <div class="media-box-body clearfix">
-                                    <small class="text-muted pull-right ml">{{ $player->playerid }}</small>
-                                    <div class="media-box-heading"><a href="{{ url('admin/player/'. $player->playerid) }}" class="text-info m0">{{ $player->name }}</a>
-                                    </div>
-                                    <p class="m0">
-                                        <small><a href="{{ url('admin/player/'. $player->playerid) }}">Afficher</a></small>
-                                    </p>
-                                </div>
+                                <p class="m0">
+                                    <small><a href="{{ url('admin/player/'. $player->playerid) }}">Afficher</a></small>
+                                </p>
                             </div>
                         </div>
                     </div>
-                    @endforeach
-                    <div class="panel-footer clearfix">
-                        <a href="{{ url('admin/player') }}" class="pull-left">
-                            <small>Voir plus</small>
-                        </a>
-                    </div>
                 </div>
-            @endif
+                @endforeach
+                <div class="panel-footer clearfix">
+                    <a href="{{ url('admin/player') }}" class="pull-left">
+                        <small>Voir plus</small>
+                    </a>
+                </div>
+            </div>
 
             @if($paypal && $user->rank == 3)
                 <div class="panel panel-default">
