@@ -57,6 +57,21 @@ class AdminController extends Controller {
 		return view('admin.players.index', compact('numberPlayers', 'user', 'players'));
 	}
 
+	public function connected(){
+		$user = $this->auth->user();
+
+		$playersAll = DB::table('players')->get();
+
+		if(env('RCON_INIT') == true) {
+			$Query = new SourceQuery();
+			$Query->Connect( env('RCON_IP'), env('RCON_PORT', 2303), 1, SourceQuery::SOURCE );
+		}else {
+			$Query = false;
+		}
+
+		return view('admin.players.connected', compact('Query', 'playersAll', 'user'));
+	}
+
 	public function joueurShow($id)
 	{
 		$user = $this->auth->user();

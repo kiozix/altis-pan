@@ -60,6 +60,7 @@ Route::group(['prefix' => 'admin'], function () {
 	Route::get('/player', ['uses' => 'AdminController@joueur']);
 	Route::get('/player/{id}', ['uses' => 'AdminController@joueurShow', 'as' => 'player'])->where('id', '[0-9]+');
 	Route::post('/player/{id}', ['uses' => 'AdminController@updatePlayer']);
+	Route::get('/player/connected', ['uses' => 'AdminController@connected']);
 	Route::post('/civ_gear/delete', ['uses' => 'AdminController@removePlayer']);
 
 	Route::get('/gang', ['uses' => 'AdminController@gangs']);

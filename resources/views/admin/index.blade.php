@@ -29,8 +29,8 @@
                                 $CurrentPlayers = null;
                             }
                         ?>
-                        <div class="h2 mt0">{{ env('RCON_INIT', false) == true ? $info['Players'] . ' / ' . $info['MaxPlayers'] : $players }}</div>
-                        <div class="text-uppercase">Joueurs {{ env('RCON_INIT', false) == true ? 'connectés' : '' }}</div>
+                        <div class="h2 mt0">{{ $players }}</div>
+                        <div class="text-uppercase">Joueurs</div>
                     </div>
                 </div>
             </div>
@@ -85,7 +85,7 @@
             @include('flash')
             <div class="row">
                 <div class="col-lg-12">
-                    <div id="money-player" class="panel panel-default panel-demo">
+                    <div id="money-player" class="panel panel-default">
                         <div class="panel-heading">
                             <div class="panel-title">Joueur les plus riche</div>
                         </div>
@@ -174,15 +174,20 @@
             @endif
 
             @if(env('RCON_INIT', false) == true && $CurrentPlayers && $info['Players'] >= 5)
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <div class="text-info">Joueurs connectés</div>
-                            <canvas data-classyloader="" data-percentage="{{ $info['Players'] / $info['MaxPlayers'] * 100 }}" data-speed="20" data-font-size="40px" data-diameter="70" data-line-color="#23b7e5" data-remaining-line-color="rgba(200,200,200,0.4)" data-line-width="10" data-rounded-line="true" class="center-block js-is-in-view" width="200" height="200"></canvas>
-                        </div>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="panel-title">Remplissage du serveur</div>
+                        <canvas data-classyloader="" data-percentage="{{ $info['Players'] / $info['MaxPlayers'] * 100 }}" data-speed="20" data-font-size="40px" data-diameter="70" data-line-color="#23b7e5" data-remaining-line-color="rgba(200,200,200,0.4)" data-line-width="10" data-rounded-line="true" class="center-block js-is-in-view" width="200" height="200"></canvas>
                     </div>
+                    <div class="panel-footer clearfix">
+                        <a href="{{ url('admin/player/connected') }}" class="pull-left">
+                            <small>Voir plus</small>
+                        </a>
+                    </div>
+                </div>
             @endif
 
-            @if(env('RCON_INIT', false) == false OR $info['Players'] >= 5)
+            @if(env('RCON_INIT', false) == false OR $info['Players'])
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <div class="panel-title">Dernier Joueurs</div>
