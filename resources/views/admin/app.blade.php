@@ -101,7 +101,6 @@
                     <li class="has-user-block">
                         <div id="user-block" class="collapse in" aria-expanded="true">
                             <div class="item user-block">
-
                                 <div class="user-block-picture">
                                     <div class="user-block-status">
                                         @if($user->avatar)
