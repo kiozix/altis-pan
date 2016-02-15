@@ -1,18 +1,18 @@
-@if($Query && $Query != false)
+<?php $auth = false ?>
+@if($Query && $Query != false && $auth == true)
     <?php
-        $playersGame = $Query->GetPlayers();
-        foreach($playersGame as $playerGame){
+        $playersGames = $Query->GetPlayers();
+        // dd($playersGames);
+        foreach($playersGames as $playerGame){
             if($playerGame['Name'] == $player->name){
+                // dd(key($playersGames), $playersGames);
                 $id = $playerGame['Id'];
                 $time = $playerGame['TimeF'];
             }
         }
 
-        if(empty($id)){
-            $id = null;
-        }
     ?>
-    @if($id && $id != null)
+    @if(isset($id))
         <div id="rcon" class="panel panel-default">
             <div class="panel-heading">
                 <span style="font-weight: bold;font-size: 20px !important;">Rcon</span>
@@ -30,7 +30,7 @@
                         <span class="btn-label"><i class="fa fa-comment-o"></i></span>Message
                     </a>
 
-                    <a href="" class="btn btn-labeled btn-warning" id="kick" data-csrf="{{ csrf_token() }}" data-callback="{{ url('admin/rcon/kick') }}" data-id="{{ $id }}">
+                    <a href="" class="btn btn-labeled btn-warning" id="kick" data-csrf="{{ csrf_token() }}" data-callback="{{ url('admin/rcon/kick') }}" data-id="{{ $id }}" data-playerid="{{ $player->playerid }}">
                         <span class="btn-label"><i class="fa fa-sign-out"></i></span>Kick
                     </a>
 

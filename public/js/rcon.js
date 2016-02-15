@@ -55,10 +55,11 @@ $(function(){
             });
     }
 
-    var RconKick = function(callback, csrf, id){
+    var RconKick = function(callback, csrf, id, playerid){
         var callback = callback;
         var csrf = csrf;
         var id = id;
+        var playerid = playerid;
 
         swal({
             title: "Kick",
@@ -80,7 +81,7 @@ $(function(){
                         method: "POST",
                         url: callback,
                         cache: false,
-                        data: { raison: inputValue, id: id, _token: csrf }
+                        data: { raison: inputValue, id: id, playerid: playerid, _token: csrf }
                     })
                     .done(function(data){
                         swal("Effectuer !", "Le joueur à bien été kicker", "success");
@@ -132,8 +133,6 @@ $(function(){
         var csrf = csrf;
         var uid = id;
         var guid = uid2guid(uid);
-
-        console.log(guid)
 
         swal({
                 title: "Ban",
@@ -201,7 +200,8 @@ $(function(){
         var callback = $(this).data("callback");
         var csrf = $(this).data("csrf");
         var id = $(this).data("id");
-        RconKick(callback, csrf, id);
+        var playerid = $(this).data("playerid");
+        RconKick(callback, csrf, id, playerid);
     });
 
     $( "#mp" ).click(function(event) {
@@ -217,7 +217,8 @@ $(function(){
         var callback = $(this).data("callback");
         var csrf = $(this).data("csrf");
         var id = $(this).data("id");
-        RconBan(callback, csrf, id);
+        swal("Erreur", "Le fonction BAN est actuellement indisponible", "error");
+        // RconBan(callback, csrf, id);
     });
 
 })

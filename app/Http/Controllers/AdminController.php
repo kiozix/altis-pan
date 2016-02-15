@@ -15,6 +15,7 @@ use App\Players;
 use App\Ranks;
 use App\Settings;
 use App\Supports;
+use App\Offenses;
 class AdminController extends Controller {
 
 	private $auth;
@@ -1039,6 +1040,14 @@ class AdminController extends Controller {
 
 			$rcon->kick_player($request->get("id"), $request->get("raison"));
 
+			$casier = new Offenses();
+			$casier->arma_id = $request->get("playerid");
+			$casier->content = $request->get("raison");
+			$casier->sanction = 'Kick';
+			$casier->author = $this->auth->user()->name;
+			$casier->author = $this->auth->user()->id;
+			$casier->save();
+
 			return response()->json(['status' => 'success']);
 
 		}catch (Exception $e) {
@@ -1059,7 +1068,7 @@ class AdminController extends Controller {
 			$time = $request->get("time");
 			$int = intval($time);
 
-			dd($rcon->ban_player($guid, $raison, $int));
+			dd($rcon->command('beserver ban ' . $guid . ' ' . $int . ' ' . $raison));
 
 			return response()->json(['status' => 'success']);
 
