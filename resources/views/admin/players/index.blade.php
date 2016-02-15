@@ -8,7 +8,7 @@
     <div class="container-fluid">
         <div class="row">
             <div id="list_players" class="panel panel-default">
-                <div class="panel-heading">Joueurs
+                <div class="panel-heading">Joueurs ({{ $numberPlayers }})
                     <a href="#" data-tool="panel-collapse" data-toggle="tooltip" title="" class="pull-right">
                         <em class="fa fa-minus"></em>
                     </a>

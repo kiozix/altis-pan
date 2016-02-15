@@ -32,19 +32,29 @@ class AdminController extends Controller {
 		$players = DB::table('players')->count();
 		$players_last = DB::table('players')->orderBy('uid', 'desc')->take(5)->get();
 		$players_money = DB::table('players')->orderBy('bankacc', 'desc')->take(15)->get();
+		$playersAll = DB::table('players')->get();
 		$support = DB::table('supports')->where('etat', 1)->Orwhere('etat', 0)->where('id_refunds', 0)->count();
 		$refunds = DB::table('refunds')->where('status', 0)->count();
 
 		$paypal = DB::table('paypals')->orderBy('id', 'desc')->take(4)->get();
 
-		return view('admin.index', compact('user', 'players', 'players_last', 'support', 'refunds', 'paypal', 'players_money'));
+		if(env('RCON_INIT') == true) {
+			$Query = new SourceQuery();
+			$Query->Connect( env('RCON_IP'), env('RCON_PORT', 2303), 1, SourceQuery::SOURCE );
+		}else {
+			$Query = false;
+		}
+
+		return view('admin.index', compact('playersAll', 'Query', 'user', 'players', 'players_last', 'support', 'refunds', 'paypal', 'players_money'));
 	}
 
 	public function joueur()
 	{
 		$user = $this->auth->user();
 		$players = DB::table('players')->orderBy('uid', 'desc')->paginate(15);
-		return view('admin.players.index', compact('user', 'players'));
+		$numberPlayers = DB::table('players')->count();
+
+		return view('admin.players.index', compact('numberPlayers', 'user', 'players'));
 	}
 
 	public function joueurShow($id)
