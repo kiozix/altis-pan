@@ -15,8 +15,14 @@
                         <em class="icon-game-controller fa-3x"></em>
                     </div>
                     <div class="col-xs-8 pv-lg">
-                        <div class="h2 mt0">{{ $players }}</div>
-                        <div class="text-uppercase">Joueurs</div>
+                        <?php
+                            if(env('RCON_INIT', false) == true) {
+                                $info = $Query->GetInfo();
+                                $CurrentPlayers = $Query->GetPlayers();
+                            }
+                        ?>
+                        <div class="h2 mt0">{{ env('RCON_INIT', false) == true ? $info['Players'] . ' / ' . $info['MaxPlayers'] : $players }}</div>
+                        <div class="text-uppercase">Joueurs {{ env('RCON_INIT', false) == true ? 'connectés' : '' }}</div>
                     </div>
                 </div>
             </div>
@@ -115,6 +121,46 @@
         </div>
 
         <aside class="col-lg-3">
+            @if(env('RCON_INIT', false) == true && $CurrentPlayers)
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="panel-title">Joueurs connectés</div>
+                    </div>
+                    @foreach($CurrentPlayers as $CurrentPlayer)
+                        <?php
+                            foreach($playersAll as $player_single) {
+                                if($CurrentPlayer['Name'] == $player_single->name){
+                                    $playerid = $player_single->playerid;
+                                }
+                            }
+                        ?>
+                        <div class="list-group">
+                            <div class="list-group-item">
+                                <div class="media-box">
+                                    <div class="pull-left">
+                                <span class="fa-stack">
+                                   <em class="fa fa-circle fa-stack-2x text-success"></em>
+                                   <em class="fa fa-male fa-stack-1x fa-inverse text-white"></em>
+                                </span>
+                                    </div>
+                                    <div class="media-box-body clearfix">
+                                        <small class="text-muted pull-right ml">{{ $playerid }}</small>
+                                        <div class="media-box-heading"><a href="{{ url('admin/player/'. $playerid) }}" class="text-info m0">{{ $CurrentPlayer['Name'] }}</a>
+                                        </div>
+                                        <p class="m0">
+                                            <small><a href="{{ url('admin/player/'. $playerid) }}">Afficher</a></small>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                    <div class="panel-footer clearfix">
+                        <small>{{ $info['Players'] . '/' . $info['MaxPlayers'] }}</small>
+                    </div>
+                </div>
+            @endif
+
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <div class="panel-title">Dernier Joueurs</div>
@@ -125,7 +171,7 @@
                         <div class="media-box">
                             <div class="pull-left">
                                 <span class="fa-stack">
-                                   <em class="fa fa-circle fa-stack-2x text-success"></em>
+                                   <em class="fa fa-circle fa-stack-2x text-info"></em>
                                    <em class="fa fa-male fa-stack-1x fa-inverse text-white"></em>
                                 </span>
                             </div>
