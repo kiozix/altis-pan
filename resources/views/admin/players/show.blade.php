@@ -18,8 +18,6 @@
             </div>
 
             <div class="col-md-6">
-                @include('admin.players.layout.rcon')
-
                 @include('admin.players.layout.money')
 
                 @include('admin.players.layout.houses')

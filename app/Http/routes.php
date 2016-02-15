@@ -73,7 +73,6 @@ Route::group(['prefix' => 'admin'], function () {
 	Route::post('/user/{id}', ['uses' => 'AdminController@userUpdate']);
 
 	Route::post('/rcon/kick', ['uses' => 'AdminController@rconKick']);
-	Route::post('/rcon/ban', ['uses' => 'AdminController@rconBan']);
 	Route::post('/rcon/say', ['uses' => 'AdminController@rconSay']);
 	Route::post('/rcon/mp', ['uses' => 'AdminController@rconMp']);
 

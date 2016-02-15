@@ -1,14 +1,13 @@
-<?php $auth = false ?>
-@if($Query && $Query != false && $auth == true)
+@if($Query && $Query != false)
     <?php
         $playersGames = $Query->GetPlayers();
-        // dd($playersGames);
+        $i = 0;
         foreach($playersGames as $playerGame){
             if($playerGame['Name'] == $player->name){
-                // dd(key($playersGames), $playersGames);
-                $id = $playerGame['Id'];
+                $id = $i;
                 $time = $playerGame['TimeF'];
             }
+            $i++;
         }
 
     ?>
@@ -32,10 +31,6 @@
 
                     <a href="" class="btn btn-labeled btn-warning" id="kick" data-csrf="{{ csrf_token() }}" data-callback="{{ url('admin/rcon/kick') }}" data-id="{{ $id }}" data-playerid="{{ $player->playerid }}">
                         <span class="btn-label"><i class="fa fa-sign-out"></i></span>Kick
-                    </a>
-
-                    <a href="" class="btn btn-labeled btn-danger" id="ban" data-csrf="{{ csrf_token() }}" data-callback="{{ url('admin/rcon/ban') }}" data-id="{{ $player->playerid }}">
-                        <span class="btn-label"><i class="fa fa-user-times"></i></span>Bannir
                     </a>
                 </div>
             </div>

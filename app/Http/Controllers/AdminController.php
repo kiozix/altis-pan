@@ -1038,7 +1038,7 @@ class AdminController extends Controller {
 		try{
 			$rcon = new ARC(env('RCON_IP'), env('RCON_PORT', 2303), env('RCON_PASSWORD', 'password'));
 
-			$rcon->kick_player($request->get("id"), $request->get("raison"));
+			// $rcon->kick_player($request->get("id"), $request->get("raison"));
 
 			$casier = new Offenses();
 			$casier->arma_id = $request->get("playerid");
@@ -1047,28 +1047,6 @@ class AdminController extends Controller {
 			$casier->author = $this->auth->user()->name;
 			$casier->author = $this->auth->user()->id;
 			$casier->save();
-
-			return response()->json(['status' => 'success']);
-
-		}catch (Exception $e) {
-			echo "Une erreur c'est produite : ".$e->getMessage();
-		}
-	}
-
-	public function rconBan(Request $request) {
-		if($this->auth->user()->rank == 1) {
-			abort(403);
-		}
-
-		try{
-			$rcon = new ARC(env('RCON_IP'), env('RCON_PORT', 2303), env('RCON_PASSWORD', 'password'));
-
-			$guid = $request->get("guid");
-			$raison = $request->get("raison");
-			$time = $request->get("time");
-			$int = intval($time);
-
-			dd($rcon->command('beserver ban ' . $guid . ' ' . $int . ' ' . $raison));
 
 			return response()->json(['status' => 'success']);
 
