@@ -1044,9 +1044,7 @@ class AdminController extends Controller {
 			$time = $request->get("time");
 			$int = intval($time);
 
-			$rcon->ban_player($guid, $raison, $int);
-
-			// $rcon->command('#exec ban ' . $guid . ' ' . $raison . ' ' . $int);
+			dd($rcon->ban_player($guid, $raison, $int));
 
 			return response()->json(['status' => 'success']);
 

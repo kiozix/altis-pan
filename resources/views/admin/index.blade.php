@@ -20,6 +20,14 @@
                                 $info = $Query->GetInfo();
                                 $CurrentPlayers = $Query->GetPlayers();
                             }
+
+                            if(empty($info)){
+                                $info = null;
+                            }
+
+                            if(empty($CurrentPlayers)){
+                                $CurrentPlayers = null;
+                            }
                         ?>
                         <div class="h2 mt0">{{ env('RCON_INIT', false) == true ? $info['Players'] . ' / ' . $info['MaxPlayers'] : $players }}</div>
                         <div class="text-uppercase">Joueurs {{ env('RCON_INIT', false) == true ? 'connectés' : '' }}</div>
@@ -133,6 +141,10 @@
                                     $playerid = $player_single->playerid;
                                 }
                             }
+
+                            if(empty($playerid)){
+                                $playerid = null;
+                            }
                         ?>
                         <div class="list-group">
                             <div class="list-group-item">
@@ -144,7 +156,7 @@
                                 </span>
                                     </div>
                                     <div class="media-box-body clearfix">
-                                        <small class="text-muted pull-right ml">{{ $playerid }}</small>
+                                        <small class="text-muted pull-right ml">{{ $CurrentPlayer['TimeF'] }}</small>
                                         <div class="media-box-heading"><a href="{{ url('admin/player/'. $playerid) }}" class="text-info m0">{{ $CurrentPlayer['Name'] }}</a>
                                         </div>
                                         <p class="m0">
@@ -161,7 +173,8 @@
                 </div>
             @endif
 
-            <div class="panel panel-default">
+            @if(env('RCON_INIT', false) == false OR $info['Players'] <= 5)
+                <div class="panel panel-default">
                 <div class="panel-heading">
                     <div class="panel-title">Dernier Joueurs</div>
                 </div>
@@ -193,6 +206,7 @@
                     </a>
                 </div>
             </div>
+            @endif
 
             @if($paypal && $user->rank == 3)
                 <div class="panel panel-default">
