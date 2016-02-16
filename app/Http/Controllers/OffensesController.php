@@ -10,11 +10,11 @@ use Illuminate\Support\Facades\DB;
 
 class OffensesController extends Controller {
 
-	/**
-	 * NewsController constructor.
-     */
+	private $auth;
+
 	public function __construct(Guard $auth)
 	{
+		// Permissions
 		$this->middleware('auth');
 		$this->middleware('admin');
 
@@ -22,9 +22,7 @@ class OffensesController extends Controller {
 	}
 
 	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
+	 * Vue d'accueil
 	 */
 	public function index()
 	{
@@ -35,9 +33,7 @@ class OffensesController extends Controller {
 	}
 
 	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
+	 * Vue de création d'une infraction
 	 */
 	public function create()
 	{
@@ -48,9 +44,7 @@ class OffensesController extends Controller {
 	}
 
 	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
+	 * Création d'une infraction en DB
 	 */
 	public function store(OffensesRequest $request)
 	{
@@ -61,10 +55,7 @@ class OffensesController extends Controller {
 
 
 	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
+	 * Vue d'édition d'une infraction
 	 */
 	public function edit($id)
 	{
@@ -75,10 +66,7 @@ class OffensesController extends Controller {
 	}
 
 	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
+	 * Edition d'une infraction en DB
 	 */
 	public function update($id, OffensesRequest $request)
 	{
@@ -88,10 +76,7 @@ class OffensesController extends Controller {
 	}
 
 	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
+	 * Supréssion d'une infraction
 	 */
 	public function destroy($id)
 	{

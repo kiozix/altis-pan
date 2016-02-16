@@ -9,11 +9,11 @@ use Illuminate\Contracts\Auth\Guard;
 
 class NewsController extends Controller {
 
-	/**
-	 * NewsController constructor.
-     */
+	private $auth;
+
 	public function __construct(Guard $auth)
 	{
+		// Permissions
 		$this->middleware('auth', ['except' => ['index_home', 'show']]);
 		$this->middleware('owner', ['except' => ['index_home', 'show']]);
 
@@ -21,9 +21,7 @@ class NewsController extends Controller {
 	}
 
 	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
+	 * Vue Admin accueil
 	 */
 	public function index()
 	{
@@ -32,6 +30,9 @@ class NewsController extends Controller {
 		return view('admin.news.index', compact('news', 'user'));
 	}
 
+	/**
+	 * Vue utilisateur acceuil
+	 */
 	public function index_home()
 	{
 		$news = News::orderBy('id', 'DESC')->paginate(10);
@@ -39,9 +40,7 @@ class NewsController extends Controller {
 	}
 
 	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
+	 * Vue de la création d'une news
 	 */
 	public function create()
 	{
@@ -51,9 +50,7 @@ class NewsController extends Controller {
 	}
 
 	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
+	 * Création d'une news en DB
 	 */
 	public function store(NewsRequest $request)
 	{
@@ -64,8 +61,7 @@ class NewsController extends Controller {
 
 
 	/**
-	 * @param $slug
-	 * @return \Illuminate\View\View
+	 * Vue d'une news
      */
 	public function show($slug)
 	{
@@ -75,10 +71,7 @@ class NewsController extends Controller {
 
 
 	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
+	 * Vue d'édition d'une news
 	 */
 	public function edit($id)
 	{
@@ -88,10 +81,7 @@ class NewsController extends Controller {
 	}
 
 	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
+	 * Edition d'une news en DB
 	 */
 	public function update($id, NewsRequest $request)
 	{
@@ -101,10 +91,7 @@ class NewsController extends Controller {
 	}
 
 	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
+	 * Supression d'une news
 	 */
 	public function destroy($id)
 	{

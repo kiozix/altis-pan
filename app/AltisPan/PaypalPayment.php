@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Behaviour;
+namespace App\Altispan;
 
 class PaypalPayment
 {

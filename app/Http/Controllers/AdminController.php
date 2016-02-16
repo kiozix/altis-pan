@@ -46,6 +46,17 @@ class AdminController extends Controller {
 			$Query = false;
 		}
 
+		$rows = DB::table('players')->get();
+		foreach ($rows as $row) {
+			$timestamp = time() - (60 * 60 * 24 * $row->duredon);
+			if ($row->timestamp != 0){
+				if($row->timestamp < $timestamp) {
+					DB::table('players')->where('timestamp', $row->timestamp)->where('duredon', $row->duredon)->update(array('donatorlvl' => 0, 'duredon' => 0, 'timestamp' => 0));
+				}
+			}
+
+		}
+
 		return view('admin.index', compact('playersAll', 'Query', 'user', 'players', 'players_last', 'support', 'refunds', 'paypal', 'players_money'));
 	}
 

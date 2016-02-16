@@ -17,7 +17,7 @@ class PlayersController extends Controller {
 
 	public function __construct(Guard $auth)
 	{
-
+		// Permissions
 		$this->middleware('auth');
 		$this->middleware('arma');
 		$this->middleware('ban');
@@ -25,10 +25,7 @@ class PlayersController extends Controller {
 	}
 
 	/**
-	 * Display a listing of the resource.
-	 *
-	 * @param Guard $auth
-	 * @return Response
+	 * Affiche le joueur connecté
 	 */
 	public function index(Guard $auth)
 	{
@@ -65,21 +62,6 @@ class PlayersController extends Controller {
 
 		$licensesName = DB::table('settings')->where('action', 'LICENSES')->get();
 
-		switch($players->adminlevel){
-			case 0:
-				$rank = env('ADMIN_GRADE_0');
-				break;
-			case 1:
-				$rank = env('ADMIN_GRADE_1');
-				break;
-			case 2:
-				$rank = env('ADMIN_GRADE_2');
-				break;
-			case 3:
-				$rank = env('ADMIN_GRADE_3');
-				break;
-		}
-
 		if($gang) {
 			return view('players.index', compact('insure', 'licensesName', 'admin', 'cop', 'medic' ,'ranks_cop','ranks_medic', 'refunds', 'allPlayers', 'players', 'mediclevel', 'coplevel', 'rank', 'gang', 'vehicles_cars', 'vehicles_airs', 'vehicles_ships', 'gangMembers'));
 		} else {
@@ -89,14 +71,19 @@ class PlayersController extends Controller {
 
 	}
 
+	/**
+	 * Vue de création d'une demande de remboursement
+	 */
 	public function refundsView(){
 		return view('players.refunds.create');
 	}
 
+	/**
+	 *	Création d'une demande de remboursement en DB
+	 */
 	public function refunds(Request $request, Guard $auth){
 
 		$this->validate($request, [
-			'g-recaptcha-response' => 'required',
 			'amount' => 'required|min:1|numeric',
 			'content' => 'required|min:10'
 		]);
@@ -123,9 +110,7 @@ class PlayersController extends Controller {
 	}
 
 	/**
-	 * @param Request $request
-	 * @param Guard $auth
-	 * @return mixed
+	 * Supression d'un joueur dans un gang
      */
 	public function deleteGang(Request $request, Guard $auth)
 	{
@@ -176,10 +161,8 @@ class PlayersController extends Controller {
 	}
 
 	/**
-	 * @param Request $request
-	 * @param Guard $auth
-	 * @return \Illuminate\Http\RedirectResponse
-     */
+	 * Ajout d'un jouer dans un gang
+	 */
 	public function addUserGang(Request $request, Guard $auth)
 	{
 		if($request->isMethod('POST')){
@@ -235,6 +218,9 @@ class PlayersController extends Controller {
 		}
 	}
 
+	/**
+	 * Affiche une demande de remboursement
+	 */
 	public function show_refunds($id){
 		$refund = DB::table('refunds')->where('id', $id)->first();
 
@@ -251,6 +237,9 @@ class PlayersController extends Controller {
 
 	}
 
+	/**
+	 * Répondre à un ticket ouvert dans une demande de remboursement
+	 */
 	public function reply_refunds($id, Request $request){
 		$content = $request->get("content");
 		$this->validate($request, [

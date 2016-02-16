@@ -17,16 +17,23 @@ class UsersController extends Controller {
 	private $auth;
 
 	public function __construct(Guard $auth){
+		// Permissions
 		$this->middleware('auth');
 		$this->middleware('ban');
 		$this->auth = $auth;
 	}
 
+	/**
+	 * Vue d'édition de l'utilisateur en cour
+	 */
 	public function edit(){
 		$user = $this->auth->user();
 		return view('users.edit', compact('user'));
 	}
 
+	/**
+	 * Edition de l'utilisateur en DB
+	 */
 	public function update(Guard $auth, Request $request){
 		$user = $this->auth->user();
 
@@ -50,6 +57,9 @@ class UsersController extends Controller {
 		return redirect()->back()->with('success', 'Votre profil a bien été modifié');
 	}
 
+	/**
+	 * Vue L'authentification à 2 facteurs
+	 */
 	public function totp(){
 		$user = $this->auth->user();
 
@@ -65,6 +75,9 @@ class UsersController extends Controller {
 		return view('users.totp', compact('qrcode'));
 	}
 
+	/**
+	 * Ajout de $secret en DB et activation l'authentification à 2 facteurs
+	 */
 	public function totp_post(Request $request){
 		$otp = new Otp();
 		$secret = session()->get('secret');
@@ -85,6 +98,9 @@ class UsersController extends Controller {
 		}
 	}
 
+	/**
+	 * Supression de l'authentification à 2 facteurs
+	 */
 	public function totp_delete(){
 
 		$user = $this->auth->user();

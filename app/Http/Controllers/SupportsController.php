@@ -15,11 +15,15 @@ class SupportsController extends Controller {
 
 	public function __construct(Guard $auth)
 	{
+		// Permissions
 		$this->middleware('auth');
 		$this->middleware('ban');
 		$this->auth = $auth;
 	}
 
+	/**
+	 * Vue d'accueil
+	 */
 	public function index()
 	{
 
@@ -27,6 +31,9 @@ class SupportsController extends Controller {
 		return view('supports.index', compact('tickets'));
 	}
 
+	/**
+	 * Vue d'un ticket
+	 */
 	public function show($id)
 	{
 		$ticket = Supports::where('id', $id)->where('message', '1')->where('id_refunds', '0')->first();
@@ -43,6 +50,9 @@ class SupportsController extends Controller {
 		}
 	}
 
+	/**
+	 * Réponse à un ticket
+	 */
 	public function reply($id, Request $request){
 		$content = $request->get("content");
 		$this->validate($request, [
@@ -75,6 +85,9 @@ class SupportsController extends Controller {
 
 	}
 
+	/**
+	 * Fermeture d'un ticket
+	 */
 	public function close($id){
 		$ticket = Supports::where('id', $id)->where('id_author', $this->auth->user()->id)->where('message', '1')->first();
 		if($this->auth->user()->id == $ticket->id_author) {
@@ -89,10 +102,16 @@ class SupportsController extends Controller {
 		}
 	}
 
+	/**
+	 * Vue de création d'un ticket
+	 */
 	public function create(){
 		return view('supports.create');
 	}
 
+	/**
+	 * Ouverture d'un ticket en DB
+	 */
 	public function open(Request $request){
 		$this->validate($request, [
 			'content' => 'required|min:2',

@@ -12,12 +12,15 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Requests\ShopsRequest;
 use App\Shops;
 use App\Paypal;
-use App\Behaviour\PaypalPayment;
+use App\AltisPan\PaypalPayment;
 
 class ShopsController extends Controller {
 
+	private $auth;
+
 	public function __construct(Guard $auth)
 	{
+		// Permissions
 		$this->middleware('auth', ['except' => ['index_home', 'show']]);
 		$this->middleware('owner', ['except' => ['index_home', 'show']]);
 		$this->middleware('arma', ['except' => ['index', 'index_home', 'create', 'store', 'edit', 'update', 'destroy']]);
@@ -26,9 +29,7 @@ class ShopsController extends Controller {
 	}
 
 	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
+	 * Vue Admin accueil
 	 */
 	public function index()
 	{
@@ -37,6 +38,9 @@ class ShopsController extends Controller {
 		return view('admin.shops.index', compact('shops', 'user'));
 	}
 
+	/**
+	 * Vue utilisateur acceuil
+	 */
 	public function index_home()
 	{
 		$shops = Shops::orderBy('id', 'ASC')->paginate(3);
@@ -44,7 +48,7 @@ class ShopsController extends Controller {
 	}
 
 	/**
-	 * @return \Illuminate\View\View
+	 * Paiement accepté
      */
 	public function accepted(Request $request)
 	{
@@ -68,8 +72,6 @@ class ShopsController extends Controller {
 			}
 		}else{
 			return redirect('/shop/payment/failed');
-			// var_dump($paypal->errors);
-			// die();
 		}
 
 		$params = array(
@@ -88,7 +90,6 @@ class ShopsController extends Controller {
 		$response = $paypal->request('DoExpressCheckoutPayment',$params);
 
 		if($response){
-				// dd($response);
 				$transaction_id = $response['PAYMENTINFO_0_TRANSACTIONID'];
 
 				$paypal_store = New Paypal();
@@ -115,22 +116,20 @@ class ShopsController extends Controller {
 
 		}else{
 			return redirect('/shop/payment/failed');
-			// dd($paypal->errors);
 		}
 
 	}
 
 	/**
-	 * @return \Illuminate\View\View
-     */
+	 * Paiement refusé
+	 */
 	public function failed()
 	{
 		return view('shops.failed');
 	}
+
 	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
+	 * Vue de la création d'un offre
 	 */
 	public function create()
 	{
@@ -140,9 +139,7 @@ class ShopsController extends Controller {
 	}
 
 	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
+	 * Création d'une offre en DB
 	 */
 	public function store(ShopsRequest $request)
 	{
@@ -151,10 +148,7 @@ class ShopsController extends Controller {
 	}
 
 	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
+	 * Vue d'une offre
 	 */
 	public function show($id)
 	{
@@ -189,10 +183,7 @@ class ShopsController extends Controller {
 	}
 
 	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
+	 * Vue d'édition d'une offre
 	 */
 	public function edit($id)
 	{
@@ -202,10 +193,7 @@ class ShopsController extends Controller {
 	}
 
 	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
+	 * Edition d'une offre en DB
 	 */
 	public function update($id, ShopsRequest $request)
 	{
@@ -215,10 +203,7 @@ class ShopsController extends Controller {
 	}
 
 	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
+	 * Supression d'une offre
 	 */
 	public function destroy($id)
 	{

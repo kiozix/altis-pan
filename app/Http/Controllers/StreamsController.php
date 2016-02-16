@@ -9,11 +9,11 @@ use Illuminate\Contracts\Auth\Guard;
 
 class StreamsController extends Controller {
 
-	/**
-	 * StreamsController constructor.
-     */
+	private $auth;
+
 	public function __construct(Guard $auth)
 	{
+		// Permissions
 		$this->middleware('auth', ['except' => ['index_home', 'show']]);
 		$this->middleware('owner', ['except' => ['index_home', 'show']]);
 
@@ -21,9 +21,7 @@ class StreamsController extends Controller {
 	}
 
 	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
+	 * Vue Admin accueil
 	 */
 	public function index()
 	{
@@ -32,6 +30,9 @@ class StreamsController extends Controller {
 		return view('admin.streams.index', compact('streams', 'user'));
 	}
 
+	/**
+	 * Vue utilisateur acceuil
+	 */
 	public function index_home()
 	{
 		$streams = Streams::orderBy('id', 'DESC')->paginate(4);
@@ -40,9 +41,7 @@ class StreamsController extends Controller {
 
 
 	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
+	 * Vue de la création d'un streamer
 	 */
 	public function create()
 	{
@@ -53,9 +52,7 @@ class StreamsController extends Controller {
 	}
 
 	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
+	 * Création d'un streamer en DB
 	 */
 	public function store(StreamsRequest $request)
 	{
@@ -64,9 +61,7 @@ class StreamsController extends Controller {
 	}
 
 	/**
-	 * Display the specified resource.
-	 * @param $slug
-	 * @return Response
+	 * Vue d'un streamer
 	 */
 	public function show($slug)
 	{
@@ -75,10 +70,7 @@ class StreamsController extends Controller {
 	}
 
 	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
+	 * Vue d'édition d'un streamer
 	 */
 	public function edit($id)
 	{
@@ -88,10 +80,7 @@ class StreamsController extends Controller {
 	}
 
 	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
+	 * Edition d'un streamer en DB
 	 */
 	public function update($id, StreamsRequest $request)
 	{
@@ -101,10 +90,7 @@ class StreamsController extends Controller {
 	}
 
 	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
+	 * Supression d'un streamer
 	 */
 	public function destroy($id)
 	{

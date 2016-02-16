@@ -9,11 +9,11 @@ use Illuminate\Contracts\Auth\Guard;
 
 class PagesController extends Controller {
 
-	/**
-	 * PagesController constructor.
-     */
+	private $auth;
+
 	public function __construct(Guard $auth)
 	{
+		// Permissions
 		$this->middleware('auth', ['except' => ['index_home', 'show']]);
 		$this->middleware('owner', ['except' => ['show']]);
 
@@ -21,9 +21,7 @@ class PagesController extends Controller {
 	}
 
 	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
+	 * Vue Admin accueil
 	 */
 	public function index()
 	{
@@ -31,19 +29,9 @@ class PagesController extends Controller {
 		$pages = Pages::orderBy('id', 'DESC')->paginate(15);
 		return view('admin.pages.index', compact('pages', 'user'));
 	}
-	
-	/*
-	public function index_home()
-	{
-		$pages = Pages::orderBy('id', 'DESC')->paginate(10);
-		return view('pages.index', compact('pages'));
-	}
-	*/
 
 	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
+	 * Vue de la création d'une page
 	 */
 	public function create()
 	{
@@ -53,9 +41,7 @@ class PagesController extends Controller {
 	}
 
 	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
+	 * Création d'une page en DB
 	 */
 	public function store(PagesRequest $request)
 	{
@@ -66,8 +52,7 @@ class PagesController extends Controller {
 
 
 	/**
-	 * @param $slug
-	 * @return \Illuminate\View\View
+	 * Vue d'une page
      */
 	public function show($slug)
 	{
@@ -77,10 +62,7 @@ class PagesController extends Controller {
 
 
 	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
+	 * Vue d'édition d'une page
 	 */
 	public function edit($id)
 	{
@@ -90,10 +72,7 @@ class PagesController extends Controller {
 	}
 
 	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
+	 * Edition d'une page en DB
 	 */
 	public function update($id, PagesRequest $request)
 	{
@@ -103,10 +82,7 @@ class PagesController extends Controller {
 	}
 
 	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
+	 * Supression d'une page
 	 */
 	public function destroy($id)
 	{

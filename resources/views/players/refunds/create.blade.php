@@ -36,8 +36,6 @@
                     <label for="content">Description</label>
                     <textarea id="content" name="content" cols="30" rows="10" class="ckeditor form-control"></textarea>
                     <br>
-                    {!! app('captcha')->display() !!}
-                    <br>
                     <div class="text-right">
                         <button type="submit" class="btn btn-labeled btn-success">
                             <i class="fa fa-check"></i>&nbsp;&nbsp;Envoyer
