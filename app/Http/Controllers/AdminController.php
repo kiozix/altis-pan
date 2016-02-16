@@ -1012,38 +1012,4 @@ class AdminController extends Controller {
 		}
 	}
 
-	public function rconKick(Request $request) {
-		try{
-			$rcon = new ARC(env('RCON_IP'), env('RCON_PORT', 2303), env('RCON_PASSWORD', 'password'));
-
-			// $rcon->kick_player($request->get("id"), $request->get("raison"));
-
-			$casier = new Offenses();
-			$casier->arma_id = $request->get("playerid");
-			$casier->content = $request->get("raison");
-			$casier->sanction = 'Kick';
-			$casier->author = $this->auth->user()->name;
-			$casier->author = $this->auth->user()->id;
-			$casier->save();
-
-			return response()->json(['status' => 'success']);
-
-		}catch (Exception $e) {
-			echo "Une erreur c'est produite : ".$e->getMessage();
-		}
-	}
-
-	public function rconMp(Request $request) {
-		try{
-			$rcon = new ARC(env('RCON_IP'), env('RCON_PORT', 2303), env('RCON_PASSWORD', 'password'));
-
-			$rcon->say_player($request->get("id"), $request->get("message"));
-
-			return response()->json(['status' => 'success']);
-
-		}catch (Exception $e) {
-			echo "Une erreur c'est produite : ".$e->getMessage();
-		}
-	}
-
 }
