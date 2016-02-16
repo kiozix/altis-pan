@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\DB;
 use Nizarii\ArmaRConClass\ARC;
 use xPaw\SourceQuery\SourceQuery;
+use App\AltisPan\Gang;
 
 use App\Paypal;
 use App\Players;
@@ -397,43 +398,9 @@ class AdminController extends Controller {
 			$userId = $request->get("userId");
 			$groupId = $request->get("groupId");
 
-			$gang = DB::table('gangs')->where('id', $groupId)->first();
+			$Gang = new Gang();
+			$Gang->DelMember($userId, $groupId);
 
-			$suppr = array("\"", "`", "[", "]");
-			$lineGang = str_replace($suppr, "", $gang->members);
-			$ArrayGang = preg_split("/,/", $lineGang);
-			$gangMembers = array();
-
-			foreach ($ArrayGang as $member) {
-				$gangMembers[] = $member;
-			}
-			unset($gangMembers[$userId]);
-			if(env('DB_EXTDB') == 1) {
-				$gangMembersString = '[';
-			}elseif(env('DB_EXTDB') == 2){
-				$gangMembersString = '"[';
-			}
-			$gangList = "";
-			foreach ($gangMembers as $gangMember) {
-				if ($gangMember != $userId) {
-					$gangList .= "`" . $gangMember . "`,";
-				}
-			}
-			$gangList = rtrim($gangList, ",");
-			$gangMembersString .= $gangList;
-			if(env('DB_EXTDB') == 1) {
-				$gangMembersString .= ']';
-			}elseif(env('DB_EXTDB') == 2){
-				$gangMembersString .= ']"';
-			}
-
-
-			DB::table('gangs')
-				->where('id', $groupId)
-				->update(array(
-					'members' => $gangMembersString,
-				))
-			;
 		}
 		return response()->json(['status' => 'success']);
 	}

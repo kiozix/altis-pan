@@ -9,8 +9,10 @@ use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Routing\ResponseFactory;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Response;
+
 use App\Refund;
 use App\Supports;
+use App\AltisPan\Gang;
 class PlayersController extends Controller {
 
 	private $auth;
@@ -117,44 +119,11 @@ class PlayersController extends Controller {
 		if($request->isMethod('POST')){
 			$userId = $request->get("userId");
 			$groupId = $request->get("groupId");
-
 			$gang = DB::table('gangs')->where('id', $groupId)->first();
 
 			if($auth->user()->arma == $gang->owner) {
-
-				$suppr = array("\"", "`", "[", "]");
-				$lineGang = str_replace($suppr, "", $gang->members);
-				$ArrayGang = preg_split("/,/", $lineGang);
-				$gangMembers = array();
-
-				foreach ($ArrayGang as $member) {
-					$gangMembers[] = $member;
-				}
-				unset($gangMembers[$userId]);
-				if(env('DB_EXTDB') == 1) {
-					$gangMembersString = '[';
-				}elseif(env('DB_EXTDB') == 2){
-					$gangMembersString = '"[';
-				}
-				$gangList = "";
-				foreach ($gangMembers as $gangMember) {
-					if ($gangMember != $userId) {
-						$gangList .= "`" . $gangMember . "`,";
-					}
-				}
-				$gangList = rtrim($gangList, ",");
-				$gangMembersString .= $gangList;
-				if(env('DB_EXTDB') == 1) {
-					$gangMembersString .= ']';
-				}elseif(env('DB_EXTDB') == 2){
-					$gangMembersString .= ']"';
-				}
-
-				DB::table('gangs')
-					->where('id', $groupId)
-					->update(array(
-						'members' => $gangMembersString,
-					));
+				$Gang = new Gang();
+				$Gang->DelMember($userId, $groupId);
 			}
 		}
 		return response()->json(['status' => 'success']);
