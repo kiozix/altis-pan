@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\DB;
 use Nizarii\ArmaRConClass\ARC;
 use xPaw\SourceQuery\SourceQuery;
 use App\AltisPan\Gang;
+use App\AltisPan\Money;
+use App\AltisPan\Vehicule;
 
 use App\Paypal;
 use App\Players;
@@ -135,17 +137,9 @@ class AdminController extends Controller {
 		if($request->get("give") && $this->auth->user()->rank == 3){
 			if($request->get("give") >= 1) {
 				$amount = $request->get("give");
+				$Money = Money();
+				$Money->AddMoney($id, $amount);
 
-
-				$user_show = DB::table('players')->where('playerid', $id)->first();
-
-				$amount = $user_show->bankacc + $amount;
-
-				DB::table('players')
-					->where('playerid', $id)
-					->update(array(
-						'bankacc' => $amount
-					));
 				return redirect(url('admin/player/' . $id))->with('success', 'L\'argent à bien été créditer');
 			}else {
 				return redirect(url('admin/player/' . $id))->with('error', 'Veuillez saisir un nombre positif');
@@ -153,21 +147,8 @@ class AdminController extends Controller {
 		}elseif($request->get("take") && $this->auth->user()->rank != 1){
 			if($request->get("take") >= 1) {
 				$amount = $request->get("take");
-
-				$user_show = DB::table('players')->where('playerid', $id)->first();
-
-				$amount = $user_show->bankacc - $amount;
-
-				if($amount <= 0){
-					$amount = 0;
-				}
-
-				DB::table('players')
-					->where('playerid', $id)
-					->update(array(
-						'bankacc' => $amount
-					));
-
+				$Money  = Money();
+				$Money->RemoveMoney($id, $amount);
 				return redirect(url('admin/player/' . $id))->with('success', 'L\'argent à bien été retiré');
 			}else {
 				return redirect(url('admin/player/' . $id))->with('error', 'Veuillez saisir un nombre positif');
@@ -612,16 +593,11 @@ class AdminController extends Controller {
 
 		$user = $this->auth->user();
 		$refund = DB::table('refunds')->where('id', $id)->first();
-		$player = DB::table('players')->where('playerid', $refund->playerid)->first();
 
 		if($request->get('status') == 2){
-			$amount = $player->bankacc + $refund->amount;
 
-			DB::table('players')
-				->where('playerid', $refund->playerid)
-				->update(array(
-					'bankacc' => $amount,
-				));
+			$Money = Money();
+			$Money->AddMoney($refund->playerid, $refund->amount);
 
 			DB::table('refunds')
 				->where('id', $id)
@@ -664,11 +640,9 @@ class AdminController extends Controller {
 		}
 		$new_owner = $request->get("playerid");
 		$vehicule = DB::table('vehicles')->where('id', $id)->first();
-		DB::table('vehicles')
-			->where('id', $id)
-			->update(array(
-				'pid' => $new_owner,
-			));
+
+		$transfert = Vehicule();
+		$transfert->transfert($id, $new_owner);
 
 		return redirect(url('admin/player/'. $vehicule->pid))->with('success', 'Véhicule transférer !');
 	}
@@ -680,7 +654,8 @@ class AdminController extends Controller {
 		$id = $request->get("id");
 		$vehicule = DB::table('vehicles')->where('id', $id)->first();
 
-		DB::table('vehicles')->where('id', $id)->delete();
+		$delete = Vehicule();
+		$delete->delete($id);
 
 		return redirect(url('admin/player/'. $vehicule->pid))->with('success', 'Véhicule supprimer !');
 	}

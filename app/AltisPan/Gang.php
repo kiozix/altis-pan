@@ -1,6 +1,7 @@
 <?php
 namespace app\AltisPan;
 use Illuminate\Support\Facades\DB;
+
 class Gang {
 
     public function DelMember($playerId, $groupId){
