@@ -11,7 +11,6 @@ use Nizarii\ArmaRConClass\ARC;
 use xPaw\SourceQuery\SourceQuery;
 use App\AltisPan\Gang;
 use App\AltisPan\Money;
-use App\AltisPan\Vehicule;
 
 use App\Paypal;
 use App\Players;
@@ -641,8 +640,11 @@ class AdminController extends Controller {
 		$new_owner = $request->get("playerid");
 		$vehicule = DB::table('vehicles')->where('id', $id)->first();
 
-		$transfert = Vehicule();
-		$transfert->transfert($id, $new_owner);
+		DB::table('vehicles')
+			->where('id', $id)
+			->update(array(
+				'pid' => $new_owner,
+			));
 
 		return redirect(url('admin/player/'. $vehicule->pid))->with('success', 'Véhicule transférer !');
 	}
@@ -654,8 +656,7 @@ class AdminController extends Controller {
 		$id = $request->get("id");
 		$vehicule = DB::table('vehicles')->where('id', $id)->first();
 
-		$delete = Vehicule();
-		$delete->delete($id);
+		DB::table('vehicles')->where('id', $id)->delete();
 
 		return redirect(url('admin/player/'. $vehicule->pid))->with('success', 'Véhicule supprimer !');
 	}
