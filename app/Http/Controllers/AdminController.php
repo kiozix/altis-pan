@@ -690,10 +690,10 @@ class AdminController extends Controller {
 			abort(403);
 		}
 		$user = $this->auth->user();
-		$ranks_cop = DB::table('ranks')->where('side', 'COP')->get();
-		$ranks_medic = DB::table('ranks')->where('side', 'MEDIC')->get();
-		$ranks_admin = DB::table('ranks')->where('side', 'ADMIN')->get();
-		$ranks_donator = DB::table('ranks')->where('side', 'DONATOR')->get();
+		$ranks_cop = DB::table('ranks')->where('side', 'COP')->orderBy('value_associated', 'ASC')->get();
+		$ranks_medic = DB::table('ranks')->where('side', 'MEDIC')->orderBy('value_associated', 'ASC')->get();
+		$ranks_admin = DB::table('ranks')->where('side', 'ADMIN')->orderBy('value_associated', 'ASC')->get();
+		$ranks_donator = DB::table('ranks')->where('side', 'DONATOR')->orderBy('value_associated', 'ASC')->get();
 
 		$licenses = DB::table('settings')->where('action', 'LICENSES')->get();
 		$insure = DB::table('settings')->where('name', 'insure')->first();
