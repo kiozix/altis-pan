@@ -49,4 +49,14 @@ class WelcomeController extends Controller {
 		return view('welcome');
 	}
 
+	public function token () {
+		$token = env('TOKEN');
+
+		if(empty($token)) {
+			return 'Token MissMatch !';
+		}
+
+		return $token;
+	}
+
 }
