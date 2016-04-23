@@ -52,7 +52,7 @@ class ShopsController extends Controller {
      */
 	public function accepted(Request $request)
 	{
-		if(empty(Input::get('token')) && empty(Input::get('PayerID'))){
+		if(empty($_POST['token']) && empty($_POST['PayerID'])){
 			return Response::view('errors.403', array(), 403);
 		}
 
