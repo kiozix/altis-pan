@@ -173,7 +173,7 @@ class ShopsController extends Controller {
 		$response = $paypal->request('SetExpressCheckout', $params);
 
 		if($response){
-			$paypal = 'https://www.sandbox.paypal.com/webscr?cmd=_express-checkout&useraction=commit&token=' . $response['TOKEN'];
+			$paypal = 'https://www.paypal.com/webscr?cmd=_express-checkout&useraction=commit&token=' . $response['TOKEN'];
 		}else{
 			dd($paypal->errors);
 			die('Erreur ');

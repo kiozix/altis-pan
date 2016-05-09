@@ -5,10 +5,10 @@ namespace App\Altispan;
 class PaypalPayment
 {
 
-    private $user      = "emile.lepetit-facilitator_api1.gmail.com";
-    private $pwd       = "9BB3SU5EZTWZ3FEH";
-    private $signature = "An5ns1Kso7MWUdW4ErQKJJJ4qi4-AzicehSrfzie6QUYdM7E7SxbBCeM";
-    private $endpoint = "https://api-3t.sandbox.paypal.com/nvp";
+    private $user      = "";
+    private $pwd       = "";
+    private $signature = "";
+    private $endpoint = "https://api-3t.paypal.com/nvp";
 
     public $errors    = array();
 
@@ -23,7 +23,7 @@ class PaypalPayment
             $this->signature = $signature;
         }
         if($prod){
-            $this->endpoint = str_replace('sandbox.','', $this->endpoint);
+            $this->endpoint = $prod;
         }
     }
 

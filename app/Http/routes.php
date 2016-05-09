@@ -32,7 +32,6 @@ Route::resource('player', 'PlayersController');
 Route::post('player', ['uses' => 'PlayersController@refunds']);
 Route::post('player/gang/delete', ['uses' => 'PlayersController@deleteGang', 'as' => 'deleteGang']);
 Route::post('player/gang/add', ['uses' => 'PlayersController@addUserGang', 'as' => 'addPlayerGang']);
-Route::get('token', ['uses' => 'WelcomeController@token']);
 
 Route::get('remboursement', ['uses' => 'PlayersController@refundsView']);
 Route::get('remboursement/{id}', ['uses' => 'PlayersController@show_refunds'])->where('id', '[0-9]+');
