@@ -32,6 +32,9 @@ class PlayersController extends Controller {
 	public function index(Guard $auth)
 	{
 		$players = DB::table('players')->where('playerid', $auth->user()->arma)->first();
+		if(empty($players)){
+			abort(403);
+		}
 		$allPlayers = DB::table('players')->get();
 		$refunds = DB::table('refunds')->where('playerid', $auth->user()->arma)->orderBy('id', 'desc')->get();
 
