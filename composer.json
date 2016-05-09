@@ -1,5 +1,5 @@
 {
-  "name": "Emile442/altis-pan",
+  "name": "emile442/altis-pan",
   "description": "AltisPan est un CMS (Content management System) développer pour Arma III et plus précisément pour le mod de jeux Altis Life. Il est composé d'une partie site est d'une partie back office (Panel Admin). Depuis le panel admin il vous sera facile de réaliser toutes les modifications que vous souhaiter faires. Pour ceux qui veulent en savoir plus, le panel est développé sous le framwork laravel avec une structure de type MVC.",
   "keywords": [
     "AltisPan",
