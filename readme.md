@@ -3,6 +3,10 @@
 > AltisPan est mon premier gros projet.
 ---
 
+|Version Stable|Téléchargements|License|Laravel|
+|:------:|:-------:|:-------:|:------:|
+|[![Version Stable](https://img.shields.io/packagist/v/emile442/altis-pan.svg?style=flat-square)](https://packagist.org/packages/emile442/altis-pan)|[![Téléchargements](https://img.shields.io/packagist/dt/emile442/altis-pan.svg?style=flat-square)](https://packagist.org/packages/emile442/altis-pan)|[![License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](https://packagist.org/packages/emile442/altis-pan)|[![Laravel](https://img.shields.io/badge/Laravel 5-%E2%99%A5-44CB12.svg?style=flat-square)](https://laravel.com/)
+
 ### Description
 AltisPan est un CMS (Content management System) développer pour Arma III et plus précisément pour le mod de jeux Altis Life. Il est composé d'une partie site est d'une partie back office (Panel Admin). Depuis le panel admin il vous sera facile de réaliser toutes les modifications que vous souhaiter faires. Pour ceux qui veulent en savoir plus, le panel est développé sous le framwork laravel avec une structure de type MVC.
 
