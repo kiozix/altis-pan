@@ -12,7 +12,7 @@ AltisPan est un CMS (Content management System) développer pour Arma III et plu
 3. Ouvrer une invite de commande dans le dossier et exécuter ceci :
     - `composer update --no-dev`
     - `php artisan key:generate`
-4. Renommer le fichier `.env.exemple` en `.env`
+4. Renommer le fichier `.env.example` en `.env`
 5. Ouvrer le fichier `.env` situer à la racine est renseigné les informations demandées
 6. Ré ouvrée vôtres invites de commande est exécuté ceci (Création des tables dans la base de données):
    - Conseil : effectuer une sauvegarde de votre base de donnée
