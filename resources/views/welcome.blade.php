@@ -31,8 +31,8 @@
                                         <img class="img-responsive" src="http://cdn.akamai.steamstatic.com/steam/apps/107410/header.jpg">
                                     </div>
                                     <div class="col-md-8">
-                                        <h1 class="fh5co-lead">Mise a jours !</h1>
-                                        <h2 class="fh5co-sub-lead">Grace a la dernière mise a jours d'Arma 3 découvrez nos nouveaux vehicules !</h2>
+                                        <h1 class="fh5co-lead">Mise à jour !</h1>
+                                        <h2 class="fh5co-sub-lead">Grâce à la dernière mise à jour d'Arma 3, découvrez nos nouveaux véhicules !</h2>
                                     </div>
                                 </div>
                             </div>
@@ -49,7 +49,7 @@
                 <div class="row text-center">
                     <div class="col-md-8 col-md-offset-2">
                         <h2 class="fh5co-section-lead">Quelques informations</h2>
-                        <h3 class="fh5co-section-sub-lead">Afin que ce serveur reste agréable, convivial et où règne une athmosphère paisible, nous vous prions de bien vouloir suivre ces quelques règles.
+                        <h3 class="fh5co-section-sub-lead">Afin que ce serveur reste agréable, convivial et où règne une atmosphère paisible, nous vous prions de bien vouloir suivre ces quelques règles.
                             <br />Pour plus d'informations, merci de contacter les modérateurs sur le teamspeak.</h3>
                     </div>
                     <div class="fh5co-spacer fh5co-spacer-md"></div>
