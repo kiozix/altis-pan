@@ -80,7 +80,7 @@
                 <div id="fh5co-navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
                         <li <?php if (Request::is('home') OR Request::is('/')) { echo 'class="active"'; } ?>>
-                            <a href="{{ url('/') }}/"><span><i class="fa fa-home"></i> Accueil<span class="border"></span></span></a>
+                            <a href="{{ url('/') }}"><span><i class="fa fa-home"></i> Accueil<span class="border"></span></span></a>
                         </li>
 
                         <li class="{{ Request::is('news') ? 'active' : '' }} <?php $path = Route::getCurrentRoute()->getPath(); if (starts_with($path, 'news/')) echo "active"; ?>">
