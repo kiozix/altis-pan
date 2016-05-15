@@ -43,7 +43,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>Compte Banque</td>
+                        <td>Compte en Banque</td>
                         <td>
                             @if($user->rank == 1)
                                 <span class='label label-info'>Masqué</span>

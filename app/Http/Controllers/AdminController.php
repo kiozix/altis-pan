@@ -132,45 +132,28 @@ class AdminController extends Controller {
 			abort(403);
 		}
 
-		if($request->get("give") && $this->auth->user()->rank == 3){
-			if($request->get("give") >= 1) {
-				$amount = $request->get("give");
+		if($request->get('money') && $request->get("money") >= 1) {
+			if($request->get('account') == 1 OR $request->get('account') == 2){
+				$request->get('account') == 1 ? $table = 'bankacc' : $table = 'cash';
 
-
-				$user_show = DB::table('players')->where('playerid', $id)->first();
-
-				$amount = $user_show->bankacc + $amount;
-
-				DB::table('players')
-					->where('playerid', $id)
-					->update(array(
-						'bankacc' => $amount
-					));
-				return redirect(url('admin/player/' . $id))->with('success', 'L\'argent à bien été créditer');
-			}else {
-				return redirect(url('admin/player/' . $id))->with('error', 'Veuillez saisir un nombre positif');
-			}
-		}elseif($request->get("take") && $this->auth->user()->rank != 1){
-			if($request->get("take") >= 1) {
-				$amount = $request->get("take");
-
-				$user_show = DB::table('players')->where('playerid', $id)->first();
-
-				$amount = $user_show->bankacc - $amount;
-
-				if($amount <= 0){
-					$amount = 0;
+				if($request->get("give") == 1 && $this->auth->user()->rank == 3) {
+					$amount = $request->get("money");
+					$user_show = DB::table('players')->where('playerid', $id)->first();
+					$amount = $user_show->{$table} + $amount;
+					DB::table('players')->where('playerid', $id)->update(array($table => $amount));
+					return redirect(url('admin/player/' . $id))->with('success', 'L\'argent à bien été créditer');
+				}elseif($request->get('take') == 1 && $this->auth->user()->rank != 1) {
+					$amount = $request->get("money");
+					$user_show = DB::table('players')->where('playerid', $id)->first();
+					$amount = $user_show->{$table} - $amount;
+					if($amount <= 0){
+						$amount = 0;
+					}
+					DB::table('players')->where('playerid', $id)->update(array($table => $amount));
+					return redirect(url('admin/player/' . $id))->with('success', 'L\'argent à bien été retiré');
 				}
-
-				DB::table('players')
-					->where('playerid', $id)
-					->update(array(
-						'bankacc' => $amount
-					));
-
-				return redirect(url('admin/player/' . $id))->with('success', 'L\'argent à bien été retiré');
-			}else {
-				return redirect(url('admin/player/' . $id))->with('error', 'Veuillez saisir un nombre positif');
+			}else{
+				return redirect(url('admin/player/' . $id))->with('error', 'Une erreur c\'est produite');
 			}
 		}else {
 			$admin = $request->get("admin");
@@ -178,7 +161,6 @@ class AdminController extends Controller {
 			$medic = $request->get("medic");
 			$donator = $request->get("donator");
 			$duredon = $request->get("duredon");
-
 
 			$user_show = DB::table('players')->where('playerid', $id)->first();
 
