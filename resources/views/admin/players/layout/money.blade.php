@@ -13,7 +13,7 @@
                     </select>
                     <br>
                     <div class="input-group">
-                        <input type="number" placeholder="Montant à ajouter" class="form-control" name="money" autocomplete="off">
+                        <input type="number" placeholder="Montant" class="form-control" name="money" autocomplete="off">
                         <div class="input-group-addon">$</div>
                     </div>
                     <br>
