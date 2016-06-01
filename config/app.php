@@ -145,8 +145,11 @@ return [
 		'App\Providers\EventServiceProvider',
 		'App\Providers\RouteServiceProvider',
 		'Illuminate\Html\HtmlServiceProvider',
+
+		/**
+		 * AltisPan Service Providers...
+		 */
 		'Anhskohbo\NoCaptcha\NoCaptchaServiceProvider',
-		'Barryvdh\Debugbar\ServiceProvider',
 	],
 
 	/*
@@ -194,8 +197,11 @@ return [
 		'URL'       => 'Illuminate\Support\Facades\URL',
 		'Validator' => 'Illuminate\Support\Facades\Validator',
 		'View'      => 'Illuminate\Support\Facades\View',
+
+		/**
+		 * AltisPan Aliases
+		 */
 		'Form'      => 'Illuminate\Html\FormFacade',
-		'Debugbar' => 'Barryvdh\Debugbar\Facade',
 	],
 
 ];
