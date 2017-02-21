@@ -1,6 +1,6 @@
-# [CMS] AltisPan
+# [CMS] AltisPan [v4.0]
 ##### By [Emile LEPETIT](http://emile-lepetit.fr) & Lucas GRALAUD
-> AltisPan est mon premier gros projet.
+> AltisPan CMS pour AltisLife - Arma III
 ---
 
 |Version Stable|Téléchargements|License|Laravel|
@@ -12,11 +12,11 @@ AltisPan est un CMS (Content management System) développer pour Arma III et plu
 
 ### Installation
 1. Dézipper l'archive dans votre dossier `www`
-2. Exécuter composer.exe suivi de l'installation de celui-ci
+2. [Télécharger](https://getcomposer.org/download/) et éxécuter composer suivi de l'installation de celui-ci
 3. Ouvrer une invite de commande dans le dossier et exécuter ceci :
-    - `composer update --no-dev`
-    - `php artisan key:generate`
+    - `composer update`
 4. Renommer le fichier `.env.example` en `.env`
+    - `php artisan key:generate`
 5. Ouvrer le fichier `.env` situer à la racine est renseigné les informations demandées
 6. Ré ouvrée vôtres invites de commande est exécuté ceci (Création des tables dans la base de données):
    - Conseil : effectuer une sauvegarde de votre base de donnée
@@ -28,7 +28,7 @@ AltisPan est un CMS (Content management System) développer pour Arma III et plu
 11. Merci de votre confiance !
 
 ## Informations
-* Si `php artisan ....` ne fonctionne metter le chemain de votre `php.exe` en absolue
+* Si `php artisan ....` ne fonctionne pas metter le chemain de votre `php.exe` en absolue
 * Il est **foremellement interdit** de modifié le footer de _AltisPan_
 
 ## Crédits
