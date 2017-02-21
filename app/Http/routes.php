@@ -49,6 +49,35 @@ Route::get('support/{id}', ['uses' => 'SupportsController@show'])->where('id', '
 Route::post('support/reply/{id}', ['uses' => 'SupportsController@reply']);
 Route::get('support/close/{id}', ['uses' => 'SupportsController@close']);
 
+Route::get('/bourse', ['uses' => 'BourseController@index', 'as' => 'bourse']);
+
+Route::get('/forum', ['uses' => 'ForumsController@index', 'as' => 'forum']);
+Route::get('/forum/{forum_slug}', ['uses' => 'ForumsController@forum', 'as' => 'forum.show']);
+Route::post('/forum/topics/{id}/post', ['uses' => 'ForumsController@post_store', 'as' => 'forum.thread.post'])->where('id', '[0-9]+');
+Route::get('/forum/post/{id}/delete', ['uses' => 'ForumsController@post_delete', 'as' => 'forum.post']);
+Route::get('/forum/topics/{id}', ['uses' => 'ForumsController@thread', 'as' => 'forum.thread'])->where('id', '[0-9]+');
+Route::post('/forum/topics/{id}', ['uses' => 'ForumsController@thread_update', 'as' => 'forum.thread.update'])->where('id', '[0-9]+');
+Route::get('/forum/topics/create', ['uses' => 'ForumsController@thread_create', 'as' => 'forum.thread.create']);
+Route::post('/forum/topics/create', ['uses' => 'ForumsController@thread_store', 'as' => 'forum.thread.store']);
+Route::post('/forum/topics/{id}/content-edit', ['uses' => 'ForumsController@thread_content', 'as' => 'forum.thread.content']);
+Route::get('/forum/topics/{id}/delete', ['uses' => 'ForumsController@thread_delete', 'as' => 'forum.thread.delete'])->where('id', '[0-9]+');
+Route::get('/forum/topic/{id}/like', ['uses' => 'ForumsController@thread_like', 'as' => 'forum.topic.like']);
+Route::get('/forum/post/{id}/like', ['uses' => 'ForumsController@post_like', 'as' => 'forum.post.like']);
+
+Route::get('admin/forum', ['uses' => 'AdminController@forum', 'as' => 'admin.forum']);
+Route::get('admin/forum/category/create', ['uses' => 'AdminController@categories_create', 'as' => 'admin.forum.category.create']);
+Route::post('admin/forum/category/create', ['uses' => 'AdminController@categories_store', 'as' => 'admin.forum.category.store']);
+Route::get('admin/forum/category/{id}/edit', ['uses' => 'AdminController@categories_edit', 'as' => 'admin.forum.category.edit']);
+Route::post('admin/forum/category/{id}/edit', ['uses' => 'AdminController@categories_update', 'as' => 'admin.forum.category.update']);
+Route::get('admin/forum/category/{id}/delete', ['uses' => 'AdminController@categories_delete', 'as' => 'admin.forum.category.delete']);
+Route::get('admin/forum/{id}', ['uses' => 'AdminController@forums_edit', 'as' => 'admin.forum.edit'])->where('id', '[0-9]+');
+Route::post('admin/forum/{id}', ['uses' => 'AdminController@forums_update', 'as' => 'admin.forum.update'])->where('id', '[0-9]+');
+Route::post('admin/forum/{id}/permissions', ['uses' => 'AdminController@forums_update_permissions', 'as' => 'admin.forum.update.permissions'])->where('id', '[0-9]+');
+Route::get('admin/forum/{id}/delete', ['uses' => 'AdminController@forums_delete', 'as' => 'admin.forum.delete']);
+Route::get('admin/forum/create', ['uses' => 'AdminController@forums_create', 'as' => 'admin.forum.create']);
+Route::post('admin/forum/create', ['uses' => 'AdminController@forums_store', 'as' => 'admin.forum.store']);
+
+
 /* Admin Route */
 Route::group(['prefix' => 'admin'], function () {
 	Route::get('/', ['uses' => 'AdminController@index']);

@@ -35,7 +35,7 @@ $(function(){
          }
         }
         )
-    }
+    };
 
     $(".group-members").on("click","a.group-userlist",function(event){
         event.preventDefault();
@@ -49,4 +49,4 @@ $(function(){
         allowClear: true,
         minimumResultsForSearch: 2
     });
-})
+});

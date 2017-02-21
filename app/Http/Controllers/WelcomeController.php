@@ -40,7 +40,7 @@ class WelcomeController extends Controller {
 
 			if ($row->timestamp != 0){
 				if($row->timestamp < $timestamp) {
-					DB::table('players')->where('timestamp', $row->timestamp)->where('duredon', $row->duredon)->update(array('donatorlvl' => 0, 'duredon' => 0, 'timestamp' => 0));
+					DB::table('players')->where('timestamp', $row->timestamp)->where('duredon', $row->duredon)->update(array('donorlevel' => 0, 'duredon' => 0, 'timestamp' => 0));
 				}
 			}
 

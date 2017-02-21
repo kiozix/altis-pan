@@ -52,7 +52,7 @@ class ShopsController extends Controller {
      */
 	public function accepted(Request $request)
 	{
-		if(empty($_POST['token']) && empty($_POST['PayerID'])){
+		if(empty($_GET['token']) && empty($_GET['PayerID'])){
 			return Response::view('errors.403', array(), 403);
 		}
 
@@ -105,7 +105,7 @@ class ShopsController extends Controller {
 				DB::table('players')
 					->where('playerid', $request->user()->arma)
 					->update(array(
-						'donatorlvl' => $shops->level,
+						'donorlevel' => $shops->level,
 						'duredon' => $shops->time,
 						'timestamp' => $time,
 					));

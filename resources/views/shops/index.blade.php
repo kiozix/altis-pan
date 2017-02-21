@@ -1,27 +1,15 @@
 @extends('app')
 
 @section('content')
-    <aside class="fh5co-page-heading">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <h1 class="fh5co-page-heading-lead">
-                        Boutique
-                        <span class="fh5co-border"></span>
-                    </h1>
-                </div>
-            </div>
-        </div>
-    </aside>
-
-    <div class="container">
+    <div class="container" style="margin-top: 70px">
+        <h1>Boutique</h1>
         @include('flash')
         <div class="row">
             @foreach($shops as $shop)
             <div class="col-md-4 panel panel-danger">
                 <div class="panel-body">
-                    <h2 class="fh5co-sidebox-lead text-center">{{ $shop->name }}</h2>
-                    <h3 class="fh5co-sidebox-lead text-center" style="font-size: 15px;">Level : {{ $shop->level }}</h3>
+                    <h2 class="text-center">{{ $shop->name }}</h2>
+                    <h3 class="text-center" style="font-size: 15px;">Level : {{ $shop->level }}</h3>
                     <hr />
                     <div class="text-center">
                       <span class="shop-currency">€</span>
@@ -35,8 +23,10 @@
                     <br />
                     <img class="img-responsive img-rounded" src="{{ $shop->image }}">
                     <br />
-                    <p>{{ $shop->content }}</p>
-                    <a class="btn btn-outline" href="{{ action('ShopsController@show', $shop) }}">Achetter</a>
+                    <p class="text-center">{{ $shop->content }}</p>
+                    <div class="text-center">
+                        <a class="btn btn-danger btn-lg" href="{{ action('ShopsController@show', $shop) }}">Achetter</a>
+                    </div>
                 </div>
             </div>
             @endforeach

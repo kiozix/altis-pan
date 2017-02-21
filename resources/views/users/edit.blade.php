@@ -1,20 +1,8 @@
 @extends('app')
 
 @section('content')
-    <aside class="fh5co-page-heading">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <h1 class="fh5co-page-heading-lead">
-                        Mon Compte
-                        <span class="fh5co-border"></span>
-                    </h1>
-                </div>
-            </div>
-        </div>
-    </aside>
-
-    <div class="container">
+    <div class="container" style="margin-top: 70px">
+        <h1>Mon Compte</h1><br>
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">

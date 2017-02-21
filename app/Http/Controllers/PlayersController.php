@@ -262,4 +262,29 @@ class PlayersController extends Controller {
 		}
 	}
 
+	public static function inGang($playerid, $gang_id) {
+		$player = DB::table('players')->where('playerid', $playerid)->first();
+		$gang = DB::table('gangs')->where('id', $gang_id)->first();
+		if(empty($player) || empty($gang)){
+			return false;
+		}
+
+		$suppr = array("\"", "`", "[", "]");
+		$lineGang = str_replace($suppr, "", $gang->members);
+		$ArrayGang = preg_split("/,/", $lineGang);
+		$gangMembers = array();
+
+		foreach ($ArrayGang as $member) {
+			$gangMembers[] = $member;
+		}
+
+		foreach ($gangMembers as $gangMember) {
+			if($gangMember == $player->playerid) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
 }

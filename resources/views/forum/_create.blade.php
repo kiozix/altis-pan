@@ -1,0 +1,1 @@
+<option value="{{ $forum->id }}" {{ isset($_GET['forum']) ? $_GET['forum'] == $forum->id ? 'selected' : '' : '' }}>{{ $forum->name }}</option>

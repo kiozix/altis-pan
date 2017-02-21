@@ -109,7 +109,7 @@
                                         <div class="form-group">
                                             <label class="col-md-4 control-label">Rang donateur</label>
                                             <div class="col-md-8">
-                                                @if($players->donatorlvl > 0)
+                                                @if($players->donorlevel > 0)
                                                     <span class="donatorlvl"><i class="fa fa-check"></i> Vous êtes donateur jusqu'au</span>
                                                     {{ date("d-m-Y à H:i:s", $players->timestamp + (60 * 60 * 24 * $players->duredon)) }}
                                                 @else

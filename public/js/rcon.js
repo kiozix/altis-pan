@@ -1,5 +1,5 @@
 $(function(){
-
+    
     var RconSay = function(callback, csrf){
         var callback = callback;
         var csrf = csrf;

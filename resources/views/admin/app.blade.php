@@ -149,6 +149,15 @@
                         </a>
                     </li>
 
+                    @if($user->rank == 3)
+                        <li class="{{ Request::is('admin/forum') ? 'active' : '' }} <?php $path = Route::getCurrentRoute()->getPath(); if (starts_with($path, 'admin/forum')) echo "active"; ?>">
+                            <a title="Forum" href="{{ url('admin/forum') }}">
+                                <em class="icon-bubbles"></em>
+                                <span>Forum</span>
+                            </a>
+                        </li>
+                    @endif
+
                     <li class="{{ Request::is('admin/player') ? 'active' : '' }} <?php $path = Route::getCurrentRoute()->getPath(); if (starts_with($path, 'admin/player')) echo "active"; ?>">
                         <a title="Joueurs" href="{{ url('admin/player') }}">
                             <em class="icon-game-controller"></em>
@@ -276,6 +285,7 @@
 <script src="{{ asset('/js/sweetalert.min.js') }}"></script>
 <script src="{{ asset('/js/select2.full.min.js') }}"></script>
 <script src="{{ asset('/js/altispan.js') }}"></script>
+<script src="{{ asset('/js/checkbox.js') }}"></script>
 <script src="{{ asset('/js/licenses.js') }}"></script>
 <script src="{{ asset('/js/rcon.js') }}"></script>
 </body>

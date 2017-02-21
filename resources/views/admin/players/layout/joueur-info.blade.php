@@ -13,7 +13,7 @@
                         <td>Nom du joueur</td>
                         <td>
                             @if($alias && $alias->value_associated == 1)
-                                <input type="text" name="username" e placeholder="Nom de l'utilisateur" value="{{ $player->name }}" class="form-control">
+                                <input type="text" name="username" placeholder="Nom de l'utilisateur" value="{{ $player->name }}" class="form-control">
                             @else
                                 {{ $player->name }}
                             @endif
@@ -113,9 +113,9 @@
                         <td>
                             <div class="col-md-7">
                                 <select name="donator" class="form-control" {{ $user->rank == 1 ? 'disabled' : '' }}>
-                                    <option value="0"{{ $player->donatorlvl == 0 ? 'selected' : '' }}>N'est pas donateur</option>
+                                    <option value="0"{{ $player->donorlevel == 0 ? 'selected' : '' }}>N'est pas donateur</option>
                                     @foreach($ranks_donator as $donator)
-                                        <option value="{{ $donator->value_associated }}" {{ $player->donatorlvl == $donator->value_associated ? 'selected' : '' }}>{{ $donator->name }}</option>
+                                        <option value="{{ $donator->value_associated }}" {{ $player->donorlevel == $donator->value_associated ? 'selected' : '' }}>{{ $donator->name }}</option>
                                     @endforeach
                                 </select>
                             </div>

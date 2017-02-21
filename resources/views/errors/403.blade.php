@@ -3,7 +3,7 @@
 @section('content')
 
     <aside class="fh5co-page-heading">
-        <div class="container">
+        <div class="container text-center" style="margin-top: 5%;">
             <div class="row">
                 <div class="col-md-12">
                     <h1 class="fh5co-page-heading-lead" style="font-size: 20rem;">

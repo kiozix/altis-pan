@@ -1,106 +1,82 @@
 @extends('app')
 
-@section('content')
-    <div class="fh5co-slider">
-        <div class="owl-carousel owl-carousel-fullwidth">
-            <!-- Slide type 1 -->
-            <div class="item" style="background-image:url({{ asset('/img/carousel/bg1.jpg') }})">
-                <div class="fh5co-overlay"></div>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-8 col-md-offset-2">
-                            <div class="fh5co-owl-text-wrap">
-                                <div class="fh5co-owl-text text-center to-animate">
-                                    <h1 class="fh5co-lead">Bienvenue sur {{ env('SITE_NAME', 'AltisPan') }}</h1>
-                                    <h2 class="fh5co-sub-lead">Pour vous connecter sur le serveur cliquer <a href="{{ url('auth/login') }}">ici</a></h2>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Slide type 2 -->
-            <div class="item" style="background-image:url({{ asset('/img/carousel/bg2.jpg') }});" >
-                <div class="fh5co-overlay"></div>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="fh5co-owl-text-wrap">
-                                <div class="fh5co-owl-text text-center to-animate">
-                                    <div class="col-md-4">
-                                        <img class="img-responsive" src="http://cdn.akamai.steamstatic.com/steam/apps/107410/header.jpg">
-                                    </div>
-                                    <div class="col-md-8">
-                                        <h1 class="fh5co-lead">Mise à jour !</h1>
-                                        <h2 class="fh5co-sub-lead">Grâce à la dernière mise à jour d'Arma 3, découvrez nos nouveaux véhicules !</h2>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+@section('header')
+    <header>
+        <div class="header-content">
+            <div class="header-content-inner">
+                <h1 id="homeHeading">{{ env('SITE_NAME') }}</h1>
+                <hr>
+                <p>Serveur arma 3 Altis Life non moddé !</p>
+                <a href="{{ url('/auth/register') }}" class="btn btn-primary btn-xl page-scroll">S'inscrire</a>
+                <a href="{{ url('/auth/login') }}" class="btn btn-default btn-xl page-scroll">Se connecter</a>
             </div>
         </div>
-    </div>
+    </header>
+@endsection
 
-    <div id="fh5co-main">
-        <div id="fh5co-features">
-            <div class="container">
-                <div class="row text-center">
-                    <div class="col-md-8 col-md-offset-2">
-                        <h2 class="fh5co-section-lead">Quelques informations</h2>
-                        <h3 class="fh5co-section-sub-lead">Afin que ce serveur reste agréable, convivial et où règne une atmosphère paisible, nous vous prions de bien vouloir suivre ces quelques règles.
-                            <br />Pour plus d'informations, merci de contacter les modérateurs sur le teamspeak.</h3>
-                    </div>
-                    <div class="fh5co-spacer fh5co-spacer-md"></div>
+@section('content')
+    <section class="bg-primary" id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <h2 class="section-heading">Rejoignez nous</h2>
+                    <hr class="light">
+                    <p class="text-faded">Un système de ticket / remboursement est mis en place sur le site, vous pouvez aussi posez vos questions sur le TeamSpeak 3 du serveur dans les cannaux d'aide.</p>
+                    <a href="steam://connect/79.137.59.248:2302" class="page-scroll btn btn-default btn-xl sr-button">Se connecter au serveur</a>
                 </div>
-                <div class="row">
-                    <div class="col-md-6 col-sm-6 fh5co-feature-border">
-                        <div class="fh5co-feature">
-                            <div class="fh5co-feature-icon to-animate">
-                                <i class="icon-lock"></i>
-                            </div>
-                            <div class="fh5co-feature-text">
-                                <h3>Règlement du Serveur</h3>
-                                <p>Veuillez prendre connaissance des règles du serveur</p>
-                                <p><br /></p>
-                            </div>
-                        </div>
-                        <div class="fh5co-feature no-border">
-                            <div class="fh5co-feature-icon to-animate">
-                                <i class="icon-star"></i>
-                            </div>
-                            <div class="fh5co-feature-text">
-                                <h3>Avis ?</h3>
-                                <p>Votre avis nous intéresse, dites nous vos remarques, vos envies sur le forum!</p>
-                                <p><a href="#">Forum</a></p>
-                            </div>
-                        </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Notre serveur</h2>
+                    <hr class="primary">
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-dashboard text-primary sr-icons"></i>
+                        <h3>Rapide</h3>
+                        <p class="text-muted">Nous sommes hébergé chez un hébergeur professionel, la qualité et donc au rendez-vous.</p>
                     </div>
-                    <div class="col-md-6 col-sm-6">
-                        <div class="fh5co-feature">
-                            <div class="fh5co-feature-icon to-animate">
-                                <i class="icon-microphone"></i>
-                            </div>
-                            <div class="fh5co-feature-text">
-                                <h3>Parlez vous !</h3>
-                                <p>Un serveur vocal est a votre disposition, alors pourquoi ne pas nous rejoindre aussi dessus ? </p>
-                                <p><a href="#">Teamspeak</a></p>
-                            </div>
-                        </div>
-                        <div class="fh5co-feature no-border">
-                            <div class="fh5co-feature-icon to-animate">
-                                <i class="icon-clock"></i>
-                            </div>
-                            <div class="fh5co-feature-text">
-                                <h3>Un problème ?</h3>
-                                <p>En cas de besoin, n'hésitez pas a contactez les modérateurs, ils sont la pour vous aider .</p>
-                                <p><a href="{{ url('support') }}">Le Support</a></p>
-                            </div>
-                        </div>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-users text-primary sr-icons"></i>
+                        <h3>RolePlay</h3>
+                        <p class="text-muted">Le RolePlay du serveur est poussé afin d'avoir un gameplay le plus réaliste.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-newspaper-o text-primary sr-icons"></i>
+                        <h3>Mise à jour</h3>
+                        <p class="text-muted">Le serveur est mis à jours régulièrement pour équilibrer le gameplay.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-lock text-primary sr-icons"></i>
+                        <h3>Securisé</h3>
+                        <p class="text-muted">Le serveur est protégé par l'antihack InfiStar & Battleye</p>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
+
+    <aside class="bg-dark">
+        <div class="container text-center">
+            <div class="call-to-action">
+                <h2>Un TeamSpeak 3 est à votre disposition</h2>
+                <a href="ts3server://ts.weed4life.fr" class="btn btn-default btn-xl sr-button">Se connecter au TeamSpeak</a>
+            </div>
+        </div>
+    </aside>
 @endsection

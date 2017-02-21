@@ -1,12 +1,17 @@
 <?php namespace App\Http\Controllers;
 
+use App\Category;
+use App\Forum;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\Post;
+use App\Thread;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Nizarii\ArmaRConClass\ARC;
 use xPaw\SourceQuery\SourceQuery;
 use App\AltisPan\Gang;
@@ -52,7 +57,7 @@ class AdminController extends Controller {
 			$timestamp = time() - (60 * 60 * 24 * $row->duredon);
 			if ($row->timestamp != 0){
 				if($row->timestamp < $timestamp) {
-					DB::table('players')->where('timestamp', $row->timestamp)->where('duredon', $row->duredon)->update(array('donatorlvl' => 0, 'duredon' => 0, 'timestamp' => 0));
+					DB::table('players')->where('timestamp', $row->timestamp)->where('duredon', $row->duredon)->update(array('donorlevel' => 0, 'duredon' => 0, 'timestamp' => 0));
 				}
 			}
 
@@ -190,7 +195,7 @@ class AdminController extends Controller {
 							'adminlevel' => $admin,
 							'coplevel' => $policier,
 							'mediclevel' => $medic,
-							'donatorlvl' => $donator,
+							'donorlevel' => $donator,
 							'duredon' => $duredon,
 							'timestamp' => $timestamp,
 							'aliases' => $alias_name
@@ -202,7 +207,7 @@ class AdminController extends Controller {
 							'adminlevel' => $admin,
 							'coplevel' => $policier,
 							'mediclevel' => $medic,
-							'donatorlvl' => $donator,
+							'donorlevel' => $donator,
 							'duredon' => $duredon,
 							'timestamp' => $timestamp
 						));
@@ -225,7 +230,7 @@ class AdminController extends Controller {
 							'adminlevel' => $admin,
 							'coplevel' => $policier,
 							'mediclevel' => $medic,
-							'donatorlvl' => $donator,
+							'donorlevel' => $donator,
 							'duredon' => $duredon,
 							'timestamp' => $timestamp,
 							'aliases' => $alias_name
@@ -237,7 +242,7 @@ class AdminController extends Controller {
 							'adminlevel' => $admin,
 							'coplevel' => $policier,
 							'mediclevel' => $medic,
-							'donatorlvl' => $donator,
+							'donorlevel' => $donator,
 							'duredon' => $duredon,
 							'timestamp' => $timestamp
 						));
@@ -356,7 +361,6 @@ class AdminController extends Controller {
 	{
 		$user = $this->auth->user();
 		$allPlayers = DB::table('players')->get();
-		$gang = DB::table('gangs')->where('id', $id)->first();
 
 		$suppr = array("\"", "`", "[", "]");
 		$lineGang = str_replace($suppr, "", $gang->members);
@@ -978,7 +982,6 @@ class AdminController extends Controller {
 			));
 
 		return redirect(url('admin/user/' . $id))->with('success', 'L\'authentification à 2 facteurs à bien été désactiver');
-
 	}
 
 	public function rconSay(Request $request){
@@ -990,8 +993,221 @@ class AdminController extends Controller {
 			return response()->json(['status' => 'success']);
 
 		}catch (Exception $e) {
-			echo "Une erreur c'est produite : ".$e->getMessage();
+			return "Une erreur c'est produite : ".$e->getMessage();
 		}
+	}
+
+	public function forum() {
+		$user = $this->auth->user();
+		$categories = Category::orderBy('order', 'ASC')->get();
+		return view('admin.forum.index', compact('user', 'categories'));
+	}
+
+	public function categories_create() {
+		if($this->auth->user()->rank != 3) {
+			abort(403);
+		}
+		$user = $this->auth->user();
+		$category = new Category();
+
+		return view('admin.forum.category.create', compact('user', 'category'));
+	}
+
+	public function categories_store(Request $request) {
+		if($this->auth->user()->rank != 3) {
+			abort(403);
+		}
+		$category = new Category();
+		$this->validate($request, [
+			'name' => 'required|min:4',
+			'order' => 'required|integer'
+		]);
+
+		$category->name = $request->input('name');
+		$category->order = $request->input('order');
+		$category->save();
+
+		return redirect(route('admin.forum'))->with('success', 'La catégorie a bien été créer.');
+	}
+
+	public function categories_edit($id) {
+		if($this->auth->user()->rank != 3) {
+			abort(403);
+		}
+		$user = $this->auth->user();
+		$category = Category::where('id', $id)->first();
+		if(is_null($category)) {
+			abort(404);
+		}
+
+		return view('admin.forum.category.edit', compact('user', 'category'));
+	}
+
+	public function categories_update($id, Request $request) {
+		if($this->auth->user()->rank != 3) {
+			abort(403);
+		}
+		$category = Category::where('id', $id)->first();
+		if(is_null($category)) {
+			abort(404);
+		}
+
+		$this->validate($request, [
+			'name' => 'required|min:4',
+			'order' => 'required|integer'
+		]);
+
+		$category->name = $request->input('name');
+		$category->order = $request->input('order');
+		$category->save();
+
+		return redirect(route('admin.forum'))->with('success', 'La catégorie a bien été édité.');
+	}
+
+	public function categories_delete($id) {
+		if($this->auth->user()->rank != 3) {
+			abort(403);
+		}
+		$category = Category::where('id', $id)->first();
+
+		Category::del($category->id);
+		return redirect(route('admin.forum'))->with('success', 'La catégorie a bien été  supprimée.');
+	}
+
+	public function forums_edit($id) {
+		if($this->auth->user()->rank != 3) {
+			abort(403);
+		}
+		$user = $this->auth->user();
+		$forum = Forum::where('id', $id)->first();
+		if(is_null($forum)) {
+			abort(404);
+		}
+		$categories = Category::all();
+		$gangs = DB::table('gangs')->orderBy('name', 'desc')->get();
+
+		return view('admin.forum.forum.edit', compact('user', 'forum', 'categories', 'gangs'));
+	}
+
+	public function forums_update($id, Request $request) {
+		if($this->auth->user()->rank != 3) {
+			abort(403);
+		}
+		$forum = Forum::where('id', $id)->first();
+		if(is_null($forum)) {
+			abort(404);
+		}
+
+		$this->validate($request, [
+			'name' => "required|min:4|unique:forums,name,{$forum->id}",
+			'description' => 'required|min:4',
+			'category' => 'required|exists:categories,id',
+			'order' => 'required|integer'
+		]);
+
+		$forum->category_id = $request->input('category');
+		$forum->name = $request->input('name');
+		$forum->slug = Str::slug($request->input('name'));
+		$forum->description = $request->input('description');
+		$forum->icon = $request->input('icon');
+		$forum->order = $request->input('order');
+		$forum->save();
+
+		return redirect(route('admin.forum'))->with('success', 'Le forum a bien été  édité.');
+	}
+
+	public function forums_update_permissions($id, Request $request) {
+		if($this->auth->user()->rank != 3) {
+			abort(403);
+		}
+		$forum = Forum::where('id', $id)->first();
+		if(is_null($forum)) {
+			abort(404);
+		}
+
+		$this->validate($request, [
+			'moderator_see' => 'boolean',
+			'moderator_post' => 'boolean',
+
+			'support_see' => 'boolean',
+			'support_post' => 'boolean',
+
+			'gang_see' => 'boolean',
+			'gang_id_see' => 'integer|exists:gangs,id',
+
+			'gang_post' => 'boolean',
+			'gang_id_post' => 'integer|exists:gangs,id',
+		]);
+
+		$forum->moderator_see = $request->input('moderator_see') == 1 ? true : null;
+		$forum->moderator_post = $request->input('moderator_post') == 1 ? true : null;
+		$forum->support_see = $request->input('support_see') == 1 ? true : null;
+		$forum->support_post = $request->input('support_post') == 1 ? true : null;
+		$forum->cop_see = $request->input('cop_see') == 1 ? true : null;
+		$forum->cop_post = $request->input('cop_post') == 1 ? true : null;
+		$forum->medic_see = $request->input('medic_see') == 1 ? true : null;
+		$forum->medic_post = $request->input('medic_post') == 1 ? true : null;
+		if ($request->input('gang_see') == 1) {
+			$forum->gang_see = $request->input('gang_id_see');
+		} else {
+			$forum->gang_see = null;
+		}
+		if ($request->input('gang_post')) {
+			$forum->gang_post = $request->input('gang_id_post');
+		} else {
+			$forum->gang_post = null;
+		}
+		$forum->save();
+
+		return redirect(route('admin.forum'))->with('success', 'Le forum a bien été  édité.');
+	}
+
+	public function forums_create() {
+		if($this->auth->user()->rank != 3) {
+			abort(403);
+		}
+		$user = $this->auth->user();
+		$forum = new Forum();
+		$categories = Category::all();
+
+		return view('admin.forum.forum.create', compact('user', 'forum', 'categories'));
+	}
+
+	public function forums_store(Request $request) {
+		if($this->auth->user()->rank != 3) {
+			abort(403);
+		}
+		$forum = new Forum();
+		$this->validate($request, [
+			'name' => "required|min:4|unique:forums,name,{$forum->id}",
+			'description' => 'required|min:4',
+			'category' => 'required|exists:categories,id',
+			'order' => 'required|integer'
+		]);
+
+		$forum->category_id = $request->input('category');
+		$forum->name = $request->input('name');
+		$forum->slug = Str::slug($request->input('name'));
+		$forum->description = $request->input('description');
+		$forum->icon = $request->input('icon');
+		$forum->order = $request->input('order');
+		$forum->save();
+
+		return redirect(route('admin.forum'))->with('success', 'Le forum a bien été  créer.');
+	}
+
+	public function forums_delete($id) {
+		if($this->auth->user()->rank != 3) {
+			abort(403);
+		}
+		$forum = Forum::where('id', $id)->first();
+		if(is_null($forum)) {
+			abort(404);
+		}
+
+		Forum::del($forum->id);
+
+		return redirect(route('admin.forum'))->with('success', 'Le forum a bien été  supprimé.');
 	}
 
 }

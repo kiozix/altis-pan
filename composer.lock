@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "5c2344ecbfd324689defb56879c6e982",
-    "content-hash": "46d387a34516ae10ee2633896b2c24e8",
+    "hash": "c36a88767ba97b5f8fd4d44e7f161747",
+    "content-hash": "10d99e0d6ce407822b12c51348f39489",
     "packages": [
         {
             "name": "anhskohbo/no-captcha",
@@ -475,6 +475,7 @@
                     "email": "taylorotwell@gmail.com"
                 }
             ],
+            "abandoned": "laravelcollective/html",
             "time": "2015-01-01 16:31:18"
         },
         {
@@ -725,6 +726,49 @@
                 "tokenizer"
             ],
             "time": "2015-12-05 17:17:57"
+        },
+        {
+            "name": "jimmiw/php-time-ago",
+            "version": "0.4.14",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jimmiw/php-time-ago.git",
+                "reference": "80178cac870260b5297330ba38354af7eae0e342"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jimmiw/php-time-ago/zipball/80178cac870260b5297330ba38354af7eae0e342",
+                "reference": "80178cac870260b5297330ba38354af7eae0e342",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=4"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "timeago.inc.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jimmi Westerberg",
+                    "homepage": "http://www.westsworld.dk",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Simple module, that displays the date in a \"time ago\" format",
+            "homepage": "https://github.com/jimmiw/php-time-ago",
+            "keywords": [
+                "distance of time",
+                "time ago",
+                "time ago in words"
+            ],
+            "time": "2016-09-22 08:40:33"
         },
         {
             "name": "laravel/framework",
