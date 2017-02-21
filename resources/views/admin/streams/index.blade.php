@@ -8,7 +8,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="text-right">
-                <a href="{{ action('StreamsController@create') }}" class="btn btn-success"><i class="fa fa-plus">&nbsp;&nbsp; Ajouter un Streamer</i></a>
+                <a href="{{ action('StreamsController@create') }}" class="btn btn-success"><i class="fa fa-plus"></i>&nbsp;&nbsp; Ajouter un Streamer</a>
                 <br><br>
             </div>
             <div id="streamer" class="panel panel-default">

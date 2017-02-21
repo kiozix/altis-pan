@@ -8,7 +8,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="text-right">
-                <a href="{{ action('ShopsController@create') }}" class="btn btn-success"><i class="fa fa-plus">&nbsp;&nbsp; Ajouter une offre</i></a>
+                <a href="{{ action('ShopsController@create') }}" class="btn btn-success"><i class="fa fa-plus"></i>&nbsp;&nbsp; Ajouter une offre</a>
                 <br><br>
             </div>
             <div id="streamer" class="panel panel-default">

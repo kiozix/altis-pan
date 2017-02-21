@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <h1 class="fh5co-page-heading-lead">
-                        {{ $players->name }}
+                        {{ $player->name }}
                         <span class="fh5co-border"></span>
                     </h1>
                 </div>
@@ -39,19 +39,19 @@
                                         <div class="form-group">
                                             <label class="col-md-4 control-label">Nom</label>
                                             <div class="col-md-8">
-                                                <input class="form-control input-lg" name="name" type="text" value="{{ $players->name }}" disabled>
+                                                <input class="form-control input-lg" name="name" type="text" value="{{ $player->name }}" disabled>
                                             </div>
                                         </div>
                                     </div>
 
                                     <br/><br/>
 
-                                    @if($admin)
+                                    @if($ranks->where('side', 'ADMIN')->where('value_associated', $player->adminlevel)->first())
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label class="col-md-4 control-label">Rang</label>
                                                 <div class="col-md-8">
-                                                    <input class="form-control input-lg" name="name" type="text" value="{{ $admin->name }}" disabled>
+                                                    <input class="form-control input-lg" name="name" type="text" value="{{ $ranks->where('side', 'ADMIN')->where('value_associated', $player->adminlevel)->first()->name }}" disabled>
                                                 </div>
                                             </div>
                                         </div>
@@ -63,7 +63,7 @@
                                         <div class="form-group">
                                             <label class="col-md-4 control-label">Cash</label>
                                             <div class="col-md-8">
-                                                <input class="form-control input-lg" type="text" value="{{ number_format($players->cash, 2, ',', ' ') . ' $' }}" disabled>
+                                                <input class="form-control input-lg" type="text" value="{{ number_format($player->cash, 2, ',', ' ') . ' $' }}" disabled>
                                             </div>
                                         </div>
                                     </div>
@@ -74,30 +74,30 @@
                                         <div class="form-group">
                                             <label class="col-md-4 control-label">Compte Banque</label>
                                             <div class="col-md-8">
-                                                <input class="form-control input-lg" type="text" value="{{ number_format($players->bankacc, 2, ',', ' ') . ' $' }}" disabled>
+                                                <input class="form-control input-lg" type="text" value="{{ number_format($player->bankacc, 2, ',', ' ') . ' $' }}" disabled>
                                             </div>
                                         </div>
                                     </div>
                                     <br /><br />
 
-                                    @if($players->mediclevel > 0 && $medic)
+                                    @if($player->mediclevel > 0 && $ranks->where('side', 'MEDIC')->where('value_associated', $player->mediclevel)->first())
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label class="col-md-4 control-label">Rang Pompier <a type="button" data-toggle="modal" data-target="#pompier">(?)</a></label>
                                                 <div class="col-md-8">
-                                                    <input type="text" class="form-control input-lg" value="{{ $medic->name }}" disabled>
+                                                    <input type="text" class="form-control input-lg" value="{{ $ranks->where('side', 'MEDIC')->where('value_associated', $player->mediclevel)->first()->name }}" disabled>
                                                 </div>
                                             </div>
                                         </div>
                                         <br /><br />
                                     @endif
 
-                                    @if($players->coplevel > 0 && $cop)
+                                    @if($player->coplevel > 0 && $ranks->where('side', 'COP')->where('value_associated', $player->coplevel)->first())
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label class="col-md-4 control-label">Rang Policier <a type="button" data-toggle="modal" data-target="#police">(?)</a></label>
                                                 <div class="col-md-8">
-                                                    <input type="text" class="form-control input-lg" value="{{ $cop->name }}" disabled>
+                                                    <input type="text" class="form-control input-lg" value="{{ $ranks->where('side', 'COP')->where('value_associated', $player->coplevel)->first()->name }}" disabled>
                                                 </div>
                                             </div>
                                         </div>
@@ -109,9 +109,9 @@
                                         <div class="form-group">
                                             <label class="col-md-4 control-label">Rang donateur</label>
                                             <div class="col-md-8">
-                                                @if($players->donorlevel > 0)
+                                                @if($player->donorlevel > 0)
                                                     <span class="donatorlvl"><i class="fa fa-check"></i> Vous êtes donateur jusqu'au</span>
-                                                    {{ date("d-m-Y à H:i:s", $players->timestamp + (60 * 60 * 24 * $players->duredon)) }}
+                                                    {{ date("d-m-Y à H:i:s", $player->timestamp + (60 * 60 * 24 * $player->duredon)) }}
                                                 @else
                                                     <span class="donatorlvl"><i class="fa fa-close"></i> Vous n'êtes pas donateur</span>
                                                     <br>
@@ -151,24 +151,24 @@
                                                         @endif
                                                         <th>Active</th>
                                                     </tr>
-                                                    @foreach($vehicles_cars as $vehicle_car)
+                                                    @foreach($vehicles->where('type', 'Car') as $car)
                                                         <tr>
-                                                            <td>{{ $vehicle_car->classname }}</td>
-                                                            <td>{{ $vehicle_car->side }}</td>
-                                                            <td>{{ $vehicle_car->type }}</td>
+                                                            <td>{{ $car->classname }}</td>
+                                                            <td>{{ $car->side }}</td>
+                                                            <td>{{ $car->type }}</td>
                                                             @if($insure && $insure->value_associated == 1)
                                                                 <td>
-                                                                    @if($vehicle_car->insure == 1)
+                                                                    @if($car->insure == 1)
                                                                         <i class="fa fa-check" style="color: #2cc36b;"></i>
-                                                                    @elseif($vehicle_car->insure == 0)
+                                                                    @elseif($car->insure == 0)
                                                                         <i class="fa fa-close" style="color: #c0392b;"></i>
                                                                     @endif
                                                                 </td>
                                                             @endif
                                                             <td>
-                                                                @if($vehicle_car->active == 1)
+                                                                @if($car->active == 1)
                                                                     <i class="fa fa-check" style="color: #2cc36b;"></i>
-                                                                @elseif($vehicle_car->active == 0)
+                                                                @elseif($car->active == 0)
                                                                     <i class="fa fa-close" style="color: #c0392b;"></i>
                                                                 @endif
                                                             </td>
@@ -196,24 +196,24 @@
                                                         @endif
                                                         <th>Active</th>
                                                     </tr>
-                                                    @foreach($vehicles_airs as $vehicle_air)
+                                                    @foreach($vehicles->where('type', 'Air') as $air)
                                                         <tr>
-                                                            <td>{{ $vehicle_air->classname }}</td>
-                                                            <td>{{ $vehicle_air->side }}</td>
-                                                            <td>{{ $vehicle_air->type }}</td>
+                                                            <td>{{ $air->classname }}</td>
+                                                            <td>{{ $air->side }}</td>
+                                                            <td>{{ $air->type }}</td>
                                                             @if($insure && $insure->value_associated == 1)
                                                                 <td>
-                                                                    @if($vehicle_air->insure == 1)
+                                                                    @if($air->insure == 1)
                                                                         <i class="fa fa-check" style="color: #2cc36b;"></i>
-                                                                    @elseif($vehicle_air->insure == 0)
+                                                                    @elseif($air->insure == 0)
                                                                         <i class="fa fa-close" style="color: #c0392b;"></i>
                                                                     @endif
                                                                 </td>
                                                             @endif
                                                             <td>
-                                                                @if($vehicle_air->active == 1)
+                                                                @if($air->active == 1)
                                                                     <i class="fa fa-check" style="color: #2cc36b;"></i>
-                                                                @elseif($vehicle_air->active == 0)
+                                                                @elseif($air->active == 0)
                                                                     <i class="fa fa-close" style="color: #c0392b;"></i>
                                                                 @endif
                                                             </td>
@@ -241,24 +241,24 @@
                                                         @endif
                                                         <th>Active</th>
                                                     </tr>
-                                                    @foreach($vehicles_ships as $vehicle_ship)
+                                                    @foreach($vehicles->where('type', 'Ship') as $ship)
                                                         <tr>
-                                                            <td>{{ $vehicle_ship->classname }}</td>
-                                                            <td>{{ $vehicle_ship->side }}</td>
-                                                            <td>{{ $vehicle_ship->type }}</td>
+                                                            <td>{{ $ship->classname }}</td>
+                                                            <td>{{ $ship->side }}</td>
+                                                            <td>{{ $ship->type }}</td>
                                                             @if($insure && $insure->value_associated == 1)
                                                                 <td>
-                                                                    @if($vehicle_ship->insure == 1)
+                                                                    @if($ship->insure == 1)
                                                                         <i class="fa fa-check" style="color: #2cc36b;"></i>
-                                                                    @elseif($vehicle_ship->insure == 0)
+                                                                    @elseif($ship->insure == 0)
                                                                         <i class="fa fa-close" style="color: #c0392b;"></i>
                                                                     @endif
                                                                 </td>
                                                             @endif
                                                             <td>
-                                                                @if($vehicle_ship->active == 1)
+                                                                @if($ship->active == 1)
                                                                     <i class="fa fa-check" style="color: #2cc36b;"></i>
-                                                                @elseif($vehicle_ship->active == 0)
+                                                                @elseif($ship->active == 0)
                                                                     <i class="fa fa-close" style="color: #c0392b;"></i>
                                                                 @endif
                                                             </td>
@@ -285,7 +285,7 @@
                                         </tr>
                                         <?php
                                         $suppr = array("\"", "`", "[", "]");
-                                        $lineLicenses = str_replace($suppr, "", $players->civ_licenses);
+                                        $lineLicenses = str_replace($suppr, "", $player->civ_licenses);
                                         $arrayLicenses = preg_split("/,/", $lineLicenses);
                                         $totarrayLicenses = count($arrayLicenses);
                                         $y = 0;

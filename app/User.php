@@ -34,6 +34,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 */
 	protected $hidden = ['password', 'remember_token'];
 
+	public function player() {
+        return $this->belongsTo('App\Players', 'arma', 'playerid');
+    }
+
 	public function getAvatarAttribute($avatar){
 		if($avatar){
 			return "/img/avatars/{$this->id}.jpg";

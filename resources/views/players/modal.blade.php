@@ -7,7 +7,7 @@
             </div>
             <div class="modal-body">
                 <ul>
-                    @foreach($ranks_cop as $cops)
+                    @foreach($ranks->where('side', 'COP') as $cops)
                         <li>{{ $cops->name }}</li>
                     @endforeach
                 </ul>
@@ -28,7 +28,7 @@
             </div>
             <div class="modal-body">
                 <ul>
-                    @foreach($ranks_medic as $medics)
+                    @foreach($ranks->where('side', 'MEDIC') as $medics)
                         <li>{{ $medics->name }}</li>
                     @endforeach
                 </ul>

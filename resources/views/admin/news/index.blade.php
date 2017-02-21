@@ -8,7 +8,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="text-right">
-                <a href="{{ action('NewsController@create') }}" class="btn btn-success"><i class="fa fa-plus">&nbsp;&nbsp; Ajouter une News</i></a>
+                <a href="{{ action('NewsController@create') }}" class="btn btn-success"><i class="fa fa-plus"></i>&nbsp;&nbsp; Ajouter une News</a>
                 <br><br>
             </div>
             <div id="streamer" class="panel panel-default">

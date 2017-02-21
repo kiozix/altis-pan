@@ -147,6 +147,7 @@
             <div class="col-md-6 col-sm-6">
                 <div class="footer-widget">
                     <h2 class="footer-logo">{{ env('SITE_NAME', 'AltisPan') }}</h2>
+                    <p>{{ env('DESCRIPTION', 'Site réalisé avec AltisPan, CMS dédiée au Mod multijoueur Altis Life. Réalisation : Lucas GRELAUD, Emile LEPETIT.') }}</p>
                     <p>&copy; Copyright <a href="#">AltisPan</a>, site par <a href="http://emile-lepetit.fr/" target="_blank">Emile LEPETIT</a>.</p>
                 </div>
             </div>

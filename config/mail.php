@@ -54,7 +54,7 @@ return [
 	|
 	*/
 
-	'from' => ['address' => env('MAIL_FROM_EMAIL', 'no-reply@altispan.dev'), 'name' => env('SITE_NAME', AltisPan)],
+	'from' => ['address' => env('MAIL_FROM_EMAIL', 'no-reply@altispan.dev'), 'name' => env('SITE_NAME', 'AltisPan')],
 
 	/*
 	|--------------------------------------------------------------------------

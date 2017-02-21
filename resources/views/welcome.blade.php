@@ -6,9 +6,14 @@
             <div class="header-content-inner">
                 <h1 id="homeHeading">{{ env('SITE_NAME') }}</h1>
                 <hr>
-                <p>Serveur arma 3 Altis Life non moddé !</p>
-                <a href="{{ url('/auth/register') }}" class="btn btn-primary btn-xl page-scroll">S'inscrire</a>
-                <a href="{{ url('/auth/login') }}" class="btn btn-default btn-xl page-scroll">Se connecter</a>
+                <p>Serveur arma 3 Altis Life !</p>
+                @if(Auth::guest())
+                    <a href="{{ url('/auth/register') }}" class="btn btn-primary btn-xl page-scroll">S'inscrire</a>
+                    <a href="{{ url('/auth/login') }}" class="btn btn-default btn-xl page-scroll">Se connecter</a>
+                @else
+                    <a href="{{ url('/forum') }}" class="btn btn-primary btn-xl page-scroll">Forum</a>
+                    <a href="{{ url('/player') }}" class="btn btn-default btn-xl page-scroll">AltisLife</a>
+                @endif
             </div>
         </div>
     </header>
@@ -22,7 +27,7 @@
                     <h2 class="section-heading">Rejoignez nous</h2>
                     <hr class="light">
                     <p class="text-faded">Un système de ticket / remboursement est mis en place sur le site, vous pouvez aussi posez vos questions sur le TeamSpeak 3 du serveur dans les cannaux d'aide.</p>
-                    <a href="steam://connect/79.137.59.248:2302" class="page-scroll btn btn-default btn-xl sr-button">Se connecter au serveur</a>
+                    <a href="steam://connect/{{ env('ARMA_IP') }}:{{ env('ARMA_PORT', '2302') }}" class="page-scroll btn btn-default btn-xl sr-button">Se connecter au serveur</a>
                 </div>
             </div>
         </div>
@@ -75,7 +80,7 @@
         <div class="container text-center">
             <div class="call-to-action">
                 <h2>Un TeamSpeak 3 est à votre disposition</h2>
-                <a href="ts3server://ts.weed4life.fr" class="btn btn-default btn-xl sr-button">Se connecter au TeamSpeak</a>
+                <a href="ts3server://{{ env('TEAMSPEAK_IP') }}" class="btn btn-default btn-xl sr-button">Se connecter au TeamSpeak</a>
             </div>
         </div>
     </aside>

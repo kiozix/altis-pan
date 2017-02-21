@@ -102,15 +102,11 @@ class ShopsController extends Controller {
 
 				$time = time();
 
-				DB::table('players')
-					->where('playerid', $request->user()->arma)
-					->update(array(
-						'donorlevel' => $shops->level,
-						'duredon' => $shops->time,
-						'timestamp' => $time,
-					));
-
-
+				$player = \Auth::user()->player();
+				$player->donorlevel = $shops->level;
+				$player->duredon = $shops->time;
+				$player->timestamp = $time;
+				$player->save();
 
 			return view('shops.accepted');
 

@@ -4,6 +4,9 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Players;
 
+use App\Ranks;
+use App\Settings;
+use App\Vehicle;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Routing\ResponseFactory;
@@ -12,7 +15,7 @@ use Illuminate\Http\Response;
 
 use App\Refund;
 use App\Supports;
-use App\AltisPan\Gang;
+use App\Gang;
 class PlayersController extends Controller {
 
 	private $auth;
@@ -31,49 +34,32 @@ class PlayersController extends Controller {
 	 */
 	public function index(Guard $auth)
 	{
-		$players = DB::table('players')->where('playerid', $auth->user()->arma)->first();
-		if(empty($players)){
-			abort(403);
-		}
-		$allPlayers = DB::table('players')->get();
-		$refunds = DB::table('refunds')->where('playerid', $auth->user()->arma)->orderBy('id', 'desc')->get();
+        $allPlayers = Players::all();
+        $player = $allPlayers->where('playerid', $auth->user()->arma)->first();
 
-		$gang = DB::table('gangs')->where('owner', $auth->user()->arma)->first();
-
+		$refunds = Refund::where('playerid', $auth->user()->arma)->orderBy('id', 'desc')->get();
+		$gang = Gang::where('owner', $auth->user()->arma)->first();
 		if($gang) {
-
 			$suppr = array("\"", "`", "[", "]");
 			$lineGang = str_replace($suppr, "", $gang->members);
 			$ArrayGang = preg_split("/,/", $lineGang);
 			$gangMembers = array();
 
 			foreach ($ArrayGang as $member) {
-				$gangMembers[$member] = DB::table('players')->where('playerid', $member)->first();
+				$gangMembers[$member] = $allPlayers->where('playerid', $member)->first();
 			}
 		}
 
-		$vehicles_cars = DB::table('vehicles')->where('pid', $auth->user()->arma)->where('type', 'Car')->get();
-		$vehicles_airs = DB::table('vehicles')->where('pid', $auth->user()->arma)->where('type', 'Air')->get();
-		$vehicles_ships = DB::table('vehicles')->where('pid', $auth->user()->arma)->where('type', 'Ship')->get();
-
-		$ranks_cop = DB::table('ranks')->where('side', 'COP')->get();
-		$ranks_medic = DB::table('ranks')->where('side', 'MEDIC')->get();
-
-		$cop = DB::table('ranks')->where('side', 'COP')->where('value_associated', $players->coplevel)->first();
-		$medic = DB::table('ranks')->where('side', 'MEDIC')->where('value_associated', $players->mediclevel)->first();
-		$admin = DB::table('ranks')->where('side', 'ADMIN')->where('value_associated', $players->adminlevel)->first();
-
-		$insure = DB::table('settings')->where('name', 'insure')->first();
-
-		$licensesName = DB::table('settings')->where('action', 'LICENSES')->get();
+        $vehicles = Vehicle::where('pid', $auth->user()->arma)->get();
+		$ranks = Ranks::all();
+		$insure = Settings::where('name', 'insure')->first();
+		$licensesName = Settings::where('action', 'LICENSES')->get();
 
 		if($gang) {
-			return view('players.index', compact('insure', 'licensesName', 'admin', 'cop', 'medic' ,'ranks_cop','ranks_medic', 'refunds', 'allPlayers', 'players', 'mediclevel', 'coplevel', 'rank', 'gang', 'vehicles_cars', 'vehicles_airs', 'vehicles_ships', 'gangMembers'));
+			return view('players.index', compact('insure', 'licensesName', 'admin', 'cop', 'medic', 'ranks', 'refunds', 'allPlayers', 'player', 'mediclevel', 'coplevel', 'rank', 'gang', 'gangMembers', 'vehicles'));
 		} else {
-			return view('players.index', compact('insure', 'licensesName', 'admin', 'cop', 'medic' ,'ranks_cop','ranks_medic', 'refunds', 'players', 'mediclevel', 'coplevel', 'rank', 'gang', 'vehicles_cars', 'vehicles_airs', 'vehicles_ships'));
-
+			return view('players.index', compact('insure', 'licensesName', 'admin', 'cop', 'medic', 'ranks', 'refunds', 'player', 'mediclevel', 'coplevel', 'rank', 'gang', 'vehicles'));
 		}
-
 	}
 
 	/**
