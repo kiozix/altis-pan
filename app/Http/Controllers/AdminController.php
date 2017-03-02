@@ -361,6 +361,7 @@ class AdminController extends Controller {
 	{
 		$user = $this->auth->user();
 		$allPlayers = DB::table('players')->get();
+        $gangs = DB::table('gangs')->where('id', $id)->first();
 
 		$suppr = array("\"", "`", "[", "]");
 		$lineGang = str_replace($suppr, "", $gang->members);

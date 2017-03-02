@@ -18,15 +18,6 @@
                                 <td>{{ $house->pos}}</td>
                             </tr>
                         @endif
-                        <tr>
-                            <td>Inventaire</td>
-                            <td>{{ $house->inventory }}</td>
-                        </tr>
-
-                        <tr>
-                            <td>Conteneur</td>
-                            <td>{{ $house->containers }}</td>
-                        </tr>
 
                         <tr>
                             <td>&nbsp;</td>
