@@ -30,7 +30,8 @@
     "christian-riesen/otp": "^1.4",
     "nizarii/arma-rcon-class": "^1.3",
     "xpaw/php-source-query-class": "^1.0",
-    "jimmiw/php-time-ago": "^0.4.14"
+    "jimmiw/php-time-ago": "^0.4.14",
+    "cboden/ratchet": "0.3.*"
   },
   "require-dev": {
     "phpunit/phpunit": "~4.0",

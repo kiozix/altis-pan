@@ -27,7 +27,10 @@ class ForumsController extends Controller
             }
         }
 
-        return view('forum.index', compact('categories', 'player'));
+        $chatPort = \Request::input("p");
+        $chatPort = $chatPort ?: 9090;
+
+        return view('forum.index', compact('categories', 'player', 'chatPort'));
     }
 
     public function forum($forum_slug) {

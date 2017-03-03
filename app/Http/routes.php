@@ -143,3 +143,5 @@ Route::controllers([
 ]);
 Route::get('totp', ['uses' => 'Auth\AuthController@totp']);
 Route::post('totp', ['uses' => 'Auth\AuthController@totp']);
+
+Route::get('shoutbox', ['uses' => 'ShoutBoxController@index']);

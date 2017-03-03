@@ -1,12 +1,23 @@
 @extends('app')
 
 @section('content')
+    <style>
+        #chatMessages{ width: 100%; border: 1px solid #ddd; min-height: 100px; list-style: none; padding-left: 0px; height: 400px; overflow-y: auto;}
+        #chatMessages li { width: 100%; padding: 10px;}
+
+        li.message.system span.who { color: red; }
+        li.message.user span.who   { color: #34495e; }
+        li.message.mine span.who   { font-weight: bold; }
+    </style>
+
     <div class="container" style="margin-top: 35px">
         <div class="page-header page-heading">
-            <h1 class="pull-left">Forum</h1>
+            <h1 class="pull-left">Shoutbox</h1>
             <div class="clearfix"></div>
         </div>
         <p class="lead">Vous pourrez ici vous raprochez encore plus de la communauté {{ env('SITE_NAME', 'AltisPan') }}</p>
+
+        @include('forum._shoutbox')
 
         @foreach($categories as $category)
             <table class="table forum table-striped">
@@ -52,4 +63,9 @@
             </table>
         @endforeach
     </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.16/vue.min.js"></script>
+
+    @include('forum._vuejs-shoutbox')
+
 @endsection
