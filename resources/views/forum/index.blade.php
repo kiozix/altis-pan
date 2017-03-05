@@ -2,20 +2,40 @@
 
 @section('content')
     <style>
-        #chatMessages{ width: 100%; border: 1px solid #ddd; min-height: 100px; list-style: none; padding-left: 0px; height: 400px; overflow-y: auto;}
-        #chatMessages li { width: 100%; padding: 10px;}
+        #chatMessages {
+            width: 100%;
+            border: 1px solid #ddd;
+            min-height: 100px;
+            list-style: none;
+            padding-left: 0px;
+            height: 250px;
+            background-color: #ffffff;
+            overflow-y: auto;
+        }
 
-        li.message.system span.who { color: red; }
-        li.message.user span.who   { color: #34495e; }
-        li.message.mine span.who   { font-weight: bold; }
+        #chatMessages li {
+            width: 100%;
+            padding: 10px;
+        }
+
+        li.message.system span.who {
+            color: red;
+        }
+
+        li.message.user span.who {
+            color: #34495e;
+        }
+
+        li.message.mine span.who {
+            font-weight: bold;
+        }
     </style>
 
     <div class="container" style="margin-top: 35px">
         <div class="page-header page-heading">
-            <h1 class="pull-left">Shoutbox</h1>
+            <h1 class="pull-left">Forum</h1>
             <div class="clearfix"></div>
         </div>
-        <p class="lead">Vous pourrez ici vous raprochez encore plus de la communauté {{ env('SITE_NAME', 'AltisPan') }}</p>
 
         @include('forum._shoutbox')
 

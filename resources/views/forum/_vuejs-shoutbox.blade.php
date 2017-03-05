@@ -49,7 +49,7 @@
                 };
 
                 this.conn.onopen = function(event) {
-                    me.addSystemMessage("Connection établie! Soit cool...");
+                    me.addSystemMessage("Connection établie! Soyez courtois...");
                     this.conn.send(this.userName+" vient de se connecter");
                 }.bind(this);
 
