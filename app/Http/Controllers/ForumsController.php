@@ -19,7 +19,7 @@ class ForumsController extends Controller
     }
 
     public function index() {
-        $categories = Category::orderBy('order', 'ASC')->get();
+        $categories = Category::with('forums')->orderBy('order', 'ASC')->get();
         $player = null;
         if(\Auth::user()) {
             if(\Auth::user()->arma) {
