@@ -48,7 +48,7 @@
                     <div class="service-box">
                         <i class="fa fa-4x fa-dashboard text-primary sr-icons"></i>
                         <h3>Rapide</h3>
-                        <p class="text-muted">Nous sommes hébergé chez un hébergeur professionel, la qualité et donc au rendez-vous.</p>
+                        <p class="text-muted">Nous sommes hébergé chez un hébergeur professionel, la qualité est donc au rendez-vous.</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 text-center">
