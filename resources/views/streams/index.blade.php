@@ -23,7 +23,7 @@
                             <h3 class="text-uppercase"><a
                                         href="{{ url("/stream/$stream->slug ")}}">{{ $stream->name }}</a></h3>
                             <div class="embed-responsive embed-responsive-4by3">
-                                <iframe src="http://player.twitch.tv/?channel={{ $stream->name }}" frameborder="0" crolling="no" class="embed-responsive-item" height="150px"></iframe>
+                                <iframe src="https://player.twitch.tv/?channel={{ $stream->name }}" frameborder="0" crolling="no" class="embed-responsive-item" height="150px"></iframe>
                             </div>
                         </div>
 
