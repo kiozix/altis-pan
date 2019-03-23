@@ -17,12 +17,12 @@
     <div class="row">
         <div class="col-md-8">
             <div class="embed-responsive embed-responsive-16by9">
-                <iframe src="http://player.twitch.tv/?channel={{ $streams->name }}" frameborder="0" scrolling="no"  class="embed-responsive-item" allowfullscreen></iframe>
+                <iframe src="https://player.twitch.tv/?channel={{ $streams->name }}" frameborder="0" scrolling="no"  class="embed-responsive-item" allowfullscreen></iframe>
             </div>
         </div>
 
         <div class="col-md-4">
-            <iframe src="http://www.twitch.tv/{{ $streams->name }}/chat?popout=" frameborder="0" scrolling="no"  height="420" width="350"></iframe>
+            <iframe src="https://www.twitch.tv/{{ $streams->name }}/chat?popout=" frameborder="0" scrolling="no"  height="420" width="350"></iframe>
         </div>
         <div class="col-md-8">
             <br>
